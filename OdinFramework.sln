@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Data", "NotLimited.Framework.Data\NotLimited.Framework.Data.csproj", "{47373497-932F-4EAA-B91A-4970BFFBDE71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Server", "NotLimited.Framework.Server\NotLimited.Framework.Server.csproj", "{615003D2-ADFF-473C-BF06-6FB13AD84053}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Common", "NotLimited.Framework.Common\NotLimited.Framework.Common.csproj", "{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Web", "NotLimited.Framework.Web\NotLimited.Framework.Web.csproj", "{21BC608D-1A75-4A70-91B4-91B1D66C51C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Raven", "NotLimited.Framework.Raven\NotLimited.Framework.Raven.csproj", "{4C0355BF-853D-48C5-9C7D-EE24664435F5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://thepretender.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NotLimited.Framework.Data\\NotLimited.Framework.Data.csproj
+		SccProjectName1 = NotLimited.Framework.Data
+		SccLocalPath1 = NotLimited.Framework.Data
+		SccProjectUniqueName2 = NotLimited.Framework.Server\\NotLimited.Framework.Server.csproj
+		SccProjectName2 = NotLimited.Framework.Server
+		SccLocalPath2 = NotLimited.Framework.Server
+		SccProjectUniqueName3 = NotLimited.Framework.Common\\NotLimited.Framework.Common.csproj
+		SccProjectName3 = NotLimited.Framework.Common
+		SccLocalPath3 = NotLimited.Framework.Common
+		SccProjectUniqueName4 = NotLimited.Framework.Web\\NotLimited.Framework.Web.csproj
+		SccProjectName4 = NotLimited.Framework.Web
+		SccLocalPath4 = NotLimited.Framework.Web
+		SccProjectUniqueName5 = NotLimited.Framework.Raven\\NotLimited.Framework.Raven.csproj
+		SccProjectName5 = NotLimited.Framework.Raven
+		SccLocalPath5 = NotLimited.Framework.Raven
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BC608D-1A75-4A70-91B4-91B1D66C51C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BC608D-1A75-4A70-91B4-91B1D66C51C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BC608D-1A75-4A70-91B4-91B1D66C51C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BC608D-1A75-4A70-91B4-91B1D66C51C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0355BF-853D-48C5-9C7D-EE24664435F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0355BF-853D-48C5-9C7D-EE24664435F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0355BF-853D-48C5-9C7D-EE24664435F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0355BF-853D-48C5-9C7D-EE24664435F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
