@@ -14,7 +14,7 @@ namespace NotLimited.Framework.Raven
 				Url = url,
 				DefaultDatabase = dbName
 			};
-			_documentStore.Conventions.DefaultQueryingConsistency = ConsistencyOptions.QueryYourWrites;
+			_documentStore.Conventions.DefaultQueryingConsistency = ConsistencyOptions.AlwaysWaitForNonStaleResultsAsOfLastWrite;
 			_documentStore.Initialize();
 		}
 

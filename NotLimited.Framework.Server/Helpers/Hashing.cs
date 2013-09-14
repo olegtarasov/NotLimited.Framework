@@ -22,7 +22,7 @@ namespace NotLimited.Framework.Server.Helpers
 
     public static class Hashing
 	{
-		private static readonly Encoding enc = new UTF8Encoding();
+		private static readonly Encoding _enc = new UTF8Encoding();
 
         public static HashedPassword HashPassword(string password)
 		{
@@ -35,7 +35,7 @@ namespace NotLimited.Framework.Server.Helpers
 
 			using (var hmac = new HMACSHA512(result.Salt))
 			{
-				result.Password = hmac.ComputeHash(enc.GetBytes(password));
+				result.Password = hmac.ComputeHash(_enc.GetBytes(password));
 			}
 
 			return result;
@@ -45,7 +45,7 @@ namespace NotLimited.Framework.Server.Helpers
 		{
 			using (var hmac = new HMACSHA512(password.Salt))
 			{
-				var hash = hmac.ComputeHash(enc.GetBytes(request));
+				var hash = hmac.ComputeHash(_enc.GetBytes(request));
 
 				return hash.SequenceEqual(password.Password);
 			}
