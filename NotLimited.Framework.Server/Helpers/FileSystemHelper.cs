@@ -1,11 +1,12 @@
 using System;
 using System.IO;
+using System.Web;
 
 namespace NotLimited.Framework.Server.Helpers
 {
-	public class FileSystemHelper
+	public sealed class FileSystemHelper
 	{
-		private readonly string _serverRoot;
+		private string _serverRoot;
 
 		public FileSystemHelper(string serverRoot)
 		{

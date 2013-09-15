@@ -7,12 +7,11 @@ namespace NotLimited.Framework.Raven
 	{
 		private readonly IDocumentStore _documentStore;
 
-		public RavenContext(string url, string dbName)
+		public RavenContext(string connectionStringName)
 		{
 			_documentStore = new DocumentStore
 			{
-				Url = url,
-				DefaultDatabase = dbName
+				ConnectionStringName = connectionStringName
 			};
 			_documentStore.Conventions.DefaultQueryingConsistency = ConsistencyOptions.AlwaysWaitForNonStaleResultsAsOfLastWrite;
 			_documentStore.Initialize();

@@ -10,7 +10,7 @@ namespace NotLimited.Framework.Server.Helpers
 
 		public ImageHelper(FileSystemHelper fsHelper)
 		{
-			this._fsHelper = fsHelper;
+			_fsHelper = fsHelper;
 		}
 
 		public string StoreImage(Stream stream, string path, int maxWidth, int maxHeight)
