@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Data", "NotLimited.Framework.Data\NotLimited.Framework.Data.csproj", "{47373497-932F-4EAA-B91A-4970BFFBDE71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Server", "NotLimited.Framework.Server\NotLimited.Framework.Server.csproj", "{615003D2-ADFF-473C-BF06-6FB13AD84053}"
@@ -11,28 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Raven", "NotLimited.Framework.Raven\NotLimited.Framework.Raven.csproj", "{4C0355BF-853D-48C5-9C7D-EE24664435F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{763E517A-68B5-42E2-99B9-2045907ABA5D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://thepretender.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NotLimited.Framework.Data\\NotLimited.Framework.Data.csproj
-		SccProjectName1 = NotLimited.Framework.Data
-		SccLocalPath1 = NotLimited.Framework.Data
-		SccProjectUniqueName2 = NotLimited.Framework.Server\\NotLimited.Framework.Server.csproj
-		SccProjectName2 = NotLimited.Framework.Server
-		SccLocalPath2 = NotLimited.Framework.Server
-		SccProjectUniqueName3 = NotLimited.Framework.Common\\NotLimited.Framework.Common.csproj
-		SccProjectName3 = NotLimited.Framework.Common
-		SccLocalPath3 = NotLimited.Framework.Common
-		SccProjectUniqueName4 = NotLimited.Framework.Web\\NotLimited.Framework.Web.csproj
-		SccProjectName4 = NotLimited.Framework.Web
-		SccLocalPath4 = NotLimited.Framework.Web
-		SccProjectUniqueName5 = NotLimited.Framework.Raven\\NotLimited.Framework.Raven.csproj
-		SccProjectName5 = NotLimited.Framework.Raven
-		SccLocalPath5 = NotLimited.Framework.Raven
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
