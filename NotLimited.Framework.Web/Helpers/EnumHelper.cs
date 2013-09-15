@@ -19,7 +19,7 @@ namespace NotLimited.Framework.Web.Helpers
 
 			return (from field in fields
 					let value = field.GetRawConstantValue()
-					let attribute = field.GetCustomAttribute<DescriptionAttribute>()
+					let attribute = (DescriptionAttribute)field.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
 					let description = attribute != null ? attribute.Description : field.Name
 					orderby value
 					select new { Name = description, Value = value })
