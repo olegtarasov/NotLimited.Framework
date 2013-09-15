@@ -1,0 +1,161 @@
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
+
+namespace NotLimited.Framework.Common.Helpers
+{
+	public static class PathHelpers
+	{
+		private static readonly char[] _separators = new[] {Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar};
+
+        public static int GetPathHashCode(string path)
+        {
+            return path.Trim(_separators).ToUpperInvariant().GetHashCode();
+        }
+
+        public static bool PathEquals(string path1, string path2)
+        {
+            var parts1 = ExplodePath(path1);
+            var parts2 = ExplodePath(path2);
+
+            if (parts1.Length != parts2.Length)
+                return false;
+
+            for (int i = 0; i < parts1.Length; i++)
+            {
+                if (!string.Equals(parts1[i], parts2[i], StringComparison.OrdinalIgnoreCase))
+                    return false;
+            }
+
+            return true;
+        }
+
+		public static bool IsFileUnderPath(string filePath, string directory)
+		{
+			if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(directory))
+				return false;
+
+			var fileParts = ExplodePath(filePath);
+			var dirParts = ExplodePath(directory);
+
+			if (dirParts.Length > fileParts.Length)
+				return false;
+
+			for (int i = 0; i < dirParts.Length; i++)
+			{
+				if (!string.Equals(dirParts[i], fileParts[i], StringComparison.OrdinalIgnoreCase))
+					return false;
+			}
+
+			return true;
+		}
+
+		public static void DeleteDirectory(string path, Action<string> childPreAction = null)
+		{
+			if (path == null) throw new ArgumentNullException("path");
+			if (!Directory.Exists(path)) throw new DirectoryNotFoundException("Directory doesn't exist!");
+
+			foreach (var file in Directory.GetFiles(path))
+			{
+				if (childPreAction != null)
+					childPreAction(file);
+
+				File.SetAttributes(file, FileAttributes.Normal);
+				File.Delete(file);
+			}
+
+			foreach (var subDir in Directory.GetDirectories(path))
+				DeleteDirectory(subDir, childPreAction);
+
+			Directory.Delete(path);
+		}
+
+		public static bool HasExtension(string fileName, string extension)
+		{
+			return !string.IsNullOrEmpty(fileName)
+			       && !string.IsNullOrEmpty(fileName)
+			       && fileName.EndsWith(extension, StringComparison.OrdinalIgnoreCase);
+		}
+
+		public static string CombineWithAssemblyDirectory(string path)
+		{
+			var location = Assembly.GetExecutingAssembly().Location;
+			if (string.IsNullOrEmpty(location))
+				throw new InvalidOperationException("Can't get current assembly location");
+
+			return Path.Combine(Path.GetDirectoryName(location), path);
+		}
+
+		public static string GetAssemblyDirectory()
+		{
+			return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+		}
+
+		public static string MakeRelative(string path, string relativeTo)
+		{
+			if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
+				return path;
+
+			var pathParts = ExplodePath(path);
+			var relativeParts = ExplodePath(relativeTo);
+			int cnt;
+
+			for (cnt = 0; cnt < Math.Min(pathParts.Length, relativeParts.Length); cnt++)
+				if (!string.Equals(pathParts[cnt], relativeParts[cnt], StringComparison.OrdinalIgnoreCase))
+					break;
+
+			if (cnt == 0)
+				return path;
+
+			var sb = new StringBuilder();
+			for (int i = 0; i < (relativeParts.Length - cnt); i++)
+				sb.Append(@"..\");
+
+			for (int i = cnt; i < pathParts.Length; i++)
+			{
+				sb.Append(pathParts[i]);
+				if (i < pathParts.Length - 1)
+					sb.Append(@"\");
+			}
+
+			return sb.ToString();
+		}
+
+		public static string MakeAbsolute(string path, string relativeTo)
+		{
+			if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
+				return path;
+
+			if (Path.IsPathRooted(path))
+				return path;
+
+			var pathParts = ExplodePath(path);
+			var relativeParts = ExplodePath(relativeTo);
+			int cnt;
+
+			for (cnt = 0; cnt < pathParts.Length; cnt++)
+				if (pathParts[cnt] != "..")
+					break;
+
+			var sb = new StringBuilder();
+
+			for (int i = 0; i < relativeParts.Length - cnt; i++)
+				sb.Append(relativeParts[i]).Append(@"\");
+
+			for (int i = cnt; i < pathParts.Length; i++)
+			{
+				sb.Append(pathParts[i]);
+				if (i < pathParts.Length - 1)
+					sb.Append(@"\");
+			}
+
+			return sb.ToString();
+		}
+
+		private static string[] ExplodePath(string path)
+		{
+			return path.TrimEnd(_separators).Split(_separators, StringSplitOptions.RemoveEmptyEntries);
+		}
+	}
+}
