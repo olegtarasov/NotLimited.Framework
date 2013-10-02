@@ -86,7 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacModule.cs" />
+    <Compile Include="ServerHelpersModule.cs" />
     <Compile Include="Helpers\Exceptions.cs" />
     <Compile Include="Helpers\FileSystemHelper.cs" />
     <Compile Include="Helpers\Hashing.cs" />

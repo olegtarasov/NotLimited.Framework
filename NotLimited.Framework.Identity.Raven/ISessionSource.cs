@@ -5,5 +5,6 @@ namespace NotLimited.Framework.Identity.Raven
 	public interface ISessionSource
 	{
 		IDocumentSession GetSession();
+		bool SaveChanges();
 	}
 }

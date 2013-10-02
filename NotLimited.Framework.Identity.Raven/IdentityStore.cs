@@ -6,17 +6,13 @@ using Raven.Client;
 
 namespace NotLimited.Framework.Identity.Raven
 {
-	public class IdentityStore<T> : IIdentityStore, ISessionSource  where T : User
+	public class IdentityStore<T> : IIdentityStore where T : UserBase
 	{
-		private readonly RavenContext _context;
-		
-		private IDocumentSession _session = null;
-		
-		private static readonly object _locker = new object();
+		private readonly ISessionSource _sessionSource = null;
 
-		public IdentityStore(RavenContext context)
+		public IdentityStore(ISessionSource source)
 		{
-			_context = context;
+			_sessionSource = source;
 		}
 
 		public void Dispose()
@@ -25,50 +21,22 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<IdentityResult> SaveChangesAsync(CancellationToken cancellationToken)
 		{
-			return Task.Run(() =>
-			{
-				if (_session == null)
-					return new IdentityResult(true);
-
-				lock (_locker)
-				{
-					if (_session == null)
-						return new IdentityResult(true);
-
-					_session.SaveChanges();
-					_session.Dispose();
-					Interlocked.Exchange(ref _session, null);
-				}
-
-				return new IdentityResult(true);
-			}, cancellationToken);
+			return Task.Run(() => new IdentityResult(_sessionSource.SaveChanges()), cancellationToken);
 		}
 
-		internal UserStore<T> UserStore { get; private set; }
+		public UserStore<T> UserStore { get; set; }
 
-		public IUserSecretStore Secrets { get; private set; }
-		public IUserLoginStore Logins { get; private set; }
+		public IUserSecretStore Secrets { get; set; }
+		public IUserLoginStore Logins { get; set; }
 		public IUserStore Users { get { return UserStore; } }
-		public IUserManagementStore UserManagement { get; private set; }
-		public IRoleStore Roles { get; private set; }
-		public IUserClaimStore UserClaims { get; private set; }
-		public ITokenStore Tokens { get; private set; }
+		public IUserManagementStore UserManagement { get; set; }
+		public IRoleStore Roles { get; set; }
+		public IUserClaimStore UserClaims { get; set; }
+		public ITokenStore Tokens { get; set; }
 		
 		public IDocumentSession GetSession()
 		{
-			if (_session != null)
-				return _session;
-
-			lock (_locker)
-			{
-				if (_session == null)
-				{
-					var session = _context.OpenSession();
-					Interlocked.Exchange(ref _session, session);
-				}
-			}
-
-			return _session;
+			return _sessionSource.GetSession();
 		}
 	}
 }

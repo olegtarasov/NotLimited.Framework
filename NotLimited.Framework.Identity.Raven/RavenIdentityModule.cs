@@ -8,7 +8,12 @@ namespace NotLimited.Framework.Identity.Raven
 		protected override void Load(ContainerBuilder builder)
 		{
 			var types = ThisAssembly.GetTypes();
-			var stores = types.Where(x => x.IsInstanceOfType(typeof(StoreBase)) && !x.IsGenericType).ToArray();
+			var stores = types.Where(x => x.IsSubclassOf(typeof(StoreBase)) && !x.IsGenericType).ToArray();
+
+			builder
+				.RegisterType<SessionSource>()
+				.As<ISessionSource>()
+				.SingleInstance();
 
 			builder
 				.RegisterTypes(stores)
@@ -19,9 +24,7 @@ namespace NotLimited.Framework.Identity.Raven
 
 			builder
 				.RegisterGeneric(typeof(IdentityStore<>))
-				.AsSelf()
-				.As<ISessionSource>()
-				.PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
+				.PropertiesAutowired()
 				.SingleInstance();
 		}
 	}

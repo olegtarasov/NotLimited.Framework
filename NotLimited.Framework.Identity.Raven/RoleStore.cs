@@ -30,7 +30,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				var role = session.Query<Role>().FirstOrDefault(x => x.Id == roleId);
+				var role = session.Load<Role>(roleId);
 				if (role == null)
 					return new IdentityResult(!failIfNonEmpty);
 
@@ -45,7 +45,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				return (IRole)session.Query<Role>().FirstOrDefault(x => x.Id == roleId);
+				return (IRole)session.Load<Role>(roleId);
 			}, cancellationToken);
 		}
 
@@ -63,7 +63,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				return session.Query<Role>().Any(x => x.Id == roleId);
+				return session.Load<Role>(roleId) != null;
 			}, cancellationToken);
 		}
 
@@ -106,7 +106,7 @@ namespace NotLimited.Framework.Identity.Raven
 				var session = _sessionSource.GetSession();
 				var userRoles = session.Query<UserRole>().Where(x => x.UserId == userId).Select(x => x.RoleId);
 
-				return session.Query<Role>().Where(x => userRoles.Contains(x.Id)).Cast<IRole>().AsEnumerable();
+				return (IEnumerable<IRole>)session.Load<Role>(userRoles).AsEnumerable();
 			}, cancellationToken);
 		}
 

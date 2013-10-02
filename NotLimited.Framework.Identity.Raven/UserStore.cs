@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity;
 
 namespace NotLimited.Framework.Identity.Raven
 {
-	public class UserStore<T> : StoreBase, IUserStore where T : User
+	public class UserStore<T> : StoreBase, IUserStore where T : UserBase
 	{
 		public UserStore(ISessionSource sessionSource) : base(sessionSource)
 		{
@@ -17,7 +17,7 @@ namespace NotLimited.Framework.Identity.Raven
 			{
 				var session = _sessionSource.GetSession();
 
-				return (IUser)session.Query<T>().FirstOrDefault(x => x.Id == userId);
+				return (IUser)session.Load<T>(userId);
 			}, cancellationToken);
 		}
 
@@ -48,7 +48,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				var user = session.Query<T>().FirstOrDefault(x => x.Id == userId);
+				var user = session.Load<T>(userId);
 				if (user == null)
 					return new IdentityResult(false);
 

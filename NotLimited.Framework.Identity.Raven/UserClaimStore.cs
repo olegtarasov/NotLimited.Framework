@@ -17,7 +17,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				return session.Query<UserClaim>().Where(x => x.UserId == userId).Cast<IUserClaim>().AsEnumerable();
+				return (IEnumerable<IUserClaim>)session.Query<UserClaim>().Where(x => x.UserId == userId).AsEnumerable();
 			}, cancellationToken);
 		}
 

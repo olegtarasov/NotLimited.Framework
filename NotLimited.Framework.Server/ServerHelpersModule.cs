@@ -5,7 +5,7 @@ using NotLimited.Framework.Server.Helpers;
 
 namespace NotLimited.Framework.Server
 {
-	public class AutofacModule : Module
+	public class ServerHelpersModule : Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{

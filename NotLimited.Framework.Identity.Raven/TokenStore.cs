@@ -32,7 +32,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				var tok = session.Query<Token>().FirstOrDefault(x => x.Id == token);
+				var tok = session.Load<Token>(token);
 				if (tok == null)
 					return new IdentityResult(false);
 
@@ -47,7 +47,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				var tok = session.Query<Token>().FirstOrDefault(x => x.Id == token.Id);
+				var tok = session.Load<Token>(token.Id);
 				if (tok == null)
 					return new IdentityResult(false);
 
@@ -63,7 +63,7 @@ namespace NotLimited.Framework.Identity.Raven
 			return Task.Run(() =>
 			{
 				var session = _sessionSource.GetSession();
-				var tok = session.Query<Token>().FirstOrDefault(x => x.Id == id);
+				var tok = session.Load<Token>(id);
 				if (tok == null)
 					return null;
 

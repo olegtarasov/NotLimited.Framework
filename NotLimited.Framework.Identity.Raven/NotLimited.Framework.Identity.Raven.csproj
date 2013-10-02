@@ -62,10 +62,11 @@
     <Compile Include="RavenIdentityModule.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="RoleStore.cs" />
+    <Compile Include="SessionSource.cs" />
     <Compile Include="StoreBase.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="TokenStore.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="UserBase.cs" />
     <Compile Include="UserClaim.cs" />
     <Compile Include="UserClaimStore.cs" />
     <Compile Include="UserLogin.cs" />
