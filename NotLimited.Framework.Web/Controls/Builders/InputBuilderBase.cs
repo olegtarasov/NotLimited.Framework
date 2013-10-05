@@ -25,11 +25,11 @@ namespace NotLimited.Framework.Web.Controls.Builders
 			_name = helper.HtmlHelper.GetControlName(expression);
 			_metadata = ModelMetadata.FromLambdaExpression(expression, helper.HtmlHelper.ViewData);
 
-			if (_metadata.AdditionalValues.ContainsKey(SizeAttribute.SizeKey))
-				ControlSize = (InputSize)_metadata.AdditionalValues[SizeAttribute.SizeKey];
+			if (_metadata.HasAdditionalValue(SizeAttribute.SizeKey))
+				ControlSize = _metadata.GetAdditionalValue<InputSize>(SizeAttribute.SizeKey);
 
-			if (_metadata.AdditionalValues.ContainsKey(LabelAttribute.LabelKey))
-				Label((string)_metadata.AdditionalValues[LabelAttribute.LabelKey]);
+			if (_metadata.HasAdditionalValue(LabelAttribute.LabelKey))
+				Label(_metadata.GetAdditionalValue<string>(LabelAttribute.LabelKey));
 		}
 
 		public string LabelText { get; set; }

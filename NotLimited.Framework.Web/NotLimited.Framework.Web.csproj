@@ -102,6 +102,7 @@
     <Compile Include="Controls\Attributes\LabelAttribute.cs" />
     <Compile Include="Controls\Attributes\MetadataAttribute.cs" />
     <Compile Include="Controls\Attributes\PasswordAttribute.cs" />
+    <Compile Include="Controls\Attributes\PathPrefixAttribute.cs" />
     <Compile Include="Controls\Attributes\PlaceholderAttribute.cs" />
     <Compile Include="Controls\Attributes\SizeAttribute.cs" />
     <Compile Include="Controls\BootstrapExtensions.cs" />
@@ -110,9 +111,14 @@
     <Compile Include="Controls\Builders\HtmlBuilderBase.cs" />
     <Compile Include="Controls\Builders\IBuilder.cs" />
     <Compile Include="Controls\Builders\IInputBuilder.cs" />
+    <Compile Include="Controls\Builders\Image\IImageBuilder.cs" />
+    <Compile Include="Controls\Builders\Image\ImageBuilder.cs" />
     <Compile Include="Controls\Builders\InputBuilderBase.cs" />
+    <Compile Include="Controls\Builders\MetadataExtensions.cs" />
     <Compile Include="Controls\Builders\TextBox\ITextBoxBuilder.cs" />
     <Compile Include="Controls\Builders\TextBox\TextBoxBuilder.cs" />
+    <Compile Include="Controls\Builders\Upload\IUploadBuilder.cs" />
+    <Compile Include="Controls\Builders\Upload\UploadBuilder.cs" />
     <Compile Include="Controls\ButtonExtensions.cs" />
     <Compile Include="Controls\CheckBoxExtensions.cs" />
     <Compile Include="Controls\DialogExtensions.cs" />

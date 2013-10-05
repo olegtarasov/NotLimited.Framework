@@ -11,11 +11,11 @@ namespace NotLimited.Framework.Web.Controls.Builders.TextBox
 	{
 		public TextBoxBuilder(OdinHelper<TModel> helper, Expression<Func<TModel, TValue>> expression) : base(helper, expression)
 		{
-			if (_metadata.AdditionalValues.ContainsKey(PlaceholderAttribute.PlaceholderKey))
-				Placeholder((string)_metadata.AdditionalValues[PlaceholderAttribute.PlaceholderKey]);
+			if (_metadata.HasAdditionalValue(PlaceholderAttribute.PlaceholderKey))
+				Placeholder(_metadata.GetAdditionalValue<string>(PlaceholderAttribute.PlaceholderKey));
 
-			if (_metadata.AdditionalValues.ContainsKey(PasswordAttribute.IsPasswordKey))
-				Password((bool)_metadata.AdditionalValues[PasswordAttribute.IsPasswordKey]);
+			if (_metadata.HasAdditionalValue(PasswordAttribute.IsPasswordKey))
+				Password(_metadata.GetAdditionalValue<bool>(PasswordAttribute.IsPasswordKey));
 		}
 
 		public bool HasPlaceholder { get; set; }

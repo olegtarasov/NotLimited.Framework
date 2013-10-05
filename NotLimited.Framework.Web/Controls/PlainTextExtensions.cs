@@ -1,4 +1,8 @@
+using System;
+using System.Linq.Expressions;
 using System.Web.Mvc;
+using Autofac.Core;
+using NotLimited.Framework.Web.Controls.Builders.Image;
 
 namespace NotLimited.Framework.Web.Controls
 {
@@ -12,6 +16,11 @@ namespace NotLimited.Framework.Web.Controls
 			div.InnerHtml = value;
 
 			return helper.Input(name, div.ToString(), labelText, helpText);
+		}
+
+		public static IImageBuilder ImageFor<TModel, TValue>(this OdinHelper<TModel> helper, Expression<Func<TModel, TValue>> expr)
+		{
+			return new ImageBuilder<TModel, TValue>(helper, expr);
 		}
 	}
 }

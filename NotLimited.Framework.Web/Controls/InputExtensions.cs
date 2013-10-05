@@ -49,10 +49,5 @@ namespace NotLimited.Framework.Web.Controls
 		{
 			return helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expr));
 		}
-
-		/*internal static string GetFieldDescription<TModel, TValue>(Expression<Func<TModel, TValue>> expr)
-		{
-			
-		}*/
 	}
 }

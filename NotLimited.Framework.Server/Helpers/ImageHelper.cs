@@ -1,9 +1,26 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
 namespace NotLimited.Framework.Server.Helpers
 {
+	public class ImageSize
+	{
+		public ImageSize(int width, int height)
+		{
+			Width = width;
+			Height = height;
+		}
+
+		public ImageSize(int size) : this(size, size)
+		{
+		}
+
+		public int Width;
+		public int Height;
+	}
+
 	public class ImageHelper
 	{
 		private readonly FileSystemHelper _fsHelper;
@@ -13,7 +30,7 @@ namespace NotLimited.Framework.Server.Helpers
 			_fsHelper = fsHelper;
 		}
 
-		public string StoreImage(Stream stream, string path, int maxWidth, int maxHeight)
+		public List<string> StoreImage(Stream stream, string path, params ImageSize[] sizes)
 		{
 			Image img;
 			Image saveImg;
@@ -28,29 +45,34 @@ namespace NotLimited.Framework.Server.Helpers
 				throw new ImageProcessingException("Error processing the image!", e);
 			}
 
-			// Resize an image if needed
-			if (img.Height > maxHeight || img.Width > maxWidth)
-			{
-				saveImg = ImageExtensions.Resize(img, maxWidth, maxHeight);
-				img.Dispose();
-			}
-			else
-				saveImg = img;
+			var result = new List<string>(sizes.Length);
 
-			// And save it to disk
-			string fileName = _fsHelper.GetRandomFileName(path, ".jpg");
-			try
+			for (int i = 0; i < sizes.Length; i++)
 			{
-				ImageExtensions.SaveJpeg(saveImg, _fsHelper.CombineServerPath(path, fileName), 80);
-			}
-			catch (Exception e)
-			{
-				throw new ImageProcessingException("Error saving image to server!", e);
+				// Resize an image if needed
+				if (img.Height > sizes[i].Height || img.Width > sizes[i].Width)
+					saveImg = img.Resize(sizes[i].Width, sizes[i].Height);
+				else
+					saveImg = new Bitmap(img);
+
+				// And save it to disk
+				string fileName = _fsHelper.GetRandomFileName(path, ".jpg");
+				try
+				{
+					saveImg.SaveJpeg(_fsHelper.CombineServerPath(path, fileName), 80);
+				}
+				catch (Exception e)
+				{
+					throw new ImageProcessingException("Error saving image to server!", e);
+				}
+
+				result.Add(fileName);
+				saveImg.Dispose();
 			}
 
-			saveImg.Dispose();
+			img.Dispose();
 
-			return fileName;
+			return result;
 		}
 	}
 }
