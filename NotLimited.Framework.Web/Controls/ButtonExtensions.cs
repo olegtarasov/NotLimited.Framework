@@ -41,7 +41,7 @@ namespace NotLimited.Framework.Web.Controls
 
 		public static MvcHtmlString Button(this OdinHelper helper, string text, string handler = null, ActionButtonType type = ActionButtonType.Default, ActionButtonSize size = ActionButtonSize.Default, object htmlAttributes = null)
 		{
-			var button = new TagBuilder("button");
+			var button = new TagBuilder("a");
 
 			button.AddCssClass("btn");
 			if (type != ActionButtonType.Default)
