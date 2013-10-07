@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Web.Mvc;
+
 namespace NotLimited.Framework.Web.Controls.Builders.Attributes
 {
 	public static class HtmlAttributeBuilderExtensions

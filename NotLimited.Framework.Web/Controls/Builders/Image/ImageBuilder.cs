@@ -25,6 +25,7 @@ namespace NotLimited.Framework.Web.Controls.Builders.Image
 		public IImageBuilder AltText(string text)
 		{
 			_altText = text;
+			_attributes.SetAttrubte("alt", text);
 			return this;
 		}
 
@@ -33,8 +34,7 @@ namespace NotLimited.Framework.Web.Controls.Builders.Image
 			var builder = new TagBuilder("img");
 
 			builder.MergeAttribute("src", (!string.IsNullOrEmpty(_pathPrefix) ? _pathPrefix : "") + _metadata.Model.ToString());
-			if (!string.IsNullOrEmpty(_altText))
-				builder.MergeAttribute("alt", _altText);
+			builder.MergeAttributes(_attributes.ToAttributeDictionary());
 
 			return new MvcHtmlString(builder.ToString());
 		}

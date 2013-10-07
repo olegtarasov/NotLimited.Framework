@@ -26,7 +26,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
 			_metadata = ModelMetadata.FromLambdaExpression(expression, helper.HtmlHelper.ViewData);
 
 			if (_metadata.HasAdditionalValue(SizeAttribute.SizeKey))
-				ControlSize = _metadata.GetAdditionalValue<InputSize>(SizeAttribute.SizeKey);
+				Size(_metadata.GetAdditionalValue<InputSize>(SizeAttribute.SizeKey));
 
 			if (_metadata.HasAdditionalValue(LabelAttribute.LabelKey))
 				Label(_metadata.GetAdditionalValue<string>(LabelAttribute.LabelKey));
@@ -43,6 +43,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
 		public TBuilder Size(InputSize size)
 		{
 			ControlSize = size;
+			_attributes.Size(size);
 
 			return (TBuilder)(object)this;
 		}

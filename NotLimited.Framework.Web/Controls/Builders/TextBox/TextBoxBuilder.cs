@@ -33,17 +33,13 @@ namespace NotLimited.Framework.Web.Controls.Builders.TextBox
 		{
 			HasPlaceholder = true;
 			PlaceholderText = GetLabelText(text);
+			_attributes.SetAttrubte("placeholder", text);
 
 			return this;
 		}
 
 		public override MvcHtmlString GetControlHtml()
 		{
-			_attributes.Size(ControlSize);
-
-			if (HasPlaceholder)
-				_attributes.SetAttrubte("placeholder", PlaceholderText);
-
 			return IsPassword
 				       ? _helper.HtmlHelper.PasswordFor(_expression, _attributes.ToAttributeDictionary())
 				       : _helper.HtmlHelper.TextBoxFor(_expression, _attributes.ToAttributeDictionary());
