@@ -1,8 +1,8 @@
 ﻿namespace NotLimited.Framework.Identity.Raven
 {
-	public class UserRole
+	public class PasswordHash
 	{
 		public string UserId { get; set; }
-		public string Role { get; set; }
+		public string Hash { get; set; }
 	}
 }

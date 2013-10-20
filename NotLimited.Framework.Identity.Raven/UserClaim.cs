@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Security.Claims;
 
 namespace NotLimited.Framework.Identity.Raven
 {
-	public class UserClaim : IUserClaim
+	public class UserClaim
 	{
 		public string UserId { get; set; }
-		public string ClaimType { get; set; }
-		public string ClaimValue { get; set; }
+		public Claim Claim { get; set; }
 	}
 }

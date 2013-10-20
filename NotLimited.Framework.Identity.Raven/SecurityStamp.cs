@@ -1,8 +1,8 @@
 ﻿namespace NotLimited.Framework.Identity.Raven
 {
-	public class UserRole
+	public class SecurityStamp
 	{
 		public string UserId { get; set; }
-		public string Role { get; set; }
+		public string Stamp { get; set; }
 	}
 }

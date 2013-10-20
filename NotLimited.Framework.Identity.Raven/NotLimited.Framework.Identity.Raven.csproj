@@ -32,11 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.1.3\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0-rc1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions">
       <HintPath>..\packages\RavenDB.Client.2.5.2700\lib\net45\Raven.Abstractions.dll</HintPath>
@@ -56,26 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crypto.cs" />
-    <Compile Include="ISessionSource.cs" />
+    <Compile Include="PasswordHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IdentityStore.cs" />
-    <Compile Include="RavenIdentityModule.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="RoleStore.cs" />
-    <Compile Include="SessionSource.cs" />
-    <Compile Include="StoreBase.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="TokenStore.cs" />
-    <Compile Include="UserBase.cs" />
+    <Compile Include="SecurityStamp.cs" />
     <Compile Include="UserClaim.cs" />
-    <Compile Include="UserClaimStore.cs" />
     <Compile Include="UserLogin.cs" />
-    <Compile Include="UserLoginStore.cs" />
-    <Compile Include="UserManagement.cs" />
-    <Compile Include="UserManagementStore.cs" />
     <Compile Include="UserRole.cs" />
-    <Compile Include="UserSecret.cs" />
-    <Compile Include="UserSecretStore.cs" />
     <Compile Include="UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
