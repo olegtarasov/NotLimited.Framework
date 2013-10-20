@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
@@ -36,6 +37,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task UpdateAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -48,6 +52,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task DeleteAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -90,6 +97,12 @@ namespace NotLimited.Framework.Identity.Raven
 			{
 				using (var session = _context.OpenSession())
 				{
+					if (string.IsNullOrEmpty(user.Id))
+					{
+						session.Store(user);
+						session.SaveChanges();
+					}
+
 					var s = session.Query<SecurityStamp>().FirstOrDefault(x => x.UserId == user.Id);
 					if (s == null)
 						s = new SecurityStamp {UserId = user.Id};
@@ -104,6 +117,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<string> GetSecurityStampAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -119,6 +135,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task AddToRoleAsync(T user, string role)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -135,6 +154,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task RemoveFromRoleAsync(T user, string role)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -151,6 +173,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<IList<string>> GetRolesAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -162,6 +187,9 @@ namespace NotLimited.Framework.Identity.Raven
 		
 		public Task<bool> IsInRoleAsync(T user, string role)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -173,6 +201,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task SetPasswordHashAsync(T user, string passwordHash)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -190,6 +221,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<string> GetPasswordHashAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -202,6 +236,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<bool> HasPasswordAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -213,6 +250,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task AddLoginAsync(T user, UserLoginInfo login)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -231,6 +271,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task RemoveLoginAsync(T user, UserLoginInfo login)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -247,6 +290,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<IList<UserLoginInfo>> GetLoginsAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -273,6 +319,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task<IList<Claim>> GetClaimsAsync(T user)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -284,6 +333,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task AddClaimAsync(T user, Claim claim)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
@@ -301,6 +353,9 @@ namespace NotLimited.Framework.Identity.Raven
 
 		public Task RemoveClaimAsync(T user, Claim claim)
 		{
+			if (string.IsNullOrEmpty(user.Id))
+				throw new InvalidOperationException("User id can't be null!");
+
 			return Task.Run(() =>
 			{
 				using (var session = _context.OpenSession())
