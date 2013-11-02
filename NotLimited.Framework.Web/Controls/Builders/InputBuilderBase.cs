@@ -75,7 +75,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
 			var clear = new TagBuilder("div");
 			var input = new TagBuilder("div");
 
-			clear.AddCssClass("control-group");
+			clear.AddCssClass("form-group");
 			input.AddCssClass("controls");
 			input.InnerHtml = GetControlHtml().ToString();
 
