@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="Helpers\CollectionFilterDefinition.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\MefHelper.cs" />
     <Compile Include="Helpers\Native\MouseHook.cs" />
     <Compile Include="Helpers\PathEqualityComparer.cs" />
@@ -99,10 +100,12 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\TaskHelpers.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Helpers\XmlCommentHelper.cs" />
     <Compile Include="Helpers\Xml\XDocumentExtensions.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\TypeResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

@@ -16,5 +16,10 @@ namespace NotLimited.Framework.Common.Helpers
 			foreach (var item in source)
 				action(item);
 		}
+
+		public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
+		{
+			return new HashSet<T>(source);
+		}
 	}
 }
