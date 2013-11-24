@@ -22,6 +22,8 @@ namespace NotLimited.Framework.Common.Types
 			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 		}
 
+		public IEnumerable<Assembly> Assemblies { get { return _assemblies.Values; } }
+
 		public void LoadLocalAssemblies()
 		{
 			string location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
