@@ -99,5 +99,10 @@ namespace NotLimited.Framework.Common.Helpers
 
 			return ((long)tmp) / Math.Pow(10, cnt);
 		}
+
+		public static double Round(this double value, int nums = 4)
+		{
+			return Math.Round(value, nums);
+		}
 	}
 }
