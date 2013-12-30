@@ -1,0 +1,19 @@
+using System.Collections.Generic;
+
+namespace NotLimited.Framework.Data.Queries
+{
+	public class PaginatedResult<T>
+	{
+		public Pagination Pagination { get; set; }
+		public List<T> Items { get; set; }
+
+		public static PaginatedResult<T> Empty(Pagination pagination)
+		{
+			return new PaginatedResult<T>
+			       {
+				       Pagination = pagination,
+					   Items = new List<T>()
+			       };
+		}
+	}
+}

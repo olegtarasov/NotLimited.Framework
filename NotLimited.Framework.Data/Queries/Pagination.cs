@@ -1,4 +1,4 @@
-namespace NotLimited.Framework.Data
+namespace NotLimited.Framework.Data.Queries
 {
 	public class Pagination
 	{
