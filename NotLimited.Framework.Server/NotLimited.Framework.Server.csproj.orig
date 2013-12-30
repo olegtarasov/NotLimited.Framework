@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug 4.5</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C0355BF-853D-48C5-9C7D-EE24664435F5}</ProjectGuid>
+    <ProjectGuid>{615003D2-ADFF-473C-BF06-6FB13AD84053}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NotLimited.Framework.Raven</RootNamespace>
-    <AssemblyName>NotLimited.Framework.Raven</AssemblyName>
+    <RootNamespace>NotLimited.Framework.Server</RootNamespace>
+    <AssemblyName>NotLimited.Framework.Server</AssemblyName>
     <TargetFrameworkVersion Condition=" '$(Configuration)' == 'Debug 4.0' Or '$(Configuration)' == 'Release 4.0' ">v4.0</TargetFrameworkVersion>
     <TargetFrameworkVersion Condition=" '$(Configuration)' == 'Debug 4.5' Or '$(Configuration)' == 'Release 4.5' ">v4.5</TargetFrameworkVersion>
     <TargetFrameworkVersion Condition=" '$(Configuration)' == 'Debug 4.5.1' Or '$(Configuration)' == 'Release 4.5.1' ">v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <RestorePackages>true</RestorePackages>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug 4.5|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,24 +72,19 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< local
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.2.0\lib\net40\Autofac.dll</HintPath>
+=======
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Net4">
-      <HintPath>..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.1\lib\net40\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Abstractions, Version=2.5.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.2.5.2781-Unstable\lib\net40\Raven.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Lightweight, Version=2.5.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.2.5.2781-Unstable\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+>>>>>>> other
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,16 +92,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServerHelpersModule.cs" />
+    <Compile Include="Helpers\Exceptions.cs" />
+    <Compile Include="Helpers\FileSystemHelper.cs" />
+    <Compile Include="Helpers\Hashing.cs" />
+    <Compile Include="Helpers\ImageExtensions.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RavenContext.cs" />
-    <Compile Include="RavenExtensions.cs" />
-    <Compile Include="RavenModule.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NotLimited.Framework.Data\NotLimited.Framework.Data.csproj">
-      <Project>{47373497-932f-4eaa-b91a-4970bffbde71}</Project>
-      <Name>NotLimited.Framework.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
