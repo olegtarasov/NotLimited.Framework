@@ -88,6 +88,7 @@
     <Compile Include="Queries\Pagination.cs" />
     <Compile Include="Queries\QuryableExtensions.cs" />
     <Compile Include="Queries\SortDefinition.cs" />
+    <Compile Include="Queries\SortMemberAttriburte.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
