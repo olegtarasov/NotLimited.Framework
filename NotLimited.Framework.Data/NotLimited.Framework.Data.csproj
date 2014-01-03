@@ -13,6 +13,8 @@
     <TargetFrameworkVersion Condition=" '$(Configuration)' == 'Debug 4.5' Or '$(Configuration)' == 'Release 4.5' ">v4.5</TargetFrameworkVersion>
     <TargetFrameworkVersion Condition=" '$(Configuration)' == 'Debug 4.5.1' Or '$(Configuration)' == 'Release 4.5.1' ">v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Odin\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug 4.5|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +66,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
@@ -72,6 +74,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\..\Odin\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,14 +91,24 @@
     <Compile Include="Queries\FilterDefinition.cs" />
     <Compile Include="Queries\PaginatedResult.cs" />
     <Compile Include="Queries\Pagination.cs" />
+    <Compile Include="Queries\PropertyMetadataCache.cs" />
     <Compile Include="Queries\QuryableExtensions.cs" />
+    <Compile Include="Queries\SortableAttribute.cs" />
     <Compile Include="Queries\SortDefinition.cs" />
     <Compile Include="Queries\SortMemberAttriburte.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NotLimited.Framework.Common\NotLimited.Framework.Common.csproj">
+      <Project>{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}</Project>
+      <Name>NotLimited.Framework.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -21,5 +21,14 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return new HashSet<T>(source);
 		}
+
+		public static HashSet<T> ConcatHashSet<T>(this IEnumerable<T> source, params T[] set)
+		{
+			var result = new HashSet<T>(source);
+			foreach (var item in set)
+				result.Add(item);
+
+			return result;
+		}
 	}
 }
