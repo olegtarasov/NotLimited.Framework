@@ -13,6 +13,8 @@ namespace NotLimited.Framework.Data.Queries
 		public string Description { get; set; }
 		public string SortMember { get; set; }
 		public bool Sortable { get; set; }
+		public string FilterMember { get; set; }
+		public bool Filterable { get; set; }
 	}
 
 	public static class PropertyMetadataCache<T>
@@ -50,11 +52,14 @@ namespace NotLimited.Framework.Data.Queries
 			{
 				var metadata = new PropertyMetadata {PropertyInfo = propertyInfo};
 				var descAttr = propertyInfo.GetCustomAttribute<DescriptionAttribute>();
-				var sortMemberAttr = propertyInfo.GetCustomAttribute<SortMemberAttribute>();
+				var sortableAttr = propertyInfo.GetCustomAttribute<SortableAttribute>();
+				var filterableAttr = propertyInfo.GetCustomAttribute<FilterableAttribute>();
 
 				metadata.Description = (descAttr != null && !string.IsNullOrEmpty(descAttr.Description)) ? descAttr.Description : propertyInfo.Name;
-				metadata.SortMember = sortMemberAttr != null ? sortMemberAttr.Name : null;
-				metadata.Sortable = Attribute.IsDefined(propertyInfo, typeof(SortableAttribute));
+				metadata.SortMember = sortableAttr != null ? sortableAttr.MemberName : null;
+				metadata.Sortable = sortableAttr != null;
+				metadata.FilterMember = filterableAttr != null ? filterableAttr.MemberName : null;
+				metadata.Filterable = filterableAttr != null;
 
 				_propertyCache[propertyInfo.Name] = metadata;
 			}

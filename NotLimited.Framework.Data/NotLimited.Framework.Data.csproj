@@ -88,6 +88,7 @@
     <Compile Include="Entities\NamedEntityBase.cs" />
     <Compile Include="Entities\UserBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\FilterableAttribute.cs" />
     <Compile Include="Queries\FilterDefinition.cs" />
     <Compile Include="Queries\PaginatedResult.cs" />
     <Compile Include="Queries\Pagination.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Queries\QuryableExtensions.cs" />
     <Compile Include="Queries\SortableAttribute.cs" />
     <Compile Include="Queries\SortDefinition.cs" />
-    <Compile Include="Queries\SortMemberAttriburte.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
