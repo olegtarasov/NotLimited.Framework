@@ -36,5 +36,10 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return source ?? Enumerable.Empty<T>();
 		}
+
+		public static bool IsNullOrEmpty<T>(this ICollection<T> source)
+		{
+			return source == null || source.Count == 0;
+		}
 	}
 }
