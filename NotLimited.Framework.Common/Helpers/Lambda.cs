@@ -10,5 +10,10 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return expression;
 		}
+
+		public static string MemberName<TKey>(Expression<Func<T, TKey>> expression)
+		{
+			return expression.GetMemberName();
+		}
 	}
 }

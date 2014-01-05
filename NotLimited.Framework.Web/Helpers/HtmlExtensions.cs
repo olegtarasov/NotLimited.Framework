@@ -15,6 +15,16 @@ namespace NotLimited.Framework.Web.Helpers
 			return new MvcHtmlString(res);
 		}
 
+		public static RouteValueDictionary QueryStringToRouteDictionary(this HtmlHelper helper)
+		{
+			var result = new RouteValueDictionary();
+
+			foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
+				result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
+
+			return result;
+		}
+
 		public static RouteValueDictionary AppendQueryString<TModel>(this HtmlHelper<TModel> helper, object routeValues)
 		{
 			var result = new RouteValueDictionary();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NotLimited.Framework.Common.Helpers
 {
@@ -29,6 +30,11 @@ namespace NotLimited.Framework.Common.Helpers
 				result.Add(item);
 
 			return result;
+		}
+
+		public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> source)
+		{
+			return source ?? Enumerable.Empty<T>();
 		}
 	}
 }
