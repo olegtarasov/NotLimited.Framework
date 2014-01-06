@@ -143,9 +143,9 @@
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\MvcExtensions.cs" />
     <Compile Include="Helpers\RequestExtensions.cs" />
-    <Compile Include="Model\AdminModelBase.cs" />
-    <Compile Include="Model\Navigation\NavigationGroup.cs" />
-    <Compile Include="Model\Navigation\NavigationItem.cs" />
+    <Compile Include="Navigation\NavigationGroup.cs" />
+    <Compile Include="Navigation\NavigationItemBase.cs" />
+    <Compile Include="Navigation\NavigationItem.cs" />
     <Compile Include="Plumbing\ExtendedModelMetadataProvider.cs" />
     <Compile Include="Plumbing\RoleProviderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +153,12 @@
   <ItemGroup>
     <None Include="Key.snk" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NotLimited.Framework.Common\NotLimited.Framework.Common.csproj">
+      <Project>{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}</Project>
+      <Name>NotLimited.Framework.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
