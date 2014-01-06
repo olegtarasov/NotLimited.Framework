@@ -12,16 +12,6 @@ namespace NotLimited.Framework.Web.Navigation
 			Controller = controller;
 		}
 
-		public static NavigationItem From<TModel, TKey>(Expression<Func<TModel, TKey>> expr, string title, string icon)
-		{
-			string controllerName = expr.GetTypeName();
-			int pos = controllerName.LastIndexOf("Controller", StringComparison.OrdinalIgnoreCase);
-			if (pos > -1)
-				controllerName = controllerName.Substring(0, pos);
-
-			return new NavigationItem(title, icon, expr.GetMemberName(), controllerName);
-		}
-
 		public string Action { get; set; }
 		public string Controller { get; set; }
 
