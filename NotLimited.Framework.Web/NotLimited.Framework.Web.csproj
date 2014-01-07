@@ -138,7 +138,6 @@
     <Compile Include="Controls\TextAreaExtensions.cs" />
     <Compile Include="Controls\TextBoxExtensions.cs" />
     <Compile Include="Controls\UploadExtensions.cs" />
-    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\MvcExtensions.cs" />
