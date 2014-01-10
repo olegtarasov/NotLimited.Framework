@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using NotLimited.Framework.Data;
+using NotLimited.Framework.Data.Queries;
 using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Indexes;
