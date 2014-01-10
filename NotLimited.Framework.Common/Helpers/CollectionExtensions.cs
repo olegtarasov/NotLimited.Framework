@@ -41,5 +41,10 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return source == null || source.Count == 0;
 		}
+
+		public static List<T> CreateEmptyIfNull<T>(this List<T> source)
+		{
+			return source ?? new List<T>();
+		}
 	}
 }

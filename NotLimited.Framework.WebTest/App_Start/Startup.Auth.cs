@@ -32,7 +32,7 @@ namespace NotLimited.Framework.WebTest
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication();
+            app.UseGoogleAuthentication();
         }
     }
 }

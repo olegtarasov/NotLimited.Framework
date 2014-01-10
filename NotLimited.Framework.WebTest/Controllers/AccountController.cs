@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using NotLimited.Framework.Identity.MongoDb;
 using NotLimited.Framework.WebTest.Models;
 
 namespace NotLimited.Framework.WebTest.Controllers
@@ -16,16 +17,16 @@ namespace NotLimited.Framework.WebTest.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser, string>(new MongoUserStore<ApplicationUser, string>()))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser, string> userManager)
         {
             UserManager = userManager;
         }
 
-        public UserManager<ApplicationUser> UserManager { get; private set; }
+        public UserManager<ApplicationUser, string> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
