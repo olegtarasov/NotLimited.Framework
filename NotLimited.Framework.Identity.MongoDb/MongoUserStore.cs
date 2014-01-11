@@ -12,6 +12,20 @@ using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Identity.MongoDb
 {
+	public class MongoUserStore<TUser> : 
+		MongoUserStore<TUser, string>,
+		IUserStore<TUser>,
+		IUserLoginStore<TUser>,
+		IUserClaimStore<TUser>,
+		IUserRoleStore<TUser>,
+		IUserPasswordStore<TUser>,
+		IUserSecurityStampStore<TUser>,
+		IQueryableUserStore<TUser>,
+		IUserConfirmationStore<TUser>,
+		IUserEmailStore<TUser> where TUser : MongoUserBase<string>
+	{
+	}
+
 	public class MongoUserStore<TUser, TKey> : 
 		IUserLoginStore<TUser, TKey>,
 		IUserClaimStore<TUser, TKey>,

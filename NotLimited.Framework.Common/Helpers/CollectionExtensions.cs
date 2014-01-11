@@ -42,6 +42,11 @@ namespace NotLimited.Framework.Common.Helpers
 			return source == null || source.Count == 0;
 		}
 
+		public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+		{
+			return source == null || !source.Any();
+		}
+
 		public static List<T> CreateEmptyIfNull<T>(this List<T> source)
 		{
 			return source ?? new List<T>();
