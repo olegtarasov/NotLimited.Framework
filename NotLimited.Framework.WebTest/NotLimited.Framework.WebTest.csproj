@@ -248,6 +248,10 @@
       <Project>{cef89b44-ad44-496c-a621-077c05d25fd4}</Project>
       <Name>NotLimited.Framework.Identity.MongoDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NotLimited.Framework.Web\NotLimited.Framework.Web.csproj">
+      <Project>{111568eb-9843-411a-b2e7-f6211efb1864}</Project>
+      <Name>NotLimited.Framework.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
