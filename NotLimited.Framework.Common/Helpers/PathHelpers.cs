@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -13,6 +14,22 @@ namespace NotLimited.Framework.Common.Helpers
         {
             return path.Trim(_separators).ToUpperInvariant().GetHashCode();
         }
+
+		public static IEnumerable<string> FindFiles(string path, string filter = "*.*")
+		{
+			var queue = new Queue<string>();
+			queue.Enqueue(path);
+
+			while (queue.Count > 0)
+			{
+				string dir = queue.Dequeue();
+				foreach (var file in Directory.GetFiles(filter))
+					yield return file;
+
+				foreach (var child in Directory.GetDirectories(path))
+					queue.Enqueue(child);
+			}
+		}
 
         public static bool PathEquals(string path1, string path2)
         {
