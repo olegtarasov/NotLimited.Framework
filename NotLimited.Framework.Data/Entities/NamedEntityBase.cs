@@ -8,6 +8,6 @@ namespace NotLimited.Framework.Data.Entities
 		[DisplayName("Name")]
 		[Description("Название")]
 		[Sortable]
-		public string Name { get; set; }
+		public virtual string Name { get; set; }
 	}
 }

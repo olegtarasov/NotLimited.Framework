@@ -1,7 +1,7 @@
 namespace NotLimited.Framework.Data.Entities
 {
-	public abstract class EntityBase
+	public abstract class EntityBase : IEntity
 	{
-		public long Id { get; set; }
+		public virtual long Id { get; set; }
 	}
 }
