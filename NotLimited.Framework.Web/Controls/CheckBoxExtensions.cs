@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Mvc.Properties;
+using NotLimited.Framework.Web.Helpers;
 
 namespace NotLimited.Framework.Web.Controls
 {
@@ -36,6 +39,13 @@ namespace NotLimited.Framework.Web.Controls
 			labelTag.InnerHtml = checkBox.ToString();
 
 			return new MvcHtmlString(labelTag.ToString());
+		}
+
+		public static MvcHtmlString SimpleCheckBoxFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, object htmlAttributes = null)
+		{
+			// Well, this is a stinking hack.
+			string result = htmlHelper.CheckBoxFor(expression, htmlAttributes).ToString();
+			return new MvcHtmlString(result.Substring(0, result.IndexOf("<input", 5)));
 		}
 	}
 }
