@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -8,6 +9,18 @@ namespace NotLimited.Framework.Common.Helpers
 	public static class PathHelpers
 	{
 		private static readonly char[] _separators = new[] {Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar};
+		
+		public static string AppPath { get { return AppDomain.CurrentDomain.BaseDirectory; } }
+
+		public static string CombineAppPath(string path)
+		{
+			return Path.Combine(AppPath, path);
+		}
+
+		public static string CombineAppPath(params string[] args)
+		{
+			return args.Aggregate(AppPath, Path.Combine);
+		}
 
         public static int GetPathHashCode(string path)
         {
