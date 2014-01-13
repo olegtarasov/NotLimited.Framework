@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 
-namespace libAwesome.Core
+namespace NotLimited.Framework.Common.Misc
 {
 	public class AwesomeConfig : DynamicObject
 	{

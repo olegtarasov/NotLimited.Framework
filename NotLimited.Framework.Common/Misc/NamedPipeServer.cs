@@ -1,11 +1,12 @@
 ﻿// ReSharper disable ImpureMethodCallOnReadonlyValueField
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
 
-namespace libAwesome.Core
+namespace NotLimited.Framework.Common.Misc
 {
 	public class NamedPipeMessage
 	{

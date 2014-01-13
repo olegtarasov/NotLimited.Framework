@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace libAwesome.Core
+namespace NotLimited.Framework.Common.Misc
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct DataPoint

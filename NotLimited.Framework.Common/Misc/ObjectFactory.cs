@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace libAwesome.Core
+namespace NotLimited.Framework.Common.Misc
 {
 	public static class ObjectFactory
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace libAwesome.Core
+namespace NotLimited.Framework.Common.Misc
 {
 	public struct MinMax<T>
 	{
