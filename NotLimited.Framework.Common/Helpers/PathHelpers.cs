@@ -122,7 +122,26 @@ namespace NotLimited.Framework.Common.Helpers
 			return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 		}
 
-		public static string MakeRelative(string path, string relativeTo)
+		public static string EnsureSlash(string path, char directorySeparator = '\\')
+		{
+			if (string.IsNullOrEmpty(path))
+				return path;
+
+			if (path[path.Length - 1] == directorySeparator)
+				return path;
+
+			if (path[path.Length - 1] == Path.DirectorySeparatorChar || path[path.Length - 1] == Path.AltDirectorySeparatorChar)
+				return path.Substring(0, path.Length - 1) + directorySeparator;
+
+			return path + directorySeparator;
+		}
+
+		public static string RebasePath(string path, string source, string target, char directorySeparator = '\\')
+		{
+			return MakeAbsolute(MakeRelative(path, source, directorySeparator), target, directorySeparator);
+		}
+
+		public static string MakeRelative(string path, string relativeTo, char directorySeparator = '\\')
 		{
 			if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
 				return path;
@@ -140,20 +159,23 @@ namespace NotLimited.Framework.Common.Helpers
 
 			var sb = new StringBuilder();
 			for (int i = 0; i < (relativeParts.Length - cnt); i++)
-				sb.Append(@"..\");
+				sb.Append(@"..").Append(directorySeparator);
 
 			for (int i = cnt; i < pathParts.Length; i++)
 			{
 				sb.Append(pathParts[i]);
 				if (i < pathParts.Length - 1)
-					sb.Append(@"\");
+					sb.Append(directorySeparator);
 			}
 
 			return sb.ToString();
 		}
 
-		public static string MakeAbsolute(string path, string relativeTo)
+		public static string MakeAbsolute(string path, string relativeTo, char directorySeparator = '\\')
 		{
+			if (string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(relativeTo))
+				return relativeTo;
+
 			if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
 				return path;
 
@@ -171,13 +193,13 @@ namespace NotLimited.Framework.Common.Helpers
 			var sb = new StringBuilder();
 
 			for (int i = 0; i < relativeParts.Length - cnt; i++)
-				sb.Append(relativeParts[i]).Append(@"\");
+				sb.Append(relativeParts[i]).Append(directorySeparator);
 
 			for (int i = cnt; i < pathParts.Length; i++)
 			{
 				sb.Append(pathParts[i]);
 				if (i < pathParts.Length - 1)
-					sb.Append(@"\");
+					sb.Append(directorySeparator);
 			}
 
 			return sb.ToString();
