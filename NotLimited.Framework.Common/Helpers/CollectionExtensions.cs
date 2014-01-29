@@ -51,5 +51,28 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return source ?? new List<T>();
 		}
+
+		public static T FirstOrDefault<T>(this IEnumerable<T> source, Func<T, bool> predicate, T def)
+		{
+			foreach (var item in source)
+			{
+				if (predicate(item))
+					return item;
+			}
+
+			return def;
+		}
+
+		public static T LastOrDefault<T>(this IEnumerable<T> source, Func<T, bool> predicate, T def)
+		{
+			var result = def;
+			foreach (var item in source)
+			{
+				if (predicate(item))
+					result = item;
+			}
+
+			return result;
+		}
 	}
 }
