@@ -74,5 +74,23 @@ namespace NotLimited.Framework.Common.Helpers
 
 			return result;
 		}
+
+		public static TValue Max<TSource, TValue>(this IEnumerable<TSource> source, Func<TSource, double> keySelector, Func<TSource, TValue> valueSelector)
+		{
+			double max = double.MinValue;
+			TValue value = default(TValue);
+
+			foreach (var item in source)
+			{
+				var key = keySelector(item);
+				if (key > max)
+				{
+					max = key;
+					value = valueSelector(item);
+				}
+			}
+
+			return value;
+		}
 	}
 }
