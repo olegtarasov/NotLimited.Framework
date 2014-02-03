@@ -75,6 +75,20 @@ namespace NotLimited.Framework.Common.Types
 			return _assemblies[assemblyFile].GetTypes().Where(predicate);
 		}
 
+		public Type GetType(string typeName)
+		{
+			if (string.IsNullOrEmpty(typeName)) throw new ArgumentNullException("type");
+
+			foreach (var assembly in _assemblies.Values)
+			{
+				var type = assembly.GetType(typeName);
+				if (type != null)
+					return type;
+			}
+
+			return null;
+		}
+
 		public Type GetType(string assemblyPath, string type)
 		{
 			if (string.IsNullOrEmpty(assemblyPath)) throw new ArgumentNullException("assemblyPath");
