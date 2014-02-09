@@ -19,7 +19,10 @@ namespace NotLimited.Framework.Common.Helpers
 				total += source[i];
 
 			for (var i = 0; i < source.Count; i++)
-				result.Add(source[i] / total);
+			{
+				double res = source[i] / total;
+				result.Add(double.IsNaN(res) ? 0.0d : res);
+			}
 
 			return result;
 		}
