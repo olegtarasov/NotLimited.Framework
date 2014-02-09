@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NotLimited.Framework.Common.Helpers
 {
@@ -9,6 +10,20 @@ namespace NotLimited.Framework.Common.Helpers
 
 	public static class MathHelpers
 	{
+		public static List<double> Normalize(this IReadOnlyList<double> source)
+		{
+			var result = new List<double>(source.Count);
+			double total = 0.0d;
+
+			for (int i = 0; i < source.Count; i++)
+				total += source[i];
+
+			for (var i = 0; i < source.Count; i++)
+				result.Add(source[i] / total);
+
+			return result;
+		}
+
 		public static double Max(params double[] nums)
 		{
 			double max = double.MinValue;

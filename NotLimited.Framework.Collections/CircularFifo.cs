@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NotLimited.Framework.Collections
 {
-	public class CircularFifo<T> : ICollection<T>
+	public class CircularFifo<T> : IList<T>
 	{
 		private readonly T[] buffer;
 
@@ -25,6 +25,27 @@ namespace NotLimited.Framework.Collections
 		{
 			for (int i = 0; i < buffer.Length; i++)
 				buffer[i] = initialValue;
+		}
+
+		public int IndexOf(T item)
+		{
+			for (int i = 0; i < buffer.Length; i++)
+			{
+				if (object.Equals(buffer[i], item))
+					return i;
+			}
+
+			return -1;
+		}
+
+		public void Insert(int index, T item)
+		{
+			throw new NotSupportedException();
+		}
+
+		public void RemoveAt(int index)
+		{
+			throw new NotSupportedException();
 		}
 
 		public T this[int idx]
