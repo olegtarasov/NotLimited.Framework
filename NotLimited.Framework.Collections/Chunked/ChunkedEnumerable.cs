@@ -60,6 +60,20 @@ namespace NotLimited.Framework.Collections.Chunked
 			return en.Current;
 		}
 
+		public static T Last<T>(this IChunkedEnumerable<T> source, Func<T, bool> predicate)
+		{
+			var en = source.GetEnumerator();
+			en.FromLast();
+
+			while (en.MovePrev())
+			{
+				if (predicate(en.Current))
+					return en.Current;
+			}
+
+			throw new InvalidOperationException("Sequence contains no matching elements!");
+		}
+
 		public static int Count<T>(this IChunkedEnumerable<T> source)
 		{
 			var list = source as ChunkedList<T>;
