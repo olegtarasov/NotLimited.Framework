@@ -21,7 +21,6 @@ namespace NotLimited.Framework.Identity.MongoDb
 		IUserPasswordStore<TUser>,
 		IUserSecurityStampStore<TUser>,
 		IQueryableUserStore<TUser>,
-		IUserConfirmationStore<TUser>,
 		IUserEmailStore<TUser> where TUser : MongoUserBase<string>
 	{
 	}
@@ -33,7 +32,6 @@ namespace NotLimited.Framework.Identity.MongoDb
 		IUserPasswordStore<TUser, TKey>,
 		IUserSecurityStampStore<TUser, TKey>,
 		IQueryableUserStore<TUser, TKey>,
-		IUserConfirmationStore<TUser, TKey>,
 		IUserEmailStore<TUser, TKey> where TUser : MongoUserBase<TKey>
 	{
 		private readonly MongoDatabase _database;
@@ -199,19 +197,6 @@ namespace NotLimited.Framework.Identity.MongoDb
 			get { return Collection.AsQueryable(); }
 		}
 
-		public Task<bool> IsConfirmedAsync(TUser user)
-		{
-			return Task.FromResult(user.IsConfirmed);
-		}
-
-		public Task SetConfirmedAsync(TUser user, bool confirmed)
-		{
-			user.IsConfirmed = confirmed;
-			Collection.Save(user);
-
-			return Task.FromResult(0);
-		}
-
 		public Task SetEmailAsync(TUser user, string email)
 		{
 			user.Email = email.ToLowerInvariant();
@@ -223,6 +208,19 @@ namespace NotLimited.Framework.Identity.MongoDb
 		public Task<string> GetEmailAsync(TUser user)
 		{
 			return Task.FromResult(user.Email);
+		}
+
+		public Task<bool> GetEmailConfirmedAsync(TUser user)
+		{
+			return Task.FromResult(user.IsConfirmed);
+		}
+
+		public Task SetEmailConfirmedAsync(TUser user, bool confirmed)
+		{
+			user.IsConfirmed = confirmed;
+			Collection.Save(user);
+
+			return Task.FromResult(0);
 		}
 
 		public Task<TUser> FindByEmailAsync(string email)
