@@ -1,16 +1,19 @@
 using System;
 using System.IO;
 using System.Web;
+using System.Web.Hosting;
 
 namespace NotLimited.Framework.Server.Helpers
 {
 	public sealed class FileSystemHelper
 	{
-		private string _serverRoot;
+		private readonly string _serverRoot;
 
-		public FileSystemHelper(string serverRoot)
+		public FileSystemHelper()
 		{
-			_serverRoot = serverRoot;
+			_serverRoot = HostingEnvironment.MapPath("~/");
+			if (string.IsNullOrEmpty(_serverRoot))
+				throw new InvalidOperationException("Can't get server root!");
 		}
 
 		public string CombineServerPath(params string[] paths)

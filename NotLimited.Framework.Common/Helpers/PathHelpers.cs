@@ -36,10 +36,10 @@ namespace NotLimited.Framework.Common.Helpers
 			while (queue.Count > 0)
 			{
 				string dir = queue.Dequeue();
-				foreach (var file in Directory.GetFiles(filter))
+				foreach (var file in Directory.GetFiles(dir, filter))
 					yield return file;
 
-				foreach (var child in Directory.GetDirectories(path))
+				foreach (var child in Directory.GetDirectories(dir))
 					queue.Enqueue(child);
 			}
 		}
