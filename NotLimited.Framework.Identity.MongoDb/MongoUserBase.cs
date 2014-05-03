@@ -13,12 +13,24 @@ namespace NotLimited.Framework.Identity.MongoDb
 		public TKey Id { get; set; }
 		public string UserName { get; set; }
 
-		public List<UserLoginInfo> Logins { get; set; }
+		public List<MongoLoginInfo> Logins { get; set; }
 		public List<IdentityClaim> Claims { get; set; }
 		public List<string> Roles { get; set; }
 		public string PasswordHash { get; set; }
 		public string SecurityStamp { get; set; }
 		public bool IsConfirmed { get; set; }
 		public string Email { get; set; }
+
+		public void SetLogin(MongoLoginInfo login)
+		{
+			if (Logins == null)
+				Logins = new List<MongoLoginInfo>();
+
+			var existingLogin = Logins.Find(x => x.ProviderKey == login.ProviderKey);
+			if (existingLogin != null)
+				Logins.Remove(existingLogin);
+
+			Logins.Add(login);
+		}
 	}
 }

@@ -83,7 +83,7 @@ namespace NotLimited.Framework.Identity.MongoDb
 
 		public Task AddLoginAsync(TUser user, UserLoginInfo login)
 		{
-			EnsureLoginList(user).Add(login);
+			EnsureLoginList(user).Add(new MongoLoginInfo(login.LoginProvider, login.ProviderKey));
 			Collection.Save(user);
 			return Task.FromResult(0);
 		}
@@ -101,7 +101,7 @@ namespace NotLimited.Framework.Identity.MongoDb
 
 		public Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user)
 		{
-			return Task.FromResult((IList<UserLoginInfo>)user.Logins.CreateEmptyIfNull());
+			return Task.FromResult((IList<UserLoginInfo>)user.Logins.CreateEmptyIfNull().Select(x => x.ToLoginInfo()).ToList());
 		}
 
 		public Task<TUser> FindAsync(UserLoginInfo login)
@@ -239,9 +239,9 @@ namespace NotLimited.Framework.Identity.MongoDb
 			return Collection.AsQueryable().FirstOrDefault(x => x.UserName == name);
 		}
 
-		private List<UserLoginInfo> EnsureLoginList(TUser user)
+		private List<MongoLoginInfo> EnsureLoginList(TUser user)
 		{
-			return user.Logins ?? (user.Logins = new List<UserLoginInfo>());
+			return user.Logins ?? (user.Logins = new List<MongoLoginInfo>());
 		}
 
 		private List<IdentityClaim> EnsureClaimList(TUser user)
