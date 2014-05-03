@@ -66,6 +66,7 @@
     <Compile Include="Helpers\StreamExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\TaskHelpers.cs" />
+    <Compile Include="Helpers\TimeHelpers.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Helpers\Xml\XDocumentExtensions.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
