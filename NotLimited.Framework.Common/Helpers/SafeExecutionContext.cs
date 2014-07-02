@@ -49,7 +49,8 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public T Logged<T>(string message, Func<Logger, T> action, Action<Logger> final = null, T def = default(T))
 		{
-			_log.Info(message);
+			if (string.IsNullOrEmpty(message))
+				_log.Info(message);
 			return Logged(action, final, def);
 		}
 
