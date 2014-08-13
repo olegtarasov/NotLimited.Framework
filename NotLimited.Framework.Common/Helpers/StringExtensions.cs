@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -134,6 +135,18 @@ namespace NotLimited.Framework.Common.Helpers
 			}
 
 			return sb.ToString();
+		}
+
+		public static bool EqualsOrdinal(this string a, string b, bool ignoreCase = false)
+		{
+			return string.Equals(a, b, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+		}
+
+		public static bool StartsWithOrdinal(this string input, string value, bool ignoreCase = false)
+		{
+			if (string.IsNullOrEmpty(input))
+				return false;
+			return input.StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
 		}
 	}
 }
