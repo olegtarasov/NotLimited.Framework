@@ -137,6 +137,11 @@ namespace NotLimited.Framework.Common.Helpers
 			return sb.ToString();
 		}
 
+		public static bool EqualsIgnoreCase(this string a, string b)
+		{
+			return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+		}
+
 		public static bool EqualsOrdinal(this string a, string b, bool ignoreCase = false)
 		{
 			return string.Equals(a, b, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
