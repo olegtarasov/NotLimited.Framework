@@ -142,6 +142,13 @@ namespace NotLimited.Framework.Common.Helpers
 			return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
 		}
 
+		public static bool EndsWithIgnoreCase(this string a, string b)
+		{
+			if (a == null || string.IsNullOrEmpty(b))
+				return false;
+			return a.EndsWith(b, StringComparison.OrdinalIgnoreCase);
+		}
+
 		public static bool EqualsOrdinal(this string a, string b, bool ignoreCase = false)
 		{
 			return string.Equals(a, b, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
