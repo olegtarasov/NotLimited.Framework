@@ -104,7 +104,7 @@ namespace NotLimited.Framework.Common.Helpers
 		public static bool HasExtension(string fileName, string extension)
 		{
 			return !string.IsNullOrEmpty(fileName)
-			       && !string.IsNullOrEmpty(fileName)
+			       && !string.IsNullOrEmpty(extension)
 			       && fileName.EndsWith(extension, StringComparison.OrdinalIgnoreCase);
 		}
 
