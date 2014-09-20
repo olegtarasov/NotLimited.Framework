@@ -9,11 +9,5 @@ namespace NotLimited.Framework.Common.Helpers
 			 if (task.Exception != null)
 				 task.Exception.Handle(x => true);
 		 }
-
-		public static T Sync<T>(this Task<T> task)
-		{
-			task.Wait();
-			return task.Result;
-		}
 	}
 }
