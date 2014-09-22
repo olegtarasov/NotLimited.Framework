@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace NotLimited.Framework.Common.Logging
 {
@@ -10,10 +11,12 @@ namespace NotLimited.Framework.Common.Logging
 	{
 		private static readonly StringBuilder _cache;
 		private static ILogWriter _writer;
+	    private static bool _showThreadId;
 
-		public static LogLevel Level { get; set; }
+	    public static LogLevel Level { get; set; }
+	    public static bool ShowThreadId { get { return _showThreadId; } set { _showThreadId = value; } }
 
-		private readonly string _typeName;
+	    private readonly string _typeName;
 
 		static Logger()
 		{
@@ -56,20 +59,20 @@ namespace NotLimited.Framework.Common.Logging
 		public void Write(string message, LogLevel level, Exception e)
 		{
 			if (level >= Level)
-				Write(string.Format("{0} [{1}] {2}: {3}. {4}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, message, e != null ? e.ToString() : ""));
+				Write(string.Format("{0} [{1}]{5} {2}: {3}. {4}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, message, e != null ? e.ToString() : "", _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
 		}
 
 		public void WriteFormat(string message, LogLevel level, params object[] args)
 		{
 			if (level >= Level)
-				Write(string.Format("{0} [{1}] {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args)));
+                Write(string.Format("{0} [{1}]{4} {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args), _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
 		}
 
 		public void WriteEval(string message, LogLevel level, params Func<string>[] args)
 		{
 			if (level >= Level)
 			{
-				Write(string.Format("{0} [{1}] {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args.Select(x => x()).ToArray())));
+                Write(string.Format("{0} [{1}]{4} {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args.Select(x => x()).ToArray()), _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
 			}
 		}
 

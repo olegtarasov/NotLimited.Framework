@@ -22,7 +22,7 @@ namespace NotLimited.Framework.Common.Helpers
 		private readonly Type _type;
 		private readonly Logger _log;
 
-		#region Exception event
+	    #region Exception event
 		public static event EventHandler<SafeExecutionExceptionArgs> Exception;
 		private static void OnException(SafeExecutionContext sender, Exception ex)
 		{
