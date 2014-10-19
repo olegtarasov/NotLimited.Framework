@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 
 namespace NotLimited.Framework.Common.Helpers
 {
@@ -23,14 +24,29 @@ namespace NotLimited.Framework.Common.Helpers
 			return new HashSet<T>(source);
 		}
 
+        public static HashSet<T> ConcatHashSet<T>(this IEnumerable<T> source, IEnumerable<T> target)
+        {
+            var result = CreateHashSetFromSource(source);
+            foreach (var item in target)
+                result.Add(item);
+
+            return result;
+        }
+
 		public static HashSet<T> ConcatHashSet<T>(this IEnumerable<T> source, params T[] set)
 		{
-			var result = new HashSet<T>(source);
+		    var result = CreateHashSetFromSource(source);
 			foreach (var item in set)
 				result.Add(item);
 
 			return result;
 		}
+
+	    private static HashSet<T> CreateHashSetFromSource<T>(IEnumerable<T> source)
+	    {
+            var sourceSet = source as HashSet<T>;
+            return sourceSet == null ? new HashSet<T>(source) : new HashSet<T>(sourceSet, sourceSet.Comparer);
+	    }
 
 		public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> source)
 		{
