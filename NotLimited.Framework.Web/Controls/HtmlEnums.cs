@@ -2,7 +2,7 @@ namespace NotLimited.Framework.Web.Controls
 {
 	public enum ActionButtonType
 	{
-		Default,
+		@default,
 		primary,
 		info,
 		success,
