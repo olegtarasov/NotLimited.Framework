@@ -22,7 +22,7 @@ namespace NotLimited.Framework.Web.Controls
 
 		 public static MvcForm BeginUploadForm(this HtmlHelper htmlHelper, string action = null, string controller = null)
 		 {
-			 return htmlHelper.BeginForm(action, controller, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" });
+			 return htmlHelper.BeginForm(action, controller, FormMethod.Post, new { enctype = "multipart/form-data", role = "form" });
 		 }
 	}
 }
