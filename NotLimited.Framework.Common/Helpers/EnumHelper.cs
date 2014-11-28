@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
@@ -24,8 +25,7 @@ namespace NotLimited.Framework.Common.Helpers
 
 			return (from field in fields
 					let value = field.GetRawConstantValue()
-					let attribute = (DescriptionAttribute)field.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
-					let description = attribute != null ? attribute.Description : field.Name
+					let description = field.GetDisplayName()
 					orderby value
 					select new { Name = description, Value = value })
 				.ToDictionary(x => (T)x.Value, x => x.Name);
@@ -35,5 +35,18 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return GetEnumDictionary<T>()[en];
 		}
+
+	    public static string GetDisplayName(this FieldInfo field)
+	    {
+	        var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
+	        if (displayAttr != null && !string.IsNullOrEmpty(displayAttr.Name))
+	            return displayAttr.Name;
+
+	        var descAttr = field.GetCustomAttribute<DescriptionAttribute>();
+	        if (descAttr != null && !string.IsNullOrEmpty(descAttr.Description))
+	            return descAttr.Description;
+
+	        return field.Name;
+	    }
 	}
 }
