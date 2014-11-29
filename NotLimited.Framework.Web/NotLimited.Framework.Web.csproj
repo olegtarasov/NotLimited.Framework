@@ -151,6 +151,10 @@
     <Compile Include="Controls\CheckBoxExtensions.cs" />
     <Compile Include="Controls\DialogExtensions.cs" />
     <Compile Include="Controls\FormExtensions.cs" />
+    <Compile Include="Controls\Grid\FilterHelpers.cs" />
+    <Compile Include="Controls\Grid\GridHelpers.cs" />
+    <Compile Include="Controls\Grid\ModelWithFields.cs" />
+    <Compile Include="Controls\Grid\TableHelpers.cs" />
     <Compile Include="Controls\HiddenExtensions.cs" />
     <Compile Include="Controls\HtmlEnums.cs" />
     <Compile Include="Controls\InputExtensions.cs" />
@@ -171,10 +175,25 @@
     <Compile Include="Plumbing\ExtendedModelMetadataProvider.cs" />
     <Compile Include="Plumbing\RoleProviderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Shared\MyPartial.generated.cs">
+    <Compile Include="Views\Shared\Helpers\FilterViewHelper.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyPartial.cshtml</DependentUpon>
+      <DependentUpon>FilterViewHelper.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Helpers\GridViewHelper.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridViewHelper.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Helpers\TableViewHelper.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableViewHelper.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Paginator.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Paginator.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -192,16 +211,35 @@
       <Project>{2f69bb6f-3c15-4b88-ac7a-9a9968cdd00d}</Project>
       <Name>NotLimited.Framework.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NotLimited.Framework.Data\NotLimited.Framework.Data.csproj">
+      <Project>{47373497-932f-4eaa-b91a-4970bffbde71}</Project>
+      <Name>NotLimited.Framework.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\MyPartial.cshtml">
+    <None Include="Views\Shared\Helpers\GridViewHelper.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>MyPartial.generated.cs</LastGenOutput>
-    </Content>
+      <LastGenOutput>GridViewHelper.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\Helpers\TableViewHelper.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TableViewHelper.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Shared\Paginator.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Paginator.generated.cs</LastGenOutput>
+    </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Shared\Helpers\FilterViewHelper.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterViewHelper.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

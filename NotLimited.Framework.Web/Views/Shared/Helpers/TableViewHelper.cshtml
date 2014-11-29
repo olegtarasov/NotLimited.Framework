@@ -1,0 +1,37 @@
+﻿@* Generator : MvcHelper *@
+@using System.Web.Mvc.Html
+@using NotLimited.Framework.Data.Queries
+@using NotLimited.Framework.Web.Controls.Grid
+@using NotLimited.Framework.Web.Views.Shared.Helpers
+
+
+@helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
+{
+    if (enabledFields == null || enabledFields.Contains(prop.PropertyInfo.Name))
+    {
+        <th class="@(prop.Sortable ? "sortable" : null)">
+
+            @prop.Description
+
+            @if (prop.Sortable)
+            {
+                <div class="pull-right">
+                    <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px" />
+                </div>
+                using (helper.BeginForm(null, null, FormMethod.Get))
+                {
+                    <input type="hidden" name="sortBy" value="@prop.PropertyInfo.Name" />
+                    <input type="hidden" name="descending" value="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()" />
+                    @FilterViewHelper.HiddenForQuery(helper, "sortBy", "descending")
+                }
+            }
+        </th>
+    }
+}
+
+@helper ModelFieldTableView(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
+{
+    <td>
+        @(helper.Partial(modelName + "/TableView/" + fieldName, model))
+    </td>
+}

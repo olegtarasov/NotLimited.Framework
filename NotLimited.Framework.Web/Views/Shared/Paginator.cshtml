@@ -1,0 +1,18 @@
+﻿@* Generator : MvcView *@
+
+@using NotLimited.Framework.Web.Helpers
+@model NotLimited.Framework.Data.Queries.Pagination
+
+@if ((double)Model.TotalCount / Model.ItemsPerPage > 1)
+{
+    <div class="text-center">
+        <ul class="pagination">
+            @foreach (var page in Enumerable.Range(1, (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage)))
+            {
+                <li class="@(page == Model.Page ? "active" : null)">
+                    @Html.ActionLink((page).ToString(), null, Html.AppendQueryString(new { page }))
+                </li>
+            }
+        </ul>
+    </div>
+}
