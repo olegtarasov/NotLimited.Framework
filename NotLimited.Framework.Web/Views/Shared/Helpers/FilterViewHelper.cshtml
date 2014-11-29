@@ -1,0 +1,16 @@
+﻿@* Generator : MvcHelper *@
+@using System.Web.Mvc.Html
+@using NotLimited.Framework.Web.Helpers
+
+@helper FilterBox(System.Web.Mvc.HtmlHelper helper, string name, string title, IEnumerable<System.Web.Mvc.SelectListItem> items, string placeholder)
+{
+    @(helper.DropDownList(name, items, new {@class = "select2", data_select_search = true, data_placeholder = placeholder}))
+}
+
+@helper HiddenForQuery(System.Web.Mvc.HtmlHelper html, params string[] except)
+{
+    foreach (var item in html.QueryStringToRouteDictionary().Where(x => !except.Contains(x.Key)))
+    {
+        @html.Hidden(item.Key, item.Value)
+    }
+}

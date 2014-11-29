@@ -1,0 +1,34 @@
+﻿@* Generator : MvcHelper *@
+
+@using NotLimited.Framework.Data.Queries
+@using NotLimited.Framework.Web.Helpers
+
+@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Pagination pagination, object tableHtmlAttributes)
+{
+    <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
+        <thead>
+            <tr>
+                @foreach (var header in headers)
+                {
+                    @header
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in rows)
+            {
+                <tr>
+                    @foreach (var column in row)
+                    {
+                        @column
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    if (pagination != null)
+    {
+        @htmlHelper.Partial("Paginator", pagination)
+    }
+}

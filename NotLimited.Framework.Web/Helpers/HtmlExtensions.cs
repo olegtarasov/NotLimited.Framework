@@ -1,5 +1,7 @@
+using System;
 using System.ComponentModel;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -7,6 +9,31 @@ namespace NotLimited.Framework.Web.Helpers
 {
 	public static class HtmlExtensions
 	{
+	    public static MvcHtmlString RenderHtmlAttributes(this HtmlHelper helper, object attributes)
+	    {
+            if (attributes == null)
+                return new MvcHtmlString("");
+
+	        var sb = new StringBuilder();
+	        var dic = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
+
+            if (dic.Count == 0)
+                return new MvcHtmlString("");
+
+	        foreach (var attr in dic)
+	        {
+                string key = attr.Key;
+	            string value = Convert.ToString(attr.Value);
+                if (!string.Equals(key, "id", StringComparison.Ordinal) || !string.IsNullOrEmpty(value))
+                {
+                    string str = HttpUtility.HtmlAttributeEncode(value);
+                    sb.Append(' ').Append(key).Append("=\"").Append(str).Append('"');
+                }
+	        }
+
+            return new MvcHtmlString(sb.ToString());
+	    }
+
 		public static MvcHtmlString AppendQueryStringJson<TModel>(this HtmlHelper<TModel> helper, object routeValues)
 		{
 			var result = AppendQueryString<TModel>(helper, routeValues);
