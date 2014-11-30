@@ -83,7 +83,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n\r\n            ");
 
 
 #line 14 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, prop.Description);
+WebViewPage.WriteTo(@__razor_helper_writer, prop.DisplayName);
 
 #line default
 #line hidden

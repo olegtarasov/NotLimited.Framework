@@ -35,18 +35,5 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return GetEnumDictionary<T>()[en];
 		}
-
-	    public static string GetDisplayName(this FieldInfo field)
-	    {
-	        var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
-	        if (displayAttr != null && !string.IsNullOrEmpty(displayAttr.Name))
-	            return displayAttr.Name;
-
-	        var descAttr = field.GetCustomAttribute<DescriptionAttribute>();
-	        if (descAttr != null && !string.IsNullOrEmpty(descAttr.Description))
-	            return descAttr.Description;
-
-	        return field.Name;
-	    }
 	}
 }

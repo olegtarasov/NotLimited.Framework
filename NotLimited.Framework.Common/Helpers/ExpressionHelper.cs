@@ -30,7 +30,13 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public static string GetMemberName(this LambdaExpression expression)
 		{
-			if (expression.Body.NodeType == ExpressionType.MemberAccess)
+		    if (expression.Body.NodeType == ExpressionType.Convert)
+		    {
+		        var operand = ((UnaryExpression)expression.Body).Operand;
+		        if (operand.NodeType == ExpressionType.MemberAccess)
+		            return GetMemberName((MemberExpression)operand);
+		    }
+		    if (expression.Body.NodeType == ExpressionType.MemberAccess)
 				return GetMemberName((MemberExpression)expression.Body);
 			if (expression.Body.NodeType == ExpressionType.Call)
 				return GetMemberName((MethodCallExpression)expression.Body);

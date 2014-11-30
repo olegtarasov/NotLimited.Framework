@@ -15,7 +15,7 @@ namespace NotLimited.Framework.Web.Controls.Grid
             if (!prop.Filterable)
                 throw new InvalidOperationException("Property is not filterable!");
 
-            return FilterViewHelper.FilterBox(helper, prop.PropertyInfo.Name, prop.Description, items, placeholder);
+            return FilterViewHelper.FilterBox(helper, prop.PropertyInfo.Name, prop.DisplayName, items, placeholder);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace NotLimited.Framework.Data.Queries
 	public class PropertyMetadata
 	{
 		public PropertyInfo PropertyInfo { get; set; }
-		public string Description { get; set; }
+		public string DisplayName { get; set; }
 		public string SortMember { get; set; }
 		public bool Sortable { get; set; }
 		public string FilterMember { get; set; }
@@ -55,7 +55,7 @@ namespace NotLimited.Framework.Data.Queries
 				var sortableAttr = propertyInfo.GetCustomAttribute<SortableAttribute>();
 				var filterableAttr = propertyInfo.GetCustomAttribute<FilterableAttribute>();
 
-				metadata.Description = (descAttr != null && !string.IsNullOrEmpty(descAttr.Description)) ? descAttr.Description : propertyInfo.Name;
+				metadata.DisplayName = propertyInfo.GetDisplayName();
 				metadata.SortMember = sortableAttr != null ? sortableAttr.MemberName : null;
 				metadata.Sortable = sortableAttr != null;
 				metadata.FilterMember = filterableAttr != null ? filterableAttr.MemberName : null;

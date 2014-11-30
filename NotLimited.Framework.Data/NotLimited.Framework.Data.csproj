@@ -55,6 +55,7 @@
     <Compile Include="Entities\NamedEntityBase.cs" />
     <Compile Include="Entities\UserBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\EnumerableExtensions.cs" />
     <Compile Include="Queries\FilterableAttribute.cs" />
     <Compile Include="Queries\FilterDefinition.cs" />
     <Compile Include="Queries\PaginatedResult.cs" />

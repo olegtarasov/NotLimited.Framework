@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -27,7 +29,7 @@ namespace NotLimited.Framework.Common.Helpers
 
 	    public static IEnumerable<TypeWithAttributes<TAttribute>> GetTypesWithAttribute<TAttribute>(Type srcType, bool sameNamespace = false) where TAttribute : Attribute
 	    {
-		    if (string.IsNullOrEmpty(srcType.Namespace))
+		    if (String.IsNullOrEmpty(srcType.Namespace))
 				throw new InvalidOperationException();
 
             var types = (IEnumerable<Type>)srcType.Assembly.GetTypes();
@@ -174,5 +176,18 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return GetTypesByInterface<T>(ass).Select(type => (T)Activator.CreateInstance(type)).ToList();
 		}
+
+        public static string GetDisplayName(this MemberInfo member)
+        {
+            var displayAttr = member.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttr != null && !String.IsNullOrEmpty(displayAttr.Name))
+                return displayAttr.Name;
+
+            var descAttr = member.GetCustomAttribute<DescriptionAttribute>();
+            if (descAttr != null && !String.IsNullOrEmpty(descAttr.Description))
+                return descAttr.Description;
+
+            return member.Name;
+        }
 	}
 }
