@@ -18,11 +18,16 @@ namespace NotLimited.Framework.Web.Controls.Grid
 
             foreach (var model in models)
             {
-                rows.Add(expressions.Select(x => TableHelpers.ModelFieldTableView(helper, model, fields, x)).ToList());
+                rows.Add(expressions.Select(x => TableHelpers.TableFieldConvention(helper, model, fields, x)).ToList());
             }
 
 
             return GridViewHelper.Grid(helper, headers, rows, pagination, tableHtmlAttributes);
+        }
+
+        public static GridBuilder<T> Grid<T>(this HtmlHelper helper, IEnumerable<T> models, Pagination pagination = null, HashSet<string> fields = null, object tableHtmlAttributes = null)
+        {
+            return new GridBuilder<T>(helper, models, pagination, tableHtmlAttributes, fields);
         }
     }
 }

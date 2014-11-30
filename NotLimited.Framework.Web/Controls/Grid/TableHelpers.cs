@@ -25,13 +25,13 @@ namespace NotLimited.Framework.Web.Controls.Grid
             return TableViewHelper.TableHeader(helper, PropertyMetadataCache<TModel>.GetPropertyMetadata(expression), enabledFields, GetSortOrder(memberName));
         }
 
-        public static HelperResult ModelFieldTableView<T>(HtmlHelper helper, T model, HashSet<string> fields, Expression<Func<T, object>> expression)
+        public static HelperResult TableFieldConvention<T>(HtmlHelper helper, T model, HashSet<string> fields, Expression<Func<T, object>> expression)
         {
             string memberName = expression.GetMemberName();
             if (fields != null && !fields.Contains(memberName))
                 return new HelperResult(w => { });
 
-            return TableViewHelper.ModelFieldTableView(helper, typeof(T).Name, memberName, model);
+            return TableViewHelper.TableFieldConvention(helper, typeof(T).Name, memberName, model);
         }
 
         public static SortOrder GetSortOrder(string sortMember)

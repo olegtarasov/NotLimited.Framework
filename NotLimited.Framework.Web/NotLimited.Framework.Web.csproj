@@ -152,6 +152,7 @@
     <Compile Include="Controls\DialogExtensions.cs" />
     <Compile Include="Controls\FormExtensions.cs" />
     <Compile Include="Controls\Grid\FilterHelpers.cs" />
+    <Compile Include="Controls\Grid\GridBuilder.cs" />
     <Compile Include="Controls\Grid\GridHelpers.cs" />
     <Compile Include="Controls\Grid\ModelWithFields.cs" />
     <Compile Include="Controls\Grid\TableHelpers.cs" />

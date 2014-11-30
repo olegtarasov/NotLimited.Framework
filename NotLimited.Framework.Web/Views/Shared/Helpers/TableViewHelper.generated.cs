@@ -184,7 +184,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </th>\r\n");
 }
 
 
-public static System.Web.WebPages.HelperResult ModelFieldTableView(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
+public static System.Web.WebPages.HelperResult TableFieldConvention(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
 {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
@@ -211,6 +211,42 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </td>\r\n");
 
 
 #line 37 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult TableFieldFixedView(System.Web.Mvc.HtmlHelper helper, string view, object model)
+{
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 40 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+ 
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <td>\r\n        ");
+
+
+
+#line 42 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, helper.Partial(view, model));
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </td>\r\n");
+
+
+
+#line 44 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 
 #line default
 #line hidden

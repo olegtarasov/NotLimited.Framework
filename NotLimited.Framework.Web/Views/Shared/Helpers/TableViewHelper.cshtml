@@ -29,9 +29,16 @@
     }
 }
 
-@helper ModelFieldTableView(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
+@helper TableFieldConvention(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
 {
     <td>
         @(helper.Partial(modelName + "/TableView/" + fieldName, model))
+    </td>
+}
+
+@helper TableFieldFixedView(System.Web.Mvc.HtmlHelper helper, string view, object model)
+{
+    <td>
+        @(helper.Partial(view, model))
     </td>
 }
