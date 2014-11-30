@@ -10,12 +10,12 @@ namespace NotLimited.Framework.Data.Queries
 	{
 		public static IQueryable<T> Sort<T>(this IQueryable<T> query, SortDefinition sortDefinition)
 		{
-			if (sortDefinition == null || string.IsNullOrEmpty(sortDefinition.SortBy))
+			if (sortDefinition == null || String.IsNullOrEmpty(sortDefinition.SortBy))
 				return query;
 
 			string sortBy = sortDefinition.SortBy;
 			var prop = PropertyMetadataCache<T>.GetPropertyMetadata(sortDefinition.SortBy);
-			if (!string.IsNullOrEmpty(prop.SortMember))
+			if (!String.IsNullOrEmpty(prop.SortMember))
 				sortBy += "." + prop.SortMember;
 
 			return query.OrderBy(sortBy + " " + (sortDefinition.Descending ? "desc" : "asc"));
@@ -31,7 +31,7 @@ namespace NotLimited.Framework.Data.Queries
 			{
 				string filterBy = filterDefinition.Property;
 				var prop = PropertyMetadataCache<T>.GetPropertyMetadata(filterDefinition.Property);
-				if (!string.IsNullOrEmpty(prop.FilterMember))
+				if (!String.IsNullOrEmpty(prop.FilterMember))
 					filterBy += "." + prop.FilterMember;
 
 				result = result.Where(filterBy + " = " + filterDefinition.Value);
@@ -39,5 +39,25 @@ namespace NotLimited.Framework.Data.Queries
 
 			return result;
 		}
+
+	    public static PaginatedResult<T> Paginate<T>(this IQueryable<T> query, Pagination pagination)
+	    {
+	        if (pagination == null || query == null)
+	            return null;
+
+	        var result = new PaginatedResult<T>();
+
+	        pagination.TotalCount = query.Count();
+
+	        result.Items = query
+	            .AsEnumerable()
+	            .Skip(pagination.ItemsPerPage * (pagination.Page - 1))
+	            .Take(pagination.ItemsPerPage)
+	            .ToList();
+
+	        result.Pagination = pagination;
+
+	        return result;
+	    }
 	}
 }
