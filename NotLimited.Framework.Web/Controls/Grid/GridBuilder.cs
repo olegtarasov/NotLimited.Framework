@@ -29,7 +29,6 @@ namespace NotLimited.Framework.Web.Controls.Grid
             public GridColumn(Expression<Func<T, object>> expression, Func<object, HelperResult> template)
             {
                 Expression = expression;
-                CompiledExpression = expression.Compile();
                 Template = template;
                 Type = GridColumnType.Template;
             }
@@ -41,7 +40,6 @@ namespace NotLimited.Framework.Web.Controls.Grid
                 Type = GridColumnType.FixedView;
             }
 
-            public Func<T, object> CompiledExpression;
             public GridColumnType Type;
             public Expression<Func<T, object>> Expression;
             public Func<object, HelperResult> Template;
@@ -105,7 +103,7 @@ namespace NotLimited.Framework.Web.Controls.Grid
                         columns.Add(new HelperResult(writer =>
                         {
                             writer.WriteLine("<td>");
-                            column.Template(column.CompiledExpression(model)).WriteTo(writer);
+                            column.Template(model).WriteTo(writer);
                             writer.WriteLine("</td>");
                         }));
                     }
