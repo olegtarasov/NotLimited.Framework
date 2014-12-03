@@ -22,6 +22,28 @@ namespace NotLimited.Framework.Web.Controls
 			return ActionButton(helper, text, helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer, type, size);
 		}
 
+	    public static MvcHtmlString GoBackLink(this OdinHelper helper, string text, string defaultAction = null, string defaultController = null)
+	    {
+	        var uri = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer;
+
+	        string href;
+	        var urlHelper = new UrlHelper(helper.HtmlHelper.ViewContext.RequestContext, helper.HtmlHelper.RouteCollection);
+	        if (uri == null || !urlHelper.IsLocalUrl(uri.AbsoluteUri))
+	        {
+	            href = urlHelper.Action(defaultAction, defaultController);
+	        }
+	        else
+	        {
+	            href = uri.AbsoluteUri;
+	        }
+
+	        var builder = new TagBuilder("a");
+            builder.MergeAttribute("href", href);
+            builder.SetInnerText(text);
+
+	        return new MvcHtmlString(builder.ToString());
+	    }
+
 		public static MvcHtmlString ActionButton(this OdinHelper helper, string text, Uri uri, ActionButtonType type = ActionButtonType.@default, ActionButtonSize size = ActionButtonSize.Default)
 		{
 			var link = new TagBuilder("a");
