@@ -9,7 +9,7 @@ namespace NotLimited.Framework.Web.Controls
 	{
 		public static MvcForm BeginHorizontalForm(this HtmlHelper htmlHelper, string action = null, string controller = null, object htmlAttributes = null)
 		{
-			var attributes = htmlAttributes == null ? new Dictionary<string, object>() : htmlAttributes.ToDictionary();
+            var attributes = htmlAttributes == null ? new Dictionary<string, object>() : (IDictionary<string, object>)HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 			attributes.Add("class", "form-horizontal");
 
 			return htmlHelper.BeginForm(action, controller, FormMethod.Post, attributes);

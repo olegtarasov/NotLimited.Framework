@@ -1,14 +1,24 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Web.Helpers
 {
 	public static class HtmlExtensions
 	{
+	    public static IDictionary<string, object> ConcatHtmlAttributes(this object attributes, object moreAttributes)
+	    {
+	        var dic = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
+            dic.AddRange(HtmlHelper.AnonymousObjectToHtmlAttributes(moreAttributes));
+
+	        return dic;
+	    }
+
 	    public static MvcHtmlString RenderHtmlAttributes(this HtmlHelper helper, object attributes)
 	    {
             if (attributes == null)

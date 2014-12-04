@@ -10,7 +10,7 @@ namespace NotLimited.Framework.Web.Controls
 	{
 		public static MvcHtmlString ActionButton(this OdinHelper helper, string text, string actionName = null, string controllerName = null, ActionButtonType type = ActionButtonType.@default, ActionButtonSize size = ActionButtonSize.Default, object routeValues = null, object htmlAttributes = null)
 		{
-			var dic = htmlAttributes.ToDictionary();
+			var dic = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 
 			dic.Add("class", "btn btn-" + type.ToString() + (size != ActionButtonSize.Default ? " btn-" + size.ToString() : ""));
 
