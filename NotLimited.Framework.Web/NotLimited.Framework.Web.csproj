@@ -177,6 +177,11 @@
     <Compile Include="Plumbing\ExtendedModelMetadataProvider.cs" />
     <Compile Include="Plumbing\RoleProviderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Shared\ConfirmDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmDialog.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\Helpers\FilterViewHelper.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,6 +227,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\Shared\ConfirmDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ConfirmDialog.generated.cs</LastGenOutput>
+    </None>
     <None Include="Views\Shared\Helpers\GridViewHelper.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>GridViewHelper.generated.cs</LastGenOutput>
