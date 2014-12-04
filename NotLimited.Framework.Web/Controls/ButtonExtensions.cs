@@ -1,7 +1,9 @@
 using System;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Routing;
 using NotLimited.Framework.Web.Helpers;
 
 namespace NotLimited.Framework.Web.Controls
@@ -22,23 +24,21 @@ namespace NotLimited.Framework.Web.Controls
 			return ActionButton(helper, text, helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer, type, size);
 		}
 
-	    public static MvcHtmlString GoBackLink(this OdinHelper helper, string text, string defaultAction = null, string defaultController = null)
+	    public static MvcHtmlString GoBackLink(this OdinHelper helper, string text, string action, string controller)
 	    {
 	        var uri = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer;
+	        string query = uri == null ? null : uri.Query;
+	        var route = new RouteValueDictionary();
+            
+            // TODO: Implement injection protection!
+            if (!string.IsNullOrEmpty(query)/* && uri.IsRouteMatch(controller, action)*/)
+	        {
+	            HttpUtility.ParseQueryString(query).CopyTo(route);
+	        }
 
-	        string href;
 	        var urlHelper = new UrlHelper(helper.HtmlHelper.ViewContext.RequestContext, helper.HtmlHelper.RouteCollection);
-	        if (uri == null || !urlHelper.IsLocalUrl(uri.AbsoluteUri))
-	        {
-	            href = urlHelper.Action(defaultAction, defaultController);
-	        }
-	        else
-	        {
-	            href = uri.AbsoluteUri;
-	        }
-
 	        var builder = new TagBuilder("a");
-            builder.MergeAttribute("href", href);
+            builder.MergeAttribute("href", urlHelper.Action(action, controller, route));
             builder.SetInnerText(text);
 
 	        return new MvcHtmlString(builder.ToString());

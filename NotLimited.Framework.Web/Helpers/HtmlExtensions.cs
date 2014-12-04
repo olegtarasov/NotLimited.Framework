@@ -62,7 +62,7 @@ namespace NotLimited.Framework.Web.Helpers
 			return result;
 		}
 
-		public static RouteValueDictionary AppendQueryString<TModel>(this HtmlHelper<TModel> helper, object routeValues)
+        public static RouteValueDictionary AppendQueryString<TModel>(this HtmlHelper<TModel> helper, object routeValues)
 		{
 			var result = new RouteValueDictionary();
 

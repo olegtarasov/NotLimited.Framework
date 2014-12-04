@@ -170,6 +170,7 @@
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\MvcExtensions.cs" />
     <Compile Include="Helpers\RequestExtensions.cs" />
+    <Compile Include="Helpers\RouteInfo.cs" />
     <Compile Include="Navigation\NavigationGroup.cs" />
     <Compile Include="Navigation\NavigationItem.cs" />
     <Compile Include="Navigation\NavigationItemBase.cs" />
