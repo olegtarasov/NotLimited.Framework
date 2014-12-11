@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using NotLimited.Framework.Server.Services;
 
 namespace NotLimited.Framework.Server.Helpers
 {
@@ -23,14 +24,15 @@ namespace NotLimited.Framework.Server.Helpers
 
 	public class ImageHelper
 	{
-		private readonly FileSystemHelper _fsHelper;
+		private readonly IStorageService _storageService;
 
-		public ImageHelper(FileSystemHelper fsHelper)
-		{
-			_fsHelper = fsHelper;
-		}
+	    public ImageHelper(IStorageService storageService)
+	    {
+	        _storageService = storageService;
+	    }
 
-		public List<string> StoreImage(Stream stream, string path, params ImageSize[] sizes)
+
+	    public List<string> StoreImage(Stream stream, string directory, params ImageSize[] sizes)
 		{
 			Image img;
 			Image saveImg;
@@ -56,16 +58,23 @@ namespace NotLimited.Framework.Server.Helpers
 					saveImg = new Bitmap(img);
 
 				// And save it to disk
-				string fileName = _fsHelper.GetRandomFileName(path, ".jpg");
-				try
-				{
-					saveImg.SaveJpeg(_fsHelper.CombineServerPath(path, fileName), 80);
-				}
-				catch (Exception e)
-				{
-					throw new ImageProcessingException("Error saving image to server!", e);
-				}
+			    string fileName;
+                string filePath = _storageService.GetRandomFileNameWithPath(directory, ".jpg", out fileName);
+			    using (var memoryStream = new MemoryStream())
+			    {
+                    try
+                    {
+                        saveImg.SaveJpeg(memoryStream, 80);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ImageProcessingException("Error saving image to server!", e);
+                    }
 
+			        memoryStream.Seek(0, SeekOrigin.Begin);
+                    _storageService.StoreFile(memoryStream, filePath);
+			    }
+                
 				result.Add(fileName);
 				saveImg.Dispose();
 			}

@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 
 namespace NotLimited.Framework.Server.Helpers
@@ -42,9 +43,6 @@ namespace NotLimited.Framework.Server.Helpers
 		/// <summary>
 		/// Saves in image to JPEG file with specified quality
 		/// </summary>
-		/// <param name="image">Image to save</param>
-		/// <param name="path">Image path</param>
-		/// <param name="level">JPEG quality</param>
 		public static void SaveJpeg(this Image image, string path, int level)
 		{
 			ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
@@ -63,6 +61,28 @@ namespace NotLimited.Framework.Server.Helpers
 			encParams.Param[0] = encParam;
 			image.Save(path, jgpEncoder, encParams);
 		}
+
+        /// <summary>
+        /// Saves in image to JPEG stream with specified quality
+        /// </summary>
+        public static void SaveJpeg(this Image image, Stream stream, int level)
+        {
+            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+
+            // Create an Encoder object based on the GUID
+            // for the Quality parameter category.
+            Encoder enc = Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+            // EncoderParameter object in the array.
+            EncoderParameters encParams = new EncoderParameters(1);
+            EncoderParameter encParam = new EncoderParameter(enc, level);
+
+            encParams.Param[0] = encParam;
+            image.Save(stream, jgpEncoder, encParams);
+        }
 
 		private static ImageCodecInfo GetEncoder(ImageFormat format)
 		{
