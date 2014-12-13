@@ -11,5 +11,6 @@ namespace NotLimited.Framework.Server.Services
         void StoreFile(Stream stream, string path);
         bool RemoveFile(string path);
         string GetRandomFileNameWithPath(string path, string ext, out string fileName);
+        void ClearDirectory(string path);
     }
 }

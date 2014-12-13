@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Web.Hosting;
+using Microsoft.WindowsAzure.Storage;
 
 namespace NotLimited.Framework.Server.Services
 {
@@ -14,6 +15,22 @@ namespace NotLimited.Framework.Server.Services
             _serverRoot = HostingEnvironment.MapPath("~/");
             if (string.IsNullOrEmpty(_serverRoot))
                 throw new InvalidOperationException("Can't get server root!");
+        }
+
+        public override void ClearDirectory(string path)
+        {
+            if (!Directory.Exists(path))
+                return;
+
+            foreach (var file in Directory.GetFiles(path))
+            {
+                File.Delete(file);
+            }
+
+            foreach (var directory in Directory.GetDirectories(path))
+            {
+                ClearDirectory(directory);
+            }
         }
 
         public override string GetCombinedUrl(params string[] paths)

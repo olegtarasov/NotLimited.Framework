@@ -9,8 +9,6 @@ namespace NotLimited.Framework.Server.Services
 {
     public class AzureStorageService : StorageServiceBase
     {
-        private readonly CloudStorageAccount _storageAccount;
-        private readonly CloudBlobClient _client;
         private readonly CloudBlobContainer _container;
         private readonly string _containerUri;
 
@@ -22,11 +20,19 @@ namespace NotLimited.Framework.Server.Services
 
         public AzureStorageService(string connectionString, string containerName)
         {
-            _storageAccount = CloudStorageAccount.Parse(connectionString);
-            _client = _storageAccount.CreateCloudBlobClient();
-            _container = _client.GetContainerReference(containerName);
+            var storageAccount = CloudStorageAccount.Parse(connectionString);
+            var client = storageAccount.CreateCloudBlobClient();
+            _container = client.GetContainerReference(containerName);
             _container.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
             _containerUri = _container.Uri.AbsoluteUri + "/";
+        }
+
+        public override void ClearDirectory(string path)
+        {
+            foreach (var item in _container.GetDirectoryReference(path).ListBlobs(true))
+            {
+                ((CloudBlockBlob)item).Delete();
+            }
         }
 
         public override string GetCombinedUrl(params string[] paths)
