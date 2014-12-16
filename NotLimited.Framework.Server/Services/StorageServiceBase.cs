@@ -31,6 +31,8 @@ namespace NotLimited.Framework.Server.Services
             return fullPath;
         }
 
+        public abstract void ClearDirectory(string path);
+
         public abstract string GetCombinedUrl(params string[] paths);
         public abstract string CombineServerPath(params string[] paths);
         public abstract void StoreFile(Stream stream, string path);
