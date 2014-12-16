@@ -12,16 +12,29 @@ namespace NotLimited.Framework.Common.Logging
 		private static readonly StringBuilder _cache;
 		private static ILogWriter _writer;
 	    private static bool _showThreadId;
+	    private static Func<string, string, LogLevel, object[], Exception, string> _messageFormatter;
 
 	    public static LogLevel Level { get; set; }
 	    public static bool ShowThreadId { get { return _showThreadId; } set { _showThreadId = value; } }
+	    public static Func<string, string, LogLevel, object[], Exception, string> MessageFormatter { get { return _messageFormatter; } set { _messageFormatter = value; } }
+
 
 	    private readonly string _typeName;
 
 		static Logger()
 		{
 			_cache = new StringBuilder();
-			Level = LogLevel.Info;
+            Level = LogLevel.Info;
+            _messageFormatter = (message, typeName, level, args, e) =>
+            {
+                return string.Format("{0} [{1}]{2} {3}: {4}.{5}",
+                                     DateTime.Now.ToString("HH:mm:ss"),
+                                     level.ToString(),
+                                     _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty,
+                                     typeName,
+                                     args == null || args.Length == 0 ? message : string.Format(message, args),
+                                     e == null ? string.Empty : (" " + e.ToString()));
+            };
 		}
 
 		public static void Init(ILogWriter writer)
@@ -59,20 +72,20 @@ namespace NotLimited.Framework.Common.Logging
 		public void Write(string message, LogLevel level, Exception e)
 		{
 			if (level >= Level)
-				Write(string.Format("{0} [{1}]{5} {2}: {3}. {4}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, message, e != null ? e.ToString() : "", _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
+				Write(_messageFormatter(message, _typeName, level, null, e));
 		}
 
 		public void WriteFormat(string message, LogLevel level, params object[] args)
 		{
 			if (level >= Level)
-                Write(string.Format("{0} [{1}]{4} {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args), _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
+                Write(_messageFormatter(message, _typeName, level, args, null));
 		}
 
 		public void WriteEval(string message, LogLevel level, params Func<string>[] args)
 		{
 			if (level >= Level)
 			{
-                Write(string.Format("{0} [{1}]{4} {2}: {3}", DateTime.Now.ToString("HH:mm:ss"), level.ToString(), _typeName, string.Format(message, args.Select(x => x()).ToArray()), _showThreadId ? (" [" + Thread.CurrentThread.ManagedThreadId + "]") : string.Empty));
+                Write(_messageFormatter(message, _typeName, level, args.Select(x => (object)x()).ToArray(), null));
 			}
 		}
 

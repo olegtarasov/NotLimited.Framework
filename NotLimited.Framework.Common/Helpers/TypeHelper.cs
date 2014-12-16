@@ -172,9 +172,15 @@ namespace NotLimited.Framework.Common.Helpers
 			return GetTypesByInterface<T>(path).Select(type => (T)Activator.CreateInstance(type)).ToList();
 		}
 
-		public static List<T> CreateInstancesByInterface<T>(this Assembly ass)
+		public static List<T> CreateInstancesByInterface<T>(this Assembly ass, bool skipNoParameterlessConstructor = false)
 		{
-			return GetTypesByInterface<T>(ass).Select(type => (T)Activator.CreateInstance(type)).ToList();
+            IEnumerable<Type> types = GetTypesByInterface<T>(ass);
+		    if (skipNoParameterlessConstructor)
+		    {
+		        types = types.Where(x => x.GetConstructors().Any(c => c.GetParameters().Length == 0));
+		    }
+            
+            return types.Select(type => (T)Activator.CreateInstance(type)).ToList();
 		}
 
         public static string GetDisplayName(this MemberInfo member)
