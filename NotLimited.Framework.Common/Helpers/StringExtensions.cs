@@ -30,6 +30,11 @@ namespace NotLimited.Framework.Common.Helpers
 			return input.Substring(0, input.IndexOf(ch));
 		}
 
+        public static string Right(this string input, int start)
+        {
+            return input.Substring(start);
+        }
+
 		public static int CountSubstrings(this string source, string substring)
 		{
 			int pos = -1;
