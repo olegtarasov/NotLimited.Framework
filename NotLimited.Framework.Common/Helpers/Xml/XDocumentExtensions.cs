@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Xml.Linq;
 
 namespace NotLimited.Framework.Common.Helpers.Xml
@@ -47,6 +48,18 @@ namespace NotLimited.Framework.Common.Helpers.Xml
             }
 
             return cur as XElement;
+        }
+
+        public static IEnumerable<XElement> AncestorElementsWithNames(this XElement node, params string[] names)
+        {
+            var cur = node;
+            while (cur != null)
+            {
+                if (names.Contains(cur.Name.LocalName))
+                    yield return cur;
+
+                cur = cur.Parent;
+            }
         }
 
 	    public static void AttributeValue(this XElement element, string name, Action<string> resultAction)
