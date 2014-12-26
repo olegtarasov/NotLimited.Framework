@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SimpleJson</id>
+    <version>$version$</version>
+    <authors>Oleg Tarasov</authors>
+    <owners>Oleg Tarasov</owners>
+    <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple helper library.</description>
+    <language>en-US</language>
+	<references>
+		<reference file="System.ComponentModel.Composition" />
+		<reference file="System.ComponentModel.DataAnnotations" />
+		<reference file="System.Configuration" />
+		<reference file="System.Xml" />
+		<reference file="System.Xml.Linq" />
+	</references>
+  </metadata>
+  <files></files>
+</package>
