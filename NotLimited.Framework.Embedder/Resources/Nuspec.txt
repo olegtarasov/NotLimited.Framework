@@ -9,13 +9,13 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple helper library.</description>
     <language>en-US</language>
-	<references>
-		<reference file="System.ComponentModel.Composition" />
-		<reference file="System.ComponentModel.DataAnnotations" />
-		<reference file="System.Configuration" />
-		<reference file="System.Xml" />
-		<reference file="System.Xml.Linq" />
-	</references>
+	<frameworkAssemblies>
+		<frameworkAssembly assemblyName="System.ComponentModel.Composition" />
+		<frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" />
+		<frameworkAssembly assemblyName="System.Configuration" />
+		<frameworkAssembly assemblyName="System.Xml" />
+		<frameworkAssembly assemblyName="System.Xml.Linq" />
+	</frameworkAssemblies>
   </metadata>
   <files></files>
 </package>
