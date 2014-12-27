@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CountdownEventSlim.cs" />
+    <Compile Include="Helpers\EnvironmentHelpers.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
     <Compile Include="Helpers\Lambda.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
