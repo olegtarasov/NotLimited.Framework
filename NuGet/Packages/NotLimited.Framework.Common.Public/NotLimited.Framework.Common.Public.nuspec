@@ -1,0 +1,51 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NotLimited.Framework.Common.Public</id>
+    <version>1.0.14</version>
+    <authors>Oleg Tarasov</authors>
+    <owners>Oleg Tarasov</owners>
+    <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple helper library.</description>
+    <language>en-US</language>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ComponentModel.Composition" targetFramework="" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="sources\Helpers\CollectionExtensions.cs.pp" target="content\Helpers\CollectionExtensions.cs.pp" />
+    <file src="sources\Helpers\CollectionFilterDefinition.cs.pp" target="content\Helpers\CollectionFilterDefinition.cs.pp" />
+    <file src="sources\Helpers\CountdownEventSlim.cs.pp" target="content\Helpers\CountdownEventSlim.cs.pp" />
+    <file src="sources\Helpers\EnumHelper.cs.pp" target="content\Helpers\EnumHelper.cs.pp" />
+    <file src="sources\Helpers\EnvironmentHelpers.cs.pp" target="content\Helpers\EnvironmentHelpers.cs.pp" />
+    <file src="sources\Helpers\ExpressionHelper.cs.pp" target="content\Helpers\ExpressionHelper.cs.pp" />
+    <file src="sources\Helpers\Lambda.cs.pp" target="content\Helpers\Lambda.cs.pp" />
+    <file src="sources\Helpers\MathHelpers.cs.pp" target="content\Helpers\MathHelpers.cs.pp" />
+    <file src="sources\Helpers\MefHelper.cs.pp" target="content\Helpers\MefHelper.cs.pp" />
+    <file src="sources\Helpers\PathEqualityComparer.cs.pp" target="content\Helpers\PathEqualityComparer.cs.pp" />
+    <file src="sources\Helpers\PathHelpers.cs.pp" target="content\Helpers\PathHelpers.cs.pp" />
+    <file src="sources\Helpers\PerformanceTimer.cs.pp" target="content\Helpers\PerformanceTimer.cs.pp" />
+    <file src="sources\Helpers\RandomExtensions.cs.pp" target="content\Helpers\RandomExtensions.cs.pp" />
+    <file src="sources\Helpers\ReflectionHelper.cs.pp" target="content\Helpers\ReflectionHelper.cs.pp" />
+    <file src="sources\Helpers\SafeExecutionContext.cs.pp" target="content\Helpers\SafeExecutionContext.cs.pp" />
+    <file src="sources\Helpers\StreamExtensions.cs.pp" target="content\Helpers\StreamExtensions.cs.pp" />
+    <file src="sources\Helpers\StringExtensions.cs.pp" target="content\Helpers\StringExtensions.cs.pp" />
+    <file src="sources\Helpers\TaskHelpers.cs.pp" target="content\Helpers\TaskHelpers.cs.pp" />
+    <file src="sources\Helpers\TimeHelpers.cs.pp" target="content\Helpers\TimeHelpers.cs.pp" />
+    <file src="sources\Helpers\TypeHelper.cs.pp" target="content\Helpers\TypeHelper.cs.pp" />
+    <file src="sources\Helpers\Native\MouseHook.cs.pp" target="content\Helpers\Native\MouseHook.cs.pp" />
+    <file src="sources\Helpers\Xml\XDocumentExtensions.cs.pp" target="content\Helpers\Xml\XDocumentExtensions.cs.pp" />
+    <file src="sources\Logging\ILogWriter.cs.pp" target="content\Logging\ILogWriter.cs.pp" />
+    <file src="sources\Logging\Logger.cs.pp" target="content\Logging\Logger.cs.pp" />
+    <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\Misc\AwesomeConfig.cs.pp" />
+    <file src="sources\Misc\AwesomeMath.cs.pp" target="content\Misc\AwesomeMath.cs.pp" />
+    <file src="sources\Misc\DataPoint.cs.pp" target="content\Misc\DataPoint.cs.pp" />
+    <file src="sources\Misc\NamedPipeServer.cs.pp" target="content\Misc\NamedPipeServer.cs.pp" />
+    <file src="sources\Misc\ObjectFactory.cs.pp" target="content\Misc\ObjectFactory.cs.pp" />
+    <file src="sources\Types\TypeResolver.cs.pp" target="content\Types\TypeResolver.cs.pp" />
+  </files>
+</package>

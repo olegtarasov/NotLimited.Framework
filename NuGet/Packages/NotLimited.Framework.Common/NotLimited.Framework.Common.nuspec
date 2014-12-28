@@ -1,0 +1,51 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NotLimited.Framework.Common</id>
+    <version>1.0.14</version>
+    <authors>Oleg Tarasov</authors>
+    <owners>Oleg Tarasov</owners>
+    <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple helper library.</description>
+    <language>en-US</language>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ComponentModel.Composition" targetFramework="" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="sources\Helpers\CollectionExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\CollectionExtensions.cs.pp" />
+    <file src="sources\Helpers\CollectionFilterDefinition.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\CollectionFilterDefinition.cs.pp" />
+    <file src="sources\Helpers\CountdownEventSlim.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\CountdownEventSlim.cs.pp" />
+    <file src="sources\Helpers\EnumHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\EnumHelper.cs.pp" />
+    <file src="sources\Helpers\EnvironmentHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\EnvironmentHelpers.cs.pp" />
+    <file src="sources\Helpers\ExpressionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\ExpressionHelper.cs.pp" />
+    <file src="sources\Helpers\Lambda.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\Lambda.cs.pp" />
+    <file src="sources\Helpers\MathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\MathHelpers.cs.pp" />
+    <file src="sources\Helpers\MefHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\MefHelper.cs.pp" />
+    <file src="sources\Helpers\PathEqualityComparer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\PathEqualityComparer.cs.pp" />
+    <file src="sources\Helpers\PathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\PathHelpers.cs.pp" />
+    <file src="sources\Helpers\PerformanceTimer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\PerformanceTimer.cs.pp" />
+    <file src="sources\Helpers\RandomExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\RandomExtensions.cs.pp" />
+    <file src="sources\Helpers\ReflectionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\ReflectionHelper.cs.pp" />
+    <file src="sources\Helpers\SafeExecutionContext.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\SafeExecutionContext.cs.pp" />
+    <file src="sources\Helpers\StreamExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\StreamExtensions.cs.pp" />
+    <file src="sources\Helpers\StringExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\StringExtensions.cs.pp" />
+    <file src="sources\Helpers\TaskHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\TaskHelpers.cs.pp" />
+    <file src="sources\Helpers\TimeHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\TimeHelpers.cs.pp" />
+    <file src="sources\Helpers\TypeHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\TypeHelper.cs.pp" />
+    <file src="sources\Helpers\Native\MouseHook.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\Native\MouseHook.cs.pp" />
+    <file src="sources\Helpers\Xml\XDocumentExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Helpers\Xml\XDocumentExtensions.cs.pp" />
+    <file src="sources\Logging\ILogWriter.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Logging\ILogWriter.cs.pp" />
+    <file src="sources\Logging\Logger.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Logging\Logger.cs.pp" />
+    <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Misc\AwesomeConfig.cs.pp" />
+    <file src="sources\Misc\AwesomeMath.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Misc\AwesomeMath.cs.pp" />
+    <file src="sources\Misc\DataPoint.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Misc\DataPoint.cs.pp" />
+    <file src="sources\Misc\NamedPipeServer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Misc\NamedPipeServer.cs.pp" />
+    <file src="sources\Misc\ObjectFactory.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Misc\ObjectFactory.cs.pp" />
+    <file src="sources\Types\TypeResolver.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.14\Types\TypeResolver.cs.pp" />
+  </files>
+</package>
