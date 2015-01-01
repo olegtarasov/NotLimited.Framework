@@ -41,6 +41,12 @@ namespace NotLimited.Framework.Web.Controls
 			return new MvcHtmlString(labelTag.ToString());
 		}
 
+	    public static MvcHtmlString SimpleCheckBox(this HtmlHelper htmlHelper, string name, object htmlAttributes)
+	    {
+            string result = htmlHelper.CheckBox(name, htmlAttributes).ToString();
+            return new MvcHtmlString(result.Substring(0, result.IndexOf("<input", 5)));
+	    }
+
 		public static MvcHtmlString SimpleCheckBoxFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, object htmlAttributes = null)
 		{
 			// Well, this is a stinking hack.

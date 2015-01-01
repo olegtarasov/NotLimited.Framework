@@ -5,13 +5,13 @@
 @using NotLimited.Framework.Web.Views.Shared.Helpers
 
 
-@helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
+@helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, string title, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
 {
     if (enabledFields == null || enabledFields.Contains(prop.PropertyInfo.Name))
     {
         <th class="@(prop.Sortable ? "sortable" : null)">
 
-            @prop.DisplayName
+            @title
 
             @if (prop.Sortable)
             {

@@ -26,19 +26,8 @@ namespace NotLimited.Framework.Web.Controls
 
 	    public static MvcHtmlString GoBackLink(this OdinHelper helper, string text, string action, string controller)
 	    {
-	        var uri = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer;
-	        string query = uri == null ? null : uri.Query;
-	        var route = new RouteValueDictionary();
-            
-            // TODO: Implement injection protection!
-            if (!string.IsNullOrEmpty(query)/* && uri.IsRouteMatch(controller, action)*/)
-	        {
-	            HttpUtility.ParseQueryString(query).CopyTo(route);
-	        }
-
-	        var urlHelper = new UrlHelper(helper.HtmlHelper.ViewContext.RequestContext, helper.HtmlHelper.RouteCollection);
 	        var builder = new TagBuilder("a");
-            builder.MergeAttribute("href", urlHelper.Action(action, controller, route));
+            builder.MergeAttribute("href", helper.HtmlHelper.GetReferrerUrl(action, controller));
             builder.SetInnerText(text);
 
 	        return new MvcHtmlString(builder.ToString());

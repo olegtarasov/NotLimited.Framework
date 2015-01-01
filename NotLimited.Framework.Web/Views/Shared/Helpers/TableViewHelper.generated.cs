@@ -54,7 +54,7 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     public static class TableViewHelper
     {
 
-public static System.Web.WebPages.HelperResult TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
+public static System.Web.WebPages.HelperResult TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, string title, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
 {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
@@ -83,7 +83,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n\r\n            ");
 
 
 #line 14 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, prop.DisplayName);
+WebViewPage.WriteTo(@__razor_helper_writer, title);
 
 #line default
 #line hidden

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using Autofac.Features.Metadata;
 using NotLimited.Framework.Common.Helpers;
 using NotLimited.Framework.Data.Queries;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
@@ -19,10 +20,17 @@ namespace NotLimited.Framework.Web.Controls.Grid
             Descending
         }
 
+
+        public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression, string title, HashSet<string> enabledFields = null)
+        {
+            var metadata = PropertyMetadataCache<TModel>.GetPropertyMetadata(expression);
+            string memberName = expression.GetMemberName();
+            return TableViewHelper.TableHeader(helper, metadata, title ?? metadata.DisplayName, enabledFields, GetSortOrder(memberName));
+        }
+
         public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression, HashSet<string> enabledFields = null)
         {
-            string memberName = expression.GetMemberName();
-            return TableViewHelper.TableHeader(helper, PropertyMetadataCache<TModel>.GetPropertyMetadata(expression), enabledFields, GetSortOrder(memberName));
+            return TableHeader(helper, expression, null, enabledFields);
         }
 
         public static HelperResult TableFieldConvention<T>(HtmlHelper helper, T model, HashSet<string> fields, Expression<Func<T, object>> expression)

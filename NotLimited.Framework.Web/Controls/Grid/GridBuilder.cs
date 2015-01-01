@@ -11,14 +11,14 @@ namespace NotLimited.Framework.Web.Controls.Grid
 {
     public class GridBuilder<T>
     {
-        private enum GridColumnType
+        public enum GridColumnType
         {
             Template,
             FixedView,
             Convention
         }
 
-        private class GridColumn
+        public class GridColumn
         {
             public GridColumn(Expression<Func<T, object>> expression)
             {
@@ -44,6 +44,7 @@ namespace NotLimited.Framework.Web.Controls.Grid
             public Expression<Func<T, object>> Expression;
             public Func<object, HelperResult> Template;
             public string View;
+            public string CustomTitle;
         }
 
         private readonly HtmlHelper _helper;
@@ -62,27 +63,39 @@ namespace NotLimited.Framework.Web.Controls.Grid
             _helper = helper;
         }
 
-        public GridBuilder<T> Column(Expression<Func<T, object>> expression, Func<dynamic, HelperResult> template)
+        public GridBuilder<T> Column(Expression<Func<T, object>> expression, Func<dynamic, HelperResult> template, Action<GridColumn> action = null)
         {
-            _columns.Add(new GridColumn(expression, template));
+            var column = new GridColumn(expression, template);
+            if (action != null)
+                action(column);
+
+            _columns.Add(column);
             return this;
         }
 
-        public GridBuilder<T> Column(Expression<Func<T, object>> expression, string view)
+        public GridBuilder<T> Column(Expression<Func<T, object>> expression, string view, Action<GridColumn> action = null)
         {
-            _columns.Add(new GridColumn(expression, view));
+            var column = new GridColumn(expression, view);
+            if (action != null)
+                action(column);
+
+            _columns.Add(column);
             return this;
         }
 
-        public GridBuilder<T> Column(Expression<Func<T, object>> expression)
+        public GridBuilder<T> Column(Expression<Func<T, object>> expression, Action<GridColumn> action = null)
         {
-            _columns.Add(new GridColumn(expression));
+            var column = new GridColumn(expression);
+            if (action != null)
+                action(column);
+
+            _columns.Add(column);
             return this;
         }
 
         public static implicit operator HelperResult(GridBuilder<T> builder)
         {
-            var headers = builder._columns.Select(column => TableHelpers.TableHeader(builder._helper, column.Expression, builder._fields)).ToList();
+            var headers = builder._columns.Select(column => TableHelpers.TableHeader(builder._helper, column.Expression, column.CustomTitle, builder._fields)).ToList();
             var rows = new List<List<HelperResult>>();
 
             foreach (var model in builder._models)
