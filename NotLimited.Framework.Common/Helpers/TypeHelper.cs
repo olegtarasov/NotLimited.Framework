@@ -101,6 +101,25 @@ namespace NotLimited.Framework.Common.Helpers
 			return GetTypesByInterface<T>(ass);
 		}
 
+        public static List<Type> GetTypesByAttribute<T>(this Assembly ass) where T : Attribute
+        {
+            var result = new List<Type>();
+            Type[] types = GetTypes(ass);
+
+            foreach (var type in types)
+            {
+                if (type == null)
+                    continue;
+                if (type.IsAbstract) // Skip abstract types
+                    continue;
+
+                if (type.GetCustomAttribute<T>() != null)
+                    result.Add(type);
+            }
+
+            return result;
+        }
+
 		public static List<Type> GetTypesByInterface<T>(this Assembly ass)
 		{
 			var	result = new List<Type>();
