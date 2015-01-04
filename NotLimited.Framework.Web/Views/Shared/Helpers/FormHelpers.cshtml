@@ -1,0 +1,24 @@
+﻿@* Generator : MvcHelper *@
+
+@helper TextBox(MvcHtmlString label, MvcHtmlString textBox, MvcHtmlString validation)
+{
+    <div class="form-group">
+        @label
+        @textBox
+        @validation
+    </div>
+}
+
+@helper Upload(MvcHtmlString label, string inputName, MvcHtmlString validation, string accept = "image/*")
+{
+    <div class="form-group">
+        @label
+        <input type="file" class="form-control" name="@inputName" id="@inputName" accept="@accept">
+        @validation
+    </div>
+}
+
+@helper SubmitButton(string text)
+{
+    <button type="submit" class="btn btn-primary">@text</button>
+}

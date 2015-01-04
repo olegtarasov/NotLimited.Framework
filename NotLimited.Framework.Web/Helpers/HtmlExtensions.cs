@@ -11,7 +11,10 @@ namespace NotLimited.Framework.Web.Helpers
 {
 	public static class HtmlExtensions
 	{
-	    public static IDictionary<string, object> ConcatHtmlAttributes(this object attributes, object moreAttributes)
+        /// <summary>
+        /// Concatenates two anonymous objects into a single attrubte dictionary.
+        /// </summary>
+        public static IDictionary<string, object> ConcatHtmlAttributes(this object attributes, object moreAttributes)
 	    {
 	        var dic = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
             dic.AddRange(HtmlHelper.AnonymousObjectToHtmlAttributes(moreAttributes));
@@ -19,7 +22,10 @@ namespace NotLimited.Framework.Web.Helpers
 	        return dic;
 	    }
 
-	    public static MvcHtmlString RenderHtmlAttributes(this HtmlHelper helper, object attributes)
+        /// <summary>
+        /// Renders anonymous object into HTML attrubte string like 'foo="bar" baz="fuzz"'.
+        /// </summary>
+        public static MvcHtmlString RenderHtmlAttributes(this HtmlHelper helper, object attributes)
 	    {
             if (attributes == null)
                 return new MvcHtmlString("");
@@ -34,7 +40,7 @@ namespace NotLimited.Framework.Web.Helpers
 	        {
                 string key = attr.Key;
 	            string value = Convert.ToString(attr.Value);
-                if (!string.Equals(key, "id", StringComparison.Ordinal) || !string.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     string str = HttpUtility.HtmlAttributeEncode(value);
                     sb.Append(' ').Append(key).Append("=\"").Append(str).Append('"');
@@ -43,20 +49,5 @@ namespace NotLimited.Framework.Web.Helpers
 
             return new MvcHtmlString(sb.ToString());
 	    }
-
-	    public static string AsyncLoadUrl(this UrlHelper helper, string action = null, string controller = null)
-		{
-			var result = new RouteValueDictionary();
-
-			foreach (var value in helper.RequestContext.RouteData.Values)
-				result.Add(value.Key, value.Value);
-
-			if (!string.IsNullOrEmpty(controller))
-				result["controller"] = controller;
-			
-			result["action"] = !string.IsNullOrEmpty(action) ? action : (string)result["action"] + "Async";
-
-			return helper.RouteUrl(result);
-		}
 	}
 }

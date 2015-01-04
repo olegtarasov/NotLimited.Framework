@@ -1,64 +1,76 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
 namespace NotLimited.Framework.Web.Helpers
 {
+    /// <summary>
+    /// Provides the means of using the collection binding.
+    /// </summary>
 	public static class HtmlPrefixScopeExtensions
-	{
-		private const string IdsToReuseKey = "__htmlPrefixScopeExtensions_IdsToReuse_";
+    {
+        private const string IdsToReuseKey = "__htmlPrefixScopeExtensions_IdsToReuse_";
 
-		public static IDisposable BeginCollectionItem(this HtmlHelper html, string collectionName)
-		{
-			var idsToReuse = GetIdsToReuse(html.ViewContext.HttpContext, collectionName);
-			string itemIndex = idsToReuse.Count > 0 ? idsToReuse.Dequeue() : Guid.NewGuid().ToString();
+        public static IDisposable BeginCollectionItem(this HtmlHelper html, string collectionName)
+        {
+            return BeginCollectionItem(html, collectionName, html.ViewContext.Writer);
+        }
 
-			// autocomplete="off" is needed to work around a very annoying Chrome behaviour whereby it reuses old values after the user clicks "Back", which causes the xyz.index and xyz[...] values to get out of sync.
-			html.ViewContext.Writer.WriteLine(string.Format("<input type=\"hidden\" name=\"{0}.index\" autocomplete=\"off\" value=\"{1}\" />", collectionName, html.Encode(itemIndex)));
+        public static IDisposable BeginCollectionItem(this HtmlHelper html, string collectionName, TextWriter writer)
+        {
+            var idsToReuse = GetIdsToReuse(html.ViewContext.HttpContext, collectionName);
+            var itemIndex = idsToReuse.Count > 0 ? idsToReuse.Dequeue() : Guid.NewGuid().ToString();
 
-			return BeginHtmlFieldPrefixScope(html, string.Format("{0}[{1}]", collectionName, itemIndex));
-		}
+            // autocomplete="off" is needed to work around a very annoying Chrome behaviour
+            // whereby it reuses old values after the user clicks "Back", which causes the
+            // xyz.index and xyz[...] values to get out of sync.
+            writer.WriteLine(
+                "<input type=\"hidden\" name=\"{0}.index\" autocomplete=\"off\" value=\"{1}\" />",
+                collectionName, html.Encode(itemIndex));
 
-		public static IDisposable BeginHtmlFieldPrefixScope(this HtmlHelper html, string htmlFieldPrefix)
-		{
-			return new HtmlFieldPrefixScope(html.ViewData.TemplateInfo, htmlFieldPrefix);
-		}
+            return BeginHtmlFieldPrefixScope(html, string.Format("{0}[{1}]", collectionName, itemIndex));
+        }
 
-		private static Queue<string> GetIdsToReuse(HttpContextBase httpContext, string collectionName)
-		{
-			// We need to use the same sequence of IDs following a server-side validation failure,  
-			// otherwise the framework won't render the validation error messages next to each item.
-			string key = IdsToReuseKey + collectionName;
-			var queue = (Queue<string>)httpContext.Items[key];
-			if (queue == null)
-			{
-				httpContext.Items[key] = queue = new Queue<string>();
-				var previouslyUsedIds = httpContext.Request[collectionName + ".index"];
-				if (!string.IsNullOrEmpty(previouslyUsedIds))
-					foreach (string previouslyUsedId in previouslyUsedIds.Split(','))
-						queue.Enqueue(previouslyUsedId);
-			}
-			return queue;
-		}
+        public static IDisposable BeginHtmlFieldPrefixScope(this HtmlHelper html, string htmlFieldPrefix)
+        {
+            return new HtmlFieldPrefixScope(html.ViewData.TemplateInfo, htmlFieldPrefix);
+        }
 
-		private class HtmlFieldPrefixScope : IDisposable
-		{
-			private readonly TemplateInfo _templateInfo;
-			private readonly string _previousHtmlFieldPrefix;
+        private static Queue<string> GetIdsToReuse(HttpContextBase httpContext, string collectionName)
+        {
+            // We need to use the same sequence of IDs following a server-side validation failure,
+            // otherwise the framework won't render the validation error messages next to each item.
+            var key = IdsToReuseKey + collectionName;
+            var queue = (Queue<string>)httpContext.Items[key];
+            if (queue == null) {
+                httpContext.Items[key] = queue = new Queue<string>();
+                var previouslyUsedIds = httpContext.Request[collectionName + ".index"];
+                if (!string.IsNullOrEmpty(previouslyUsedIds))
+                    foreach (var previouslyUsedId in previouslyUsedIds.Split(','))
+                        queue.Enqueue(previouslyUsedId);
+            }
+            return queue;
+        }
 
-			public HtmlFieldPrefixScope(TemplateInfo templateInfo, string htmlFieldPrefix)
-			{
-				_templateInfo = templateInfo;
+        internal class HtmlFieldPrefixScope : IDisposable
+        {
+            internal readonly TemplateInfo TemplateInfo;
+            internal readonly string PreviousHtmlFieldPrefix;
 
-				_previousHtmlFieldPrefix = templateInfo.HtmlFieldPrefix;
-				templateInfo.HtmlFieldPrefix = htmlFieldPrefix;
-			}
+            public HtmlFieldPrefixScope(TemplateInfo templateInfo, string htmlFieldPrefix)
+            {
+                TemplateInfo = templateInfo;
 
-			public void Dispose()
-			{
-				_templateInfo.HtmlFieldPrefix = _previousHtmlFieldPrefix;
-			}
-		}
+                PreviousHtmlFieldPrefix = TemplateInfo.HtmlFieldPrefix;
+                TemplateInfo.HtmlFieldPrefix = htmlFieldPrefix;
+            }
+
+            public void Dispose()
+            {
+                TemplateInfo.HtmlFieldPrefix = PreviousHtmlFieldPrefix;
+            }
+        }
 	}
 }

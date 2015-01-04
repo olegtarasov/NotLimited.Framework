@@ -1,26 +1,34 @@
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using NotLimited.Framework.Web.Controls.Builders.Upload;
+using System.Web.Mvc.Html;
+using System.Web.WebPages;
+using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Controls
 {
 	public static class UploadExtensions
 	{
-		public static IUploadBuilder UploadFor<TModel, TValue>(this OdinHelper<TModel> helper, Expression<Func<TModel, TValue>> expr)
-		{
-			return new UploadBuilder<TModel, TValue>(helper, expr);
-		}
+	    /// <summary>
+	    /// Creates an upload control.
+	    /// </summary>
+	    public static HelperResult UploadFor<TModel, TProperty>(this FormHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
+	    {
+	        return FormHelpers.Upload(
+	            helper.HtmlHelper.LabelFor(expression),
+	            helper.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression)),
+	            helper.HtmlHelper.ValidationMessageFor(expression, "", new { @class = "text-danger" }));
+	    }
 
-		public static MvcHtmlString Upload<TModel>(this OdinHelper<TModel> helper, string name, string labelText = null, string helpText = null)
-		{
-			var textBox = new TagBuilder("input");
-
-			textBox.MergeAttribute("type", "file");
-			textBox.MergeAttribute("name", name);
-			textBox.MergeAttribute("id", name);
-
-			return helper.Input(name, textBox.ToString(), labelText, helpText);
-		}
+	    /// <summary>
+	    /// Creates an upload control with custom name and label.
+	    /// </summary>
+	    public static HelperResult Upload<TModel>(this FormHelper<TModel> helper, string name, string label)
+	    {
+	        return FormHelpers.Upload(
+	            helper.HtmlHelper.Label(name, label),
+	            name,
+	            new MvcHtmlString(""));
+	    }
 	}
 }

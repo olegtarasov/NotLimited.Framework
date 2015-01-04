@@ -4,6 +4,9 @@ using System.Web.Routing;
 
 namespace NotLimited.Framework.Web.Helpers
 {
+    /// <summary>
+    /// Helper class to parse route information.
+    /// </summary>
     public class RouteInfo
     {
         public RouteData RouteData { get; private set; }

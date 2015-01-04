@@ -124,33 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
-    <Compile Include="Controls\Attributes\LabelAttribute.cs" />
-    <Compile Include="Controls\Attributes\MetadataAttribute.cs" />
-    <Compile Include="Controls\Attributes\PasswordAttribute.cs" />
-    <Compile Include="Controls\Attributes\PathPrefixAttribute.cs" />
-    <Compile Include="Controls\Attributes\PlaceholderAttribute.cs" />
-    <Compile Include="Controls\Attributes\RowsAttribute.cs" />
-    <Compile Include="Controls\Attributes\SizeAttribute.cs" />
-    <Compile Include="Controls\BootstrapExtensions.cs" />
-    <Compile Include="Controls\Builders\Attributes\HtmlAttributeBuilder.cs" />
-    <Compile Include="Controls\Builders\Attributes\HtmlAttributeBuilderExtensions.cs" />
-    <Compile Include="Controls\Builders\HtmlBuilderBase.cs" />
-    <Compile Include="Controls\Builders\IBuilder.cs" />
-    <Compile Include="Controls\Builders\IInputBuilder.cs" />
-    <Compile Include="Controls\Builders\Image\IImageBuilder.cs" />
-    <Compile Include="Controls\Builders\Image\ImageBuilder.cs" />
-    <Compile Include="Controls\Builders\InputBuilderBase.cs" />
-    <Compile Include="Controls\Builders\MetadataExtensions.cs" />
-    <Compile Include="Controls\Builders\TextArea\ITextAreaBuilder.cs" />
-    <Compile Include="Controls\Builders\TextArea\TextAreaBuilder.cs" />
-    <Compile Include="Controls\Builders\TextBox\ITextBoxBuilder.cs" />
-    <Compile Include="Controls\Builders\TextBox\TextBoxBuilder.cs" />
-    <Compile Include="Controls\Builders\Upload\IUploadBuilder.cs" />
-    <Compile Include="Controls\Builders\Upload\UploadBuilder.cs" />
     <Compile Include="Controls\ButtonExtensions.cs" />
     <Compile Include="Controls\CheckBoxExtensions.cs" />
     <Compile Include="Controls\DialogExtensions.cs" />
+    <Compile Include="Controls\FontAwesomeExtensions.cs" />
     <Compile Include="Controls\FormExtensions.cs" />
+    <Compile Include="Controls\FormHelper.cs" />
     <Compile Include="Controls\Grid\FilterHelpers.cs" />
     <Compile Include="Controls\Grid\GridBuilder.cs" />
     <Compile Include="Controls\Grid\GridHelpers.cs" />
@@ -158,12 +137,8 @@
     <Compile Include="Controls\Grid\TableHelpers.cs" />
     <Compile Include="Controls\HiddenExtensions.cs" />
     <Compile Include="Controls\HtmlEnums.cs" />
-    <Compile Include="Controls\InputExtensions.cs" />
     <Compile Include="Controls\Model\ConfirmDialogModel.cs" />
-    <Compile Include="Controls\NavigationExtensions.cs" />
-    <Compile Include="Controls\PlainTextExtensions.cs" />
     <Compile Include="Controls\SelectExtensions.cs" />
-    <Compile Include="Controls\TextAreaExtensions.cs" />
     <Compile Include="Controls\TextBoxExtensions.cs" />
     <Compile Include="Controls\UploadExtensions.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
@@ -171,11 +146,7 @@
     <Compile Include="Helpers\MvcExtensions.cs" />
     <Compile Include="Helpers\RequestExtensions.cs" />
     <Compile Include="Helpers\RouteInfo.cs" />
-    <Compile Include="Navigation\NavigationGroup.cs" />
-    <Compile Include="Navigation\NavigationItem.cs" />
-    <Compile Include="Navigation\NavigationItemBase.cs" />
-    <Compile Include="Plumbing\ExtendedModelMetadataProvider.cs" />
-    <Compile Include="Plumbing\RoleProviderBase.cs" />
+    <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Shared\ConfirmDialog.generated.cs">
       <AutoGen>True</AutoGen>
@@ -187,10 +158,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterViewHelper.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\Helpers\FormHelpers.generated.cs">
+      <DependentUpon>FormHelpers.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Shared\Helpers\GridViewHelper.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GridViewHelper.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Helpers\IconHelpers.generated.cs">
+      <DependentUpon>IconHelpers.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Shared\Helpers\TableViewHelper.generated.cs">
       <AutoGen>True</AutoGen>
@@ -231,10 +212,18 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ConfirmDialog.generated.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Shared\Helpers\FormHelpers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FormHelpers.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Views\Shared\Helpers\GridViewHelper.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>GridViewHelper.generated.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Shared\Helpers\IconHelpers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>IconHelpers.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Views\Shared\Helpers\TableViewHelper.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>TableViewHelper.generated.cs</LastGenOutput>
