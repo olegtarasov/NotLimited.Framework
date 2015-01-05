@@ -1,8 +1,9 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace NotLimited.Framework.Common.Helpers
 {
-    public class CountdownEventSlim
+    public sealed class CountdownEventSlim : IDisposable
     {
         private int _count = 0;
         private ManualResetEventSlim _resetEvent = new ManualResetEventSlim(true);
@@ -24,6 +25,11 @@ namespace NotLimited.Framework.Common.Helpers
         public void Wait()
         {
             _resetEvent.Wait();
+        }
+
+        public void Dispose()
+        {
+            _resetEvent.Dispose();
         }
     }
 }
