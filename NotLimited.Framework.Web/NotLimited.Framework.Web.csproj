@@ -124,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Controls\Builders\ButtonBuilder.cs" />
+    <Compile Include="Controls\Builders\ControlBuilderBase.cs" />
+    <Compile Include="Controls\Builders\FormControlBuilderBase.cs" />
+    <Compile Include="Controls\Builders\SelectBuilder.cs" />
+    <Compile Include="Controls\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Controls\Builders\TextBoxBuilder.cs" />
     <Compile Include="Controls\ButtonExtensions.cs" />
     <Compile Include="Controls\CheckBoxExtensions.cs" />
     <Compile Include="Controls\DialogExtensions.cs" />

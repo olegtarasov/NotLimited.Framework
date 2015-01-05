@@ -10,6 +10,7 @@ namespace NotLimited.Framework.Web.Controls
 {
 	public static class CheckBoxExtensions
 	{
+        [Obsolete("Remove if not needed")]
 		public static MvcHtmlString DataCheckBox(this FormHelper helper, string name, string label, bool isChecked = false, object value = null)
 		{
 			var labelTag = new TagBuilder("label");
@@ -31,12 +32,18 @@ namespace NotLimited.Framework.Web.Controls
 			return new MvcHtmlString(labelTag.ToString());
 		}
 
-	    public static MvcHtmlString SimpleCheckBox(this FormHelper htmlHelper, string name, object htmlAttributes)
+        /// <summary>
+        /// Creates a simple checkbox as opposed to complicated MVC version.
+        /// </summary>
+        public static MvcHtmlString SimpleCheckBox(this FormHelper htmlHelper, string name, object htmlAttributes)
 	    {
             string result = htmlHelper.HtmlHelper.CheckBox(name, htmlAttributes).ToString();
             return new MvcHtmlString(result.Substring(0, result.IndexOf("<input", 5)));
 	    }
 
+        /// <summary>
+        /// Creates a simple checkbox as opposed to complicated MVC version.
+        /// </summary>
 		public static MvcHtmlString SimpleCheckBoxFor<TModel>(this FormHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, object htmlAttributes = null)
 		{
 			// Well, this is a stinking hack.

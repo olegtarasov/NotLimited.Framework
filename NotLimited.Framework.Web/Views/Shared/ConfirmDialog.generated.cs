@@ -41,8 +41,17 @@ namespace NotLimited.Framework.Web.Views.Shared
 WriteLiteral("\r\n\r\n");
 
 
-WriteLiteral("\r\n<script type=\"text/javascript\">\r\n\tfunction ConfirmDialog() {\r\n\t\t$(\'#confirmDial" +
-"og\').modal(\'show\');\r\n\t}\r\n\r\n\tfunction SubmitConfirmed() {\r\n\t\t$(\'#");
+WriteLiteral("\r\n<script type=\"text/javascript\">\r\n\tfunction ConfirmDialog() {\r\n\t\t$(\'#");
+
+
+            
+            #line 7 "..\..\Views\Shared\ConfirmDialog.cshtml"
+ Write(Model.DialogId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\').modal(\'show\');\r\n\t}\r\n\r\n\tfunction SubmitConfirmed() {\r\n\t\t$(\'#");
 
 
             
@@ -52,16 +61,20 @@ WriteLiteral("\r\n<script type=\"text/javascript\">\r\n\tfunction ConfirmDialog(
             
             #line default
             #line hidden
-WriteLiteral(@"').submit();
-	}
-</script>
+WriteLiteral("\').submit();\r\n\t}\r\n</script>\r\n\r\n<div class=\"modal fade\" id=\"");
 
-<div class=""modal fade"" id=""confirmDialog"">
-    <div class=""modal-dialog"">
-        <div class=""modal-content"">
-            <div class=""modal-header"">
-                <a href=""#"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"">×</a>
-                <h4 class=""modal-title"">");
+
+            
+            #line 15 "..\..\Views\Shared\ConfirmDialog.cshtml"
+                       Write(Model.DialogId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n        " +
+"    <div class=\"modal-header\">\r\n                <a href=\"#\" class=\"close\" data-d" +
+"ismiss=\"modal\" aria-hidden=\"true\">×</a>\r\n                <h4 class=\"modal-title\"" +
+">");
 
 
             

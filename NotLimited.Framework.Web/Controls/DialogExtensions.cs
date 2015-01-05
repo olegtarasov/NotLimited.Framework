@@ -6,9 +6,12 @@ namespace NotLimited.Framework.Web.Controls
 {
 	public static class DialogExtensions
 	{
-		 public static MvcHtmlString ConfirmDialog(this FormHelper helper, string formId, string title, string message)
-		 {
-			 return helper.HtmlHelper.Partial("ConfirmDialog", new ConfirmDialogModel(formId, title, message));
-		 }
+	    /// <summary>
+	    /// Creates a confirmation dialog.
+	    /// </summary>
+        public static MvcHtmlString ConfirmDialog(this FormHelper helper, string formId, string title, string message)
+	    {
+	        return helper.HtmlHelper.Partial("ConfirmDialog", new ConfirmDialogModel(formId, title, message));
+	    }
 	}
 }
