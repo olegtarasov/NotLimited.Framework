@@ -138,6 +138,8 @@
     <Compile Include="Controls\FormHelper.cs" />
     <Compile Include="Controls\Grid\FilterHelpers.cs" />
     <Compile Include="Controls\Grid\GridBuilder.cs" />
+    <Compile Include="Controls\Grid\GridColumnBuilder.cs" />
+    <Compile Include="Controls\Grid\GridColumnType.cs" />
     <Compile Include="Controls\Grid\GridHelpers.cs" />
     <Compile Include="Controls\Grid\ModelWithFields.cs" />
     <Compile Include="Controls\Grid\TableHelpers.cs" />
