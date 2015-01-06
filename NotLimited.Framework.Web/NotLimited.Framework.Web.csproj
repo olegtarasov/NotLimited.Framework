@@ -151,7 +151,6 @@
     <Compile Include="Controls\UploadExtensions.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
-    <Compile Include="Helpers\MvcExtensions.cs" />
     <Compile Include="Helpers\RequestExtensions.cs" />
     <Compile Include="Helpers\RouteInfo.cs" />
     <Compile Include="Helpers\UrlExtensions.cs" />

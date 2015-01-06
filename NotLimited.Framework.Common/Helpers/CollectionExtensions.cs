@@ -138,7 +138,7 @@ namespace NotLimited.Framework.Common.Helpers
             return value;
         }
 
-        public static IEnumerable<TElement> IterateQueue<TElement, TContainer>(
+        public static IEnumerable<TElement> IterateQueueList<TElement, TContainer>(
             this TContainer root, 
             Func<TContainer, IEnumerable<TElement>> elementAccessor,
             Func<TContainer, IEnumerable<TContainer>> childrenAccessor)

@@ -34,9 +34,9 @@ namespace NotLimited.Framework.Web.Helpers
         /// <summary>
         /// Indicates whether supplied Url matches specific controller and action.
         /// </summary>
-        public static bool IsRouteMatch(this Uri uri, string actionName, string controllerName)
+        public static bool IsRouteMatch(this Uri url, string actionName, string controllerName)
         {
-            var routeInfo = new RouteInfo(uri, HttpContext.Current.Request.ApplicationPath);
+            var routeInfo = new RouteInfo(url, HttpContext.Current.Request.ApplicationPath);
             return (routeInfo.RouteData.Values["controller"].ToString() == controllerName && routeInfo.RouteData.Values["action"].ToString() == actionName);
         }
 
@@ -59,7 +59,7 @@ namespace NotLimited.Framework.Web.Helpers
 
             foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
             {
-                if (string.IsNullOrEmpty(key) || set.Contains(key))
+                if (String.IsNullOrEmpty(key) || set.Contains(key))
                     continue;
 
                 result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
@@ -87,13 +87,13 @@ namespace NotLimited.Framework.Web.Helpers
         /// <summary>
         /// Appends GET parameters from an anonymous object to current set of GET parameters.
         /// </summary>
-        public static RouteValueDictionary AppendQueryString<TModel>(this HtmlHelper<TModel> helper, object routeValues)
+        public static RouteValueDictionary AppendQueryString(this HtmlHelper helper, object routeValues)
         {
             var result = new RouteValueDictionary();
 
             foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
             {
-                if (string.IsNullOrEmpty(key))
+                if (String.IsNullOrEmpty(key))
                     continue;
 
                 result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
@@ -114,7 +114,7 @@ namespace NotLimited.Framework.Web.Helpers
             var route = new RouteValueDictionary();
 
             // TODO: Implement injection protection!
-            if (!string.IsNullOrEmpty(query)/* && url.IsRouteMatch(controller, action)*/)
+            if (!String.IsNullOrEmpty(query)/* && url.IsRouteMatch(controller, action)*/)
             {
                 HttpUtility.ParseQueryString(query).CopyTo(route);
             }
@@ -131,21 +131,13 @@ namespace NotLimited.Framework.Web.Helpers
         }
 
         /// <summary>
-        /// Gets GET query params from current request Url in a form of a RouteValueDictionary.
-        /// </summary>
-        public static RouteValueDictionary GetCurrentQueryParams(this HtmlHelper helper)
-        {
-            return helper.ViewContext.RequestContext.HttpContext.Request.Url.GetUrlQueryParams();
-        }
-
-        /// <summary>
         /// Gets a relative part of the current request Url.
         /// </summary>
         public static string GetCurrentUrl(this HtmlHelper helper)
         {
             return helper.ViewContext.RequestContext.HttpContext.Request.Url != null 
                 ? helper.ViewContext.RequestContext.HttpContext.Request.Url.PathAndQuery 
-                : string.Empty;
+                : String.Empty;
         }
 
         /// <summary>
@@ -177,6 +169,21 @@ namespace NotLimited.Framework.Web.Helpers
         {
             var result = new RouteValueDictionary(source);
             result.AddRange(dst);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert an anonymous object to RouteValueDictionary.
+        /// </summary>
+        public static RouteValueDictionary ToRouteValueDictionary(this object value)
+        {
+            var result = new RouteValueDictionary();
+            if (value == null)
+                return result;
+
+            foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(value))
+                result.Add(property.Name, property.GetValue(value));
 
             return result;
         }
