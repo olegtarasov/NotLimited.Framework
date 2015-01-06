@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Policy;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Web.Helpers
 {
@@ -31,7 +34,7 @@ namespace NotLimited.Framework.Web.Helpers
         /// <summary>
         /// Indicates whether supplied Url matches specific controller and action.
         /// </summary>
-        public static bool IsRouteMatch(this Uri uri, string controllerName, string actionName)
+        public static bool IsRouteMatch(this Uri uri, string actionName, string controllerName)
         {
             var routeInfo = new RouteInfo(uri, HttpContext.Current.Request.ApplicationPath);
             return (routeInfo.RouteData.Values["controller"].ToString() == controllerName && routeInfo.RouteData.Values["action"].ToString() == actionName);
@@ -49,12 +52,18 @@ namespace NotLimited.Framework.Web.Helpers
         /// <summary>
         /// Converts current GET parameters to a RouteValueDictionary.
         /// </summary>
-        public static RouteValueDictionary QueryStringToRouteDictionary(this HtmlHelper helper)
+        public static RouteValueDictionary QueryStringToRouteDictionary(this HtmlHelper helper, params string[] except)
         {
             var result = new RouteValueDictionary();
+            var set = new HashSet<string>(except, StringComparer.OrdinalIgnoreCase);
 
             foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
+            {
+                if (string.IsNullOrEmpty(key) || set.Contains(key))
+                    continue;
+
                 result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
+            }
 
             return result;
         }
@@ -83,7 +92,12 @@ namespace NotLimited.Framework.Web.Helpers
             var result = new RouteValueDictionary();
 
             foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
+            {
+                if (string.IsNullOrEmpty(key))
+                    continue;
+
                 result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
+            }
 
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(routeValues))
                 result[property.Name] = property.GetValue(routeValues);
@@ -157,6 +171,14 @@ namespace NotLimited.Framework.Web.Helpers
             builder.Append('}');
 
             return builder.ToString();
+        }
+
+        public static RouteValueDictionary ConcatRouteValues(this object source, RouteValueDictionary dst)
+        {
+            var result = new RouteValueDictionary(source);
+            result.AddRange(dst);
+
+            return result;
         }
     }
 }

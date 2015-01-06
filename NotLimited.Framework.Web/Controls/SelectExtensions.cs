@@ -49,7 +49,7 @@ namespace NotLimited.Framework.Web.Controls
 	    /// <summary>
 	    /// Creates a select control.
 	    /// </summary>
-	    public static SelectBuilder<TModel, TValue> SelectFor<TModel, TValue>(this FormHelper<TModel> helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items)
+	    public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper<TModel> helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items)
 	    {
 	        return new SelectBuilder<TModel, TValue>(helper.HtmlHelper, expression)
                 .Items(items)

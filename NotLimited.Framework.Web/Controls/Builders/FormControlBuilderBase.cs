@@ -17,7 +17,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         }
 
         public Expression<Func<TModel, TProperty>> Expression { get; private set; }
-        
+
         public override HelperResult GetControlHtml()
         {
             return FormHelpers.TextBox(

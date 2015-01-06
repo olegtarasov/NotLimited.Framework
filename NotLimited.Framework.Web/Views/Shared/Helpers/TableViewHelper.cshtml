@@ -1,6 +1,7 @@
 ﻿@* Generator : MvcHelper *@
 @using System.Web.Mvc.Html
 @using NotLimited.Framework.Data.Queries
+@using NotLimited.Framework.Web.Controls
 @using NotLimited.Framework.Web.Controls.Grid
 @using NotLimited.Framework.Web.Views.Shared.Helpers
 
@@ -18,12 +19,11 @@
                 <div class="pull-right">
                     <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px" />
                 </div>
-                using (helper.BeginForm(null, null, FormMethod.Get))
-                {
+                <form action="@(new UrlHelper(helper.ViewContext.RequestContext).Action())" method="GET">
                     <input type="hidden" name="sortBy" value="@prop.PropertyInfo.Name" />
                     <input type="hidden" name="descending" value="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()" />
-                    @FilterViewHelper.HiddenForQuery(helper, "sortBy", "descending")
-                }
+                    @(helper.Form().HiddenForQuery("sortBy", "descending"))
+                </form>
             }
         </th>
     }

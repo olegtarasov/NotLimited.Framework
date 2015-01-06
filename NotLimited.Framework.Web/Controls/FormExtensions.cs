@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Routing;
 using System.Web.WebPages;
 using NotLimited.Framework.Web.Helpers;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
@@ -30,9 +31,9 @@ namespace NotLimited.Framework.Web.Controls
         /// <summary>
         /// Creates a form with specified method and current action and controller.
         /// </summary>
-        public static MvcForm BeginForm(this HtmlHelper htmlHelper, FormMethod method, object htmlAttributes = null)
+        public static MvcForm BeginForm(this FormHelper helper, FormMethod method, RouteValueDictionary routeValues = null, object htmlAttributes = null, string id = null)
         {
-            return htmlHelper.BeginForm(null, null, method, htmlAttributes.ConcatHtmlAttributes(new {role = "form"}));
+            return helper.HtmlHelper.BeginForm(null, null, routeValues, method, htmlAttributes.ConcatHtmlAttributes(new {role = "form", id}));
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace NotLimited.Framework.Web.Controls
         /// </summary>
         public static MvcForm BeginPostForm<T>(this FormHelper<T> helper, string action = null, string controller = null, string id = null)
         {
-            return helper.HtmlHelper.BeginForm(action, controller, FormMethod.Post, new {role = "form", id = id});
+            return helper.HtmlHelper.BeginForm(action, controller, FormMethod.Post, new {role = "form", id});
         }
     }
 }

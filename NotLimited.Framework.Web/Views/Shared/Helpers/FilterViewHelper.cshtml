@@ -7,7 +7,7 @@
     @(helper.DropDownList(name, items, new {@class = "select2", data_select_search = true, data_placeholder = placeholder}))
 }
 
-@helper HiddenForQuery(System.Web.Mvc.HtmlHelper html, params string[] except)
+@helper HiddenForQuery(System.Web.Mvc.HtmlHelper html, HashSet<string> except)
 {
     foreach (var item in html.QueryStringToRouteDictionary().Where(x => !except.Contains(x.Key)))
     {

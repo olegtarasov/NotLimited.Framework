@@ -28,9 +28,26 @@ namespace NotLimited.Framework.Web.Controls.Builders
             return this;
         }
 
-        public SelectBuilder<TModel, TProperty> Select2()
+        public SelectBuilder<TModel, TProperty> Select2(string placeholder = null, bool allowClear = false)
         {
             CssClasses.Add("select2");
+
+            if (!string.IsNullOrEmpty(placeholder))
+            {
+                HtmlAttributes.Add("data-placeholder", placeholder);
+            }
+
+            if (allowClear)
+            {
+                HtmlAttributes.Add("data-allowClear", "true");
+            }
+
+            return this;
+        }
+
+        public SelectBuilder<TModel, TProperty> OnChange(string handler)
+        {
+            HtmlAttributes["onchange"] = handler;
             return this;
         }
 

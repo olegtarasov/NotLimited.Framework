@@ -55,11 +55,15 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <form></form>\r\n");
+
+
+
 WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <table ");
 
 
 
-#line 8 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 9 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.RenderHtmlAttributes(tableHtmlAttributes));
 
 #line default
@@ -69,7 +73,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n        <thead>\r\n    
 
 
 
-#line 11 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 12 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                  foreach (var header in headers)
                 {
                     
@@ -77,14 +81,14 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n        <thead>\r\n    
 #line hidden
 
 
-#line 13 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 14 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, header);
 
 #line default
 #line hidden
 
 
-#line 13 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 14 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                            
                 }
 
@@ -95,7 +99,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </tr>\r\n       
 
 
 
-#line 18 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 19 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
              foreach (var row in rows)
             {
 
@@ -106,7 +110,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <tr>\r\n");
 
 
 
-#line 21 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 22 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                      foreach (var column in row)
                     {
                         
@@ -114,14 +118,14 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <tr>\r\n");
 #line hidden
 
 
-#line 23 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 24 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, column);
 
 #line default
 #line hidden
 
 
-#line 23 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 24 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                                
                     }
 
@@ -132,7 +136,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                </tr>\r\n");
 
 
 
-#line 26 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 27 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
             }
 
 #line default
@@ -142,7 +146,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </tbody>\r\n    </ta
 
 
 
-#line 29 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 30 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
     
     if (pagination != null)
     {
@@ -151,14 +155,14 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </tbody>\r\n    </ta
 #line hidden
 
 
-#line 32 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 33 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.Partial("Paginator", pagination));
 
 #line default
 #line hidden
 
 
-#line 32 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 33 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                                                     
     }
 

@@ -73,7 +73,7 @@ WebViewPage.WriteTo(@__razor_helper_writer, helper.DropDownList(name, items, new
 }
 
 
-public static System.Web.WebPages.HelperResult HiddenForQuery(System.Web.Mvc.HtmlHelper html, params string[] except)
+public static System.Web.WebPages.HelperResult HiddenForQuery(System.Web.Mvc.HtmlHelper html, HashSet<string> except)
 {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
