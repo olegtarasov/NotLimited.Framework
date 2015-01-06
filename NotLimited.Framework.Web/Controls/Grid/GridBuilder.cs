@@ -17,6 +17,7 @@ namespace NotLimited.Framework.Web.Controls.Grid
         private readonly object _attributes;
         private readonly Pagination _pagination;
         private readonly List<GridColumnBuilder<T>> _columns = new List<GridColumnBuilder<T>>();
+        private readonly GridFormBuilder _formBuilder = new GridFormBuilder();
 
         public GridBuilder(HtmlHelper helper, IEnumerable<T> models, Pagination pagination = null, object attributes = null, HashSet<string> fields = null)
         {
@@ -37,6 +38,15 @@ namespace NotLimited.Framework.Web.Controls.Grid
             return this;
         }
 
+        public GridBuilder<T> Form(Action<GridFormBuilder> action)
+        {
+            if (action == null)
+                return this;
+
+            action(_formBuilder);
+            return this;
+        }
+
         public static implicit operator HelperResult(GridBuilder<T> builder)
         {
             var headers = builder._columns.Select(column => column.GetTitleHtml()).ToList();
@@ -54,7 +64,7 @@ namespace NotLimited.Framework.Web.Controls.Grid
             }
 
 
-            return GridViewHelper.Grid(builder._helper, headers, rows, builder._pagination, builder._attributes);
+            return GridViewHelper.Grid(builder._helper, headers, rows, builder._formBuilder, builder._pagination, builder._attributes);
         }
     }
 }

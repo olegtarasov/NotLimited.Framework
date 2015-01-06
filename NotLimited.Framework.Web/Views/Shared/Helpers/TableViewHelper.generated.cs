@@ -66,25 +66,37 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 10 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 9 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
  
     if (enabledFields == null || enabledFields.Contains(prop.PropertyInfo.Name))
     {
+        if (prop.Sortable)
+        {
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <th class=\"");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <th class=\"sortable\" data-name=\"");
 
 
 
-#line 13 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, prop.Sortable ? "sortable" : null);
+#line 14 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+ WebViewPage.WriteTo(@__razor_helper_writer, prop.PropertyInfo.Name);
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n\r\n            ");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" data-descending=\"");
+
+
+
+#line 14 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+                                           WebViewPage.WriteTo(@__razor_helper_writer, TableHelpers.IsOppositeOrderDescending(sortOrder).ToString());
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n                ");
 
 
 
@@ -94,86 +106,44 @@ WebViewPage.WriteTo(@__razor_helper_writer, title);
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n                <div class=\"pull-right\">\r\n                    <span class=\"fa ");
 
 
 
 #line 17 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-             if (prop.Sortable)
-            {
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <div class=\"pull-right\">\r\n                    <span class=\"fa ");
-
-
-
-#line 20 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, TableHelpers.GetSortIcon(sortOrder));
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" style=\"margin-right: 5px\" />\r\n                </div>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" style=\"margin-right: 5px\" />\r\n                </div>\r\n            </th>\r\n");
 
 
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <form action=\"");
-
-
-
-#line 22 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, new UrlHelper(helper.ViewContext.RequestContext).Action());
+#line 20 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+        }
+        else
+        {
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" method=\"GET\">\r\n                    <input type=\"hidden\" name=\"sortBy\" value=\"");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <th>");
 
 
 
 #line 23 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-                   WebViewPage.WriteTo(@__razor_helper_writer, prop.PropertyInfo.Name);
+WebViewPage.WriteTo(@__razor_helper_writer, title);
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" />\r\n                    <input type=\"hidden\" name=\"descending\" value=\"");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</th>\r\n");
 
 
 
 #line 24 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-                       WebViewPage.WriteTo(@__razor_helper_writer, TableHelpers.IsOppositeOrderDescending(sortOrder).ToString());
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" />\r\n                    ");
-
-
-
-#line 25 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, helper.Form().HiddenForQuery("sortBy", "descending"));
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n                </form>\r\n");
-
-
-
-#line 27 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
-            }
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </th>\r\n");
-
-
-
-#line 29 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+        }
     }
 
 #line default
@@ -190,7 +160,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 33 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 29 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
  
 
 #line default
@@ -200,7 +170,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <td>\r\n        ");
 
 
 
-#line 35 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 31 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, helper.Partial(modelName + "/TableView/" + fieldName, model));
 
 #line default
@@ -210,7 +180,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </td>\r\n");
 
 
 
-#line 37 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 33 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 
 #line default
 #line hidden
@@ -226,7 +196,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 40 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 36 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
  
 
 #line default
@@ -236,7 +206,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <td>\r\n        ");
 
 
 
-#line 42 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 38 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, helper.Partial(view, model));
 
 #line default
@@ -246,7 +216,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </td>\r\n");
 
 
 
-#line 44 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
+#line 40 "..\..\Views\Shared\Helpers\TableViewHelper.cshtml"
 
 #line default
 #line hidden

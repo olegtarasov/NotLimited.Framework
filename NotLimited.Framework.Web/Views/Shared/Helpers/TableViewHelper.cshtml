@@ -5,27 +5,23 @@
 @using NotLimited.Framework.Web.Controls.Grid
 @using NotLimited.Framework.Web.Views.Shared.Helpers
 
-
 @helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, string title, HashSet<string> enabledFields, TableHelpers.SortOrder sortOrder)
 {
     if (enabledFields == null || enabledFields.Contains(prop.PropertyInfo.Name))
     {
-        <th class="@(prop.Sortable ? "sortable" : null)">
-
-            @title
-
-            @if (prop.Sortable)
-            {
+        if (prop.Sortable)
+        {
+            <th class="sortable" data-name="@prop.PropertyInfo.Name" data-descending="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()">
+                @title
                 <div class="pull-right">
                     <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px" />
                 </div>
-                <form action="@(new UrlHelper(helper.ViewContext.RequestContext).Action())" method="GET">
-                    <input type="hidden" name="sortBy" value="@prop.PropertyInfo.Name" />
-                    <input type="hidden" name="descending" value="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()" />
-                    @(helper.Form().HiddenForQuery("sortBy", "descending"))
-                </form>
-            }
-        </th>
+            </th>
+        }
+        else
+        {
+            <th>@title</th>
+        }
     }
 }
 

@@ -1,33 +1,67 @@
 ﻿@* Generator : MvcHelper *@
 
 @using NotLimited.Framework.Data.Queries
+@using NotLimited.Framework.Web.Controls
+@using NotLimited.Framework.Web.Controls.Grid
 @using NotLimited.Framework.Web.Helpers
 
-@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Pagination pagination, object tableHtmlAttributes)
+@helper GridScript()
 {
-    <form></form>
-    <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
-        <thead>
-            <tr>
-                @foreach (var header in headers)
-                {
-                    @header
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in rows)
-            {
+    <script>
+    $(function () {
+        $("th.sortable").click(function () {
+            SortGrid($(this).data("name"), $(this).data("descending"));
+        });
+    });
+
+    function SortGrid(name, descending) {
+        $("#gridSort #sortBy").val(name);
+        $("#gridSort #descending").val(descending);
+        $("#gridSort").submit();
+    }
+    </script>
+}
+
+@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, GridFormBuilder formBuilder, Pagination pagination, object tableHtmlAttributes)
+{
+    using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
+    {
+        @htmlHelper.TextBox("sortBy", "", new {style = "display: none;"})
+        @htmlHelper.TextBox("descending", "", new { style = "display: none;" })
+        @htmlHelper.Form().HiddenForQuery("sortBy", "descending")
+    }
+
+    using (htmlHelper.BeginForm(formBuilder.FormAction, formBuilder.FormController, formBuilder.FormMethod, new {id = formBuilder.FormId}))
+    {
+        <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
+            <thead>
                 <tr>
-                    @foreach (var column in row)
+                    @foreach (var header in headers)
                     {
-                        @column
+                        @header
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-    
+            </thead>
+            <tbody>
+            
+                @foreach (var row in rows)
+                {
+                    <tr>
+                        @foreach (var column in row)
+                        {
+                            @column
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        if (formBuilder.FormControls != null)
+        {
+            @formBuilder.FormControls(null)
+        }
+    }
+
     if (pagination != null)
     {
         @htmlHelper.Partial("Paginator", pagination)

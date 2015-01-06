@@ -21,6 +21,7 @@ namespace NotLimited.Framework.Data.Queries
 	{
 	    private static object _locker = new object();
 		private static Dictionary<string, PropertyMetadata> _propertyCache;
+	    private static bool _initialized = false;
 
 		public static PropertyMetadata GetPropertyMetadata(string propertyName)
 		{
@@ -45,12 +46,12 @@ namespace NotLimited.Framework.Data.Queries
 
 		private static void ReadPropertyCache()
 		{
-			if (_propertyCache != null)
+			if (_initialized)
 				return;
 
 		    lock (_locker)
 		    {
-		        if (_propertyCache != null)
+		        if (_initialized)
                     return;
 
                 _propertyCache = new Dictionary<string, PropertyMetadata>();
@@ -69,6 +70,8 @@ namespace NotLimited.Framework.Data.Queries
 
                     _propertyCache[propertyInfo.Name] = metadata;
                 }
+
+		        _initialized = true;
 		    }
 		}
 	}

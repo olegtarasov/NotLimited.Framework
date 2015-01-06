@@ -34,6 +34,18 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     #line hidden
     
     #line 4 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+    using NotLimited.Framework.Web.Controls;
+    
+    #line default
+    #line hidden
+    
+    #line 5 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+    using NotLimited.Framework.Web.Controls.Grid;
+    
+    #line default
+    #line hidden
+    
+    #line 6 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
     using NotLimited.Framework.Web.Helpers;
     
     #line default
@@ -43,111 +55,213 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     public static class GridViewHelper
     {
 
-public static System.Web.WebPages.HelperResult Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Pagination pagination, object tableHtmlAttributes)
+public static System.Web.WebPages.HelperResult GridScript()
 {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 7 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 9 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
  
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <form></form>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, @"    <script>
+    $(function () {
+        $(""th.sortable"").click(function () {
+            SortGrid($(this).data(""name""), $(this).data(""descending""));
+        });
+    });
+
+    function SortGrid(name, descending) {
+        $(""#gridSort #sortBy"").val(name);
+        $(""#gridSort #descending"").val(descending);
+        $(""#gridSort"").submit();
+    }
+    </script>
+");
 
 
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <table ");
+#line 23 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, GridFormBuilder formBuilder, Pagination pagination, object tableHtmlAttributes)
+{
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 9 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 26 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+ 
+    using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
+    {
+        
+#line default
+#line hidden
+
+
+#line 29 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.TextBox("sortBy", "", new {style = "display: none;"}));
+
+#line default
+#line hidden
+
+
+#line 29 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                                                                         
+        
+#line default
+#line hidden
+
+
+#line 30 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.TextBox("descending", "", new { style = "display: none;" }));
+
+#line default
+#line hidden
+
+
+#line 30 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                                                                               
+        
+#line default
+#line hidden
+
+
+#line 31 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.Form().HiddenForQuery("sortBy", "descending"));
+
+#line default
+#line hidden
+
+
+#line 31 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                                                                 
+    }
+
+    using (htmlHelper.BeginForm(formBuilder.FormAction, formBuilder.FormController, formBuilder.FormMethod, new {id = formBuilder.FormId}))
+    {
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <table ");
+
+
+
+#line 36 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.RenderHtmlAttributes(tableHtmlAttributes));
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n        <thead>\r\n            <tr>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n            <thead>\r\n                <tr>\r\n");
 
 
 
-#line 12 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-                 foreach (var header in headers)
-                {
-                    
-#line default
-#line hidden
-
-
-#line 14 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, header);
-
-#line default
-#line hidden
-
-
-#line 14 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-                           
-                }
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </tr>\r\n        </thead>\r\n        <tbody>\r\n");
-
-
-
-#line 19 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-             foreach (var row in rows)
-            {
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <tr>\r\n");
-
-
-
-#line 22 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-                     foreach (var column in row)
+#line 39 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                     foreach (var header in headers)
                     {
                         
 #line default
 #line hidden
 
 
-#line 24 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, column);
+#line 41 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, header);
 
 #line default
 #line hidden
 
 
-#line 24 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 41 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                                
                     }
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                </tr>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                </tr>\r\n            </thead>\r\n            <tbody>\r\n            \r\n");
 
 
 
-#line 27 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-            }
+#line 47 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                 foreach (var row in rows)
+                {
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </tbody>\r\n    </table>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                    <tr>\r\n");
 
 
 
-#line 30 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
-    
+#line 50 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                         foreach (var column in row)
+                        {
+                            
+#line default
+#line hidden
+
+
+#line 52 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, column);
+
+#line default
+#line hidden
+
+
+#line 52 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                                   
+                        }
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                    </tr>\r\n");
+
+
+
+#line 55 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                }
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </tbody>\r\n        </table>\r\n");
+
+
+
+#line 58 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+
+        if (formBuilder.FormControls != null)
+        {
+            
+#line default
+#line hidden
+
+
+#line 61 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, formBuilder.FormControls(null));
+
+#line default
+#line hidden
+
+
+#line 61 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+                                           
+        }
+    }
+
     if (pagination != null)
     {
         
@@ -155,14 +269,14 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </tbody>\r\n    </ta
 #line hidden
 
 
-#line 33 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 67 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
 WebViewPage.WriteTo(@__razor_helper_writer, htmlHelper.Partial("Paginator", pagination));
 
 #line default
 #line hidden
 
 
-#line 33 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
+#line 67 "..\..\Views\Shared\Helpers\GridViewHelper.cshtml"
                                                     
     }
 
