@@ -28,7 +28,7 @@ namespace NotLimited.Framework.Common.Misc
 		}
 	}
 
-	public sealed class NamedPipeServer : IDisposable
+	public class NamedPipeServer : IDisposable
 	{
 		private class ReadDto
 		{

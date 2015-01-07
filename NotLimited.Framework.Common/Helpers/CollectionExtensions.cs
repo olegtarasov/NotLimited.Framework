@@ -16,7 +16,7 @@ namespace NotLimited.Framework.Common.Helpers
             }
         }
 
-        public static bool EqualsTo<TSrc, TDst>(this List<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
+        public static bool EqualsTo<TSrc, TDst>(this IReadOnlyList<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
         {
             if (ReferenceEquals(source, destination))
                 return true;

@@ -5,7 +5,7 @@ namespace NotLimited.Framework.Data.Queries
 	public class PaginatedResult<T>
 	{
 		public Pagination Pagination { get; set; }
-		public List<T> Items { get; set; }
+		public IReadOnlyList<T> Items { get; set; }
 
 		public static PaginatedResult<T> Empty(Pagination pagination)
 		{
