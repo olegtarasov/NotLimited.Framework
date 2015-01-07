@@ -22,10 +22,12 @@ namespace NotLimited.Framework.Web.Views.Shared
     using System.Web.Mvc;
     using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using NotLimited.Framework.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/ConfirmDialog.cshtml")]
@@ -36,78 +38,94 @@ namespace NotLimited.Framework.Web.Views.Shared
         }
         public override void Execute()
         {
-
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n\r\n");
 
+WriteLiteral("<script");
 
-WriteLiteral("\r\n<script type=\"text/javascript\">\r\n\tfunction ConfirmDialog() {\r\n\t\t$(\'#");
+WriteLiteral(" type=\"text/javascript\"");
 
+WriteLiteral(">\r\n\tfunction ConfirmDialog() {\r\n\t\t$(\'#");
 
-            
-            #line 7 "..\..\Views\Shared\ConfirmDialog.cshtml"
- Write(Model.DialogId);
+       Write(Model.DialogId);
 
-            
-            #line default
-            #line hidden
 WriteLiteral("\').modal(\'show\');\r\n\t}\r\n\r\n\tfunction SubmitConfirmed() {\r\n\t\t$(\'#");
 
+       Write(Model.FormId);
 
-            
-            #line 11 "..\..\Views\Shared\ConfirmDialog.cshtml"
- Write(Model.FormId);
+WriteLiteral("\').submit();\r\n\t}\r\n</script>\r\n\r\n<div");
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\').submit();\r\n\t}\r\n</script>\r\n\r\n<div class=\"modal fade\" id=\"");
+WriteLiteral(" class=\"modal fade\"");
 
+WriteAttribute("id", Tuple.Create(" id=\"", 371), Tuple.Create("\"", 391)
+, Tuple.Create(Tuple.Create("", 376), Tuple.Create<System.Object, System.Int32>(Model.DialogId
+, 376), false)
+);
 
-            
-            #line 15 "..\..\Views\Shared\ConfirmDialog.cshtml"
-                       Write(Model.DialogId);
+WriteLiteral(">\r\n    <div");
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n        " +
-"    <div class=\"modal-header\">\r\n                <a href=\"#\" class=\"close\" data-d" +
-"ismiss=\"modal\" aria-hidden=\"true\">×</a>\r\n                <h4 class=\"modal-title\"" +
-">");
+WriteLiteral(" class=\"modal-dialog\"");
 
+WriteLiteral(">\r\n        <div");
 
-            
-            #line 20 "..\..\Views\Shared\ConfirmDialog.cshtml"
+WriteLiteral(" class=\"modal-content\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"modal-header\"");
+
+WriteLiteral(">\r\n                <a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(" class=\"close\"");
+
+WriteLiteral(" data-dismiss=\"modal\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral(">×</a>\r\n                <h4");
+
+WriteLiteral(" class=\"modal-title\"");
+
+WriteLiteral(">");
+
                                    Write(Model.Title);
 
-            
-            #line default
-            #line hidden
-WriteLiteral("</h4>\r\n            </div>\r\n\r\n            <div class=\"modal-body\">\r\n              " +
-"  ");
+WriteLiteral("</h4>\r\n            </div>\r\n\r\n            <div");
 
+WriteLiteral(" class=\"modal-body\"");
 
-            
-            #line 24 "..\..\Views\Shared\ConfirmDialog.cshtml"
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
            Write(Model.Text);
 
-            
-            #line default
-            #line hidden
-WriteLiteral(@"
-            </div>
+WriteLiteral("\r\n            </div>\r\n\r\n            <div");
 
-            <div class=""modal-footer"">
-                <button type=""button"" class=""btn btn-default"" data-dismiss=""modal"">Отмена</button>
-                <button type=""button"" class=""btn btn-primary"" data-dismiss=""modal"" onclick=""SubmitConfirmed();"">ОК</button>
-            </div>
-        </div>
-    </div>
-</div>
+WriteLiteral(" class=\"modal-footer\"");
 
-");
+WriteLiteral(">\r\n                <button");
 
+WriteLiteral(" type=\"button\"");
+
+WriteLiteral(" class=\"btn btn-default\"");
+
+WriteLiteral(" data-dismiss=\"modal\"");
+
+WriteLiteral(">Отмена</button>\r\n                <button");
+
+WriteLiteral(" type=\"button\"");
+
+WriteLiteral(" class=\"btn btn-primary\"");
+
+WriteLiteral(" data-dismiss=\"modal\"");
+
+WriteLiteral(" onclick=\"SubmitConfirmed();\"");
+
+WriteLiteral(">ОК</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
 
         }
     }

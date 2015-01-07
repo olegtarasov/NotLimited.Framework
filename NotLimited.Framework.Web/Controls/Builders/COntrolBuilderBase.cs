@@ -13,6 +13,8 @@ namespace NotLimited.Framework.Web.Controls.Builders
 
         protected ControlBuilderBase(HtmlHelper htmlHelper)
         {
+            if (htmlHelper == null) throw new ArgumentNullException("htmlHelper");
+
             HtmlHelper = htmlHelper;
             CssClasses = new HashSet<string>();
             HtmlAttributes = new Dictionary<string, object>();

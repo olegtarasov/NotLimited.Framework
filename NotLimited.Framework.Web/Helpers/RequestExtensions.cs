@@ -141,7 +141,7 @@ namespace NotLimited.Framework.Web.Helpers
         }
 
         /// <summary>
-        /// Construct an Url from specified action and controller appending GET parameters from url referrer.
+        /// Constructs an url from action and contoller with referrer GET params.
         /// </summary>
         public static string GetReferrerUrl(this HtmlHelper helper, string action, string controller)
         {

@@ -1,4 +1,5 @@
-﻿@* Generator : MvcHelper *@
+﻿@* TypeVisibility: Internal DisableLinePragmas: true TrimLeadingUnderscores: true *@
+@* Generator : MvcHelper *@
 
 @using NotLimited.Framework.Data.Queries
 @using NotLimited.Framework.Web.Controls
@@ -22,16 +23,18 @@
     </script>
 }
 
-@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, GridFormBuilder formBuilder, Pagination pagination, object tableHtmlAttributes)
+@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Func<IDisposable> form, Func<object, HelperResult> formControls, Pagination pagination, object tableHtmlAttributes)
 {
     using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
     {
-        @htmlHelper.TextBox("sortBy", "", new {style = "display: none;"})
-        @htmlHelper.TextBox("descending", "", new { style = "display: none;" })
+        @htmlHelper.Form().Hidden("sortBy", "")
+        @htmlHelper.Form().Hidden("descending", "")
         @htmlHelper.Form().HiddenForQuery("sortBy", "descending")
     }
+    
+    <div></div>
 
-    using (htmlHelper.BeginForm(formBuilder.FormAction, formBuilder.FormController, formBuilder.FormMethod, new {id = formBuilder.FormId}))
+    using (form != null ? form() : new DummyForm())
     {
         <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
             <thead>
@@ -56,9 +59,9 @@
             </tbody>
         </table>
 
-        if (formBuilder.FormControls != null)
+        if (formControls != null)
         {
-            @formBuilder.FormControls(null)
+            @formControls(null)
         }
     }
 
@@ -66,4 +69,36 @@
     {
         @htmlHelper.Partial("Paginator", pagination)
     }
+}
+
+@helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, string title, TableHelpers.SortOrder sortOrder)
+{
+    if (prop.Sortable)
+    {
+        <th class="sortable" data-name="@prop.PropertyInfo.Name" data-descending="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()">
+            @title
+            <div class="pull-right">
+                <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px" />
+            </div>
+        </th>
+    }
+    else
+    {
+        <th>@title</th>
+    }
+
+}
+
+@helper TableFieldConvention(System.Web.Mvc.HtmlHelper helper, string modelName, string fieldName, object model)
+{
+    <td>
+        @(helper.Partial(modelName + "/TableView/" + fieldName, model))
+    </td>
+}
+
+@helper TableFieldFixedView(System.Web.Mvc.HtmlHelper helper, string view, object model)
+{
+    <td>
+        @(helper.Partial(view, model))
+    </td>
 }

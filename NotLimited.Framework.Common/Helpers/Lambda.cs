@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Remoting.Messaging;
 
@@ -15,5 +17,31 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			return expression.GetMemberName();
 		}
+
+	    public static LambdaBuilder<T> MemberList()
+	    {
+	        return new LambdaBuilder<T>();
+	    }
 	}
+
+    public class LambdaBuilder<T>
+    {
+        private readonly List<LambdaExpression> _expressions = new List<LambdaExpression>();
+
+        public LambdaBuilder<T> Expr<TKey>(Expression<Func<T, TKey>> expression)
+        {
+            _expressions.Add(expression);
+            return this;
+        }
+
+        public IEnumerable<string> AsEnumerable()
+        {
+            return (HashSet<string>)this;
+        }
+
+        public static implicit operator HashSet<string>(LambdaBuilder<T> builder)
+        {
+            return builder._expressions.Select(x => x.GetMemberName()).ToHashSet();
+        }
+    }
 }

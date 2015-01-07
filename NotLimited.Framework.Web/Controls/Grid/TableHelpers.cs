@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.WebPages;
-using Autofac.Features.Metadata;
 using NotLimited.Framework.Common.Helpers;
 using NotLimited.Framework.Data.Queries;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
@@ -19,27 +16,17 @@ namespace NotLimited.Framework.Web.Controls.Grid
             Ascending,
             Descending
         }
-
-
-        public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression, string title, HashSet<string> enabledFields = null)
+        
+        public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression, string title)
         {
             var metadata = PropertyMetadataCache<TModel>.GetPropertyMetadata(expression);
             string memberName = expression.GetMemberName();
-            return TableViewHelper.TableHeader(helper, metadata, title ?? metadata.DisplayName, enabledFields, GetSortOrder(memberName));
+            return GridViewHelper.TableHeader(helper, metadata, title ?? metadata.DisplayName, GetSortOrder(memberName));
         }
 
-        public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression, HashSet<string> enabledFields = null)
+        public static HelperResult TableHeader<TModel, TKey>(System.Web.Mvc.HtmlHelper helper, Expression<Func<TModel, TKey>> expression)
         {
-            return TableHeader(helper, expression, null, enabledFields);
-        }
-
-        public static HelperResult TableFieldConvention<T>(HtmlHelper helper, T model, HashSet<string> fields, Expression<Func<T, object>> expression)
-        {
-            string memberName = expression.GetMemberName();
-            if (fields != null && !fields.Contains(memberName))
-                return new HelperResult(w => { });
-
-            return TableViewHelper.TableFieldConvention(helper, typeof(T).Name, memberName, model);
+            return TableHeader(helper, expression, null);
         }
 
         public static SortOrder GetSortOrder(string sortMember)

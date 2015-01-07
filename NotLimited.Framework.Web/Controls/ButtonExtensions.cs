@@ -31,7 +31,7 @@ namespace NotLimited.Framework.Web.Controls
 		    string url = null;
 		    if (helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer != null)
 		    {
-		        url = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer.ToString();
+                url = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer.PathAndQuery;
 		    }
 		    
 		    return new ButtonBuilder(helper.HtmlHelper)

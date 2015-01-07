@@ -22,132 +22,109 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     using System.Web.Mvc;
     using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using NotLimited.Framework.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public static class IconHelpers
+    internal class IconHelpers : System.Web.WebPages.HelperPage
     {
 
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult SimpleIcon(string icon)
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 4 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <i");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <i class=\"fa fa-");
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 159), Tuple.Create("\"", 178)
+, Tuple.Create(Tuple.Create("", 167), Tuple.Create("fa", 167), true)
+, Tuple.Create(Tuple.Create(" ", 169), Tuple.Create("fa-", 170), true)
+, Tuple.Create(Tuple.Create("", 173), Tuple.Create<System.Object, System.Int32>(icon
+, 173), false)
+);
 
+WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
 
-
-#line 5 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, icon);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\"></i>\r\n");
-
-
-
-#line 6 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
+#line default
+#line hidden
 
-
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult IconMargin(string icon)
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 9 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <i");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <i class=\"fa fa-margin-r fa-");
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 233), Tuple.Create("\"", 264)
+, Tuple.Create(Tuple.Create("", 241), Tuple.Create("fa", 241), true)
+, Tuple.Create(Tuple.Create(" ", 243), Tuple.Create("fa-margin-r", 244), true)
+, Tuple.Create(Tuple.Create(" ", 255), Tuple.Create("fa-", 256), true)
+, Tuple.Create(Tuple.Create("", 259), Tuple.Create<System.Object, System.Int32>(icon
+, 259), false)
+);
 
+WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
 
-
-#line 10 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, icon);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\"></i>\r\n");
-
-
-
-#line 11 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
+#line default
+#line hidden
 
-
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult IconText(string icon, string text)
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 14 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <span><i");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <span><i class=\"fa fa-margin-r fa-");
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 336), Tuple.Create("\"", 367)
+, Tuple.Create(Tuple.Create("", 344), Tuple.Create("fa", 344), true)
+, Tuple.Create(Tuple.Create(" ", 346), Tuple.Create("fa-margin-r", 347), true)
+, Tuple.Create(Tuple.Create(" ", 358), Tuple.Create("fa-", 359), true)
+, Tuple.Create(Tuple.Create("", 362), Tuple.Create<System.Object, System.Int32>(icon
+, 362), false)
+);
 
+WriteLiteralTo(__razor_helper_writer, "></i>");
 
+                   WriteTo(__razor_helper_writer, text);
 
-#line 15 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, icon);
+WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
 
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\"></i>");
-
-
-
-#line 15 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-      WebViewPage.WriteTo(@__razor_helper_writer, text);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</span>\r\n");
-
-
-
-#line 16 "..\..\Views\Shared\Helpers\IconHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
-
+#line default
+#line hidden
 
     }
 }

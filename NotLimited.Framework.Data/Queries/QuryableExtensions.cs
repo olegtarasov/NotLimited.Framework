@@ -42,20 +42,27 @@ namespace NotLimited.Framework.Data.Queries
 
 	    public static PaginatedResult<T> Paginate<T>(this IQueryable<T> query, Pagination pagination)
 	    {
-	        if (pagination == null || query == null)
+	        if (query == null)
 	            return null;
 
-	        var result = new PaginatedResult<T>();
+            var result = new PaginatedResult<T>();
 
-	        pagination.TotalCount = query.Count();
+	        if (pagination == null)
+	        {
+	            result.Items = query.ToList();
+	        }
+	        else
+	        {
+                pagination.TotalCount = query.Count();
 
-	        result.Items = query
-	            .AsEnumerable()
-	            .Skip(pagination.ItemsPerPage * (pagination.Page - 1))
-	            .Take(pagination.ItemsPerPage)
-	            .ToList();
+                result.Items = query
+                    .AsEnumerable()
+                    .Skip(pagination.ItemsPerPage * (pagination.Page - 1))
+                    .Take(pagination.ItemsPerPage)
+                    .ToList();
 
-	        result.Pagination = pagination;
+                result.Pagination = pagination;
+	        }
 
 	        return result;
 	    }

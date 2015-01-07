@@ -22,182 +22,145 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     using System.Web.Mvc;
     using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using NotLimited.Framework.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public static class FormHelpers
+    internal class FormHelpers : System.Web.WebPages.HelperPage
     {
 
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult TextBox(MvcHtmlString label, MvcHtmlString textBox, MvcHtmlString validation)
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 4 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <div");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <div class=\"form-group\">\r\n        ");
+WriteLiteralTo(__razor_helper_writer, " class=\"form-group\"");
 
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
+WriteLiteralTo(__razor_helper_writer, "        ");
 
-#line 6 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, label);
+WriteTo(__razor_helper_writer, label);
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n        ");
+WriteLiteralTo(__razor_helper_writer, "        ");
 
+WriteTo(__razor_helper_writer, textBox);
 
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
-#line 7 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, textBox);
+WriteLiteralTo(__razor_helper_writer, "        ");
 
-#line default
-#line hidden
+WriteTo(__razor_helper_writer, validation);
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n        ");
+WriteLiteralTo(__razor_helper_writer, "\r\n    </div>\r\n");
 
-
-
-#line 8 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, validation);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </div>\r\n");
-
-
-
-#line 10 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
+#line default
+#line hidden
 
-
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult Upload(MvcHtmlString label, string inputName, MvcHtmlString validation, string accept = "image/*")
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 13 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <div");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <div class=\"form-group\">\r\n        ");
+WriteLiteralTo(__razor_helper_writer, " class=\"form-group\"");
 
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
+WriteLiteralTo(__razor_helper_writer, "        ");
 
-#line 15 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, label);
+WriteTo(__razor_helper_writer, label);
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n        <input");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n        <input type=\"file\" class=\"form-control\" name=\"");
+WriteLiteralTo(__razor_helper_writer, " type=\"file\"");
 
+WriteLiteralTo(__razor_helper_writer, " class=\"form-control\"");
 
+WriteAttributeTo(__razor_helper_writer, "name", Tuple.Create(" name=\"", 513), Tuple.Create("\"", 530)
+, Tuple.Create(Tuple.Create("", 520), Tuple.Create<System.Object, System.Int32>(inputName
+, 520), false)
+);
 
-#line 16 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-           WebViewPage.WriteTo(@__razor_helper_writer, inputName);
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 531), Tuple.Create("\"", 546)
+, Tuple.Create(Tuple.Create("", 536), Tuple.Create<System.Object, System.Int32>(inputName
+, 536), false)
+);
 
-#line default
-#line hidden
+WriteAttributeTo(__razor_helper_writer, "accept", Tuple.Create(" accept=\"", 547), Tuple.Create("\"", 563)
+           , Tuple.Create(Tuple.Create("", 556), Tuple.Create<System.Object, System.Int32>(accept
+, 556), false)
+);
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" id=\"");
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
+WriteLiteralTo(__razor_helper_writer, "        ");
 
+WriteTo(__razor_helper_writer, validation);
 
-#line 16 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-                           WebViewPage.WriteTo(@__razor_helper_writer, inputName);
+WriteLiteralTo(__razor_helper_writer, "\r\n    </div>\r\n");
 
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" accept=\"");
-
-
-
-#line 16 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-                                               WebViewPage.WriteTo(@__razor_helper_writer, accept);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n        ");
-
-
-
-#line 17 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, validation);
-
-#line default
-#line hidden
-
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n    </div>\r\n");
-
-
-
-#line 19 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
+#line default
+#line hidden
 
-
+#line default
+#line hidden
 public static System.Web.WebPages.HelperResult SubmitButton(string text)
 {
+#line default
+#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-
-
-#line 22 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
  
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <button");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <button type=\"submit\" class=\"btn btn-primary\">");
+WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
 
+WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
 
+WriteLiteralTo(__razor_helper_writer, ">");
 
-#line 23 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-       WebViewPage.WriteTo(@__razor_helper_writer, text);
+                    WriteTo(__razor_helper_writer, text);
 
-#line default
-#line hidden
+WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</button>\r\n");
-
-
-
-#line 24 "..\..\Views\Shared\Helpers\FormHelpers.cshtml"
-
-#line default
-#line hidden
 
 });
 
+#line default
+#line hidden
 }
-
+#line default
+#line hidden
 
     }
 }

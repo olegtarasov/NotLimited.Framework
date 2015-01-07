@@ -1,3 +1,4 @@
+using System;
 using System.Web.Mvc;
 
 namespace NotLimited.Framework.Web.Controls
@@ -19,5 +20,12 @@ namespace NotLimited.Framework.Web.Controls
         }
 
         public HtmlHelper HtmlHelper { get; private set; }
+    }
+
+    public class DummyForm : IDisposable
+    {
+        public void Dispose()
+        {
+        }
     }
 }

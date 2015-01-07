@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using NotLimited.Framework.Common.Helpers;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Controls.Grid
@@ -12,24 +12,22 @@ namespace NotLimited.Framework.Web.Controls.Grid
     {
         private readonly Expression<Func<T, object>> _expression;
         private readonly HtmlHelper _helper;
-        private readonly HashSet<string> _fields;
 
         private GridColumnType _type;
         private Func<object, HelperResult> _template;
         private string _view;
         private string _customTitle;
 
-        public GridColumnBuilder(Expression<Func<T, object>> expression, HtmlHelper helper, HashSet<string> fields)
+        public GridColumnBuilder(Expression<Func<T, object>> expression, HtmlHelper helper)
         {
             _expression = expression;
             _helper = helper;
-            _fields = fields;
             _type = GridColumnType.Convention;
         }
 
         public HelperResult GetTitleHtml()
         {
-            return TableHelpers.TableHeader(_helper, _expression, _customTitle, _fields);
+            return TableHelpers.TableHeader(_helper, _expression, _customTitle);
         }
 
         public HelperResult GetColumnHtml(T model)
@@ -44,9 +42,9 @@ namespace NotLimited.Framework.Web.Controls.Grid
                         writer.WriteLine("</td>");
                     });
                 case GridColumnType.FixedView:
-                    return TableViewHelper.TableFieldFixedView(_helper, _view, model);
+                    return GridViewHelper.TableFieldFixedView(_helper, _view, model);
                 case GridColumnType.Convention:
-                    return TableHelpers.TableFieldConvention(_helper, model, _fields, _expression);
+                    return GridViewHelper.TableFieldConvention(_helper, typeof(T).Name, _expression.GetMemberName(), model);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -1,0 +1,37 @@
+﻿@* TypeVisibility: Internal DisableLinePragmas: true TrimLeadingUnderscores: true *@
+@* Generator : MvcHelper *@
+
+@using NotLimited.Framework.Web.Controls
+
+@helper ModalDialog(string id, string title, Func<object, HelperResult> body, Func<IDisposable> form, string okHandler, string okText, string cancelText)
+{
+    <div class="modal fade" id="@id">
+        <div class="modal-dialog">
+            @using (form != null ? form() : new DummyForm())
+            {
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+                        <h4 class="modal-title">@title</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        @body(null)
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@cancelText</button>
+                        @if (!string.IsNullOrEmpty(okHandler))
+                        {
+                            <button data-dismiss="modal" type="button" class="btn btn-primary" onclick="@okHandler">@okText</button>
+                        }
+                        else
+                        {
+                            <button data-dismiss="modal" type="@(form == null ? "button" : "submit")" class="btn btn-primary">@okText</button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
