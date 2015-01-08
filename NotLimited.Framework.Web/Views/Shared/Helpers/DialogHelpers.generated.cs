@@ -145,18 +145,16 @@ WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                            <button");
 
-WriteLiteralTo(__razor_helper_writer, " data-dismiss=\"modal\"");
-
-WriteAttributeTo(__razor_helper_writer, "type", Tuple.Create(" type=\"", 1391), Tuple.Create("\"", 1435)
-, Tuple.Create(Tuple.Create("", 1398), Tuple.Create<System.Object, System.Int32>(form == null ? "button" : "submit"
-, 1398), false)
+WriteAttributeTo(__razor_helper_writer, "type", Tuple.Create(" type=\"", 1370), Tuple.Create("\"", 1414)
+, Tuple.Create(Tuple.Create("", 1377), Tuple.Create<System.Object, System.Int32>(form == null ? "button" : "submit"
+, 1377), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
-                                                                                                WriteTo(__razor_helper_writer, okText);
+                                                                           WriteTo(__razor_helper_writer, okText);
 
 WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
 
