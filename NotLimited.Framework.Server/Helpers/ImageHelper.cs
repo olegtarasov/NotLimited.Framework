@@ -31,6 +31,13 @@ namespace NotLimited.Framework.Server.Helpers
 	        _storageService = storageService;
 	    }
 
+	    public List<string> StoreImage(byte[] bytes, string directory, params ImageSize[] sizes)
+	    {
+	        using (var ms = new MemoryStream(bytes))
+	        {
+	            return StoreImage(ms, directory, sizes);
+	        }
+	    }
 
 	    public List<string> StoreImage(Stream stream, string directory, params ImageSize[] sizes)
 		{
