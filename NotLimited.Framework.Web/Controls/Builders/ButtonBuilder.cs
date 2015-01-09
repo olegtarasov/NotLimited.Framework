@@ -12,6 +12,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         private object _route;
         private string _url;
         private string _onClick;
+        private bool _isSubmit;
 
         public ButtonBuilder(HtmlHelper htmlHelper) : base(htmlHelper)
         {
@@ -61,9 +62,15 @@ namespace NotLimited.Framework.Web.Controls.Builders
             return this;
         }
 
+        public ButtonBuilder Submit()
+        {
+            _isSubmit = true;
+            return this;
+        }
+
         public override HelperResult GetControlHtml()
         {
-            var link = new TagBuilder("a");
+            var link = new TagBuilder(_isSubmit ? "button" : "a");
             link.AddCssClass("btn");
             link.AddCssClass("btn-" + _type.ToString());
             if (_size != ActionButtonSize.Default)
@@ -71,18 +78,25 @@ namespace NotLimited.Framework.Web.Controls.Builders
                 link.AddCssClass("btn-" + _size.ToString());
             }
 
-            string url = _url;
-            if (string.IsNullOrEmpty(url) && (!string.IsNullOrEmpty(_action) || !string.IsNullOrEmpty(_controller)))
+            if (!_isSubmit)
             {
-                url = new UrlHelper(HtmlHelper.ViewContext.RequestContext).Action(_action, _controller, _route);
-            }
+                string url = _url;
+                if (string.IsNullOrEmpty(url) && (!string.IsNullOrEmpty(_action) || !string.IsNullOrEmpty(_controller)))
+                {
+                    url = new UrlHelper(HtmlHelper.ViewContext.RequestContext).Action(_action, _controller, _route);
+                }
 
-            if (string.IsNullOrEmpty(url))
+                if (string.IsNullOrEmpty(url))
+                {
+                    url = "#";
+                }
+
+                link.MergeAttribute("href", url);
+            }
+            else
             {
-                url = "#";
+                link.MergeAttribute("type", "submit");
             }
-
-            link.MergeAttribute("href", url);
 
             if (!string.IsNullOrEmpty(_onClick))
             {

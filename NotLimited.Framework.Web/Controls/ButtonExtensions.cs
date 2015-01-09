@@ -64,9 +64,12 @@ namespace NotLimited.Framework.Web.Controls
 		/// <summary>
 	    /// Creates a submit button.
 	    /// </summary>
-	    public static HelperResult SubmitButton<TModel>(this FormHelper<TModel> helper, string text = "Сохранить")
+        public static ButtonBuilder SubmitButton<TModel>(this FormHelper<TModel> helper, string text = "Сохранить")
 	    {
-	        return FormHelpers.SubmitButton(text);
+	        return new ButtonBuilder(helper.HtmlHelper)
+                .Submit()
+                .Text(text)
+                .Type(ActionButtonType.primary);
 	    }
 	}
 }

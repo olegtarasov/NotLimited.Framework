@@ -132,36 +132,6 @@ WriteLiteralTo(__razor_helper_writer, "\r\n    </div>\r\n");
 #line default
 #line hidden
 
-#line default
-#line hidden
-public static System.Web.WebPages.HelperResult SubmitButton(string text)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
- 
-
-WriteLiteralTo(__razor_helper_writer, "    <button");
-
-WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
-
-                    WriteTo(__razor_helper_writer, text);
-
-WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
-
-
-});
-
-#line default
-#line hidden
-}
-#line default
-#line hidden
-
     }
 }
 #pragma warning restore 1591

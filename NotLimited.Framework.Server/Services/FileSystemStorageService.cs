@@ -17,17 +17,24 @@ namespace NotLimited.Framework.Server.Services
                 throw new InvalidOperationException("Can't get server root!");
         }
 
+        public FileSystemStorageService(string serverRoot)
+        {
+            _serverRoot = serverRoot;
+        }
+
         public override void ClearDirectory(string path)
         {
-            if (!Directory.Exists(path))
+            string fullPath = CombineServerPath(path);
+
+            if (!Directory.Exists(fullPath))
                 return;
 
-            foreach (var file in Directory.GetFiles(path))
+            foreach (var file in Directory.GetFiles(fullPath))
             {
                 File.Delete(file);
             }
 
-            foreach (var directory in Directory.GetDirectories(path))
+            foreach (var directory in Directory.GetDirectories(fullPath))
             {
                 ClearDirectory(directory);
             }

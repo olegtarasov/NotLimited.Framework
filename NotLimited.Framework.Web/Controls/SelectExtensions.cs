@@ -25,7 +25,7 @@ namespace NotLimited.Framework.Web.Controls
         /// <param name="selected">Selected value.</param>
         /// <param name="includeUnselected">Include and "Unselected" item.</param>
         /// <param name="unselectedText">"Unselected" item text.</param>
-        public static IEnumerable<SelectListItem> ToSelectListItems<T>(this IEnumerable<T> source, Expression<Func<T, string>> nameExpr, Expression<Func<T, string>> valueExpr, object selected = null, bool includeUnselected = false, string unselectedText = "[ Не выбрано ]")
+        public static List<SelectListItem> ToSelectListItems<T>(this IEnumerable<T> source, Expression<Func<T, string>> nameExpr, Expression<Func<T, string>> valueExpr, object selected = null, bool includeUnselected = false, string unselectedText = "[ Не выбрано ]")
 		{
 			var result = new List<SelectListItem>();
 			var nameFunc = nameExpr.Compile();
@@ -45,6 +45,17 @@ namespace NotLimited.Framework.Web.Controls
 
 			return result;
 		}
+
+        /// <summary>
+        /// Appends an empty item to a list of SelectListItems.
+        /// </summary>
+        public static List<SelectListItem> WithEmptyItem(this IEnumerable<SelectListItem> source)
+	    {
+	        var result = new List<SelectListItem> {new SelectListItem()};
+            result.AddRange(source);
+
+	        return result;
+	    }
 
 	    /// <summary>
 	    /// Creates a select control.
