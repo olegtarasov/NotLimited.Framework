@@ -3,15 +3,72 @@
 @using NotLimited.Framework.Web.Helpers
 @model NotLimited.Framework.Data.Queries.Pagination
 
-@if ((double)Model.TotalCount / Model.ItemsPerPage > 1)
+@{
+    int pageCount = (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage);
+}
+
+@helper RenderPage(int page)
+{
+    <li class="@(page == Model.Page ? "active" : null)">
+        @Html.ActionLink((page).ToString(), null, Html.AppendQueryString(new { page }))
+    </li>
+}
+
+@helper DisabledPage()
+{
+    <li class="disabled"><span>...</span></li>
+}
+
+@if (pageCount > 1)
 {
     <div class="text-center">
         <ul class="pagination">
-            @foreach (var page in Enumerable.Range(1, (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage)))
+            @if (pageCount > 6)
             {
-                <li class="@(page == Model.Page ? "active" : null)">
-                    @Html.ActionLink((page).ToString(), null, Html.AppendQueryString(new { page }))
-                </li>
+                if (Model.Page < 5)
+                {
+                    foreach (var page in Enumerable.Range(1, Math.Max(3, Model.Page + 1)))
+                    {
+                        @RenderPage(page)
+                    }
+                }
+                else
+                {
+                    @RenderPage(1)
+                }
+
+                @DisabledPage()
+
+                if (Model.Page > pageCount - 4)
+                {
+                    int start = Math.Min(Model.Page - 1, pageCount - 2);
+                    
+                    foreach (var page in Enumerable.Range(start, pageCount - start + 1))
+                    {
+                        @RenderPage(page)
+                    }
+                }
+                else
+                {
+                    if (Model.Page >= 5)
+                    {
+                        foreach (var page in Enumerable.Range(Model.Page - 1, 3))
+                        {
+                            @RenderPage(page)
+                        }
+
+                        @DisabledPage()
+                    }
+
+                    @RenderPage(pageCount)
+                }
+            }
+            else
+            {
+                foreach (var page in Enumerable.Range(1, pageCount))
+                {
+                    @RenderPage(page)
+                }
             }
         </ul>
     </div>

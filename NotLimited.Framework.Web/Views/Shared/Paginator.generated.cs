@@ -37,6 +37,79 @@ namespace NotLimited.Framework.Web.Views.Shared
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Paginator.cshtml")]
     public partial class Paginator : System.Web.Mvc.WebViewPage<NotLimited.Framework.Data.Queries.Pagination>
     {
+
+public System.Web.WebPages.HelperResult RenderPage(int page)
+{
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 11 "..\..\Views\Shared\Paginator.cshtml"
+ 
+
+#line default
+#line hidden
+
+WriteLiteralTo(@__razor_helper_writer, "    <li class=\"");
+
+
+
+#line 12 "..\..\Views\Shared\Paginator.cshtml"
+WriteTo(@__razor_helper_writer, page == Model.Page ? "active" : null);
+
+#line default
+#line hidden
+
+WriteLiteralTo(@__razor_helper_writer, "\">\r\n        ");
+
+
+
+#line 13 "..\..\Views\Shared\Paginator.cshtml"
+WriteTo(@__razor_helper_writer, Html.ActionLink((page).ToString(), null, Html.AppendQueryString(new { page })));
+
+#line default
+#line hidden
+
+WriteLiteralTo(@__razor_helper_writer, "\r\n    </li>\r\n");
+
+
+
+#line 15 "..\..\Views\Shared\Paginator.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public System.Web.WebPages.HelperResult DisabledPage()
+{
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 18 "..\..\Views\Shared\Paginator.cshtml"
+ 
+
+#line default
+#line hidden
+
+WriteLiteralTo(@__razor_helper_writer, "    <li class=\"disabled\"><span>...</span></li>\r\n");
+
+
+
+#line 20 "..\..\Views\Shared\Paginator.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
         public Paginator()
         {
         }
@@ -53,7 +126,27 @@ WriteLiteral("\r\n");
 
             
             #line 6 "..\..\Views\Shared\Paginator.cshtml"
- if ((double)Model.TotalCount / Model.ItemsPerPage > 1)
+  
+    int pageCount = (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage);
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+
+
+WriteLiteral("\r\n\r\n");
+
+
+
+WriteLiteral("\r\n\r\n");
+
+
+            
+            #line 22 "..\..\Views\Shared\Paginator.cshtml"
+ if (pageCount > 1)
 {
 
             
@@ -63,38 +156,157 @@ WriteLiteral("    <div class=\"text-center\">\r\n        <ul class=\"pagination\
 
 
             
-            #line 10 "..\..\Views\Shared\Paginator.cshtml"
-             foreach (var page in Enumerable.Range(1, (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage)))
+            #line 26 "..\..\Views\Shared\Paginator.cshtml"
+             if (pageCount > 6)
             {
+                if (Model.Page < 5)
+                {
+                    foreach (var page in Enumerable.Range(1, Math.Max(3, Model.Page + 1)))
+                    {
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 32 "..\..\Views\Shared\Paginator.cshtml"
+                   Write(RenderPage(page));
 
             
             #line default
             #line hidden
-WriteLiteral("                <li class=\"");
-
-
             
-            #line 12 "..\..\Views\Shared\Paginator.cshtml"
-                       Write(page == Model.Page ? "active" : null);
+            #line 32 "..\..\Views\Shared\Paginator.cshtml"
+                                         
+                    }
+                }
+                else
+                {
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 37 "..\..\Views\Shared\Paginator.cshtml"
+               Write(RenderPage(1));
 
             
             #line default
             #line hidden
-WriteLiteral("\">\r\n                    ");
-
-
             
-            #line 13 "..\..\Views\Shared\Paginator.cshtml"
-               Write(Html.ActionLink((page).ToString(), null, Html.AppendQueryString(new { page })));
+            #line 37 "..\..\Views\Shared\Paginator.cshtml"
+                                  
+                }
+
+                
+            
+            #line default
+            #line hidden
+            
+            #line 40 "..\..\Views\Shared\Paginator.cshtml"
+           Write(DisabledPage());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </li>\r\n");
+            
+            #line 40 "..\..\Views\Shared\Paginator.cshtml"
+                               
 
+                if (Model.Page > pageCount - 4)
+                {
+                    int start = Math.Min(Model.Page - 1, pageCount - 2);
+                    
+                    foreach (var page in Enumerable.Range(start, pageCount - start + 1))
+                    {
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 48 "..\..\Views\Shared\Paginator.cshtml"
+                   Write(RenderPage(page));
 
             
-            #line 15 "..\..\Views\Shared\Paginator.cshtml"
+            #line default
+            #line hidden
+            
+            #line 48 "..\..\Views\Shared\Paginator.cshtml"
+                                         
+                    }
+                }
+                else
+                {
+                    if (Model.Page >= 5)
+                    {
+                        foreach (var page in Enumerable.Range(Model.Page - 1, 3))
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 57 "..\..\Views\Shared\Paginator.cshtml"
+                       Write(RenderPage(page));
+
+            
+            #line default
+            #line hidden
+            
+            #line 57 "..\..\Views\Shared\Paginator.cshtml"
+                                             
+                        }
+
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 60 "..\..\Views\Shared\Paginator.cshtml"
+                   Write(DisabledPage());
+
+            
+            #line default
+            #line hidden
+            
+            #line 60 "..\..\Views\Shared\Paginator.cshtml"
+                                       
+                    }
+
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 63 "..\..\Views\Shared\Paginator.cshtml"
+               Write(RenderPage(pageCount));
+
+            
+            #line default
+            #line hidden
+            
+            #line 63 "..\..\Views\Shared\Paginator.cshtml"
+                                          
+                }
+            }
+            else
+            {
+                foreach (var page in Enumerable.Range(1, pageCount))
+                {
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 70 "..\..\Views\Shared\Paginator.cshtml"
+               Write(RenderPage(page));
+
+            
+            #line default
+            #line hidden
+            
+            #line 70 "..\..\Views\Shared\Paginator.cshtml"
+                                     
+                }
             }
 
             
@@ -104,7 +316,7 @@ WriteLiteral("        </ul>\r\n    </div>\r\n");
 
 
             
-            #line 18 "..\..\Views\Shared\Paginator.cshtml"
+            #line 75 "..\..\Views\Shared\Paginator.cshtml"
 }
             
             #line default
