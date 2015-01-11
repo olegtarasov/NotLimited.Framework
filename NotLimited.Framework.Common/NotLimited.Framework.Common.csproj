@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAnnotations\MinNumberAttribute.cs" />
+    <Compile Include="DataAnnotations\MinCollectionCount.cs" />
     <Compile Include="DataAnnotations\NotEmptyAttribute.cs" />
     <Compile Include="Helpers\CountdownEventSlim.cs" />
     <Compile Include="Helpers\EnvironmentHelpers.cs" />

@@ -1,6 +1,7 @@
 ﻿@* TypeVisibility: Internal DisableLinePragmas: true TrimLeadingUnderscores: true *@
 @* Generator : MvcHelper *@
 
+@using NotLimited.Framework.Common.Helpers
 @using NotLimited.Framework.Data.Queries
 @using NotLimited.Framework.Web.Controls
 @using NotLimited.Framework.Web.Controls.Grid
@@ -20,55 +21,73 @@
         $("#gridSort #descending").val(descending);
         $("#gridSort").submit();
     }
+
+    function SetItemsPerPage() {
+        $("#itemsPerPageForm").submit();
+    }
     </script>
 }
 
 @helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Func<IDisposable> form, Func<object, HelperResult> formControls, Pagination pagination, object tableHtmlAttributes)
 {
+
     using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
     {
-        @htmlHelper.Form().Hidden("sortBy", "")
-        @htmlHelper.Form().Hidden("descending", "")
-        @htmlHelper.Form().HiddenForQuery("sortBy", "descending")
+        @htmlHelper.Form().Hidden(Lambda<SortDefinition>.MemberName(x => x.SortBy), "")
+        @htmlHelper.Form().Hidden(Lambda<SortDefinition>.MemberName(x => x.Descending), "")
+        @htmlHelper.Form().HiddenForQuery(Lambda<SortDefinition>.MemberList().Expr(x => x.SortBy).Expr(x => x.Descending).ToArray())
+    }
+
+    if (pagination != null && pagination.PageCount > 1)
+    {
+        <div class="pull-right">
+            @using (htmlHelper.Form().BeginForm(FormMethod.Get, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
+            {
+                @htmlHelper.Label(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), "Записей на странице:")
+                @htmlHelper.Form().ItemsPerPageDropdown(pagination == null ? (int?)null : pagination.ItemsPerPage)
+                @htmlHelper.Form().HiddenForQuery(Lambda<Pagination>.MemberName(x => x.ItemsPerPage))
+            }
+        </div>
     }
     
-    <div></div>
-
-    using (form != null ? form() : new DummyForm())
-    {
-        <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
-            <thead>
-                <tr>
-                    @foreach (var header in headers)
-                    {
-                        @header
-                    }
-                </tr>
-            </thead>
-            <tbody>
-            
-                @foreach (var row in rows)
-                {
-                    <tr>
-                        @foreach (var column in row)
+    <div class="row">
+        <div class="col-md-12">
+            @using (form != null ? form() : new DummyForm())
+            {
+                <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
+                    <thead>
+                        <tr>
+                            @foreach (var header in headers)
+                            {
+                                @header
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in rows)
                         {
-                            @column
+                            <tr>
+                                @foreach (var column in row)
+                                {
+                                    @column
+                                }
+                            </tr>
                         }
-                    </tr>
+                    </tbody>
+                </table>
+
+                if (formControls != null)
+                {
+                    @formControls(null)
                 }
-            </tbody>
-        </table>
+            }
 
-        if (formControls != null)
-        {
-            @formControls(null)
-        }
-    }
-
-    if (pagination != null)
-    {
-        @htmlHelper.Partial("Paginator", pagination)
-    }
+            @if (pagination != null && pagination.PageCount > 1)
+            {
+                @htmlHelper.Partial("Paginator", pagination)
+            }
+        </div>
+    </div>
 }
 
 @helper TableHeader(System.Web.Mvc.HtmlHelper helper, PropertyMetadata prop, string title, TableHelpers.SortOrder sortOrder)

@@ -4,7 +4,7 @@
 @model NotLimited.Framework.Data.Queries.Pagination
 
 @{
-    int pageCount = (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage);
+    int pageCount = Model.PageCount;
 }
 
 @helper RenderPage(int page)

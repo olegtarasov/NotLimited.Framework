@@ -39,7 +39,7 @@ namespace NotLimited.Framework.Web.Controls
         /// <summary>
         /// Creates a form suitable for an upload control.
         /// </summary>
-        public static MvcForm BeginUploadForm<T>(this FormHelper<T> helper, string action = null, string controller = null)
+        public static MvcForm BeginUploadForm(this FormHelper helper, string action = null, string controller = null)
         {
             return helper.HtmlHelper.BeginForm(action, controller, FormMethod.Post, new { enctype = "multipart/form-data", role = "form" });
         }
@@ -47,7 +47,7 @@ namespace NotLimited.Framework.Web.Controls
         /// <summary>
         /// Creates a form with POST method.
         /// </summary>
-        public static MvcForm BeginPostForm<T>(this FormHelper<T> helper, string action = null, string controller = null, string id = null)
+        public static MvcForm BeginPostForm(this FormHelper helper, string action = null, string controller = null, string id = null)
         {
             return helper.HtmlHelper.BeginForm(action, controller, FormMethod.Post, new {role = "form", id});
         }

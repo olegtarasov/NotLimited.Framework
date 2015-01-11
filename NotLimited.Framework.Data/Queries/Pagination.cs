@@ -1,3 +1,5 @@
+using System;
+
 namespace NotLimited.Framework.Data.Queries
 {
 	public class Pagination
@@ -19,5 +21,7 @@ namespace NotLimited.Framework.Data.Queries
 		public int ItemsPerPage { get; set; }
 		public int Page { get; set; }
 		public int TotalCount { get; set; }
+
+        public int PageCount { get { return (int)Math.Ceiling((double)TotalCount / ItemsPerPage); } }
 	}
 }

@@ -39,6 +39,11 @@ namespace NotLimited.Framework.Common.Helpers
             return (HashSet<string>)this;
         }
 
+        public string[] ToArray()
+        {
+            return _expressions.Select(x => x.GetMemberName()).ToArray();
+        }
+
         public static implicit operator HashSet<string>(LambdaBuilder<T> builder)
         {
             return builder._expressions.Select(x => x.GetMemberName()).ToHashSet();

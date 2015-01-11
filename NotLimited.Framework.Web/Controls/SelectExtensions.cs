@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.WebPages;
 using NotLimited.Framework.Common.Helpers;
+using NotLimited.Framework.Data.Queries;
 using NotLimited.Framework.Web.Controls.Builders;
 using NotLimited.Framework.Web.Helpers;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
@@ -55,6 +56,18 @@ namespace NotLimited.Framework.Web.Controls
             result.AddRange(source);
 
 	        return result;
+	    }
+
+	    public static MvcHtmlString ItemsPerPageDropdown(this FormHelper helper, int? page)
+	    {
+	        var list = new List<SelectListItem>
+	                   {
+	                       new SelectListItem {Text = "20", Value = "20", Selected = page.GetValueOrDefault() == 20},
+	                       new SelectListItem {Text = "50", Value = "50", Selected = page.GetValueOrDefault() == 50},
+	                       new SelectListItem {Text = "100", Value = "100", Selected = page.GetValueOrDefault() == 100}
+	                   };
+
+            return helper.HtmlHelper.DropDownList(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), list, new { @class = "form-control", onchange = "SetItemsPerPage();", style = "display: inline-block; width: 75px; margin-left: 20px;" });
 	    }
 
 	    /// <summary>

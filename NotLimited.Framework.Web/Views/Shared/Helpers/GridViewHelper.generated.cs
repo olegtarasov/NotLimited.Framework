@@ -27,6 +27,7 @@ namespace NotLimited.Framework.Web.Views.Shared.Helpers
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using NotLimited.Framework.Common.Helpers;
     using NotLimited.Framework.Data.Queries;
     using NotLimited.Framework.Web;
     using NotLimited.Framework.Web.Controls;
@@ -58,6 +59,10 @@ WriteLiteralTo(__razor_helper_writer, @"    <script>
         $(""#gridSort #descending"").val(descending);
         $(""#gridSort"").submit();
     }
+
+    function SetItemsPerPage() {
+        $(""#itemsPerPageForm"").submit();
+    }
     </script>
 ");
 
@@ -78,84 +83,130 @@ public static System.Web.WebPages.HelperResult Grid(HtmlHelper htmlHelper, List<
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
  
+
     using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
     {
         
-WriteTo(__razor_helper_writer, htmlHelper.Form().Hidden("sortBy", ""));
+WriteTo(__razor_helper_writer, htmlHelper.Form().Hidden(Lambda<SortDefinition>.MemberName(x => x.SortBy), ""));
 
-                                               
+                                                                                       
         
-WriteTo(__razor_helper_writer, htmlHelper.Form().Hidden("descending", ""));
+WriteTo(__razor_helper_writer, htmlHelper.Form().Hidden(Lambda<SortDefinition>.MemberName(x => x.Descending), ""));
 
-                                                   
+                                                                                           
         
-WriteTo(__razor_helper_writer, htmlHelper.Form().HiddenForQuery("sortBy", "descending"));
+WriteTo(__razor_helper_writer, htmlHelper.Form().HiddenForQuery(Lambda<SortDefinition>.MemberList().Expr(x => x.SortBy).Expr(x => x.Descending).ToArray()));
 
-                                                                 
+                                                                                                                                    
+    }
+
+    if (pagination != null && pagination.PageCount > 1)
+    {
+
+WriteLiteralTo(__razor_helper_writer, "        <div");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"pull-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+            
+             using (htmlHelper.Form().BeginForm(FormMethod.Get, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
+            {
+                
+WriteTo(__razor_helper_writer, htmlHelper.Label(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), "Записей на странице:"));
+
+                                                                                                             
+                
+WriteTo(__razor_helper_writer, htmlHelper.Form().ItemsPerPageDropdown(pagination == null ? (int?)null : pagination.ItemsPerPage));
+
+                                                                                                                  
+                
+WriteTo(__razor_helper_writer, htmlHelper.Form().HiddenForQuery(Lambda<Pagination>.MemberName(x => x.ItemsPerPage)));
+
+                                                                                                     
+            }
+
+WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
+
     }
     
 
-WriteLiteralTo(__razor_helper_writer, "    <div></div>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <div");
 
+WriteLiteralTo(__razor_helper_writer, " class=\"row\"");
 
-    using (form != null ? form() : new DummyForm())
-    {
+WriteLiteralTo(__razor_helper_writer, ">\r\n        <div");
 
-WriteLiteralTo(__razor_helper_writer, "        <table ");
+WriteLiteralTo(__razor_helper_writer, " class=\"col-md-12\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+            
+             using (form != null ? form() : new DummyForm())
+            {
+
+WriteLiteralTo(__razor_helper_writer, "                <table ");
 
 WriteTo(__razor_helper_writer, htmlHelper.RenderHtmlAttributes(tableHtmlAttributes));
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <thead>\r\n                <tr>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <thead>\r\n                        <tr>\r\n");
 
-                    
-                     foreach (var header in headers)
-                    {
-                        
-WriteTo(__razor_helper_writer, header);
-
-                               
-                    }
-
-WriteLiteralTo(__razor_helper_writer, "                </tr>\r\n            </thead>\r\n            <tbody>\r\n            \r\n");
-
-                
-                 foreach (var row in rows)
-                {
-
-WriteLiteralTo(__razor_helper_writer, "                    <tr>\r\n");
-
-                        
-                         foreach (var column in row)
-                        {
                             
-WriteTo(__razor_helper_writer, column);
+                             foreach (var header in headers)
+                            {
+                                
+  WriteTo(__razor_helper_writer, header);
 
-                                   
+                                       
+                            }
+
+WriteLiteralTo(__razor_helper_writer, "                        </tr>\r\n                    </thead>\r\n                    " +
+"<tbody>\r\n");
+
+                        
+                         foreach (var row in rows)
+                        {
+
+WriteLiteralTo(__razor_helper_writer, "                            <tr>\r\n");
+
+                                
+                                 foreach (var column in row)
+                                {
+                                    
+      WriteTo(__razor_helper_writer, column);
+
+                                           
+                                }
+
+WriteLiteralTo(__razor_helper_writer, "                            </tr>\r\n");
+
                         }
 
-WriteLiteralTo(__razor_helper_writer, "                    </tr>\r\n");
-
-                }
-
-WriteLiteralTo(__razor_helper_writer, "            </tbody>\r\n        </table>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                    </tbody>\r\n                </table>\r\n");
 
 
-        if (formControls != null)
-        {
-            
+                if (formControls != null)
+                {
+                    
 WriteTo(__razor_helper_writer, formControls(null));
 
-                               
-        }
-    }
+                                       
+                }
+            }
 
-    if (pagination != null)
-    {
-        
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+            
+             if (pagination != null && pagination.PageCount > 1)
+            {
+                
 WriteTo(__razor_helper_writer, htmlHelper.Partial("Paginator", pagination));
 
-                                                    
-    }
+                                                            
+            }
+
+WriteLiteralTo(__razor_helper_writer, "        </div>\r\n    </div>\r\n");
+
 
 });
 
@@ -204,10 +255,10 @@ WriteLiteralTo(__razor_helper_writer, " class=\"pull-right\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                <span");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2498), Tuple.Create("\"", 2545)
-, Tuple.Create(Tuple.Create("", 2506), Tuple.Create("fa", 2506), true)
-, Tuple.Create(Tuple.Create(" ", 2508), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
-, 2509), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3736), Tuple.Create("\"", 3783)
+, Tuple.Create(Tuple.Create("", 3744), Tuple.Create("fa", 3744), true)
+, Tuple.Create(Tuple.Create(" ", 3746), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
+, 3747), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"margin-right: 5px\"");

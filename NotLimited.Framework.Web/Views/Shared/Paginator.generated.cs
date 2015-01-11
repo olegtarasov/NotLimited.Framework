@@ -127,7 +127,7 @@ WriteLiteral("\r\n");
             
             #line 6 "..\..\Views\Shared\Paginator.cshtml"
   
-    int pageCount = (int)Math.Ceiling((double)Model.TotalCount / Model.ItemsPerPage);
+    int pageCount = Model.PageCount;
 
 
             
