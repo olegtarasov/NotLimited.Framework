@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Common.Public</id>
-    <version>1.0.14</version>
+    <version>1.0.25</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -17,6 +17,8 @@
     </frameworkAssemblies>
   </metadata>
   <files>
+    <file src="sources\DataAnnotations\MinCollectionCount.cs.pp" target="content\DataAnnotations\MinCollectionCount.cs.pp" />
+    <file src="sources\DataAnnotations\NotEmptyAttribute.cs.pp" target="content\DataAnnotations\NotEmptyAttribute.cs.pp" />
     <file src="sources\Helpers\CollectionExtensions.cs.pp" target="content\Helpers\CollectionExtensions.cs.pp" />
     <file src="sources\Helpers\CollectionFilterDefinition.cs.pp" target="content\Helpers\CollectionFilterDefinition.cs.pp" />
     <file src="sources\Helpers\CountdownEventSlim.cs.pp" target="content\Helpers\CountdownEventSlim.cs.pp" />

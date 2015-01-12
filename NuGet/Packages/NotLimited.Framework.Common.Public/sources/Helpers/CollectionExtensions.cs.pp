@@ -16,7 +16,7 @@ namespace NotLimited.Framework.Common.Helpers
             }
         }
 
-        public static bool EqualsTo<TSrc, TDst>(this List<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
+        public static bool EqualsTo<TSrc, TDst>(this IReadOnlyList<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
         {
             if (ReferenceEquals(source, destination))
                 return true;
@@ -35,7 +35,6 @@ namespace NotLimited.Framework.Common.Helpers
 
             return true;
         }
-
 
         public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> source)
         {
@@ -137,6 +136,58 @@ namespace NotLimited.Framework.Common.Helpers
             }
 
             return value;
+        }
+
+        public static IEnumerable<TElement> IterateQueueList<TElement, TContainer>(
+            this TContainer root, 
+            Func<TContainer, IEnumerable<TElement>> elementAccessor,
+            Func<TContainer, IEnumerable<TContainer>> childrenAccessor)
+        {
+            if (root == null) throw new ArgumentNullException("root");
+            if (elementAccessor == null) throw new ArgumentNullException("elementAccessor");
+            if (childrenAccessor == null) throw new ArgumentNullException("childrenAccessor");
+
+            var queue = new Queue<TContainer>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                var item = queue.Dequeue();
+                foreach (var element in elementAccessor(item))
+                {
+                    yield return element;
+                }
+
+                foreach (var child in childrenAccessor(item))
+                {
+                    queue.Enqueue(child);
+                }
+            }
+        }
+
+        public static IEnumerable<TElement> IterateQueue<TElement, TContainer>(
+            this TContainer root,
+            Func<TContainer, TElement> elementAccessor,
+            Func<TContainer, IEnumerable<TContainer>> childrenAccessor)
+        {
+            if (root == null) throw new ArgumentNullException("root");
+            if (elementAccessor == null) throw new ArgumentNullException("elementAccessor");
+            if (childrenAccessor == null) throw new ArgumentNullException("childrenAccessor");
+
+            var queue = new Queue<TContainer>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                var item = queue.Dequeue();
+                
+                yield return elementAccessor(item);
+
+                foreach (var child in childrenAccessor(item))
+                {
+                    queue.Enqueue(child);
+                }
+            }
         }
     }
 }

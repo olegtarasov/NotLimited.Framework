@@ -4,6 +4,8 @@
 // If you do, all hell will break loose and living will envy the dead.
 //////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Remoting.Messaging;
 
@@ -20,5 +22,36 @@ namespace $rootnamespace$.Helpers
 		{
 			return expression.GetMemberName();
 		}
+
+	    public static LambdaBuilder<T> MemberList()
+	    {
+	        return new LambdaBuilder<T>();
+	    }
 	}
+
+    internal class LambdaBuilder<T>
+    {
+        private readonly List<LambdaExpression> _expressions = new List<LambdaExpression>();
+
+        public LambdaBuilder<T> Expr<TKey>(Expression<Func<T, TKey>> expression)
+        {
+            _expressions.Add(expression);
+            return this;
+        }
+
+        public IEnumerable<string> AsEnumerable()
+        {
+            return (HashSet<string>)this;
+        }
+
+        public string[] ToArray()
+        {
+            return _expressions.Select(x => x.GetMemberName()).ToArray();
+        }
+
+        public static implicit operator HashSet<string>(LambdaBuilder<T> builder)
+        {
+            return builder._expressions.Select(x => x.GetMemberName()).ToHashSet();
+        }
+    }
 }

@@ -3,11 +3,12 @@
 // You are strongly discouraged from fiddling with it.
 // If you do, all hell will break loose and living will envy the dead.
 //////////////////////////////////////////////////////////////////////////
+using System;
 using System.Threading;
 
 namespace $rootnamespace$.Helpers
 {
-    internal class CountdownEventSlim
+    internal sealed class CountdownEventSlim : IDisposable
     {
         private int _count = 0;
         private ManualResetEventSlim _resetEvent = new ManualResetEventSlim(true);
@@ -29,6 +30,11 @@ namespace $rootnamespace$.Helpers
         public void Wait()
         {
             _resetEvent.Wait();
+        }
+
+        public void Dispose()
+        {
+            _resetEvent.Dispose();
         }
     }
 }

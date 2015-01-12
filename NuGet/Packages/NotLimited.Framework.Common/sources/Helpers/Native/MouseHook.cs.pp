@@ -21,8 +21,61 @@ namespace $rootnamespace$.Helpers.Native
         public int Y { get; set; }
     }
 
-    internal class MouseHook : IDisposable
+    internal sealed class MouseHook : IDisposable
     {
+        private static class NativeMethods
+        {
+// ReSharper disable InconsistentNaming
+// ReSharper disable FieldCanBeMadeReadOnly.Local
+// ReSharper disable MemberCanBePrivate.Local
+// ReSharper disable UnusedMember.Local
+            internal const int WH_MOUSE_LL = 14;
+
+
+            internal enum MouseMessages
+            {
+                WM_LBUTTONDOWN = 0x0201,
+                WM_LBUTTONUP = 0x0202,
+                WM_MOUSEMOVE = 0x0200,
+                WM_MOUSEWHEEL = 0x020A,
+                WM_RBUTTONDOWN = 0x0204,
+                WM_RBUTTONUP = 0x0205
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            internal struct MSLLHOOKSTRUCT
+            {
+                public PointApi pt;
+                public uint mouseData;
+                public uint flags;
+                public uint time;
+                public IntPtr dwExtraInfo;
+            }
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            internal static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            internal static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode,
+                                                        IntPtr wParam, IntPtr lParam);
+
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            internal static extern IntPtr GetModuleHandle(string lpModuleName);
+
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool GetCursorPos(out PointApi lpPoint);
+
+// ReSharper restore UnusedMember.Local
+// ReSharper restore MemberCanBePrivate.Local
+// ReSharper restore FieldCanBeMadeReadOnly.Local
+// ReSharper restore InconsistentNaming
+        }
+
         private IntPtr _hookId = IntPtr.Zero;
 
         public event EventHandler<MouseMoveEventArgs> MouseMove;
@@ -50,7 +103,7 @@ namespace $rootnamespace$.Helpers.Native
         {
             if (_hookId != IntPtr.Zero)
             {
-                if (!UnhookWindowsHookEx(_hookId))
+                if (!NativeMethods.UnhookWindowsHookEx(_hookId))
                     throw new InvalidOperationException("Failed to remove the hook!");
 
                 _hookId = IntPtr.Zero;
@@ -60,7 +113,7 @@ namespace $rootnamespace$.Helpers.Native
         public PointApi GetCursorPos()
         {
             PointApi result;
-            GetCursorPos(out result);
+            NativeMethods.GetCursorPos(out result);
             return result;
         }
 
@@ -69,7 +122,7 @@ namespace $rootnamespace$.Helpers.Native
             using (var curProcess = Process.GetCurrentProcess())
             using (var curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                return NativeMethods.SetWindowsHookEx(NativeMethods.WH_MOUSE_LL, proc, NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
@@ -79,61 +132,22 @@ namespace $rootnamespace$.Helpers.Native
         {
             if (nCode >= 0)
             {
-                var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
-                switch ((MouseMessages)wParam)
+                var hookStruct = (NativeMethods.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(NativeMethods.MSLLHOOKSTRUCT));
+                switch ((NativeMethods.MouseMessages)wParam)
                 {
-                    case MouseMessages.WM_MOUSEMOVE:
+                    case NativeMethods.MouseMessages.WM_MOUSEMOVE:
                         OnMouseMove(new MouseMoveEventArgs(hookStruct.pt.x, hookStruct.pt.y));
                         break;
-                    case MouseMessages.WM_LBUTTONUP:
+                    case NativeMethods.MouseMessages.WM_LBUTTONUP:
                         OnLButtonUp(EventArgs.Empty);
                         break;
                 }
             }
 
-            return CallNextHookEx(_hookId, nCode, wParam, lParam);
+            return NativeMethods.CallNextHookEx(_hookId, nCode, wParam, lParam);
         }
 
-        private const int WH_MOUSE_LL = 14;
-
-        private enum MouseMessages
-        {
-            WM_LBUTTONDOWN = 0x0201,
-            WM_LBUTTONUP = 0x0202,
-            WM_MOUSEMOVE = 0x0200,
-            WM_MOUSEWHEEL = 0x020A,
-            WM_RBUTTONDOWN = 0x0204,
-            WM_RBUTTONUP = 0x0205
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct MSLLHOOKSTRUCT
-        {
-            public PointApi pt;
-            public uint mouseData;
-            public uint flags;
-            public uint time;
-            public IntPtr dwExtraInfo;
-        }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook,
-                                                      LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode,
-                                                    IntPtr wParam, IntPtr lParam);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetCursorPos(out PointApi lpPoint);
+        
 
         public void Dispose()
         {
