@@ -34,5 +34,14 @@ namespace NotLimited.Framework.Web.Controls
 	        return new TextBoxBuilder<TModel, TProperty>(helper.HtmlHelper, expression)
                 .Type(TextBoxType.Password);
 	    }
+
+        /// <summary>
+        /// Creates a readonly field.
+        /// </summary>
+        public static TextBoxBuilder<TModel, TProperty> ReadonlyFor<TModel, TProperty>(this FormHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
+        {
+            return new TextBoxBuilder<TModel, TProperty>(helper.HtmlHelper, expression)
+                .Type(TextBoxType.Readonly);
+        }
 	}
 }

@@ -9,7 +9,8 @@ namespace NotLimited.Framework.Web.Controls.Builders
     public enum TextBoxType
     {
         Default,
-        Password
+        Password,
+        Readonly
     }
 
     public class TextBoxBuilder<TModel, TProperty> : FormControlBuilderBase<TextBoxBuilder<TModel, TProperty>, TModel, TProperty>
@@ -23,6 +24,16 @@ namespace NotLimited.Framework.Web.Controls.Builders
         public TextBoxBuilder<TModel, TProperty> Type(TextBoxType type)
         {
             _type = type;
+
+            if (type == TextBoxType.Readonly)
+            {
+                HtmlAttributes["readonly"] = "";
+            }
+            else
+            {
+                HtmlAttributes.Remove("readonly");
+            }
+
             return this;
         }
 
@@ -30,6 +41,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         {
             switch (_type)
             {
+                case TextBoxType.Readonly:
                 case TextBoxType.Default:
                     return HtmlHelper.TextBoxFor(Expression, GetAttributesDictionary());
                 case TextBoxType.Password:
