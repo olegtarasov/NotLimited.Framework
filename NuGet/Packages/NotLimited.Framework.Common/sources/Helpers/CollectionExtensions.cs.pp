@@ -4,6 +4,7 @@
 // If you do, all hell will break loose and living will envy the dead.
 //////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -141,6 +142,17 @@ namespace $rootnamespace$.Helpers
             }
 
             return value;
+        }
+
+        public static bool Remove<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            TValue value;
+            return dictionary.TryRemove(key, out value);
+        }
+
+        public static void AddOrUpdate<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        {
+            dictionary.AddOrUpdate(key, value, (key1, value1) => value);
         }
 
         public static IEnumerable<TElement> IterateQueueList<TElement, TContainer>(

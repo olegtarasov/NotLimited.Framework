@@ -21,3 +21,4 @@ for /r %%i in (*.nupkg) do (
 	echo %%i
 	%nugetCmd% push %%i
 )
+cd ..

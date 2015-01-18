@@ -1,9 +1,14 @@
-﻿using System.Collections.Concurrent;
+//////////////////////////////////////////////////////////////////////////
+// This file is a part of NotLimited.Framework.Common NuGet package.
+// You are strongly discouraged from fiddling with it.
+// If you do, all hell will break loose and living will envy the dead.
+//////////////////////////////////////////////////////////////////////////
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace NotLimited.Framework.Common.Collections
+namespace $rootnamespace$.Collections
 {
-    public class ConcurrentDictionaryReadonly<TKey, TValue> : ConcurrentDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>
+    internal class ConcurrentDictionaryReadonly<TKey, TValue> : ConcurrentDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>
     {
         public ConcurrentDictionaryReadonly()
         {
