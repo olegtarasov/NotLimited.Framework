@@ -58,7 +58,10 @@ namespace NotLimited.Framework.Web.Controls
 	        return result;
 	    }
 
-	    public static MvcHtmlString ItemsPerPageDropdown(this FormHelper helper, int? page)
+        /// <summary>
+        /// Renders an “Items per page” dropdown.
+        /// </summary>
+        public static MvcHtmlString ItemsPerPageDropdown(this FormHelper helper, int? page)
 	    {
 	        var list = new List<SelectListItem>
 	                   {
@@ -68,6 +71,19 @@ namespace NotLimited.Framework.Web.Controls
 	                   };
 
             return helper.HtmlHelper.DropDownList(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), list, new { @class = "form-control", onchange = "SetItemsPerPage();", style = "display: inline-block; width: 75px; margin-left: 20px;" });
+	    }
+
+        /// <summary>
+        /// Unselects all items in a collection.
+        /// </summary>
+        public static IEnumerable<SelectListItem> UnselectAll(this IEnumerable<SelectListItem> source)
+	    {
+	        foreach (var item in source)
+	        {
+	            item.Selected = false;
+	        }
+
+	        return source;
 	    }
 
 	    /// <summary>
