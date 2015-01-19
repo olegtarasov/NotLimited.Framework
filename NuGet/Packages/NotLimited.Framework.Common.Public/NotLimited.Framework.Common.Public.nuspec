@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Common.Public</id>
-    <version>1.0.29</version>
+    <version>1.0.30</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -28,7 +28,6 @@
     <file src="sources\Helpers\ExpressionHelper.cs.pp" target="content\Helpers\ExpressionHelper.cs.pp" />
     <file src="sources\Helpers\Lambda.cs.pp" target="content\Helpers\Lambda.cs.pp" />
     <file src="sources\Helpers\MathHelpers.cs.pp" target="content\Helpers\MathHelpers.cs.pp" />
-    <file src="sources\Helpers\MefHelper.cs.pp" target="content\Helpers\MefHelper.cs.pp" />
     <file src="sources\Helpers\PathEqualityComparer.cs.pp" target="content\Helpers\PathEqualityComparer.cs.pp" />
     <file src="sources\Helpers\PathHelpers.cs.pp" target="content\Helpers\PathHelpers.cs.pp" />
     <file src="sources\Helpers\PerformanceTimer.cs.pp" target="content\Helpers\PerformanceTimer.cs.pp" />
