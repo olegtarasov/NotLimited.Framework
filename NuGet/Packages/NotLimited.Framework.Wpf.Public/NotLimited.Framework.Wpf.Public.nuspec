@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>NotLimited.Framework.Wpf.Public</id>
+        <version>1.0.1</version>
+        <authors>Oleg Tarasov</authors>
+        <owners>Oleg Tarasov</owners>
+        <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple helper library.</description>
+        <language>en-US</language>
+        <references>
+            <reference file="PresentationCore" />
+            <reference file="PresentationFramework" />
+            <reference file="System" />
+            <reference file="System.Core" />
+            <reference file="System.Drawing" />
+            <reference file="System.Windows.Presentation" />
+            <reference file="System.Xaml" />
+            <reference file="System.Xml.Linq" />
+            <reference file="System.Data.DataSetExtensions" />
+            <reference file="Microsoft.CSharp" />
+            <reference file="System.Data" />
+            <reference file="System.Xml" />
+            <reference file="WindowsBase" />
+        </references>
+    </metadata>
+    <files>
+        <file src="sources\Animations\AnimationBag.cs.pp" target="content\Animations\AnimationBag.cs.pp" />
+        <file src="sources\Animations\AnimationExtensions.cs.pp" target="content\Animations\AnimationExtensions.cs.pp" />
+        <file src="sources\Animations\AnimationFactory.cs.pp" target="content\Animations\AnimationFactory.cs.pp" />
+        <file src="sources\Animations\AnimationGroup.cs.pp" target="content\Animations\AnimationGroup.cs.pp" />
+        <file src="sources\Animations\AnimationItem.cs.pp" target="content\Animations\AnimationItem.cs.pp" />
+        <file src="sources\Converters\AppendTextConverter.cs.pp" target="content\Converters\AppendTextConverter.cs.pp" />
+        <file src="sources\Converters\BoolVisibilityConverter.cs.pp" target="content\Converters\BoolVisibilityConverter.cs.pp" />
+        <file src="sources\Converters\IntVisibilityConverter.cs.pp" target="content\Converters\IntVisibilityConverter.cs.pp" />
+        <file src="sources\Converters\InvertedBoolConverter.cs.pp" target="content\Converters\InvertedBoolConverter.cs.pp" />
+        <file src="sources\Converters\InvertedVisibilityConverter.cs.pp" target="content\Converters\InvertedVisibilityConverter.cs.pp" />
+        <file src="sources\Converters\NullVisibilityConverter.cs.pp" target="content\Converters\NullVisibilityConverter.cs.pp" />
+        <file src="sources\GridLengthAnimation.cs.pp" target="content\GridLengthAnimation.cs.pp" />
+        <file src="sources\Inherit.cs.pp" target="content\Inherit.cs.pp" />
+        <file src="sources\ObservableWrapper.cs.pp" target="content\ObservableWrapper.cs.pp" />
+        <file src="sources\SizeChangedReactor.cs.pp" target="content\SizeChangedReactor.cs.pp" />
+        <file src="sources\TextRenderer.cs.pp" target="content\TextRenderer.cs.pp" />
+        <file src="sources\ThemeFixer.cs.pp" target="content\ThemeFixer.cs.pp" />
+        <file src="sources\WpfConversionExtensions.cs.pp" target="content\WpfConversionExtensions.cs.pp" />
+        <file src="sources\WpfExtensions.cs.pp" target="content\WpfExtensions.cs.pp" />
+        <file src="sources\WpfHelper.cs.pp" target="content\WpfHelper.cs.pp" />
+    </files>
+</package>
