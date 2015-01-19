@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Common</id>
-    <version>1.0.31</version>
+    <version>1.0.36</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -17,37 +17,37 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="sources\Collections\ConcurrentDictionaryReadonly.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Collections\ConcurrentDictionaryReadonly.cs.pp" />
-    <file src="sources\DataAnnotations\MinCollectionCount.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\DataAnnotations\MinCollectionCount.cs.pp" />
-    <file src="sources\DataAnnotations\NotEmptyAttribute.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\DataAnnotations\NotEmptyAttribute.cs.pp" />
-    <file src="sources\Helpers\CollectionExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\CollectionExtensions.cs.pp" />
-    <file src="sources\Helpers\CollectionFilterDefinition.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\CollectionFilterDefinition.cs.pp" />
-    <file src="sources\Helpers\CountdownEventSlim.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\CountdownEventSlim.cs.pp" />
-    <file src="sources\Helpers\EnumHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\EnumHelper.cs.pp" />
-    <file src="sources\Helpers\EnvironmentHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\EnvironmentHelpers.cs.pp" />
-    <file src="sources\Helpers\ExpressionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\ExpressionHelper.cs.pp" />
-    <file src="sources\Helpers\Lambda.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\Lambda.cs.pp" />
-    <file src="sources\Helpers\MathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\MathHelpers.cs.pp" />
-    <file src="sources\Helpers\PathEqualityComparer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\PathEqualityComparer.cs.pp" />
-    <file src="sources\Helpers\PathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\PathHelpers.cs.pp" />
-    <file src="sources\Helpers\PerformanceTimer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\PerformanceTimer.cs.pp" />
-    <file src="sources\Helpers\RandomExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\RandomExtensions.cs.pp" />
-    <file src="sources\Helpers\ReflectionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\ReflectionHelper.cs.pp" />
-    <file src="sources\Helpers\SafeExecutionContext.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\SafeExecutionContext.cs.pp" />
-    <file src="sources\Helpers\StreamExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\StreamExtensions.cs.pp" />
-    <file src="sources\Helpers\StringExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\StringExtensions.cs.pp" />
-    <file src="sources\Helpers\TaskHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\TaskHelpers.cs.pp" />
-    <file src="sources\Helpers\TimeHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\TimeHelpers.cs.pp" />
-    <file src="sources\Helpers\TypeHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\TypeHelper.cs.pp" />
-    <file src="sources\Helpers\Native\MouseHook.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\Native\MouseHook.cs.pp" />
-    <file src="sources\Helpers\Xml\XDocumentExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Helpers\Xml\XDocumentExtensions.cs.pp" />
-    <file src="sources\Logging\ILogWriter.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Logging\ILogWriter.cs.pp" />
-    <file src="sources\Logging\Logger.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Logging\Logger.cs.pp" />
-    <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Misc\AwesomeConfig.cs.pp" />
-    <file src="sources\Misc\AwesomeMath.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Misc\AwesomeMath.cs.pp" />
-    <file src="sources\Misc\DataPoint.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Misc\DataPoint.cs.pp" />
-    <file src="sources\Misc\NamedPipeServer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Misc\NamedPipeServer.cs.pp" />
-    <file src="sources\Misc\ObjectFactory.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Misc\ObjectFactory.cs.pp" />
-    <file src="sources\Types\TypeResolver.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.31\Types\TypeResolver.cs.pp" />
+    <file src="sources\Collections\ConcurrentDictionaryReadonly.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Collections\ConcurrentDictionaryReadonly.cs.pp" />
+    <file src="sources\DataAnnotations\MinCollectionCount.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\DataAnnotations\MinCollectionCount.cs.pp" />
+    <file src="sources\DataAnnotations\NotEmptyAttribute.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\DataAnnotations\NotEmptyAttribute.cs.pp" />
+    <file src="sources\Helpers\CollectionExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\CollectionExtensions.cs.pp" />
+    <file src="sources\Helpers\CollectionFilterDefinition.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\CollectionFilterDefinition.cs.pp" />
+    <file src="sources\Helpers\CountdownEventSlim.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\CountdownEventSlim.cs.pp" />
+    <file src="sources\Helpers\EnumHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\EnumHelper.cs.pp" />
+    <file src="sources\Helpers\EnvironmentHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\EnvironmentHelpers.cs.pp" />
+    <file src="sources\Helpers\ExpressionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\ExpressionHelper.cs.pp" />
+    <file src="sources\Helpers\Lambda.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\Lambda.cs.pp" />
+    <file src="sources\Helpers\MathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\MathHelpers.cs.pp" />
+    <file src="sources\Helpers\PathEqualityComparer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\PathEqualityComparer.cs.pp" />
+    <file src="sources\Helpers\PathHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\PathHelpers.cs.pp" />
+    <file src="sources\Helpers\PerformanceTimer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\PerformanceTimer.cs.pp" />
+    <file src="sources\Helpers\RandomExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\RandomExtensions.cs.pp" />
+    <file src="sources\Helpers\ReflectionHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\ReflectionHelper.cs.pp" />
+    <file src="sources\Helpers\SafeExecutionContext.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\SafeExecutionContext.cs.pp" />
+    <file src="sources\Helpers\StreamExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\StreamExtensions.cs.pp" />
+    <file src="sources\Helpers\StringExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\StringExtensions.cs.pp" />
+    <file src="sources\Helpers\TaskHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\TaskHelpers.cs.pp" />
+    <file src="sources\Helpers\TimeHelpers.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\TimeHelpers.cs.pp" />
+    <file src="sources\Helpers\TypeHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\TypeHelper.cs.pp" />
+    <file src="sources\Helpers\Native\MouseHook.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\Native\MouseHook.cs.pp" />
+    <file src="sources\Helpers\Xml\XDocumentExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Helpers\Xml\XDocumentExtensions.cs.pp" />
+    <file src="sources\Logging\ILogWriter.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Logging\ILogWriter.cs.pp" />
+    <file src="sources\Logging\Logger.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Logging\Logger.cs.pp" />
+    <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Misc\AwesomeConfig.cs.pp" />
+    <file src="sources\Misc\AwesomeMath.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Misc\AwesomeMath.cs.pp" />
+    <file src="sources\Misc\DataPoint.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Misc\DataPoint.cs.pp" />
+    <file src="sources\Misc\NamedPipeServer.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Misc\NamedPipeServer.cs.pp" />
+    <file src="sources\Misc\ObjectFactory.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Misc\ObjectFactory.cs.pp" />
+    <file src="sources\Types\TypeResolver.cs.pp" target="content\App_Packages\NotLimited.Framework.Common.1.0.36\Types\TypeResolver.cs.pp" />
   </files>
 </package>
