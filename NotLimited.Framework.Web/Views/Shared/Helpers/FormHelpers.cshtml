@@ -18,3 +18,13 @@
         @validation
     </div>
 }
+
+@helper InputWithButton(MvcHtmlString input, MvcHtmlString button)
+{
+    <div class="input-group">
+        @input
+        <span class="input-group-btn">
+            @button
+        </span>
+    </div>
+}

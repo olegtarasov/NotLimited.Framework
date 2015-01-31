@@ -10,6 +10,8 @@ namespace NotLimited.Framework.Web.Controls.Builders
     public abstract class FormControlBuilderBase<TBuilder, TModel, TProperty> : ControlBuilderBase<TBuilder, TModel, TProperty> 
         where TBuilder : FormControlBuilderBase<TBuilder, TModel, TProperty>
     {
+        private ButtonBuilder _buttonBuilder;
+
         protected FormControlBuilderBase(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression) : base(htmlHelper)
         {
             Expression = expression;
@@ -18,11 +20,22 @@ namespace NotLimited.Framework.Web.Controls.Builders
 
         public Expression<Func<TModel, TProperty>> Expression { get; private set; }
 
+        public TBuilder WithButton(Action<ButtonBuilder> builder)
+        {
+            if (builder == null) throw new ArgumentNullException("builder");
+
+            _buttonBuilder = new ButtonBuilder(HtmlHelper);
+            builder(_buttonBuilder);
+            return (TBuilder)this;
+        }
+
         public override HelperResult GetControlHtml()
         {
             return FormHelpers.TextBox(
                 HtmlHelper.LabelFor(Expression),
-                GetFormControlHtml(),
+                _buttonBuilder == null 
+                    ? GetFormControlHtml()
+                    : new MvcHtmlString(FormHelpers.InputWithButton(GetFormControlHtml(), new MvcHtmlString(_buttonBuilder.GetControlHtml().ToHtmlString())).ToHtmlString()),
                 HtmlHelper.ValidationMessageFor(Expression, "", new {@class = "text-danger"}));
         }
 

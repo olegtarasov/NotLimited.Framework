@@ -102,7 +102,13 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                    </div>\r\n\r\n   
 
 WriteLiteralTo(__razor_helper_writer, " class=\"modal-footer\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n                        <button");
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+                        
+                         if (!string.IsNullOrEmpty(cancelText))
+                        {
+
+WriteLiteralTo(__razor_helper_writer, "                            <button");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"button\"");
 
@@ -112,11 +118,14 @@ WriteLiteralTo(__razor_helper_writer, " data-dismiss=\"modal\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
-                                                             WriteTo(__razor_helper_writer, cancelText);
+                                                                 WriteTo(__razor_helper_writer, cancelText);
 
 WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
 
-                        
+                        }
+
+WriteLiteralTo(__razor_helper_writer, "                        ");
+
                          if (!string.IsNullOrEmpty(okHandler))
                         {
 
@@ -128,9 +137,9 @@ WriteLiteralTo(__razor_helper_writer, " type=\"button\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
 
-WriteAttributeTo(__razor_helper_writer, "onclick", Tuple.Create(" onclick=\"", 1211), Tuple.Create("\"", 1231)
-                        , Tuple.Create(Tuple.Create("", 1221), Tuple.Create<System.Object, System.Int32>(okHandler
-, 1221), false)
+WriteAttributeTo(__razor_helper_writer, "onclick", Tuple.Create(" onclick=\"", 1334), Tuple.Create("\"", 1354)
+                        , Tuple.Create(Tuple.Create("", 1344), Tuple.Create<System.Object, System.Int32>(okHandler
+, 1344), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -142,22 +151,40 @@ WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
                         }
                         else
                         {
+                            if (form == null)
+                            {
 
-WriteLiteralTo(__razor_helper_writer, "                            <button");
+WriteLiteralTo(__razor_helper_writer, "                                <button");
 
-WriteAttributeTo(__razor_helper_writer, "type", Tuple.Create(" type=\"", 1370), Tuple.Create("\"", 1414)
-, Tuple.Create(Tuple.Create("", 1377), Tuple.Create<System.Object, System.Int32>(form == null ? "button" : "submit"
-, 1377), false)
-);
+WriteLiteralTo(__razor_helper_writer, " type=\"button\"");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
+
+WriteLiteralTo(__razor_helper_writer, " data-dismiss=\"modal\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+                                                                     WriteTo(__razor_helper_writer, okText);
+
+WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
+
+                            }
+                            else
+                            {
+
+WriteLiteralTo(__razor_helper_writer, "                                <button");
+
+WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
-                                                                           WriteTo(__razor_helper_writer, okText);
+                                                WriteTo(__razor_helper_writer, okText);
 
 WriteLiteralTo(__razor_helper_writer, "</button>\r\n");
 
+                            }
                         }
 
 WriteLiteralTo(__razor_helper_writer, "                    </div>\r\n                </div>\r\n");

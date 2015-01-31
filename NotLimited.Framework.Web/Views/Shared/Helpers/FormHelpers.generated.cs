@@ -132,6 +132,46 @@ WriteLiteralTo(__razor_helper_writer, "\r\n    </div>\r\n");
 #line default
 #line hidden
 
+#line default
+#line hidden
+public static System.Web.WebPages.HelperResult InputWithButton(MvcHtmlString input, MvcHtmlString button)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+ 
+
+WriteLiteralTo(__razor_helper_writer, "    <div");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"input-group\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "        ");
+
+WriteTo(__razor_helper_writer, input);
+
+WriteLiteralTo(__razor_helper_writer, "\r\n        <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"input-group-btn\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "            ");
+
+WriteTo(__razor_helper_writer, button);
+
+WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n    </div>\r\n");
+
+
+});
+
+#line default
+#line hidden
+}
+#line default
+#line hidden
+
     }
 }
 #pragma warning restore 1591

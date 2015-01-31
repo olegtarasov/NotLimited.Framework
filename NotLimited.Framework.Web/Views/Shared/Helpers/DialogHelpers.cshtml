@@ -20,14 +20,24 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">@cancelText</button>
+                        @if (!string.IsNullOrEmpty(cancelText))
+                        {
+                            <button type="button" class="btn btn-default" data-dismiss="modal">@cancelText</button>
+                        }
                         @if (!string.IsNullOrEmpty(okHandler))
                         {
                             <button data-dismiss="modal" type="button" class="btn btn-primary" onclick="@okHandler">@okText</button>
                         }
                         else
                         {
-                            <button type="@(form == null ? "button" : "submit")" class="btn btn-primary">@okText</button>
+                            if (form == null)
+                            {
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">@okText</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary">@okText</button>
+                            }
                         }
                     </div>
                 </div>
