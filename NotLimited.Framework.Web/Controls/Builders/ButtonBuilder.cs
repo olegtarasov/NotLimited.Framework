@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading;
+using System.Web.Mvc;
 using System.Web.WebPages;
 
 namespace NotLimited.Framework.Web.Controls.Builders
@@ -13,6 +14,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         private string _url;
         private string _onClick;
         private bool _isSubmit;
+        private string _customType;
 
         public ButtonBuilder(HtmlHelper htmlHelper) : base(htmlHelper)
         {
@@ -68,11 +70,24 @@ namespace NotLimited.Framework.Web.Controls.Builders
             return this;
         }
 
+        public ButtonBuilder CustomType(string type)
+        {
+            _customType = type;
+            return this;
+        }
+
         public override HelperResult GetControlHtml()
         {
             var link = new TagBuilder(_isSubmit ? "button" : "a");
             link.AddCssClass("btn");
-            link.AddCssClass("btn-" + _type.ToString());
+            if (!string.IsNullOrEmpty(_customType))
+            {
+                link.AddCssClass(_customType);
+            }
+            else
+            {
+                link.AddCssClass("btn-" + _type.ToString());
+            }
             if (_size != ActionButtonSize.Default)
             {
                 link.AddCssClass("btn-" + _size.ToString());
