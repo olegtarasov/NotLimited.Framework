@@ -74,6 +74,7 @@
     <Compile Include="Helpers\TimeHelpers.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Helpers\Xml\XDocumentExtensions.cs" />
+    <Compile Include="Logging\FileSystemLogWriter.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Misc\AwesomeConfig.cs" />

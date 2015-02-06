@@ -148,23 +148,28 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public static List<Type> GetTypesSubclassOf<T>(this Assembly ass)
 		{
-			var result = new List<Type>();
-			Type[] types = GetTypes(ass);
-
-
-			foreach (var type in types)
-			{
-				if (type == null)
-					continue;
-				if (type.IsAbstract) // Skip abstract types
-					continue;
-				
-				if (type.IsSubclassOf(typeof(T)))
-					result.Add(type);
-			}
-
-			return result;
+			return GetTypesSubclassOf(ass, typeof(T));
 		}
+
+        public static List<Type> GetTypesSubclassOf(this Assembly ass, Type superclass)
+        {
+            var result = new List<Type>();
+            Type[] types = GetTypes(ass);
+
+
+            foreach (var type in types)
+            {
+                if (type == null)
+                    continue;
+                if (type.IsAbstract) // Skip abstract types
+                    continue;
+
+                if (type.IsSubclassOf(superclass))
+                    result.Add(type);
+            }
+
+            return result;
+        }
 
 		private static Type[] GetTypes(Assembly ass)
 		{
