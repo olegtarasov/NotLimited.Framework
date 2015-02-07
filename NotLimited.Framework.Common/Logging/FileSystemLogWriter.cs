@@ -6,9 +6,9 @@ namespace NotLimited.Framework.Common.Logging
     {
         private readonly StreamWriter _writer;
 
-        public FileSystemLogWriter(string path)
+        public FileSystemLogWriter(string path, bool append = true)
         {
-            _writer = new StreamWriter(path, true);
+            _writer = new StreamWriter(path, append);
         }
 
         public void WriteLine(string text)
