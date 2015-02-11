@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Data.Entity", "NotLimited.Framework.Data.Entity\NotLimited.Framework.Data.Entity.csproj", "{778503EE-3BFB-4549-A427-94C88B99ADFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Tests", "NotLimited.Framework.Tests\NotLimited.Framework.Tests.csproj", "{DC05E617-DA9B-424B-81AD-A3ACC941837A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{778503EE-3BFB-4549-A427-94C88B99ADFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{778503EE-3BFB-4549-A427-94C88B99ADFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{778503EE-3BFB-4549-A427-94C88B99ADFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
