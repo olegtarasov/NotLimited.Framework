@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -16,7 +17,7 @@ namespace NotLimited.Framework.Collections
         public TValue Value { get; set; }
     }
 
-    public class PairList<TKey, TValue> : List<Pair<TKey, TValue>>
+    public class PairList<TKey, TValue> : List<Pair<TKey, TValue>>, IEnumerable<Pair<TKey, TValue>>, IEnumerable
     {
         public PairList()
         {
@@ -50,5 +51,7 @@ namespace NotLimited.Framework.Collections
                 Add(key, value);
             }
         }
+
+
     }
 }
