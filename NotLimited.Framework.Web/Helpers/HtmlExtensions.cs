@@ -5,7 +5,10 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.WebPages;
 using NotLimited.Framework.Common.Helpers;
+using NotLimited.Framework.Data.Queries;
+using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Helpers
 {
@@ -48,6 +51,11 @@ namespace NotLimited.Framework.Web.Helpers
 	        }
 
             return new MvcHtmlString(sb.ToString());
+	    }
+
+	    public static HelperResult Paginator(this HtmlHelper helper, Pagination pagination, string wrapperClass = "text-center", string listClass = "pagination")
+	    {
+	        return PaginationHelper.Paginator(helper, pagination, wrapperClass, listClass);
 	    }
 	}
 }

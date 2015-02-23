@@ -44,11 +44,11 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 WriteLiteralTo(__razor_helper_writer, "    <i");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 159), Tuple.Create("\"", 178)
-, Tuple.Create(Tuple.Create("", 167), Tuple.Create("fa", 167), true)
-, Tuple.Create(Tuple.Create(" ", 169), Tuple.Create("fa-", 170), true)
-, Tuple.Create(Tuple.Create("", 173), Tuple.Create<System.Object, System.Int32>(icon
-, 173), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 186), Tuple.Create("\"", 205)
+, Tuple.Create(Tuple.Create("", 194), Tuple.Create("fa", 194), true)
+, Tuple.Create(Tuple.Create(" ", 196), Tuple.Create("fa-", 197), true)
+, Tuple.Create(Tuple.Create("", 200), Tuple.Create<System.Object, System.Int32>(icon
+, 200), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
@@ -73,12 +73,12 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 WriteLiteralTo(__razor_helper_writer, "    <i");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 233), Tuple.Create("\"", 264)
-, Tuple.Create(Tuple.Create("", 241), Tuple.Create("fa", 241), true)
-, Tuple.Create(Tuple.Create(" ", 243), Tuple.Create("fa-margin-r", 244), true)
-, Tuple.Create(Tuple.Create(" ", 255), Tuple.Create("fa-", 256), true)
-, Tuple.Create(Tuple.Create("", 259), Tuple.Create<System.Object, System.Int32>(icon
-, 259), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 260), Tuple.Create("\"", 291)
+, Tuple.Create(Tuple.Create("", 268), Tuple.Create("fa", 268), true)
+, Tuple.Create(Tuple.Create(" ", 270), Tuple.Create("fa-margin-r", 271), true)
+, Tuple.Create(Tuple.Create(" ", 282), Tuple.Create("fa-", 283), true)
+, Tuple.Create(Tuple.Create("", 286), Tuple.Create<System.Object, System.Int32>(icon
+, 286), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
@@ -103,12 +103,12 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 WriteLiteralTo(__razor_helper_writer, "    <span><i");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 336), Tuple.Create("\"", 367)
-, Tuple.Create(Tuple.Create("", 344), Tuple.Create("fa", 344), true)
-, Tuple.Create(Tuple.Create(" ", 346), Tuple.Create("fa-margin-r", 347), true)
-, Tuple.Create(Tuple.Create(" ", 358), Tuple.Create("fa-", 359), true)
-, Tuple.Create(Tuple.Create("", 362), Tuple.Create<System.Object, System.Int32>(icon
-, 362), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 363), Tuple.Create("\"", 394)
+, Tuple.Create(Tuple.Create("", 371), Tuple.Create("fa", 371), true)
+, Tuple.Create(Tuple.Create(" ", 373), Tuple.Create("fa-margin-r", 374), true)
+, Tuple.Create(Tuple.Create(" ", 385), Tuple.Create("fa-", 386), true)
+, Tuple.Create(Tuple.Create("", 389), Tuple.Create<System.Object, System.Int32>(icon
+, 389), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></i>");

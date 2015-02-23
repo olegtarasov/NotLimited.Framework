@@ -58,9 +58,9 @@ WriteLiteral("\').submit();\r\n\t}\r\n</script>\r\n\r\n<div");
 
 WriteLiteral(" class=\"modal fade\"");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 371), Tuple.Create("\"", 391)
-, Tuple.Create(Tuple.Create("", 376), Tuple.Create<System.Object, System.Int32>(Model.DialogId
-, 376), false)
+WriteAttribute("id", Tuple.Create(" id=\"", 398), Tuple.Create("\"", 418)
+, Tuple.Create(Tuple.Create("", 403), Tuple.Create<System.Object, System.Int32>(Model.DialogId
+, 403), false)
 );
 
 WriteLiteral(">\r\n    <div");

@@ -184,10 +184,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DialogHelpers.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shared\Paginator.generated.cs">
+    <Compile Include="Views\Shared\Helpers\PaginationHelper.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Paginator.cshtml</DependentUpon>
+      <DependentUpon>PaginationHelper.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -234,9 +234,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>DialogHelpers.generated.cs</LastGenOutput>
     </None>
-    <None Include="Views\Shared\Paginator.cshtml">
+    <None Include="Views\Shared\Helpers\PaginationHelper.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Paginator.generated.cs</LastGenOutput>
+      <LastGenOutput>PaginationHelper.generated.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
