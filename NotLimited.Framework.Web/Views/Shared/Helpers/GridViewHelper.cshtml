@@ -1,4 +1,4 @@
-﻿@* TypeVisibility: Internal DisableLinePragmas: true TrimLeadingUnderscores: true *@
+﻿@* TypeVisibility: Internal DisableLinePragmas: true TrimLeadingUnderscores: true GeneratePrettyNames : true *@
 @* Generator : MvcHelper *@
 
 @using NotLimited.Framework.Common.Helpers
@@ -84,7 +84,7 @@
 
             @if (pagination != null && pagination.PageCount > 1)
             {
-                @htmlHelper.Partial("Paginator", pagination)
+                @htmlHelper.Paginator(pagination)
             }
         </div>
     </div>

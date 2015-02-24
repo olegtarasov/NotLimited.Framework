@@ -47,9 +47,9 @@ WriteLiteralTo(__razor_helper_writer, "    <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"modal fade\"");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 346), Tuple.Create("\"", 354)
-, Tuple.Create(Tuple.Create("", 351), Tuple.Create<System.Object, System.Int32>(id
-, 351), false)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 373), Tuple.Create("\"", 381)
+, Tuple.Create(Tuple.Create("", 378), Tuple.Create<System.Object, System.Int32>(id
+, 378), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <div");
@@ -137,9 +137,9 @@ WriteLiteralTo(__razor_helper_writer, " type=\"button\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary\"");
 
-WriteAttributeTo(__razor_helper_writer, "onclick", Tuple.Create(" onclick=\"", 1334), Tuple.Create("\"", 1354)
-                        , Tuple.Create(Tuple.Create("", 1344), Tuple.Create<System.Object, System.Int32>(okHandler
-, 1344), false)
+WriteAttributeTo(__razor_helper_writer, "onclick", Tuple.Create(" onclick=\"", 1361), Tuple.Create("\"", 1381)
+                        , Tuple.Create(Tuple.Create("", 1371), Tuple.Create<System.Object, System.Int32>(okHandler
+, 1371), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");

@@ -100,19 +100,19 @@ WriteLiteralTo(__razor_helper_writer, " type=\"file\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"form-control\"");
 
-WriteAttributeTo(__razor_helper_writer, "name", Tuple.Create(" name=\"", 513), Tuple.Create("\"", 530)
-, Tuple.Create(Tuple.Create("", 520), Tuple.Create<System.Object, System.Int32>(inputName
-, 520), false)
+WriteAttributeTo(__razor_helper_writer, "name", Tuple.Create(" name=\"", 540), Tuple.Create("\"", 557)
+, Tuple.Create(Tuple.Create("", 547), Tuple.Create<System.Object, System.Int32>(inputName
+, 547), false)
 );
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 531), Tuple.Create("\"", 546)
-, Tuple.Create(Tuple.Create("", 536), Tuple.Create<System.Object, System.Int32>(inputName
-, 536), false)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 558), Tuple.Create("\"", 573)
+, Tuple.Create(Tuple.Create("", 563), Tuple.Create<System.Object, System.Int32>(inputName
+, 563), false)
 );
 
-WriteAttributeTo(__razor_helper_writer, "accept", Tuple.Create(" accept=\"", 547), Tuple.Create("\"", 563)
-           , Tuple.Create(Tuple.Create("", 556), Tuple.Create<System.Object, System.Int32>(accept
-, 556), false)
+WriteAttributeTo(__razor_helper_writer, "accept", Tuple.Create(" accept=\"", 574), Tuple.Create("\"", 590)
+           , Tuple.Create(Tuple.Create("", 583), Tuple.Create<System.Object, System.Int32>(accept
+, 583), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");

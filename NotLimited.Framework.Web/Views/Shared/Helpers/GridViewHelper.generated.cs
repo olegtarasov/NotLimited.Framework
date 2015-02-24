@@ -200,9 +200,9 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
              if (pagination != null && pagination.PageCount > 1)
             {
                 
-WriteTo(__razor_helper_writer, htmlHelper.Partial("Paginator", pagination));
+WriteTo(__razor_helper_writer, htmlHelper.Paginator(pagination));
 
-                                                            
+                                                 
             }
 
 WriteLiteralTo(__razor_helper_writer, "        </div>\r\n    </div>\r\n");
@@ -255,10 +255,10 @@ WriteLiteralTo(__razor_helper_writer, " class=\"pull-right\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                <span");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3736), Tuple.Create("\"", 3783)
-, Tuple.Create(Tuple.Create("", 3744), Tuple.Create("fa", 3744), true)
-, Tuple.Create(Tuple.Create(" ", 3746), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
-, 3747), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3752), Tuple.Create("\"", 3799)
+, Tuple.Create(Tuple.Create("", 3760), Tuple.Create("fa", 3760), true)
+, Tuple.Create(Tuple.Create(" ", 3762), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
+, 3763), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"margin-right: 5px\"");
