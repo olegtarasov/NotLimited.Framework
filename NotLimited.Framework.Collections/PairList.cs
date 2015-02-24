@@ -45,10 +45,12 @@ namespace NotLimited.Framework.Collections
                 var pair = this.FirstOrDefault(x => Equals(x.Key, key));
                 if (pair != null)
                 {
-                    Remove(pair);
+                    pair.Value = value;
                 }
-
-                Add(key, value);
+                else
+                {
+                    Add(key, value);
+                }
             }
         }
 
