@@ -4,7 +4,9 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Mvc.Properties;
+using System.Web.WebPages;
 using NotLimited.Framework.Web.Helpers;
+using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Controls
 {
@@ -31,6 +33,11 @@ namespace NotLimited.Framework.Web.Controls
 
 			return new MvcHtmlString(labelTag.ToString());
 		}
+
+	    public static HelperResult CheckBoxFor<TModel>(this FormHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, object htmlAttributes = null)
+	    {
+	        return FormHelpers.TextBox(htmlHelper.HtmlHelper.LabelFor(expression), SimpleCheckBoxFor(htmlHelper, expression, htmlAttributes), htmlHelper.HtmlHelper.ValidationMessageFor(expression));
+	    }
 
         /// <summary>
         /// Creates a simple checkbox as opposed to complicated MVC version.
