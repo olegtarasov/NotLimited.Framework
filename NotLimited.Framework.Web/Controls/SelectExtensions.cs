@@ -12,6 +12,7 @@ using NotLimited.Framework.Data.Queries;
 using NotLimited.Framework.Web.Controls.Builders;
 using NotLimited.Framework.Web.Helpers;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
+using EnumHelper = System.Web.Mvc.Html.EnumHelper;
 
 namespace NotLimited.Framework.Web.Controls
 {
@@ -113,6 +114,11 @@ namespace NotLimited.Framework.Web.Controls
 	    {
 	        return new SelectBuilder<TModel, TProperty>(helper.HtmlHelper, expression)
                 .Type(SelectControlType.EnumDropDown);
+	    }
+
+	    public static IList<SelectListItem> GetEnumList<T>()
+	    {
+	        return EnumHelper.GetSelectList(typeof(T));
 	    }
 	}
 }
