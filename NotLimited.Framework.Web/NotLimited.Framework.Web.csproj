@@ -153,6 +153,7 @@
     <Compile Include="Helpers\RouteInfo.cs" />
     <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Mvc\CommaSeparatedModelBinder.cs" />
+    <Compile Include="Mvc\DummyViewDataContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Shared\ConfirmDialog.generated.cs">
       <AutoGen>True</AutoGen>

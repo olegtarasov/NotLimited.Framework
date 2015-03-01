@@ -11,6 +11,7 @@ using NotLimited.Framework.Common.Helpers;
 using NotLimited.Framework.Data.Queries;
 using NotLimited.Framework.Web.Controls.Builders;
 using NotLimited.Framework.Web.Helpers;
+using NotLimited.Framework.Web.Mvc;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
 using EnumHelper = System.Web.Mvc.Html.EnumHelper;
 
@@ -87,14 +88,26 @@ namespace NotLimited.Framework.Web.Controls
 	        return source;
 	    }
 
+	    public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items) where TModel : new()
+	    {
+	        var typedHelper = helper.HtmlHelper as HtmlHelper<TModel>;
+	        if (typedHelper == null)
+	        {
+                var container = new DummyViewDataContainer(new ViewDataDictionary<TModel>(new TModel()));
+                typedHelper = new HtmlHelper<TModel>(helper.HtmlHelper.ViewContext, container);
+	        }
+
+            return new SelectBuilder<TModel, TValue>(typedHelper, expression)
+                .Items(items)
+                .Type(SelectControlType.DropDown);
+	    }
+
 	    /// <summary>
 	    /// Creates a select control.
 	    /// </summary>
-	    public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper<TModel> helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items)
+	    public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper<TModel> helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items) where TModel : new()
 	    {
-	        return new SelectBuilder<TModel, TValue>(helper.HtmlHelper, expression)
-                .Items(items)
-                .Type(SelectControlType.DropDown);
+	        return DropDownFor((FormHelper)helper, expression, items);
 	    }
 
 	    /// <summary>

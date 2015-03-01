@@ -11,6 +11,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         where TBuilder : FormControlBuilderBase<TBuilder, TModel, TProperty>
     {
         private ButtonBuilder _buttonBuilder;
+        private string _label;
 
         protected FormControlBuilderBase(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression) : base(htmlHelper)
         {
@@ -29,10 +30,17 @@ namespace NotLimited.Framework.Web.Controls.Builders
             return (TBuilder)this;
         }
 
+
+        public TBuilder Label(string label)
+        {
+            _label = label;
+            return (TBuilder)this;
+        }
+
         public override HelperResult GetControlHtml()
         {
             return FormHelpers.TextBox(
-                HtmlHelper.LabelFor(Expression),
+                !string.IsNullOrEmpty(_label) ? HtmlHelper.LabelFor(Expression, _label) : HtmlHelper.LabelFor(Expression),
                 _buttonBuilder == null 
                     ? GetFormControlHtml()
                     : new MvcHtmlString(FormHelpers.InputWithButton(GetFormControlHtml(), new MvcHtmlString(_buttonBuilder.GetControlHtml().ToHtmlString())).ToHtmlString()),
