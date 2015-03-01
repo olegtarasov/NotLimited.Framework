@@ -139,6 +139,50 @@ namespace NotLimited.Framework.Common.Helpers
             return value;
         }
 
+        public static TValue Max<TSource, TKey, TValue>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TValue> valueSelector) where TKey : IComparable<TKey>
+        {
+            return SelectByComparison(source, keySelector, valueSelector, 1);
+        }
+
+        public static TValue Min<TSource, TKey, TValue>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TValue> valueSelector) where TKey : IComparable<TKey>
+        {
+            return SelectByComparison(source, keySelector, valueSelector, -1);
+        }
+
+        private static TValue SelectByComparison<TSource, TKey, TValue>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector, 
+            Func<TSource, TValue> valueSelector,
+            int comparisonResult) where TKey : IComparable<TKey>
+        {
+            if (!source.Any())
+            {
+                return default(TValue);
+            }
+
+            var first = source.First();
+            var curKey = keySelector(first);
+            var curValue = valueSelector(first);
+
+            foreach (var item in source.Skip(1))
+            {
+                var key = keySelector(item);
+                if (key.CompareTo(curKey) == comparisonResult)
+                {
+                    curKey = key;
+                    curValue = valueSelector(item);
+                }
+            }
+
+            return curValue;
+        }
+
         public static bool Remove<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
         {
             TValue value;
