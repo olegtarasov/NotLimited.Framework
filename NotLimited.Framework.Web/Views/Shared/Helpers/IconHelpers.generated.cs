@@ -126,6 +126,40 @@ WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
 #line default
 #line hidden
 
+#line default
+#line hidden
+public static System.Web.WebPages.HelperResult IconText(string icon, IHtmlString text)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+ 
+
+WriteLiteralTo(__razor_helper_writer, "    <span><i");
+
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 483), Tuple.Create("\"", 514)
+, Tuple.Create(Tuple.Create("", 491), Tuple.Create("fa", 491), true)
+, Tuple.Create(Tuple.Create(" ", 493), Tuple.Create("fa-margin-r", 494), true)
+, Tuple.Create(Tuple.Create(" ", 505), Tuple.Create("fa-", 506), true)
+, Tuple.Create(Tuple.Create("", 509), Tuple.Create<System.Object, System.Int32>(icon
+, 509), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, "></i>");
+
+                   WriteTo(__razor_helper_writer, text);
+
+WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
+
+
+});
+
+#line default
+#line hidden
+}
+#line default
+#line hidden
+
     }
 }
 #pragma warning restore 1591

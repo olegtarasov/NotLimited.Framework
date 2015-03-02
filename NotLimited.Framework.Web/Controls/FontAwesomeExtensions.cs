@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.WebPages;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
 
@@ -18,6 +19,14 @@ namespace NotLimited.Framework.Web.Controls
         /// Creates an icon followed by an 8 px margin and text.
         /// </summary>
         public static HelperResult IconText(this HtmlHelper helper, string icon, string text)
+        {
+            return IconHelpers.IconText(icon, text);
+        }
+
+        /// <summary>
+        /// Creates an icon followed by an 8 px margin and text.
+        /// </summary>
+        public static HelperResult IconText(this HtmlHelper helper, string icon, IHtmlString text)
         {
             return IconHelpers.IconText(icon, text);
         }
