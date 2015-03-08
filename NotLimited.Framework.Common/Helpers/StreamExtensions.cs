@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace NotLimited.Framework.Common.Helpers
 {
@@ -24,5 +25,24 @@ namespace NotLimited.Framework.Common.Helpers
 		{
 			stream.Write(buff, 0, buff.Length);
 		}
+
+        /// <summary>
+        /// Reads the given stream up to the end, returning the data as a byte
+        ///             array, using the given buffer for transferring data. Note that the
+        ///             current contents of the buffer is ignored, so the buffer needn't
+        ///             be cleared beforehand.
+        /// 
+        /// </summary>
+        public static byte[] ReadAllBytes(this Stream input)
+        {
+            if (input == null)
+                throw new ArgumentNullException("input");
+            
+            using (var stream = new MemoryStream())
+            {
+                input.CopyTo(stream);
+                return stream.ToArray();
+            }
+        }
 	}
 }
