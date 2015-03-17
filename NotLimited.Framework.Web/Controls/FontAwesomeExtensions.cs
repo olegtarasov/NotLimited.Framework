@@ -10,8 +10,13 @@ namespace NotLimited.Framework.Web.Controls
         /// <summary>
         /// Creates a simple icon.
         /// </summary>
-        public static HelperResult Icon(this HtmlHelper helper, string icon)
+        public static HelperResult Icon(this HtmlHelper helper, string icon, bool doubleSize = false)
         {
+            if (doubleSize)
+            {
+                return IconHelpers.SimpleIcon2X(icon);
+            }
+
             return IconHelpers.SimpleIcon(icon);
         }
 
