@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Common.Public</id>
-    <version>1.0.40</version>
+    <version>1.0.49</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -41,6 +41,7 @@
     <file src="sources\Helpers\TypeHelper.cs.pp" target="content\Helpers\TypeHelper.cs.pp" />
     <file src="sources\Helpers\Native\MouseHook.cs.pp" target="content\Helpers\Native\MouseHook.cs.pp" />
     <file src="sources\Helpers\Xml\XDocumentExtensions.cs.pp" target="content\Helpers\Xml\XDocumentExtensions.cs.pp" />
+    <file src="sources\Logging\FileSystemLogWriter.cs.pp" target="content\Logging\FileSystemLogWriter.cs.pp" />
     <file src="sources\Logging\ILogWriter.cs.pp" target="content\Logging\ILogWriter.cs.pp" />
     <file src="sources\Logging\Logger.cs.pp" target="content\Logging\Logger.cs.pp" />
     <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\Misc\AwesomeConfig.cs.pp" />
