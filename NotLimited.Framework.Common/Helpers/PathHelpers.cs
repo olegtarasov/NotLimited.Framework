@@ -205,7 +205,7 @@ namespace NotLimited.Framework.Common.Helpers
 			return sb.ToString();
 		}
 
-		private static string[] ExplodePath(string path)
+	    public static string[] ExplodePath(string path)
 		{
 			return path.TrimEnd(_separators).Split(_separators, StringSplitOptions.RemoveEmptyEntries);
 		}
