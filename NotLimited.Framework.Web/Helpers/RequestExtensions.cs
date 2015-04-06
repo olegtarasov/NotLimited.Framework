@@ -41,6 +41,14 @@ namespace NotLimited.Framework.Web.Helpers
         }
 
         /// <summary>
+        /// Indicates whether current route matches specific controller and action.
+        /// </summary>
+        public static bool IsCurrentRouteMatch(this HtmlHelper helper, string actionName, string controllerName)
+        {
+            return (helper.ViewContext.RouteData.Values["controller"].ToString() == controllerName && helper.ViewContext.RouteData.Values["action"].ToString() == actionName);
+        }
+
+        /// <summary>
         /// Extracts specified GET parameter from an Url.
         /// </summary>
         public static string GetRouteParameterValue(this Uri uri, string paramaterName)
