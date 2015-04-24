@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Wpf.Public</id>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>

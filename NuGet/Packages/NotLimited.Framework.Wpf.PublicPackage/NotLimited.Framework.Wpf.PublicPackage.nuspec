@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Wpf.PublicPackage</id>
-    <version>1.0.13</version>
+    <version>1.0.15</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -24,25 +24,25 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="sources\GridLengthAnimation.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\GridLengthAnimation.cs.pp" />
-    <file src="sources\Inherit.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Inherit.cs.pp" />
-    <file src="sources\ObservableWrapper.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\ObservableWrapper.cs.pp" />
-    <file src="sources\SizeChangedReactor.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\SizeChangedReactor.cs.pp" />
-    <file src="sources\TextRenderer.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\TextRenderer.cs.pp" />
-    <file src="sources\ThemeFixer.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\ThemeFixer.cs.pp" />
-    <file src="sources\WpfConversionExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\WpfConversionExtensions.cs.pp" />
-    <file src="sources\WpfExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\WpfExtensions.cs.pp" />
-    <file src="sources\WpfHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\WpfHelper.cs.pp" />
-    <file src="sources\Animations\AnimationBag.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Animations\AnimationBag.cs.pp" />
-    <file src="sources\Animations\AnimationExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Animations\AnimationExtensions.cs.pp" />
-    <file src="sources\Animations\AnimationFactory.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Animations\AnimationFactory.cs.pp" />
-    <file src="sources\Animations\AnimationGroup.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Animations\AnimationGroup.cs.pp" />
-    <file src="sources\Animations\AnimationItem.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Animations\AnimationItem.cs.pp" />
-    <file src="sources\Converters\AppendTextConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\AppendTextConverter.cs.pp" />
-    <file src="sources\Converters\BoolVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\BoolVisibilityConverter.cs.pp" />
-    <file src="sources\Converters\IntVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\IntVisibilityConverter.cs.pp" />
-    <file src="sources\Converters\InvertedBoolConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\InvertedBoolConverter.cs.pp" />
-    <file src="sources\Converters\InvertedVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\InvertedVisibilityConverter.cs.pp" />
-    <file src="sources\Converters\NullVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.13\Converters\NullVisibilityConverter.cs.pp" />
+    <file src="sources\GridLengthAnimation.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\GridLengthAnimation.cs.pp" />
+    <file src="sources\Inherit.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Inherit.cs.pp" />
+    <file src="sources\ObservableWrapper.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\ObservableWrapper.cs.pp" />
+    <file src="sources\SizeChangedReactor.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\SizeChangedReactor.cs.pp" />
+    <file src="sources\TextRenderer.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\TextRenderer.cs.pp" />
+    <file src="sources\ThemeFixer.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\ThemeFixer.cs.pp" />
+    <file src="sources\WpfConversionExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\WpfConversionExtensions.cs.pp" />
+    <file src="sources\WpfExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\WpfExtensions.cs.pp" />
+    <file src="sources\WpfHelper.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\WpfHelper.cs.pp" />
+    <file src="sources\Animations\AnimationBag.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Animations\AnimationBag.cs.pp" />
+    <file src="sources\Animations\AnimationExtensions.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Animations\AnimationExtensions.cs.pp" />
+    <file src="sources\Animations\AnimationFactory.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Animations\AnimationFactory.cs.pp" />
+    <file src="sources\Animations\AnimationGroup.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Animations\AnimationGroup.cs.pp" />
+    <file src="sources\Animations\AnimationItem.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Animations\AnimationItem.cs.pp" />
+    <file src="sources\Converters\AppendTextConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\AppendTextConverter.cs.pp" />
+    <file src="sources\Converters\BoolVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\BoolVisibilityConverter.cs.pp" />
+    <file src="sources\Converters\IntVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\IntVisibilityConverter.cs.pp" />
+    <file src="sources\Converters\InvertedBoolConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\InvertedBoolConverter.cs.pp" />
+    <file src="sources\Converters\InvertedVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\InvertedVisibilityConverter.cs.pp" />
+    <file src="sources\Converters\NullVisibilityConverter.cs.pp" target="content\App_Packages\NotLimited.Framework.Wpf.1.0.15\Converters\NullVisibilityConverter.cs.pp" />
   </files>
 </package>
