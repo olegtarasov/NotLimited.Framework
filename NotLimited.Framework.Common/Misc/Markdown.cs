@@ -89,7 +89,7 @@ using System.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MarkdownSharp
+namespace NotLimited.Framework.Common.Misc
 {
 
     public class MarkdownOptions
