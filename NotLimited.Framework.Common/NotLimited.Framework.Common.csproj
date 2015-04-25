@@ -80,6 +80,7 @@
     <Compile Include="Misc\AwesomeConfig.cs" />
     <Compile Include="Misc\AwesomeMath.cs" />
     <Compile Include="Misc\DataPoint.cs" />
+    <Compile Include="Misc\Markdown.cs" />
     <Compile Include="Misc\NamedPipeServer.cs" />
     <Compile Include="Misc\ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

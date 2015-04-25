@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NotLimited.Framework.Common.Public</id>
-    <version>1.0.51</version>
+    <version>1.0.52</version>
     <authors>Oleg Tarasov</authors>
     <owners>Oleg Tarasov</owners>
     <projectUrl>https://bitbucket.org/thepretender/odinframework</projectUrl>
@@ -47,6 +47,7 @@
     <file src="sources\Misc\AwesomeConfig.cs.pp" target="content\Misc\AwesomeConfig.cs.pp" />
     <file src="sources\Misc\AwesomeMath.cs.pp" target="content\Misc\AwesomeMath.cs.pp" />
     <file src="sources\Misc\DataPoint.cs.pp" target="content\Misc\DataPoint.cs.pp" />
+    <file src="sources\Misc\Markdown.cs.pp" target="content\Misc\Markdown.cs.pp" />
     <file src="sources\Misc\NamedPipeServer.cs.pp" target="content\Misc\NamedPipeServer.cs.pp" />
     <file src="sources\Misc\ObjectFactory.cs.pp" target="content\Misc\ObjectFactory.cs.pp" />
     <file src="sources\Types\TypeResolver.cs.pp" target="content\Types\TypeResolver.cs.pp" />
