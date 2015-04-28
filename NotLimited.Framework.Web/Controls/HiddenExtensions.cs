@@ -14,12 +14,12 @@ namespace NotLimited.Framework.Web.Controls
 	{
         public static MvcHtmlString HiddenCurrentUrl(this FormHelper helper)
         {
-            return helper.HtmlHelper.Hidden("ReturnUrl", helper.HtmlHelper.GetCurrentUrl());
+            return helper.HtmlHelper.Hidden(ViewDataKeys.ReturnUrl, helper.HtmlHelper.GetCurrentUrl());
         }
 
         public static MvcHtmlString HiddenReferrer(this FormHelper helper, string action, string controller)
         {
-            return helper.HtmlHelper.Hidden("ReturnUrl", helper.HtmlHelper.GetReferrerUrl(action, controller));
+            return helper.HtmlHelper.Hidden(ViewDataKeys.ReturnUrl, helper.HtmlHelper.GetReferrerUrl(action, controller));
         }
 
         public static MvcHtmlString HiddenReferrer(this FormHelper helper)
@@ -30,7 +30,7 @@ namespace NotLimited.Framework.Web.Controls
                 url = helper.HtmlHelper.ViewContext.RequestContext.HttpContext.Request.UrlReferrer.PathAndQuery;
             }
 
-			return helper.HtmlHelper.Hidden("ReturnUrl", url);
+			return helper.HtmlHelper.Hidden(ViewDataKeys.ReturnUrl, url);
 		}
 
         /// <summary>
