@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,6 +125,8 @@
     <Compile Include="Controls\Builders\ControlBuilderBase.cs" />
     <Compile Include="Controls\Builders\DialogBuilder.cs" />
     <Compile Include="Controls\Builders\FormControlBuilderBase.cs" />
+    <Compile Include="Controls\Builders\RadioEnumBuilder.cs" />
+    <Compile Include="Controls\Builders\RadioEnumGroupBuilder.cs" />
     <Compile Include="Controls\Builders\SelectBuilder.cs" />
     <Compile Include="Controls\Builders\TextAreaBuilder.cs" />
     <Compile Include="Controls\Builders\TextBoxBuilder.cs" />
@@ -143,6 +146,7 @@
     <Compile Include="Controls\HiddenExtensions.cs" />
     <Compile Include="Controls\HtmlEnums.cs" />
     <Compile Include="Controls\Model\ConfirmDialogModel.cs" />
+    <Compile Include="Controls\RadioExtensions.cs" />
     <Compile Include="Controls\SelectExtensions.cs" />
     <Compile Include="Controls\TextBoxExtensions.cs" />
     <Compile Include="Controls\UploadExtensions.cs" />
@@ -152,6 +156,7 @@
     <Compile Include="Helpers\RequestExtensions.cs" />
     <Compile Include="Helpers\RouteInfo.cs" />
     <Compile Include="Helpers\UrlExtensions.cs" />
+    <Compile Include="Mvc\AggregateHelperResult.cs" />
     <Compile Include="Mvc\CommaSeparatedModelBinder.cs" />
     <Compile Include="Mvc\DummyViewDataContainer.cs" />
     <Compile Include="Mvc\ReturnUrlAttribute.cs" />
