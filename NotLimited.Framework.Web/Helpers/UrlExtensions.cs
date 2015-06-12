@@ -35,7 +35,7 @@ namespace NotLimited.Framework.Web.Helpers
         /// </summary>
         public static string Absolute(this UrlHelper helper, string url)
         {
-            if (url.StartsWithOrdinal("http://", true))
+            if (url.StartsWithOrdinal("http://", true) || url.StartsWithOrdinal("https://", true))
             {
                 return url;
             }
