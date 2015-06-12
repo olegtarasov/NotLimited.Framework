@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Web.Helpers
 {
@@ -26,6 +28,21 @@ namespace NotLimited.Framework.Web.Helpers
             result["action"] = !String.IsNullOrEmpty(action) ? action : (string)result["action"] + "Async";
 
             return helper.RouteUrl(result);
+        }
+
+        /// <summary>
+        /// Returns an absolute Url for server-relative url.
+        /// </summary>
+        public static string Absolute(this UrlHelper helper, string url)
+        {
+            if (url.StartsWithOrdinal("http://", true))
+            {
+                return url;
+            }
+
+            var originalUrl = HttpContext.Current.Request.Url;
+            
+            return originalUrl.Scheme + "://" + originalUrl.Authority + url;
         }
     }
 }
