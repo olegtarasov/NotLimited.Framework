@@ -11,7 +11,7 @@ namespace NotLimited.Framework.Common.Helpers
                 return time.ToShortTimeString();
             }
 
-            return $"{time.ToShortDateString()} {time.ToShortTimeString()}";
+            return time.ToShortDateString() + " " + time.ToShortTimeString();
         }
     }
 }
