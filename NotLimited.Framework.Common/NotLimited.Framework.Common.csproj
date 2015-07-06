@@ -57,6 +57,7 @@
     <Compile Include="Helpers\DateTimeHelpers.cs" />
     <Compile Include="Helpers\EnvironmentHelpers.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\Lambda.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\CollectionExtensions.cs" />
