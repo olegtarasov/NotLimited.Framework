@@ -23,12 +23,13 @@ namespace NotLimited.Framework.Web.Controls
 	    /// <summary>
 	    /// Creates an upload control with custom name and label.
 	    /// </summary>
-	    public static HelperResult Upload<TModel>(this FormHelper<TModel> helper, string name, string label)
+	    public static HelperResult Upload<TModel>(this FormHelper<TModel> helper, string name, string label, string accept = "image/*")
 	    {
 	        return FormHelpers.Upload(
 	            helper.HtmlHelper.Label(name, label),
 	            name,
-	            new MvcHtmlString(""));
+	            new MvcHtmlString(""),
+                accept);
 	    }
 	}
 }
