@@ -275,5 +275,31 @@ namespace NotLimited.Framework.Common.Helpers
                 }
             }
         }
+
+        public static IEnumerable<TElement> IterateQueue<TElement, TContainer>(
+            this TContainer root,
+            Func<TContainer, TElement> elementAccessor,
+            Func<TContainer, TContainer> childAccessor) where TContainer : class 
+        {
+            if (root == null) throw new ArgumentNullException(nameof(root));
+            if (elementAccessor == null) throw new ArgumentNullException(nameof(elementAccessor));
+            if (childAccessor == null) throw new ArgumentNullException(nameof(childAccessor));
+
+            var queue = new Queue<TContainer>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                var item = queue.Dequeue();
+
+                yield return elementAccessor(item);
+
+                var child = childAccessor(item);
+                if (child != null)
+                {
+                    queue.Enqueue(child);
+                }
+            }
+        }
     }
 }
