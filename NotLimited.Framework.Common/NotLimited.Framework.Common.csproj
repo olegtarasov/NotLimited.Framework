@@ -74,6 +74,7 @@
     <Compile Include="Helpers\SafeExecutionContext.cs" />
     <Compile Include="Helpers\StreamExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Helpers\StringLogicalComparer.cs" />
     <Compile Include="Helpers\TaskHelpers.cs" />
     <Compile Include="Helpers\TimeHelpers.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
