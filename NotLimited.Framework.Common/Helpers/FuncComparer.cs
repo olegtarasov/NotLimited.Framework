@@ -8,11 +8,7 @@ namespace NotLimited.Framework.Common.Helpers
         private readonly Func<T, T, bool> _equalityFunc;
         private readonly Func<T, int> _hashFunc;
 
-        public FuncComparer(Func<T, T, bool> equalityFunc) : this(equalityFunc, arg => arg.GetHashCode())
-        {
-        }
-
-        public FuncComparer(Func<T, T, bool> equalityFunc, Func<T, int> hashFunc)
+	    public FuncComparer(Func<T, T, bool> equalityFunc, Func<T, int> hashFunc)
         {
             _equalityFunc = equalityFunc;
             _hashFunc = hashFunc;
