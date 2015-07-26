@@ -1,4 +1,4 @@
-namespace NotLimited.Framework.Web.Controls.Grid
+﻿namespace NotLimited.Framework.Web.Controls.Grid
 {
     public enum GridColumnType
     {

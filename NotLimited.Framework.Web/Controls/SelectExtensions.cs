@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -29,7 +29,7 @@ namespace NotLimited.Framework.Web.Controls
 	    /// <param name="includeUnselected">Include and "Unselected" item.</param>
 	    /// <param name="unselectedText">"Unselected" item text.</param>
 	    /// <param name="enabledValues">Values that are enabled in a box.</param>
-	    public static List<SelectListItem> ToSelectListItems<T>(this IEnumerable<T> source, Expression<Func<T, string>> nameExpr, Expression<Func<T, string>> valueExpr, object selected = null, bool includeUnselected = false, string unselectedText = "[ ÕÂ ‚˚·‡ÌÓ ]", HashSet<string> enabledValues = null)
+	    public static List<SelectListItem> ToSelectListItems<T>(this IEnumerable<T> source, Expression<Func<T, string>> nameExpr, Expression<Func<T, string>> valueExpr, object selected = null, bool includeUnselected = false, string unselectedText = "[ –ù–µ –≤—ã–±—Ä–∞–Ω–æ ]", HashSet<string> enabledValues = null)
 		{
 			var result = new List<SelectListItem>();
 			var nameFunc = nameExpr.Compile();
@@ -67,7 +67,7 @@ namespace NotLimited.Framework.Web.Controls
 	    }
 
         /// <summary>
-        /// Renders an ìItems per pageî dropdown.
+        /// Renders an ‚ÄúItems per page‚Äù dropdown.
         /// </summary>
         public static MvcHtmlString ItemsPerPageDropdown(this FormHelper helper, int? page)
 	    {

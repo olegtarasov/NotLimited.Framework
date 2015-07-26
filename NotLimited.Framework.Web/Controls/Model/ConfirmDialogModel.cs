@@ -1,4 +1,4 @@
-namespace NotLimited.Framework.Web.Controls.Model
+﻿namespace NotLimited.Framework.Web.Controls.Model
 {
 	public class ConfirmDialogModel
 	{

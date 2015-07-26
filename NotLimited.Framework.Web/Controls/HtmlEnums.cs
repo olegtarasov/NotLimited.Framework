@@ -1,4 +1,4 @@
-namespace NotLimited.Framework.Web.Controls
+﻿namespace NotLimited.Framework.Web.Controls
 {
 	public enum ActionButtonType
 	{

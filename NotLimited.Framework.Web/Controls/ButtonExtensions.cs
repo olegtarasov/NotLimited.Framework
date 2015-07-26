@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -64,7 +64,7 @@ namespace NotLimited.Framework.Web.Controls
 		/// <summary>
 	    /// Creates a submit button.
 	    /// </summary>
-        public static ButtonBuilder SubmitButton<TModel>(this FormHelper<TModel> helper, string text = "Ñîõðàíèòü")
+        public static ButtonBuilder SubmitButton<TModel>(this FormHelper<TModel> helper, string text = "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ")
 	    {
 	        return new ButtonBuilder(helper.HtmlHelper)
                 .Submit()

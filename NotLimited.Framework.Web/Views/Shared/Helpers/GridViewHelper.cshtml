@@ -95,9 +95,9 @@
     if (prop.Sortable)
     {
         <th class="sortable" data-name="@prop.PropertyInfo.Name" data-descending="@TableHelpers.IsOppositeOrderDescending(sortOrder).ToString()">
-            @title
-            <div class="pull-right">
-                <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px" />
+            <div class="sortable">
+                @title
+                <span class="fa @TableHelpers.GetSortIcon(sortOrder)" style="margin-right: 5px"></span>
             </div>
         </th>
     }

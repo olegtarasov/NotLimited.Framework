@@ -1,4 +1,4 @@
-using System.ComponentModel;
+Ôªøusing System.ComponentModel;
 using NotLimited.Framework.Data.Queries;
 
 namespace NotLimited.Framework.Data.Entities
@@ -6,7 +6,7 @@ namespace NotLimited.Framework.Data.Entities
 	public abstract class NamedEntityBase : EntityBase
 	{
 		[DisplayName("Name")]
-		[Description("Õ‡Á‚‡ÌËÂ")]
+		[Description("–ù–∞–∑–≤–∞–Ω–∏–µ")]
 		[Sortable]
 		public string Name { get; set; }
 	}

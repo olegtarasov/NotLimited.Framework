@@ -1,4 +1,4 @@
-namespace NotLimited.Framework.Data.Entities
+﻿namespace NotLimited.Framework.Data.Entities
 {
 	public class UserBase : NamedEntityBase
 	{
