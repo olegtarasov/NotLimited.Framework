@@ -94,7 +94,36 @@ namespace NotLimited.Framework.Web.Controls
 	        return source;
 	    }
 
-	    public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items) where TModel : new()
+
+		/// <summary>
+		/// Marks single item as selected.
+		/// </summary>
+		public static List<SelectListItem> SelectSingle(this IEnumerable<SelectListItem> source, string value)
+		{
+			var result = source.Select(x => x.Clone()).ToList();
+			bool selected = false;
+			foreach (var item in result)
+			{
+				if (item.Value == value && !selected)
+				{
+					selected = true;
+					item.Selected = true;
+				}
+				else
+				{
+					item.Selected = false;
+				}
+			}
+
+			return result;
+		}
+
+		public static SelectListItem Clone(this SelectListItem item)
+		{
+			return new SelectListItem {Text = item.Text, Value = item.Value, Disabled = item.Disabled, Group = item.Group, Selected = item.Selected};
+		}
+
+		public static SelectBuilder<TModel, TValue> DropDownFor<TModel, TValue>(this FormHelper helper, Expression<Func<TModel, TValue>> expression, IEnumerable<SelectListItem> items) where TModel : new()
 	    {
 	        var typedHelper = helper.HtmlHelper as HtmlHelper<TModel>;
 	        if (typedHelper == null)
