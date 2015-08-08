@@ -70,12 +70,14 @@ namespace NotLimited.Framework.Collections.Chunked
 			return Enumerable.Contains(this, item);
 		}
 
+		/// <exception cref="ArgumentNullException"><paramref name="array"/> is <see langword="null" />.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">arrayIndex is &lt; 0 or target array is too small</exception>
 		public void CopyTo(T[] array, int arrayIndex)
 		{
-			Contract.Requires(array != null);
-			Contract.Requires(arrayIndex >= 0);
-			Contract.Requires(array.Length - arrayIndex >= Count, "Target array is too small!");
-
+			if (array == null) throw new ArgumentNullException("array");
+			if (arrayIndex < 0) throw new ArgumentOutOfRangeException("arrayIndex");
+			if (array.Length - arrayIndex < Count) throw new ArgumentOutOfRangeException("array");
+			
 			int i = arrayIndex;
 			foreach (var item in this)
 			{
