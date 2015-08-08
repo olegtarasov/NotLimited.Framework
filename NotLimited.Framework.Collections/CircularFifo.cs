@@ -53,14 +53,14 @@ namespace NotLimited.Framework.Collections
 			get
 			{
 				if (idx >= buffer.Length)
-					throw new IndexOutOfRangeException();
+					throw new ArgumentOutOfRangeException("idx");
 
 				return (idx >= curIdx) ? buffer[buffer.Length - (idx - curIdx + 1)] : buffer[curIdx - idx - 1];
 			}
 			set
 			{
 				if (idx >= buffer.Length)
-					throw new IndexOutOfRangeException();
+					throw new ArgumentOutOfRangeException("idx");
 
 				buffer[(idx >= curIdx) ? buffer.Length - (idx - curIdx + 1) : curIdx - idx - 1] = value;
 			}

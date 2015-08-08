@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -56,7 +57,7 @@ namespace NotLimited.Framework.Collections.Chunked
 			buckets[buckets.Count - 1].Add(item);
 
 			if (ListUpdated != null)
-				ListUpdated(this, 1);
+				ListUpdated(this, new ListUpdatedArgs(1));
 		}
 
 		public void Clear()
@@ -71,12 +72,9 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		public void CopyTo(T[] array, int arrayIndex)
 		{
-			if (array == null)
-				throw new ArgumentNullException("array");
-			if (arrayIndex < 0)
-				throw new ArgumentOutOfRangeException("arrayIndex");
-			if (array.Length - arrayIndex < Count)
-				throw new ArgumentException("Target array is too small", "array");
+			Contract.Requires(array != null);
+			Contract.Requires(arrayIndex >= 0);
+			Contract.Requires(array.Length - arrayIndex >= Count, "Target array is too small!");
 
 			int i = arrayIndex;
 			foreach (var item in this)
@@ -169,9 +167,19 @@ namespace NotLimited.Framework.Collections.Chunked
 			}
 
 			if (ListUpdated != null)
-				ListUpdated(this, items.Length);
+				ListUpdated(this, new ListUpdatedArgs(items.Length));
 		}
 
-		public event Action<ChunkedList<T>, int> ListUpdated;
+		public event EventHandler<ListUpdatedArgs> ListUpdated;
+	}
+
+	public class ListUpdatedArgs : EventArgs
+	{
+		public ListUpdatedArgs(int count)
+		{
+			Count = count;
+		}
+
+		public int Count { get; set; }
 	}
 }

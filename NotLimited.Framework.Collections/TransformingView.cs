@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace NotLimited.Framework.Collections
 {
-	public class TransformingView<T, E> : INotifyCollectionChanged, IDisposable, IEnumerable<E>
+	public sealed class TransformingView<T, E> : INotifyCollectionChanged, IDisposable, IEnumerable<E>
 	{
 		private readonly IEnumerable<T> collection;
 		private readonly Func<T, IEnumerable<E>> transformer;

@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace NotLimited.Framework.Collections
 {
 	[DataContract]
-	public class ObservableBase<T> : IObservableBase<T>
+	public class ObservableBase<T> : IObservableBase<T>, IDisposable
 	{
 		[DataMember]
 		protected ICollection<T> baseCollection;
@@ -176,5 +176,19 @@ namespace NotLimited.Framework.Collections
 		}
 
 		#endregion
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				monitor.Dispose();
+			}
+		}
 	}
 }

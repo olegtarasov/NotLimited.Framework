@@ -3,7 +3,7 @@
 namespace NotLimited.Framework.Collections
 {
 	[Serializable]
-	public class SimpleMonitor : IDisposable
+	public sealed class SimpleMonitor : IDisposable
 	{
 		private int busyCount;
 

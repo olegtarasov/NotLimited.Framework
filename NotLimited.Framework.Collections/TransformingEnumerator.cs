@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NotLimited.Framework.Collections
 {
-	public class TransformingEnumerator<T, E> : IEnumerator<E>
+	public sealed class TransformingEnumerator<T, E> : IEnumerator<E>
 	{
 		private readonly IEnumerator<T> orig;
 		private readonly Func<T, IEnumerable<E>> transformer;

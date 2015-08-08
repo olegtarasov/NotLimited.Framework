@@ -28,6 +28,26 @@ namespace NotLimited.Framework.Common.Misc
 		}
 	}
 
+	public class NamedPipeMessageArgs : EventArgs
+	{
+		public NamedPipeMessageArgs(NamedPipeMessage message)
+		{
+			Message = message;
+		}
+
+		public NamedPipeMessage Message { get; set; }
+	}
+
+	public class ClientConnectedArgs : EventArgs
+	{
+		public ClientConnectedArgs(NamedPipeServer server)
+		{
+			Server = server;
+		}
+
+		public NamedPipeServer Server { get; set; }
+	}
+
 	public class NamedPipeServer : IDisposable
 	{
 		private class ReadDto
@@ -53,36 +73,36 @@ namespace NotLimited.Framework.Common.Misc
 
 		#region MessageReceived event
 
-		public event Action<NamedPipeMessage> MessageReceived;
+		public event EventHandler<NamedPipeMessageArgs> MessageReceived;
 
 		protected void OnMessageReceived(NamedPipeMessage message)
 		{
 			if (MessageReceived != null)
-				MessageReceived(message);
+				MessageReceived(this, new NamedPipeMessageArgs(message));
 		}
 
 		#endregion
 
 		#region ClientConnected event
 
-		public event Action<NamedPipeServer> ClientConnected;
+		public event EventHandler<ClientConnectedArgs> ClientConnected;
 
-		protected void OnClientConnected(NamedPipeServer arg)
+		protected void OnClientConnected(NamedPipeServer server)
 		{
 			if (ClientConnected != null)
-				ClientConnected(arg);
+				ClientConnected(this, new ClientConnectedArgs(server));
 		}
 
 		#endregion
 
 		#region ClientDisconnected event
 
-		public event Action<NamedPipeServer> ClientDisconnected;
+		public event EventHandler<ClientConnectedArgs> ClientDisconnected;
 
-		protected void OnClientDisconnected(NamedPipeServer arg)
+		protected void OnClientDisconnected(NamedPipeServer server)
 		{
 			if (ClientDisconnected != null)
-				ClientDisconnected(arg);
+				ClientDisconnected(this, new ClientConnectedArgs(server));
 		}
 
 		#endregion
@@ -308,8 +328,17 @@ namespace NotLimited.Framework.Common.Misc
 
 		public void Dispose()
 		{
-			StopListen();
-			StopServers();
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				StopListen();
+				StopServers();
+			}
 		}
 	}
 }
