@@ -281,9 +281,9 @@ namespace NotLimited.Framework.Common.Helpers
             Func<TContainer, TElement> elementAccessor,
             Func<TContainer, TContainer> childAccessor) where TContainer : class 
         {
-            if (root == null) throw new ArgumentNullException(nameof(root));
-            if (elementAccessor == null) throw new ArgumentNullException(nameof(elementAccessor));
-            if (childAccessor == null) throw new ArgumentNullException(nameof(childAccessor));
+            if (root == null) throw new ArgumentNullException("root");
+            if (elementAccessor == null) throw new ArgumentNullException("elementAccessor");
+            if (childAccessor == null) throw new ArgumentNullException("childAccessor");
 
             var queue = new Queue<TContainer>();
             queue.Enqueue(root);
