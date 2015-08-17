@@ -79,7 +79,7 @@ namespace NotLimited.Framework.Collections.Chunked
 			if (array.Length - arrayIndex < Count) throw new ArgumentOutOfRangeException("array");
 			
 			int i = arrayIndex;
-			foreach (var item in this)
+			foreach (T item in this)
 			{
 				array[i] = item;
 				i++;

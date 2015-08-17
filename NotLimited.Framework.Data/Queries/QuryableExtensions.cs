@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using JetBrains.Annotations;
 using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Data.Queries
@@ -42,29 +43,37 @@ namespace NotLimited.Framework.Data.Queries
 
 	    public static PaginatedResult<T> Paginate<T>(this IQueryable<T> query, Pagination pagination)
 	    {
+	        return Paginate(query, pagination, x => x);
+	    }
+
+        public static PaginatedResult<TDest> Paginate<TSource, TDest>(this IQueryable<TSource> query, Pagination pagination, [NotNull] Func<TSource, TDest> map)
+	    {
 	        if (query == null)
 	            return null;
 
-            var result = new PaginatedResult<T>();
+            if (map == null) throw new ArgumentNullException(nameof(map));
+            var result = new PaginatedResult<TDest>();
 
 	        if (pagination == null)
 	        {
-	            result.Items = query.ToList();
+	            result.Items = query.Select(map).ToList();
 	        }
 	        else
 	        {
                 pagination.TotalCount = query.Count();
 
                 result.Items = query
-                    .AsEnumerable()
+                    //.AsEnumerable()
                     .Skip(pagination.ItemsPerPage * (pagination.Page - 1))
                     .Take(pagination.ItemsPerPage)
+                    .AsEnumerable()
+                    .Select(map)
                     .ToList();
 
                 result.Pagination = pagination;
 	        }
 
-	        return result;
+            return result;
 	    }
 	}
 }
