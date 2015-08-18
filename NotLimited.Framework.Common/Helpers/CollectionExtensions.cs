@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+	    public static int GetArrayHashCode<T>(this T[] array)
+	    {
+		    return ((IStructuralEquatable)array).GetHashCode(EqualityComparer<object>.Default);
+	    }
 
         public static bool EqualsTo(this byte[] a, byte[] b)
         {
