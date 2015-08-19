@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic;
 using JetBrains.Annotations;
 using NotLimited.Framework.Common.Helpers;
+using NotLimited.Framework.Data.Entities;
 
 namespace NotLimited.Framework.Data.Queries
 {
@@ -64,7 +65,8 @@ namespace NotLimited.Framework.Data.Queries
 
                 result.Items = query
                     //.AsEnumerable()
-                    .Skip(pagination.ItemsPerPage * (pagination.Page - 1))
+					.OrderBy("Id")
+					.Skip(pagination.ItemsPerPage * (pagination.Page - 1))
                     .Take(pagination.ItemsPerPage)
                     .AsEnumerable()
                     .Select(map)
