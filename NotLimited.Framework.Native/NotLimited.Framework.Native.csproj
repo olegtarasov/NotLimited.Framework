@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BitConverterEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinApi\FileFunctions.cs" />
     <Compile Include="WinApi\HandleFunctions.cs" />
     <Compile Include="WinApi\ProcessFunctions.cs" />
   </ItemGroup>

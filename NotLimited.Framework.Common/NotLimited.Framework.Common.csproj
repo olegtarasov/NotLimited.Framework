@@ -54,6 +54,7 @@
     <Compile Include="DataAnnotations\MinCollectionCount.cs" />
     <Compile Include="DataAnnotations\NotEmptyAttribute.cs" />
     <Compile Include="Collections\ConcurrentDictionaryReadonly.cs" />
+    <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\CountdownEventSlim.cs" />
     <Compile Include="Helpers\DateTimeHelpers.cs" />
     <Compile Include="Helpers\DelegateExtensions.cs" />
