@@ -57,7 +57,18 @@ namespace NotLimited.Framework.Server.Services
 
         public override void StoreFile(Stream stream, string path)
         {
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+	        string dir = Path.GetDirectoryName(path);
+	        if (string.IsNullOrEmpty(dir))
+	        {
+		        throw new InvalidOperationException("Can't get directory from a path!");
+	        }
+
+	        if (!Directory.Exists(dir))
+	        {
+		        Directory.CreateDirectory(dir);
+	        }
+
+	        using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 stream.CopyTo(fs);
             }
