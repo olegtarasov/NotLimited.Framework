@@ -52,7 +52,19 @@ namespace NotLimited.Framework.Common.Helpers
             }
         }
 
-        public static bool EqualsTo<TSrc, TDst>(this IReadOnlyList<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
+		public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, IEnumerable<TValue> source, Func<TValue, TKey> keyFunc)
+		{
+			if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+			if (source == null) throw new ArgumentNullException(nameof(source));
+			if (keyFunc == null) throw new ArgumentNullException(nameof(keyFunc));
+
+			foreach (var item in source)
+			{
+				dictionary[keyFunc(item)] = item;
+			}
+		}
+
+	    public static bool EqualsTo<TSrc, TDst>(this IReadOnlyList<TSrc> source, List<TDst> destination, Func<TSrc, TDst, bool> comparer)
         {
             if (ReferenceEquals(source, destination))
                 return true;
