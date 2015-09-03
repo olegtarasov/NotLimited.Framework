@@ -11,6 +11,11 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+	    public static IReadOnlyList<T> CastToList<T>(this object source)
+	    {
+		    return (IReadOnlyList<T>)source;
+	    }
+
 	    public static int GetArrayHashCode<T>(this T[] array)
 	    {
 		    return ((IStructuralEquatable)array).GetHashCode(EqualityComparer<object>.Default);
