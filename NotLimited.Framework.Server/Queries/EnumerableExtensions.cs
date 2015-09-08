@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic;
 using NotLimited.Framework.Common.Helpers;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
     public static class EnumerableExtensions
     {

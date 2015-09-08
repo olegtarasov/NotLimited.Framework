@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
-using JetBrains.Annotations;
 using NotLimited.Framework.Common.Helpers;
-using NotLimited.Framework.Data.Entities;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
 	public static class QuryableExtensions
 	{
@@ -47,7 +45,7 @@ namespace NotLimited.Framework.Data.Queries
 	        return Paginate(query, pagination, x => x);
 	    }
 
-        public static PaginatedResult<TDest> Paginate<TSource, TDest>(this IQueryable<TSource> query, Pagination pagination, [NotNull] Func<TSource, TDest> map)
+        public static PaginatedResult<TDest> Paginate<TSource, TDest>(this IQueryable<TSource> query, Pagination pagination, Func<TSource, TDest> map)
 	    {
 	        if (query == null)
 	            return null;
@@ -64,8 +62,7 @@ namespace NotLimited.Framework.Data.Queries
                 pagination.TotalCount = query.Count();
 
                 result.Items = query
-                    //.AsEnumerable()
-					.OrderBy("Id")
+                    .OrderBy("Id")
 					.Skip(pagination.ItemsPerPage * (pagination.Page - 1))
                     .Take(pagination.ItemsPerPage)
                     .AsEnumerable()

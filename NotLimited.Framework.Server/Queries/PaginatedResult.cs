@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
 	public class PaginatedResult<T>
 	{

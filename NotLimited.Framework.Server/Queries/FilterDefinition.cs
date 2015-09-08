@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace NotLimited.Framework.Data.Queries
+﻿namespace NotLimited.Framework.Server.Queries
 {
 	public class FilterDefinition
 	{

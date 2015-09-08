@@ -215,9 +215,9 @@
       <Project>{2f69bb6f-3c15-4b88-ac7a-9a9968cdd00d}</Project>
       <Name>NotLimited.Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NotLimited.Framework.Data\NotLimited.Framework.Data.csproj">
-      <Project>{47373497-932f-4eaa-b91a-4970bffbde71}</Project>
-      <Name>NotLimited.Framework.Data</Name>
+    <ProjectReference Include="..\NotLimited.Framework.Server\NotLimited.Framework.Server.csproj">
+      <Project>{615003d2-adff-473c-bf06-6fb13ad84053}</Project>
+      <Name>NotLimited.Framework.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

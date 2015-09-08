@@ -42,7 +42,7 @@ namespace NotLimited.Framework.Web.Controls
 	    }
 
         /// <summary>
-        /// Generates a textbox with style="display: none" (to work around a weird jQuery bug)
+        /// Generates a textbox with style="display: none" (to work around a weird jQuery _bug)
         /// </summary>
         public static MvcHtmlString HiddenFor<TModel, TProperty>(this FormHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
 	    {
@@ -50,7 +50,7 @@ namespace NotLimited.Framework.Web.Controls
 	    }
 
         /// <summary>
-        /// Generates a textbox with style="display: none" (to work around a weird jQuery bug)
+        /// Generates a textbox with style="display: none" (to work around a weird jQuery _bug)
         /// </summary>
         public static MvcHtmlString Hidden(this FormHelper helper, string name, object value)
         {

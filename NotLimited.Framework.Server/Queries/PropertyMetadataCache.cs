@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using NotLimited.Framework.Common.Helpers;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
 	public class PropertyMetadata
 	{

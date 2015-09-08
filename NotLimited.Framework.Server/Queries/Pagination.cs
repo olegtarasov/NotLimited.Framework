@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
 	public class Pagination
 	{

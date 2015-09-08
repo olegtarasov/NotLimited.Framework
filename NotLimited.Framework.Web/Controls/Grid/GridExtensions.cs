@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.WebPages;
-using NotLimited.Framework.Data.Queries;
+using NotLimited.Framework.Server.Queries;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Controls.Grid

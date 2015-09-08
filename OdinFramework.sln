@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Data", "NotLimited.Framework.Data\NotLimited.Framework.Data.csproj", "{47373497-932F-4EAA-B91A-4970BFFBDE71}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Server", "NotLimited.Framework.Server\NotLimited.Framework.Server.csproj", "{615003D2-ADFF-473C-BF06-6FB13AD84053}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Common", "NotLimited.Framework.Common\NotLimited.Framework.Common.csproj", "{2F69BB6F-3C15-4B88-AC7A-9A9968CDD00D}"
@@ -34,10 +32,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47373497-932F-4EAA-B91A-4970BFFBDE71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{615003D2-ADFF-473C-BF06-6FB13AD84053}.Release|Any CPU.ActiveCfg = Release|Any CPU

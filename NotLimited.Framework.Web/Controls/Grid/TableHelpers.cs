@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.WebPages;
 using NotLimited.Framework.Common.Helpers;
-using NotLimited.Framework.Data.Queries;
+using NotLimited.Framework.Server.Queries;
 using NotLimited.Framework.Web.Views.Shared.Helpers;
 
 namespace NotLimited.Framework.Web.Controls.Grid

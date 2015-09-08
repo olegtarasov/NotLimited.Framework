@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NotLimited.Framework.Data.Queries
+namespace NotLimited.Framework.Server.Queries
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class FilterableAttribute : Attribute
+	public class SortableAttribute : Attribute
 	{
 		public string MemberName { get; set; }
 	}
