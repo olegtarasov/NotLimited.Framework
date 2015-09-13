@@ -40,9 +40,14 @@ namespace NotLimited.Framework.Web.Helpers
                 return url;
             }
 
-            var originalUrl = HttpContext.Current.Request.Url;
-            
-            return originalUrl.Scheme + "://" + originalUrl.Authority + url;
+	        var ctx = HttpContext.Current;
+	        if (ctx == null)
+	        {
+		        return "http://" + url;
+	        }
+
+			var originalUrl = ctx.Request.Url;
+	        return originalUrl.Scheme + "://" + originalUrl.Authority + url;
         }
     }
 }

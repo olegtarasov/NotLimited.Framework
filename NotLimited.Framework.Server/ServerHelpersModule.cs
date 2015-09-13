@@ -28,6 +28,10 @@ namespace NotLimited.Framework.Server
 
 			builder.RegisterType<ImageHelper>()
 				.SingleInstance();
+
+			builder.RegisterType<DefaultHostingService>()
+					.AsImplementedInterfaces()
+					.SingleInstance();
 		}
 	}
 }

@@ -10,9 +10,9 @@ namespace NotLimited.Framework.Server.Services
     {
         private readonly string _serverRoot;
 
-        public FileSystemStorageService()
+        public FileSystemStorageService(IHostingService hostingService)
         {
-            _serverRoot = HostingEnvironment.MapPath("~/");
+            _serverRoot = hostingService.MapPath("~/");
             if (string.IsNullOrEmpty(_serverRoot))
                 throw new InvalidOperationException("Can't get server root!");
         }
