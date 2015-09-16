@@ -40,39 +40,34 @@ namespace NotLimited.Framework.Server.Queries
 			return result;
 		}
 
-	    public static PaginatedResult<T> Paginate<T>(this IQueryable<T> query, Pagination pagination)
+	    public static PaginatedResult<T> Paginate<T>(this IQueryable<T> query, Pagination pagination, SortDefinition sort = null)
 	    {
-	        return Paginate(query, pagination, x => x);
+	        return Paginate(query, pagination, x => x, sort);
 	    }
 
-        public static PaginatedResult<TDest> Paginate<TSource, TDest>(this IQueryable<TSource> query, Pagination pagination, Func<TSource, TDest> map)
+        public static PaginatedResult<TDest> Paginate<TSource, TDest>(this IQueryable<TSource> query, Pagination pagination, Func<TSource, TDest> map, SortDefinition sort = null)
 	    {
 	        if (query == null)
 	            return null;
 
             if (map == null) throw new ArgumentNullException(nameof(map));
             var result = new PaginatedResult<TDest>();
+			var set = query;
 
-	        if (pagination == null)
+	        set = !string.IsNullOrEmpty(sort?.SortBy) ? set.Sort(sort) : set.OrderBy("Id");
+
+	        if (pagination != null)
 	        {
-	            result.Items = query.Select(map).ToList();
-	        }
-	        else
-	        {
-                pagination.TotalCount = query.Count();
+				result.Pagination = pagination;
+				result.Pagination.TotalCount = set.Count();
 
-                result.Items = query
-                    .OrderBy("Id")
-					.Skip(pagination.ItemsPerPage * (pagination.Page - 1))
-                    .Take(pagination.ItemsPerPage)
-                    .AsEnumerable()
-                    .Select(map)
-                    .ToList();
+				set = set.Skip(pagination.ItemsPerPage * (pagination.Page - 1))
+						.Take(pagination.ItemsPerPage);
+			}
 
-                result.Pagination = pagination;
-	        }
-
-            return result;
+			result.Items = set.AsEnumerable().Select(map).ToList();
+	        
+	        return result;
 	    }
 	}
 }
