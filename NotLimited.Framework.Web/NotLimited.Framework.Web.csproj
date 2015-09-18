@@ -151,6 +151,7 @@
     <Compile Include="Controls\SelectExtensions.cs" />
     <Compile Include="Controls\TextBoxExtensions.cs" />
     <Compile Include="Controls\UploadExtensions.cs" />
+    <Compile Include="Helpers\ControllerExtensions.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\ModelExtensions.cs" />
