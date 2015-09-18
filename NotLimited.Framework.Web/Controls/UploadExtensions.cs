@@ -12,12 +12,13 @@ namespace NotLimited.Framework.Web.Controls
 	    /// <summary>
 	    /// Creates an upload control.
 	    /// </summary>
-	    public static HelperResult UploadFor<TModel, TProperty>(this FormHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
+	    public static HelperResult UploadFor<TModel, TProperty>(this FormHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, string accept = "image/*")
 	    {
 	        return FormHelpers.Upload(
 	            helper.HtmlHelper.LabelFor(expression),
 	            helper.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression)),
-	            helper.HtmlHelper.ValidationMessageFor(expression, "", new { @class = "text-danger" }));
+	            helper.HtmlHelper.ValidationMessageFor(expression, "", new { @class = "text-danger" }),
+				accept);
 	    }
 
 	    /// <summary>
