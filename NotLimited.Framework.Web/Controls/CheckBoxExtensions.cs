@@ -36,7 +36,7 @@ namespace NotLimited.Framework.Web.Controls
 
 	    public static HelperResult CheckBoxFor<TModel>(this FormHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, object htmlAttributes = null)
 	    {
-	        return FormHelpers.TextBox(htmlHelper.HtmlHelper.LabelFor(expression), SimpleCheckBoxFor(htmlHelper, expression, htmlAttributes), htmlHelper.HtmlHelper.ValidationMessageFor(expression));
+	        return FormHelpers.CheckBox(htmlHelper.HtmlHelper.LabelFor(expression), SimpleCheckBoxFor(htmlHelper, expression, htmlAttributes), htmlHelper.HtmlHelper.ValidationMessageFor(expression));
 	    }
 
         /// <summary>

@@ -10,6 +10,15 @@
     </div>
 }
 
+@helper CheckBox(MvcHtmlString label, MvcHtmlString checkBox, MvcHtmlString validation)
+{
+    <div class="form-group">
+        @checkBox
+        @label
+        @validation
+    </div>
+}
+
 @helper Upload(MvcHtmlString label, string inputName, MvcHtmlString validation, string accept = "image/*")
 {
     <div class="form-group">
