@@ -101,12 +101,10 @@ namespace NotLimited.Framework.Web.Controls.Builders
                     url = new UrlHelper(HtmlHelper.ViewContext.RequestContext).Action(_action, _controller, _route);
                 }
 
-                if (string.IsNullOrEmpty(url))
+                if (!string.IsNullOrEmpty(url))
                 {
-                    url = "#";
-                }
-
-                link.MergeAttribute("href", url);
+					link.MergeAttribute("href", url);
+				}
             }
             else
             {
