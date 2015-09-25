@@ -11,6 +11,13 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+	    public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T element)
+	    {
+		    if (source == null) throw new ArgumentNullException(nameof(source));
+
+		    return source.Where(item => !object.Equals(item, element));
+	    }
+
 	    public static IReadOnlyList<T> CastToList<T>(this object source)
 	    {
 		    return (IReadOnlyList<T>)source;
