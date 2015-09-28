@@ -15,7 +15,7 @@
             SortGrid($(this).data("name"), $(this).data("descending"));
         });
     });
-
+        
     function SortGrid(name, descending) {
         $("#gridSort #sortBy").val(name);
         $("#gridSort #descending").val(descending);
@@ -28,7 +28,7 @@
     </script>
 }
 
-@helper Grid(HtmlHelper htmlHelper, List<HelperResult> headers, List<List<HelperResult>> rows, Func<IDisposable> form, Func<object, HelperResult> formControls, Pagination pagination, object tableHtmlAttributes)
+@helper Grid(HtmlHelper htmlHelper, GridOptions options)
 {
 
     using (htmlHelper.BeginForm(null, null, FormMethod.Get, new {id = "gridSort"}))
@@ -38,13 +38,13 @@
         @htmlHelper.Form().HiddenForQuery(Lambda<SortDefinition>.MemberList().Expr(x => x.SortBy).Expr(x => x.Descending).ToArray())
     }
 
-    if (pagination != null && pagination.PageCount > 1)
+    if (options.Pagination != null && options.Pagination.PageCount > 1)
     {
         <div class="pull-right">
             @using (htmlHelper.Form().BeginForm(FormMethod.Get, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
             {
                 @htmlHelper.Label(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), "Записей на странице:")
-                @htmlHelper.Form().ItemsPerPageDropdown(pagination == null ? (int?)null : pagination.ItemsPerPage)
+                @htmlHelper.Form().ItemsPerPageDropdown(options.Pagination == null ? (int?)null : options.Pagination.ItemsPerPage)
                 @htmlHelper.Form().HiddenForQuery(Lambda<Pagination>.MemberName(x => x.ItemsPerPage))
             }
         </div>
@@ -52,19 +52,19 @@
     
     <div class="row">
         <div class="col-md-12">
-            @using (form != null ? form() : new DummyForm())
+            @using (options.Form != null ? options.Form() : new DummyForm())
             {
-                <table @htmlHelper.RenderHtmlAttributes(tableHtmlAttributes)>
+                <table @htmlHelper.RenderHtmlAttributes(options.TableHtmlAttributes)>
                     <thead>
                         <tr>
-                            @foreach (var header in headers)
+                            @foreach (var header in options.Headers)
                             {
                                 @header
                             }
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var row in rows)
+                        @foreach (var row in options.Rows)
                         {
                             <tr>
                                 @foreach (var column in row)
@@ -76,15 +76,15 @@
                     </tbody>
                 </table>
 
-                if (formControls != null)
+                if (options.FormControls != null)
                 {
-                    @formControls(null)
+                    @options.FormControls(null)
                 }
             }
 
-            @if (pagination != null && pagination.PageCount > 1)
+            @if (options.Pagination != null && options.Pagination.PageCount > 1)
             {
-                @htmlHelper.Paginator(pagination)
+                @htmlHelper.Paginator(options.Pagination, action: options.Action, controller: options.Controller)
             }
         </div>
     </div>

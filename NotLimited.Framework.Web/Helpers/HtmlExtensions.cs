@@ -53,9 +53,9 @@ namespace NotLimited.Framework.Web.Helpers
             return new MvcHtmlString(sb.ToString());
 	    }
 
-	    public static HelperResult Paginator(this HtmlHelper helper, Pagination pagination, string wrapperClass = "text-center", string listClass = "pagination")
+	    public static HelperResult Paginator(this HtmlHelper helper, Pagination pagination, string wrapperClass = "text-center", string listClass = "pagination", string action = null, string controller = null)
 	    {
-	        return PaginationHelper.Paginator(helper, pagination, wrapperClass, listClass);
+	        return PaginationHelper.Paginator(helper, pagination, wrapperClass, listClass, action, controller);
 	    }
 	}
 }

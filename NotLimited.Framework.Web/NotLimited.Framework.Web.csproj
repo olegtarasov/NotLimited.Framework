@@ -142,6 +142,7 @@
     <Compile Include="Controls\Grid\GridColumnType.cs" />
     <Compile Include="Controls\Grid\GridFormBuilder.cs" />
     <Compile Include="Controls\Grid\GridExtensions.cs" />
+    <Compile Include="Controls\Grid\GridOptions.cs" />
     <Compile Include="Controls\Grid\ModelWithFields.cs" />
     <Compile Include="Controls\Grid\TableHelpers.cs" />
     <Compile Include="Controls\HiddenExtensions.cs" />
@@ -233,10 +234,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FormHelpers.generated.cs</LastGenOutput>
     </Content>
-    <None Include="Views\Shared\Helpers\GridViewHelper.cshtml">
+    <Content Include="Views\Shared\Helpers\GridViewHelper.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>GridViewHelper.generated.cs</LastGenOutput>
-    </None>
+    </Content>
     <Content Include="Views\Shared\Helpers\IconHelpers.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>IconHelpers.generated.cs</LastGenOutput>
