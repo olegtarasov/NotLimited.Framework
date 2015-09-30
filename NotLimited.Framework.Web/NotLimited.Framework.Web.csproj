@@ -156,6 +156,7 @@
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\ModelExtensions.cs" />
+    <Compile Include="Helpers\QueryKeys.cs" />
     <Compile Include="Helpers\RequestExtensions.cs" />
     <Compile Include="Helpers\RouteInfo.cs" />
     <Compile Include="Helpers\UrlExtensions.cs" />

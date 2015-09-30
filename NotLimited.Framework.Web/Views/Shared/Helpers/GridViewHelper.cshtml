@@ -41,7 +41,7 @@
     if (options.Pagination != null && options.Pagination.PageCount > 1)
     {
         <div class="pull-right">
-            @using (htmlHelper.Form().BeginForm(FormMethod.Get, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
+            @using (htmlHelper.Form().BeginGetForm(options.Action, options.Controller, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
             {
                 @htmlHelper.Label(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), "Записей на странице:")
                 @htmlHelper.Form().ItemsPerPageDropdown(options.Pagination == null ? (int?)null : options.Pagination.ItemsPerPage)

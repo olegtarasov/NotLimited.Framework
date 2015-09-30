@@ -15,6 +15,7 @@ namespace NotLimited.Framework.Web.Controls.Builders
         private Func<object, HelperResult> _body;
         private string _okHandler;
         private string _title;
+	    private bool _forceSubmit;
 
         public DialogBuilder(HtmlHelper htmlHelper, string id) : base(htmlHelper)
         {
@@ -59,9 +60,15 @@ namespace NotLimited.Framework.Web.Controls.Builders
             return this;
         }
 
+	    public DialogBuilder SubmitOuterForm()
+	    {
+		    _forceSubmit = true;
+		    return this;
+	    }
+
         public override HelperResult GetControlHtml()
         {
-            return DialogHelpers.ModalDialog(_id, _title, _body, _form, _okHandler, _okText, _cancelText);
+            return DialogHelpers.ModalDialog(_id, _title, _body, _form, _okHandler, _okText, _cancelText, _forceSubmit);
         }
     }
 }

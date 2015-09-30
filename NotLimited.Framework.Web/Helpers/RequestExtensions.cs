@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Web;
@@ -103,25 +104,26 @@ namespace NotLimited.Framework.Web.Helpers
         /// <summary>
         /// Appends GET parameters from an anonymous object to current set of GET parameters.
         /// </summary>
-        public static RouteValueDictionary AppendQueryString(this HtmlHelper helper, object routeValues)
+        public static RouteValueDictionary AppendQueryString(this HtmlHelper helper, object routeValues, params string[] except)
         {
             var result = new RouteValueDictionary();
+			var set = new HashSet<string>(except, StringComparer.OrdinalIgnoreCase);
 
-            foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
+			foreach (var key in helper.ViewContext.HttpContext.Request.QueryString.AllKeys)
             {
-                if (String.IsNullOrEmpty(key))
+                if (String.IsNullOrEmpty(key) || set.Contains(key))
                     continue;
 
                 result[key] = helper.ViewContext.HttpContext.Request.QueryString[key];
             }
 
-            foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(routeValues))
+            foreach (var property in TypeDescriptor.GetProperties(routeValues).Cast<PropertyDescriptor>().Where(x => !set.Contains(x.Name)))
                 result[property.Name] = property.GetValue(routeValues);
 
             return result;
         }
 
-        /// <summary>
+		/// <summary>
         /// Gets GET query params from specified Url in a form of a RouteValueDictionary.
         /// </summary>
         public static RouteValueDictionary GetUrlQueryParams(this Uri url)

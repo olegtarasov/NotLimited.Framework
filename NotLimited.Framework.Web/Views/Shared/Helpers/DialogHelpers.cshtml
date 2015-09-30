@@ -3,7 +3,7 @@
 
 @using NotLimited.Framework.Web.Controls
 
-@helper ModalDialog(string id, string title, Func<object, HelperResult> body, Func<IDisposable> form, string okHandler, string okText, string cancelText)
+@helper ModalDialog(string id, string title, Func<object, HelperResult> body, Func<IDisposable> form, string okHandler, string okText, string cancelText, bool forceSubmit)
 {
     <div class="modal fade" id="@id">
         <div class="modal-dialog">
@@ -30,7 +30,7 @@
                         }
                         else
                         {
-                            if (form == null)
+                            if (form == null && !forceSubmit)
                             {
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">@okText</button>
                             }

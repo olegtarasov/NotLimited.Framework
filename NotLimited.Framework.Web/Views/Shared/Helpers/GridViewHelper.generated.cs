@@ -110,7 +110,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"pull-right\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
             
-             using (htmlHelper.Form().BeginForm(FormMethod.Get, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
+             using (htmlHelper.Form().BeginGetForm(options.Action, options.Controller, htmlAttributes: new {@class = "form-horizontal"}, id: "itemsPerPageForm"))
             {
                 
 WriteTo(__razor_helper_writer, htmlHelper.Label(Lambda<Pagination>.MemberName(x => x.ItemsPerPage), "Записей на странице:"));
@@ -255,10 +255,10 @@ WriteTo(__razor_helper_writer, title);
 
 WriteLiteralTo(__razor_helper_writer, "\r\n                <span");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3778), Tuple.Create("\"", 3825)
-, Tuple.Create(Tuple.Create("", 3786), Tuple.Create("fa", 3786), true)
-, Tuple.Create(Tuple.Create(" ", 3788), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
-, 3789), false)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3801), Tuple.Create("\"", 3848)
+, Tuple.Create(Tuple.Create("", 3809), Tuple.Create("fa", 3809), true)
+, Tuple.Create(Tuple.Create(" ", 3811), Tuple.Create<System.Object, System.Int32>(TableHelpers.GetSortIcon(sortOrder)
+, 3812), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"margin-right: 5px\"");

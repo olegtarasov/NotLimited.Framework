@@ -36,10 +36,18 @@ namespace NotLimited.Framework.Web.Controls
             return helper.HtmlHelper.BeginForm(null, null, routeValues, method, htmlAttributes.ConcatHtmlAttributes(new {role = "form", id}));
         }
 
-        /// <summary>
-        /// Creates a form suitable for an upload control.
-        /// </summary>
-        public static MvcForm BeginUploadForm(this FormHelper helper, string action = null, string controller = null)
+		/// <summary>
+		/// Creates a form with specified method and current action and controller.
+		/// </summary>
+		public static MvcForm BeginGetForm(this FormHelper helper, string action = null, string controller = null, RouteValueDictionary routeValues = null, object htmlAttributes = null, string id = null)
+		{
+			return helper.HtmlHelper.BeginForm(action, controller, routeValues, FormMethod.Get, htmlAttributes.ConcatHtmlAttributes(new { role = "form", id }));
+		}
+
+		/// <summary>
+		/// Creates a form suitable for an upload control.
+		/// </summary>
+		public static MvcForm BeginUploadForm(this FormHelper helper, string action = null, string controller = null)
         {
             return helper.HtmlHelper.BeginForm(action, controller, FormMethod.Post, new { enctype = "multipart/form-data", role = "form" });
         }
