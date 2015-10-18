@@ -13,7 +13,7 @@ namespace NotLimited.Framework.Common.Helpers
     {
 	    public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T element)
 	    {
-		    if (source == null) throw new ArgumentNullException(nameof(source));
+		    if (source == null) throw new ArgumentNullException("source");
 
 		    return source.Where(item => !object.Equals(item, element));
 	    }
@@ -66,9 +66,9 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, IEnumerable<TValue> source, Func<TValue, TKey> keyFunc)
 		{
-			if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-			if (source == null) throw new ArgumentNullException(nameof(source));
-			if (keyFunc == null) throw new ArgumentNullException(nameof(keyFunc));
+			if (dictionary == null) throw new ArgumentNullException("dictionary");
+			if (source == null) throw new ArgumentNullException("source");
+			if (keyFunc == null) throw new ArgumentNullException("keyFunc");
 
 			foreach (var item in source)
 			{
