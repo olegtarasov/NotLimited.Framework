@@ -162,6 +162,7 @@
     <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Mvc\AggregateHelperResult.cs" />
     <Compile Include="Mvc\CommaSeparatedModelBinder.cs" />
+    <Compile Include="Mvc\CSVAttribute.cs" />
     <Compile Include="Mvc\DummyViewDataContainer.cs" />
     <Compile Include="Mvc\RequiredAnyAttribute.cs" />
     <Compile Include="Mvc\ReturnUrlAttribute.cs" />
