@@ -52,6 +52,7 @@
     <Compile Include="Chunked\ConditionalChunkedEnumerator.cs" />
     <Compile Include="Chunked\IChunkedEnumerable.cs" />
     <Compile Include="Chunked\IChunkedEnumerator.cs" />
+    <Compile Include="Chunked\IComparableChunckedEnumerator.cs" />
     <Compile Include="Chunked\LimitingChunkedEnumerator.cs" />
     <Compile Include="Chunked\LinqChunkedEnumeratorBase.cs" />
     <Compile Include="Chunked\OffsetChunkedEnumerator.cs" />

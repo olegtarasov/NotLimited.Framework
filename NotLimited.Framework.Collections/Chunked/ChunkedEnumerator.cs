@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NotLimited.Framework.Collections.Chunked
 {
-	internal class ChunkedEnumerator<T> : IChunkedEnumerator<T>
+	internal class ChunkedEnumerator<T> : IComparableChunkedEnumerator<T>
 	{
 		protected readonly int maxBucketElements;
 
@@ -122,6 +122,17 @@ namespace NotLimited.Framework.Collections.Chunked
 		{
 			curBucket = 0;
 			curIdx = -1;
+		}
+
+		public bool IsPositionEqual(IComparableChunkedEnumerator<T> other)
+		{
+			var en = other as ChunkedEnumerator<T>;
+			if (en == null)
+			{
+				return false;
+			}
+
+			return curBucket == en.curBucket && curIdx == en.curIdx;
 		}
 
 		IChunkedEnumerator<T> IChunkedEnumerable<T>.GetEnumerator()
