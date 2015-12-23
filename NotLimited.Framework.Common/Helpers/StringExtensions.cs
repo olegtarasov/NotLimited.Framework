@@ -79,7 +79,7 @@ namespace NotLimited.Framework.Common.Helpers
 			{
 				string line = lines[i];
 
-				if (line.Length == 0 || string.IsNullOrWhiteSpace(line))
+				if (string.IsNullOrWhiteSpace(line) || line.Length == 0)
 				{
 					if (!hasText)
 					{
@@ -115,7 +115,7 @@ namespace NotLimited.Framework.Common.Helpers
 			{
 				string line = lines[i];
 
-				if (line.Length == 0 || string.IsNullOrWhiteSpace(line))
+				if (string.IsNullOrWhiteSpace(line) || line.Length == 0)
 					continue;
 
 				if (cnt > 0)
