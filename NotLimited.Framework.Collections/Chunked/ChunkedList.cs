@@ -13,7 +13,7 @@ namespace NotLimited.Framework.Collections.Chunked
 	/// </summary>
 	public class ChunkedList<T> : ICollection<T>, IChunkedEnumerable<T>
 	{
-		protected const int DEFAULT_BUCKET_SIZE = 1024 * 1024; // 1 M
+		protected const int DEFAULT_BUCKET_SIZE = 84000;
 
 		protected readonly List<Bucket<T>> buckets = new List<Bucket<T>>();
 

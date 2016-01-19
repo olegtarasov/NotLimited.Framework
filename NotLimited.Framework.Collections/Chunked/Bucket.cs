@@ -4,47 +4,47 @@ namespace NotLimited.Framework.Collections.Chunked
 {
 	public class Bucket<T>
 	{
-		private readonly int maxElements;
-		private readonly T[] array;
+		private readonly int _maxElements;
+		private readonly T[] _array;
 
-		private int curIdx = 0;
+		private int _curIdx = 0;
 
-		public int Index { get { return curIdx; } }
-		public bool IsEmpty { get { return curIdx == 0; } }
-		public T LastItem { get { return array[curIdx - 1]; } }
-		public int FreeSpace { get { return maxElements - curIdx; } }
-		public T[] Buffer { get { return array; } }
+		public int Index => _curIdx;
+		public bool IsEmpty => _curIdx == 0;
+		public T LastItem => _array[_curIdx - 1];
+		public int FreeSpace => _maxElements - _curIdx;
+		public T[] Buffer => _array;
 
-		public T this[int idx] { get { return array[idx]; } set { array[idx] = value; } }
+		public T this[int idx] { get { return _array[idx]; } set { _array[idx] = value; } }
 
 		public Bucket(int maxElements)
 		{
-			this.maxElements = maxElements;	
-			array = new T[maxElements];
+			this._maxElements = maxElements;	
+			_array = new T[maxElements];
 		}
 
 		public Bucket(T[] buff, int index)
 		{
-			array = buff;
-			curIdx = index;
+			_array = buff;
+			_curIdx = index;
 		}
 
 		public void Add(T item)
 		{
-			if (curIdx == maxElements)
+			if (_curIdx == _maxElements)
 				throw new InvalidOperationException("The bucket is full!");
 
-			array[curIdx] = item;
-			curIdx++;
+			_array[_curIdx] = item;
+			_curIdx++;
 		}
 
 		public void AddRange(T[] items)
 		{
-			if ((maxElements - curIdx) < items.Length)
+			if ((_maxElements - _curIdx) < items.Length)
 				throw new InvalidOperationException("Not enough space in this bucket!");
 
-			for (int i = 0; i < items.Length; i++, curIdx++)
-				array[curIdx] = items[i];
+			for (int i = 0; i < items.Length; i++, _curIdx++)
+				_array[_curIdx] = items[i];
 		}
 	}
 }
