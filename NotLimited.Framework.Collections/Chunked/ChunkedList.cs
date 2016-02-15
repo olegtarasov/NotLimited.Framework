@@ -13,25 +13,20 @@ namespace NotLimited.Framework.Collections.Chunked
 	/// </summary>
 	public class ChunkedList<T> : ICollection<T>, IChunkedEnumerable<T>
 	{
-		protected const int DEFAULT_BUCKET_SIZE = 84000;
+		protected const int DefaultBucketSize = 84000;
 
 		protected readonly List<Bucket<T>> buckets = new List<Bucket<T>>();
 
 		public int MaxBucketElements { get; private set; }
 		public IList<Bucket<T>> Buckets { get { return buckets.AsReadOnly(); } }
 
-		public ChunkedList() : this(DEFAULT_BUCKET_SIZE)
+		public ChunkedList() : this(DefaultBucketSize)
 		{
 		}
 
 		public ChunkedList(int bucketSize)
 		{
 			MaxBucketElements = bucketSize / (typeof(T).IsValueType ? Marshal.SizeOf(typeof(T)) : IntPtr.Size);
-		}
-
-		public void AddBucket(T[] buff, int index)
-		{
-			buckets.Add(new Bucket<T>(buff, index));
 		}
 
 		public IChunkedEnumerator<T> GetEnumerator()
@@ -67,7 +62,7 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		public bool Contains(T item)
 		{
-			return Enumerable.Contains(this, item);
+			return Enumerable.Contains(this, item, null);
 		}
 
 		/// <exception cref="ArgumentNullException"><paramref name="array"/> is <see langword="null" />.</exception>
@@ -88,7 +83,7 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		public bool Remove(T item)
 		{
-			throw new InvalidOperationException("Sorry dude, no removals from this one!");
+			throw new NotSupportedException("Sorry dude, no removals from this one!");
 		}
 
 		public int Count
@@ -164,7 +159,7 @@ namespace NotLimited.Framework.Collections.Chunked
 
 				cur += cnt;
 
-				if (curBucket.FreeSpace == 0)
+				if (curBucket.FreeSpace == 0 && cur < items.Length)
 					buckets.Add(curBucket = new Bucket<T>(MaxBucketElements));
 			}
 

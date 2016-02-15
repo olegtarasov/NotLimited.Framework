@@ -86,5 +86,23 @@ namespace NotLimited.Framework.Tests.Collections.Chunked
 			bucket.Add(42);
 			bucket.LastItem.ShouldEqual(42);
 		}
+
+		[Fact]
+		public void CanSetElemetByIndex()
+		{
+			var bucket = new Bucket<int>(1);
+			bucket.Add(42);
+			bucket[0].ShouldEqual(42);
+			bucket[0] = 1;
+			bucket[0].ShouldEqual(1);
+		}
+
+		[Fact]
+		public void CantSetElementPastCurrentIndex()
+		{
+			var bucket = new Bucket<int>(2);
+			bucket.Add(42);
+			Trap.Exception(() => bucket[1] = 1).ShouldBeInstanceOf<IndexOutOfRangeException>();
+		}
 	}
 }

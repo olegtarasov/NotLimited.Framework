@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Chunked\BucketTests.cs" />
+    <Compile Include="Collections\Chunked\ChunkedEnumeratorTests.cs" />
+    <Compile Include="Collections\Chunked\ChunkedListTests.cs" />
     <Compile Include="Common\Helpers\EnumHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

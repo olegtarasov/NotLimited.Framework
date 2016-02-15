@@ -15,18 +15,24 @@ namespace NotLimited.Framework.Collections.Chunked
 		public int FreeSpace => _maxElements - _curIdx;
 		public T[] Buffer => _array;
 
-		public T this[int idx] { get { return _array[idx]; } set { _array[idx] = value; } }
+		public T this[int idx]
+		{
+			get { return _array[idx]; }
+			set
+			{
+				if (idx > _curIdx - 1)
+				{
+					throw new IndexOutOfRangeException("Can't set elements past current index!");
+				}
+
+				_array[idx] = value;
+			}
+		}
 
 		public Bucket(int maxElements)
 		{
 			this._maxElements = maxElements;	
 			_array = new T[maxElements];
-		}
-
-		public Bucket(T[] buff, int index)
-		{
-			_array = buff;
-			_curIdx = index;
 		}
 
 		public void Add(T item)

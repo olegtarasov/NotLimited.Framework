@@ -32,7 +32,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,36 +46,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chunked\Bucket.cs" />
-    <Compile Include="Chunked\ChunkedEnumerable.cs" />
+    <Compile Include="Chunked\Legacy\ChunkedEnumerable.cs" />
     <Compile Include="Chunked\ChunkedEnumerator.cs" />
     <Compile Include="Chunked\ChunkedList.cs" />
-    <Compile Include="Chunked\ConditionalChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\ConditionalChunkedEnumerator.cs" />
     <Compile Include="Chunked\IChunkedEnumerable.cs" />
     <Compile Include="Chunked\IChunkedEnumerator.cs" />
     <Compile Include="Chunked\IComparableChunckedEnumerator.cs" />
-    <Compile Include="Chunked\LimitingChunkedEnumerator.cs" />
-    <Compile Include="Chunked\LinqChunkedEnumeratorBase.cs" />
-    <Compile Include="Chunked\OffsetChunkedEnumerator.cs" />
-    <Compile Include="Chunked\PrependingChunkedEnumerator.cs" />
-    <Compile Include="Chunked\RepeatingChunkedEnumerator.cs" />
-    <Compile Include="Chunked\RevealingChunkedEnumerator.cs" />
-    <Compile Include="Chunked\RevelationToken.cs" />
-    <Compile Include="Chunked\ReverseChunkedEnumerator.cs" />
-    <Compile Include="Chunked\TransformingChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\LimitingChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\LinqChunkedEnumeratorBase.cs" />
+    <Compile Include="Chunked\Legacy\OffsetChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\PrependingChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\RepeatingChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\RevealingChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\RevelationToken.cs" />
+    <Compile Include="Chunked\Legacy\ReverseChunkedEnumerator.cs" />
+    <Compile Include="Chunked\Legacy\TransformingChunkedEnumerator.cs" />
     <Compile Include="CircularFifo.cs" />
     <Compile Include="CircularFifoEnumerator.cs" />
     <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="IObservableBase.cs" />
-    <Compile Include="OrderedMultiValueDictionary.cs" />
-    <Compile Include="ObservableBase.cs" />
-    <Compile Include="ObservableList.cs" />
+    <Compile Include="Observable\IObservableBase.cs" />
+    <Compile Include="Observable\ObservableBase.cs" />
+    <Compile Include="Observable\ObservableList.cs" />
+    <Compile Include="Observable\SimpleMonitor.cs" />
+    <Compile Include="Observable\Tree.cs" />
     <Compile Include="PairList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleMonitor.cs" />
-    <Compile Include="Transformers.cs" />
-    <Compile Include="TransformingEnumerator.cs" />
-    <Compile Include="TransformingView.cs" />
-    <Compile Include="Tree.cs" />
+    <Compile Include="Transforming\Transformers.cs" />
+    <Compile Include="Transforming\TransformingEnumerator.cs" />
+    <Compile Include="Transforming\TransformingView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotLimited.Framework.Common\NotLimited.Framework.Common.csproj">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace NotLimited.Framework.Collections
+namespace NotLimited.Framework.Collections.Observable
 {
 	public class Tree<T> : INotifyPropertyChanged
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Runtime.Serialization;
 
-namespace NotLimited.Framework.Collections
+namespace NotLimited.Framework.Collections.Observable
 {
 	[DataContract]
 	public class ObservableList<T> : ObservableBase<T>, IList<T>

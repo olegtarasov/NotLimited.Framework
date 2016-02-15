@@ -6,49 +6,49 @@ namespace NotLimited.Framework.Collections.Chunked
 {
 	internal class ChunkedEnumerator<T> : IComparableChunkedEnumerator<T>
 	{
-		protected readonly int maxBucketElements;
+		private readonly int _maxBucketElements;
 
-		protected List<Bucket<T>> list;
-		protected int curBucket;
-		protected int curIdx;
-		protected T current;
+		private readonly List<Bucket<T>> _buckets;
+		private int _curBucket;
+		private int _curIdx;
+		private T _current;
 
-		public ChunkedEnumerator(List<Bucket<T>> list, int maxBucketElements)
+		public ChunkedEnumerator(List<Bucket<T>> buckets, int maxBucketElements)
 		{
-			this.list = list;
-			this.maxBucketElements = maxBucketElements;
-			curIdx = -1;
-			curBucket = 0;
-			current = default(T);
+			_buckets = buckets;
+			_maxBucketElements = maxBucketElements;
+			_curIdx = -1;
+			_curBucket = 0;
+			_current = default(T);
 		}
 
 		private ChunkedEnumerator(ChunkedEnumerator<T> source)
 		{
-			maxBucketElements = source.maxBucketElements;
-			list = source.list;
-			curBucket = source.curBucket;
-			curIdx = source.curIdx;
-			current = source.current;
+			_maxBucketElements = source._maxBucketElements;
+			_buckets = source._buckets;
+			_curBucket = source._curBucket;
+			_curIdx = source._curIdx;
+			_current = source._current;
 		}
 
 		public void FromFirst()
 		{
-			if (list.Count == 0 || list[0].IsEmpty)
+			if (_buckets.Count == 0 || _buckets[0].IsEmpty)
 				throw new InvalidOperationException("List is empty!");
 
-			curBucket = 0;
-			curIdx = -1;
-			current = default(T);
+			_curBucket = 0;
+			_curIdx = -1;
+			_current = default(T);
 		}
 
 		public void FromLast()
 		{
-			if (list.Count == 0 || list[0].IsEmpty)
+			if (_buckets.Count == 0 || _buckets[0].IsEmpty)
 				throw new InvalidOperationException("List is empty!");
 
-			curBucket = list.Count - 1;
-			curIdx = list[curBucket].Index;
-			current = default(T);
+			_curBucket = _buckets.Count - 1;
+			_curIdx = _buckets[_curBucket].Index;
+			_current = default(T);
 		}
 
 		public bool FromIndex(int idx)
@@ -57,19 +57,19 @@ namespace NotLimited.Framework.Collections.Chunked
 				return false;
 
 			int start = idx - 1;
-			int newBucket = start < 0 ? 0 : start / maxBucketElements;
+			int newBucket = start < 0 ? 0 : start / _maxBucketElements;
 
-			if (list.Count <= newBucket)
+			if (_buckets.Count <= newBucket)
 				return false;
 
-			int newIdx = start - (maxBucketElements * newBucket);
+			int newIdx = start - (_maxBucketElements * newBucket);
 
-			if (newIdx > list[newBucket].Index)
+			if (newIdx > _buckets[newBucket].Index)
 				return false;
 
-			curBucket = newBucket;
-			curIdx = newIdx;
-			current = newIdx < 0 ? default(T) : list[curBucket][curIdx];
+			_curBucket = newBucket;
+			_curIdx = newIdx;
+			_current = newIdx < 0 ? default(T) : _buckets[_curBucket][_curIdx];
 
 			return true;
 		}
@@ -83,10 +83,10 @@ namespace NotLimited.Framework.Collections.Chunked
 		{
 			get
 			{
-				if (list.Count == 0)
+				if (_buckets.Count == 0)
 					return 0;
 
-				return ((list.Count - 1) * maxBucketElements) + list[list.Count - 1].Index;
+				return ((_buckets.Count - 1) * _maxBucketElements) + _buckets[_buckets.Count - 1].Index;
 			}
 		}
 
@@ -94,25 +94,19 @@ namespace NotLimited.Framework.Collections.Chunked
 		{
 			get 
 			{
-				if (list.Count == 0 || (curIdx >= list[curBucket].Index - 1 && curIdx < maxBucketElements - 1))
+				if (_buckets.Count == 0 || (_curIdx >= _buckets[_curBucket].Index - 1 && _curIdx < _maxBucketElements - 1))
 					return false;
 
-				if (curIdx >= maxBucketElements - 1 && curBucket >= list.Count - 1)
+				if (_curIdx >= _maxBucketElements - 1 && _curBucket >= _buckets.Count - 1)
 					return false;
 
 				return true;
 			}
 		}
 
-		public T Current
-		{
-			get { return current; }
-		}
+		public T Current => _current;
 
-		object IEnumerator.Current
-		{
-			get { return current; }
-		}
+		object IEnumerator.Current => _current;
 
 		public void Dispose()
 		{
@@ -120,8 +114,8 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		public virtual void Reset()
 		{
-			curBucket = 0;
-			curIdx = -1;
+			_curBucket = 0;
+			_curIdx = -1;
 		}
 
 		public bool IsPositionEqual(IComparableChunkedEnumerator<T> other)
@@ -132,7 +126,7 @@ namespace NotLimited.Framework.Collections.Chunked
 				return false;
 			}
 
-			return curBucket == en.curBucket && curIdx == en.curIdx;
+			return _curBucket == en._curBucket && _curIdx == en._curIdx;
 		}
 
 		IChunkedEnumerator<T> IChunkedEnumerable<T>.GetEnumerator()
@@ -152,40 +146,45 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		public bool MoveNext()
 		{
-			if (list.Count == 0 || (curIdx >= list[curBucket].Index - 1 && curIdx < maxBucketElements - 1))
+			if (_buckets.Count == 0 || (_curIdx >= _buckets[_curBucket].Index - 1 && _curIdx < _maxBucketElements - 1))
 				return false;
 
-			if (curIdx >= maxBucketElements - 1)
+			if (_curIdx >= _maxBucketElements - 1)
 			{
-				if (curBucket >= list.Count - 1)
+				if (_curBucket >= _buckets.Count - 1)
 					return false;
 
-				curBucket++;
-				curIdx = -1;
+				_curBucket++;
+				_curIdx = -1;
 			}
 
-			curIdx++;
-			current = list[curBucket][curIdx];
+			_curIdx++;
+			_current = _buckets[_curBucket][_curIdx];
 			return true;
 		}
 
 		public bool MovePrev()
 		{
-			if (curIdx == -1)
+			if (_curIdx == -1)
 				return false;
 
-			if (curIdx == 0)
+			if (_curIdx == 0)
 			{
-				if (curBucket == 0)
+				if (_curBucket == 0)
 					return false;
 
-				curBucket--;
-				curIdx = maxBucketElements;
+				_curBucket--;
+				_curIdx = _maxBucketElements;
 			}
 
-			curIdx--;
-			current = list[curBucket][curIdx];
+			_curIdx--;
+			_current = _buckets[_curBucket][_curIdx];
 			return true;
+		}
+
+		public IComparableChunkedEnumerator<T> AsComparable()
+		{
+			return this;
 		}
 	}
 }

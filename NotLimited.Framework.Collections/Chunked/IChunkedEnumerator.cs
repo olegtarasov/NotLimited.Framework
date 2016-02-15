@@ -2,7 +2,7 @@
 
 namespace NotLimited.Framework.Collections.Chunked
 {
-	public interface IChunkedEnumerator<out T> : IChunkedEnumerable<T>, IEnumerator<T>
+	public interface IChunkedEnumerator<T> : IChunkedEnumerable<T>, IEnumerator<T>
 	{
 		bool MovePrev();
 		void FromFirst();
@@ -12,5 +12,6 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		int Count { get; }
 		bool HasMore { get; }
+		IComparableChunkedEnumerator<T> AsComparable();
 	}
 }

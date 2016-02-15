@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NotLimited.Framework.Collections
+namespace NotLimited.Framework.Collections.Transforming
 {
 	public static class Transformers
 	{
