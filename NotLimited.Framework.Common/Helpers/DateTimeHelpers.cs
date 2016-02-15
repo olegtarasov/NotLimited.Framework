@@ -13,5 +13,10 @@ namespace NotLimited.Framework.Common.Helpers
 
             return time.ToShortDateString() + " " + time.ToShortTimeString();
         }
+
+	    public static bool EqualsToSecond(this DateTime time, DateTime other)
+	    {
+		    return Math.Abs(time.Subtract(other).TotalSeconds) < 1;
+	    }
     }
 }
