@@ -104,6 +104,8 @@ namespace NotLimited.Framework.Collections.Chunked
 			}
 		}
 
+		public int Position => (_curBucket * _maxBucketElements) + _curIdx;
+
 		public T Current => _current;
 
 		object IEnumerator.Current => _current;

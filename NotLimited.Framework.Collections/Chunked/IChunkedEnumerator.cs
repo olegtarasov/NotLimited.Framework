@@ -12,6 +12,7 @@ namespace NotLimited.Framework.Collections.Chunked
 
 		int Count { get; }
 		bool HasMore { get; }
+		int Position { get; }
 		IComparableChunkedEnumerator<T> AsComparable();
 	}
 }

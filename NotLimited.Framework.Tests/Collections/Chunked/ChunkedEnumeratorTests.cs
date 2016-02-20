@@ -286,5 +286,33 @@ namespace NotLimited.Framework.Tests.Collections.Chunked
 				idx--;
 			}
 		}
+
+		[Fact]
+		public void CanGetPosition()
+		{
+			var list = new ChunkedList<int>(20);
+			list.AddRange(Enumerable.Range(0, 10).ToArray());
+
+			var en = list.GetEnumerator();
+			en.Position.ShouldEqual(-1);
+
+			for (int i = 0; i < 5; i++)
+			{
+				en.MoveNext().ShouldBeTrue();
+			}
+
+			en.Position.ShouldEqual(4);
+
+			for (int i = 0; i < 4; i++)
+			{
+				en.MoveNext().ShouldBeTrue();
+			}
+
+			en.Position.ShouldEqual(8);
+
+			while (en.MoveNext()) ;
+
+			en.Position.ShouldEqual(9);
+		}
 	}
 }
