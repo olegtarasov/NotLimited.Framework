@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace NotLimited.Framework.Common.Misc
 {
-	public class AwesomeConfig : DynamicObject
+	public class DynamicConfig : DynamicObject
 	{
 		private readonly StringDictionary settings = new StringDictionary();
 
-		public AwesomeConfig()
+		public DynamicConfig()
 		{
 			var asses = AppDomain.CurrentDomain.GetAssemblies();
 

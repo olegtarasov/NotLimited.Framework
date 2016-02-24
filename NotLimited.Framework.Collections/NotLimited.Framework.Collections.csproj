@@ -62,9 +62,6 @@
     <Compile Include="Chunked\Legacy\RevelationToken.cs" />
     <Compile Include="Chunked\Legacy\ReverseChunkedEnumerator.cs" />
     <Compile Include="Chunked\Legacy\TransformingChunkedEnumerator.cs" />
-    <Compile Include="CircularFifo.cs" />
-    <Compile Include="CircularFifoEnumerator.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Observable\IObservableBase.cs" />
     <Compile Include="Observable\ObservableBase.cs" />
     <Compile Include="Observable\ObservableList.cs" />

@@ -15,7 +15,7 @@ namespace NotLimited.Framework.Common.Helpers
 	    {
 		    if (source == null) throw new ArgumentNullException("source");
 
-		    return source.Where(item => !object.Equals(item, element));
+		    return source.Where(item => !Equals(item, element));
 	    }
 
 	    public static IReadOnlyList<T> CastToList<T>(this object source)
@@ -182,7 +182,7 @@ namespace NotLimited.Framework.Common.Helpers
 
         public static TValue Max<TSource, TValue>(this IEnumerable<TSource> source, Func<TSource, double> keySelector, Func<TSource, TValue> valueSelector)
         {
-            double max = double.MinValue;
+            double max = Double.MinValue;
             TValue value = default(TValue);
 
             foreach (var item in source)
@@ -330,5 +330,33 @@ namespace NotLimited.Framework.Common.Helpers
                 }
             }
         }
+
+	    public static MinMax<T> MinMax<T>(this IEnumerable<T> en, Func<T, double> selector)
+	    {
+		    var result = new MinMax<T>();
+		    double curItem, curMin, curMax;
+
+		    result.Max = result.Min = en.First();
+		    curMax = curMin = selector(result.Min);
+
+		    foreach (var item in en.Skip(1))
+		    {
+			    curItem = selector(item);
+
+			    if (curItem > curMax)
+			    {
+				    result.Max = item;
+				    curMax = curItem;
+			    }
+
+			    if (curItem < curMin)
+			    {
+				    result.Min = item;
+				    curMin = curItem;
+			    }
+		    }
+
+		    return result;
+	    }
     }
 }
