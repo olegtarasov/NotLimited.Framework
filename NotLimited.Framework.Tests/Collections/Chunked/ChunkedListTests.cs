@@ -18,13 +18,6 @@ namespace NotLimited.Framework.Tests.Collections.Chunked
 		}
 
 		[Fact]
-		public void CanSetMaxElemetsForPointer()
-		{
-			var list = new ChunkedList<object>(16);
-			list.MaxBucketElements.ShouldEqual(2);
-		}
-
-		[Fact]
 		public void CanAddElements()
 		{
 			var list = new ChunkedList<int>(40); // 10 of Int32
