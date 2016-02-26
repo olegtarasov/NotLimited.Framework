@@ -58,6 +58,9 @@
     <Compile Include="Animations\AnimationItem.cs" />
     <Compile Include="Converters\AppendTextConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\ICompositeConverter.cs" />
+    <Compile Include="Converters\IInlineConverter.cs" />
+    <Compile Include="Converters\InlineConverter.cs" />
     <Compile Include="Converters\IntVisibilityConverter.cs" />
     <Compile Include="Converters\InvertedBoolConverter.cs" />
     <Compile Include="Converters\InvertedVisibilityConverter.cs" />
