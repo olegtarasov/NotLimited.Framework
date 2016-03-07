@@ -118,6 +118,7 @@ namespace NotLimited.Framework.Collections.Chunked
 		{
 			_curBucket = 0;
 			_curIdx = -1;
+			_current = default(T);
 		}
 
 		public bool IsPositionEqual(IComparableChunkedEnumerator<T> other)

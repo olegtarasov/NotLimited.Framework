@@ -241,6 +241,7 @@ namespace NotLimited.Framework.Tests.Collections.Chunked
 			en.MoveNext().ShouldBeTrue();
 			en.Current.ShouldEqual(1);
 			en.Reset();
+			en.Current.ShouldEqual(0);
 			en.MoveNext().ShouldBeTrue();
 			en.Current.ShouldEqual(1);
 		}
