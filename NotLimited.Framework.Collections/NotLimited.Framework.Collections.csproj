@@ -67,7 +67,6 @@
     <Compile Include="Observable\ObservableList.cs" />
     <Compile Include="Observable\SimpleMonitor.cs" />
     <Compile Include="Observable\Tree.cs" />
-    <Compile Include="PairList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transforming\Transformers.cs" />
     <Compile Include="Transforming\TransformingEnumerator.cs" />
