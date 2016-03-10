@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace NotLimited.Framework.Common.Helpers.Xml
 {
     public static class XDocumentExtensions
     {
+	    public static T Deserialize<T>(this XElement node)
+	    {
+		    var reader = node.CreateReader();
+			var serializer = new XmlSerializer(typeof(T));
+
+		    return (T)serializer.Deserialize(reader);
+	    }
+
         public static XElement ChildElement(this XContainer node, string name)
         {
             return node.Elements().FirstOrDefault(x => x.Name.LocalName == name);
