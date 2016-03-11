@@ -15,7 +15,8 @@ namespace NotLimited.Framework.Wpf.Converters
 		{
 			var args = new ConverterEventArgs(value, targetType, parameter, culture);
 			var handler = Converting;
-			handler?.Invoke(this, args);
+            if (handler != null)
+			    handler(this, args);
 			return PostConverter == null
 				? args.ConvertedValue
 				: PostConverter.Convert(args.ConvertedValue, targetType, PostConverterParameter, culture);
@@ -25,7 +26,8 @@ namespace NotLimited.Framework.Wpf.Converters
 		{
 			var args = new ConverterEventArgs(value, targetType, parameter, culture);
 			var handler = ConvertingBack;
-			handler?.Invoke(this, args);
+            if (handler != null)
+			    handler(this, args);
 			return PostConverter == null
 				? args.ConvertedValue
 				: PostConverter.ConvertBack(args.ConvertedValue, targetType, PostConverterParameter, culture);

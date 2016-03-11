@@ -16,7 +16,7 @@ namespace NotLimited.Framework.Common.Testing
 
 				if (!object.Equals(valA, valB))
 				{
-					throw new InvalidOperationException($"Property {prop.Name} is not equal between objects!");
+					throw new InvalidOperationException(string.Format("Property {0} is not equal between objects!", prop.Name));
 				}
 			}
 		}
