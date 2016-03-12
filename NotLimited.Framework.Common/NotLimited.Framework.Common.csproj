@@ -77,6 +77,7 @@
     <Compile Include="Helpers\RandomExtensions.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Helpers\SafeExecutionContext.cs" />
+    <Compile Include="Helpers\SerializationHelpers.cs" />
     <Compile Include="Helpers\StreamExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringLogicalComparer.cs" />
