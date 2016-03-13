@@ -65,6 +65,7 @@
     <Compile Include="Converters\InvertedBoolConverter.cs" />
     <Compile Include="Converters\InvertedVisibilityConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="FileDialogHelpers.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="Inherit.cs" />
     <Compile Include="ObservableWrapper.cs" />

@@ -11,16 +11,19 @@ namespace NotLimited.Framework.Common.Helpers
 				task.Exception.Handle(x => true);
 		}
 
-		public static async void HandleException(this Task task, Action<Exception> handler)
+		public static void HandleException(this Task task, Action<Exception> handler)
 		{
-			try
+			task.ContinueWith(result =>
 			{
-				await task.ConfigureAwait(false);
-			}
-			catch (Exception e)
-			{
-				handler(e);
-			}
+				if (result.Exception != null)
+				{
+					result.Exception.Handle(exception =>
+					{
+						handler(exception);
+						return true;
+					});
+				}
+			}, TaskScheduler.FromCurrentSynchronizationContext());
 		}
 	}
 }
