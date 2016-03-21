@@ -70,6 +70,7 @@
     <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="Helpers\CollectionFilterDefinition.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\MinMaxTracker.cs" />
     <Compile Include="Helpers\Native\MouseHook.cs" />
     <Compile Include="Helpers\PathEqualityComparer.cs" />
     <Compile Include="Helpers\PathHelpers.cs" />
