@@ -78,7 +78,9 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public static Dictionary<string, int> GetEnumDictionaryReflection<T>()
 		{
-			var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static);
+			var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
+
+			var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
 
 			return (from field in fields
 					let value = field.GetRawConstantValue()
