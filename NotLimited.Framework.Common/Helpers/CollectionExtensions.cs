@@ -358,5 +358,25 @@ namespace NotLimited.Framework.Common.Helpers
 
 		    return result;
 	    }
-    }
+
+		public static MinMax<double> MinMax(this IEnumerable<double> en)
+		{
+			var result = new MinMax<double> {Max = double.MinValue, Min = double.MaxValue};
+			
+			foreach (var item in en)
+			{
+				if (item > result.Max)
+				{
+					result.Max = item;
+				}
+
+				if (item < result.Min)
+				{
+					result.Min = item;
+				}
+			}
+
+			return result;
+		}
+	}
 }
