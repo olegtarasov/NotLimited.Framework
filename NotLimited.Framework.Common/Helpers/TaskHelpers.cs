@@ -11,6 +11,18 @@ namespace NotLimited.Framework.Common.Helpers
 				task.Exception.Handle(x => true);
 		}
 
+		public static void HandleExceptionLight(this Task task, Action<Exception> handler)
+		{
+			if (task.Exception != null)
+			{
+				task.Exception.Handle(exception =>
+				{
+					handler(exception);
+					return true;
+				});
+			}
+		}
+
 		public static void HandleException(this Task task, Action<Exception> handler)
 		{
 			task.ContinueWith(result =>
