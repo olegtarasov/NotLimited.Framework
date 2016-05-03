@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace NotLimited.Framework.Common.Helpers
 {
 	public static class StringExtensions
 	{
+		public static string ConcatNewLine(this IEnumerable<string> items)
+		{
+			var sb = new StringBuilder();
+			foreach (var item in items)
+			{
+				sb.AppendLine(item);
+			}
+
+			return sb.ToString();
+		}
+
 		public static bool ParseBool(this string input, bool def = false)
 		{
 			bool boolResult;
