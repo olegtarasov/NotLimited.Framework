@@ -8,6 +8,19 @@ namespace NotLimited.Framework.Common.Helpers
 {
 	public static class StringExtensions
 	{
+		public static string RemoveInvalidFileNameChars(this string input)
+		{
+			var chars = Path.GetInvalidFileNameChars();
+			var sb = new StringBuilder(input);
+
+			for (int i = 0; i < chars.Length; i++)
+			{
+				sb.Replace(chars[i].ToString(), "");
+			}
+
+			return sb.ToString();
+		}
+
 		public static string ConcatNewLine(this IEnumerable<string> items)
 		{
 			var sb = new StringBuilder();
