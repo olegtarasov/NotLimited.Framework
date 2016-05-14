@@ -4,19 +4,19 @@ using System.Windows.Media;
 
 namespace NotLimited.Framework.Wpf
 {
-	public class TextRenderer
+	public class WpfTextRenderer
 	{
 		private Typeface _typeface;
 		private GlyphTypeface _glyphFace;
 		private double _fontSize;
 		private double _fontHeight;
 
-		public TextRenderer()
+		public WpfTextRenderer()
 			: this(new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal))
 		{
 		}
 
-		public TextRenderer(Typeface typeface)
+		public WpfTextRenderer(Typeface typeface)
 		{
 			_typeface = typeface;
 			_fontSize = 12;

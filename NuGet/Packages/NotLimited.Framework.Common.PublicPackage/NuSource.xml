@@ -1,0 +1,9 @@
+<NuSource
+	ProjectDir="..\..\..\NotLimited.Framework.Common"
+	MakeInternal="false"
+	UseTargetNamespace="false"
+	AddWarning="true"
+	UseAppPackage="true"
+	PackageName="NotLimited.Framework.Common.PublicPackage">
+
+</NuSource>

@@ -1,0 +1,13 @@
+<NuSource
+	ProjectDir="..\..\..\NotLimited.Framework.Wpf"
+	MakeInternal="false"
+	UseTargetNamespace="false"
+	AddWarning="true"
+	UseAppPackage="true"
+	PackageName="NotLimited.Framework.Wpf.PublicPackage">
+
+	<Dependencies>
+		<Dependency Name="NotLimited.Framework.Common.PublicPackage" Version="1.0.0"/>
+	</Dependencies>
+
+</NuSource>
