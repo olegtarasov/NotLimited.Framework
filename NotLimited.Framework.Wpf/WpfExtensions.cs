@@ -122,6 +122,12 @@ namespace NotLimited.Framework.Wpf
 				binding.UpdateSource();
 		}
 
+		public static void UpdateAllBindingTargets(this DependencyObject obj)
+		{
+			foreach (var binding in GetAllBindings(obj))
+				binding.UpdateTarget();
+		}
+
 		public static IEnumerable<BindingExpression> GetAllBindings(this DependencyObject obj)
 		{
 			var stack = new Stack<DependencyObject>();
