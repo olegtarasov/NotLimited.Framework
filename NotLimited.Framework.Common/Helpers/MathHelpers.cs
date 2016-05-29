@@ -49,6 +49,46 @@ namespace NotLimited.Framework.Common.Helpers
 			return min;
 		}
 
+		public static int? Max(params int?[] nums)
+		{
+			int max = int.MinValue;
+			bool notNull = false;
+
+			for (int i = 0; i < nums.Length; i++)
+			{
+				if (!nums[i].HasValue)
+				{
+					continue;
+				}
+
+				notNull = true;
+				if (nums[i].Value > max)
+					max = nums[i].Value;
+			}
+
+			return notNull ? max : (int?)null;
+		}
+
+		public static int? Min(params int?[] nums)
+		{
+			int min = int.MaxValue;
+			bool notNull = false;
+
+			for (int i = 0; i < nums.Length; i++)
+			{
+				if (!nums[i].HasValue)
+				{
+					continue;
+				}
+
+				notNull = true;
+				if (nums[i].Value < min)
+					min = nums[i].Value;
+			}
+
+			return notNull ? min : (int?)null;
+		}
+
 		public static void MinMax(double a, double b, out double min, out double max)
 		{
 			if (a > b)
@@ -121,6 +161,11 @@ namespace NotLimited.Framework.Common.Helpers
 		public static double Round(this double value, int nums = 4)
 		{
 			return Math.Round(value, nums);
+		}
+
+		public static double? Abs(double? value)
+		{
+			return value != null ? Math.Abs(value.Value) : (double?)null;
 		}
 	}
 }
