@@ -375,5 +375,17 @@ namespace NotLimited.Framework.Common.Helpers
 
 			return result;
 		}
+
+        public static SortedDictionary<TTargetKey, List<TValue>> ToSortedDictionaryOfLists<TKey, TTargetKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groups, Func<TKey, TTargetKey> keyFunc)
+        {
+            var result = new SortedDictionary<TTargetKey, List<TValue>>();
+
+            foreach (var batch in groups.OrderBy(x => x.Key))
+            {
+                result.Add(keyFunc(batch.Key), new List<TValue>(batch));
+            }
+
+            return result;
+        }
 	}
 }
