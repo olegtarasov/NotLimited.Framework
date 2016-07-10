@@ -20,5 +20,11 @@
 				}
 			}
 		}
+
+	    public void Reset()
+	    {
+	        Min = double.MaxValue;
+	        Max = double.MinValue;
+	    }
 	}
 }
