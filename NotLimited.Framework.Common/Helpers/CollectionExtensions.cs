@@ -8,6 +8,12 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static bool Contains<T>(this ConcurrentBag<T> bag, T item)
+        {
+            T result;
+            return bag.TryPeek(out result);
+        }
+
         public static bool Remove<T>(this ConcurrentBag<T> bag, T item)
         {
             T dummy;
