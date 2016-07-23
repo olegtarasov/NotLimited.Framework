@@ -8,6 +8,12 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static bool Remove<T>(this ConcurrentBag<T> bag, T item)
+        {
+            T dummy;
+            return bag.TryTake(out dummy);
+        }
+
 	    public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T element)
 	    {
 		    if (source == null) throw new ArgumentNullException("source");
