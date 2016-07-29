@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NotLimited.Framework.Common.Helpers
@@ -25,6 +26,11 @@ namespace NotLimited.Framework.Common.Helpers
 
 		public static void HandleException(this Task task, Action<Exception> handler)
 		{
+		    if (SynchronizationContext.Current == null)
+		    {
+		        SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+		    }
+
 			task.ContinueWith(result =>
 			{
 				if (result.Exception != null)
