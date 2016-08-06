@@ -8,6 +8,11 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static SortedList<TKey, TValue> Clone<TKey, TValue>(this SortedList<TKey, TValue> source)
+        {
+            return new SortedList<TKey, TValue>(source, source.Comparer);
+        }
+
         public static bool Contains<T>(this ConcurrentBag<T> bag, T item)
         {
             T result;
