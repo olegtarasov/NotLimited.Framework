@@ -8,6 +8,16 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static SortedDictionary<TKey, TValue> Clone<TKey, TValue>(this SortedDictionary<TKey, TValue> source)
+        {
+            return new SortedDictionary<TKey, TValue>(source, source.Comparer);
+        }
+
+        public static SortedSet<T> Clone<T>(this SortedSet<T> source)
+        {
+            return new SortedSet<T>(source, source.Comparer);
+        }
+
         public static SortedList<TKey, TValue> Clone<TKey, TValue>(this SortedList<TKey, TValue> source)
         {
             return new SortedList<TKey, TValue>(source, source.Comparer);
