@@ -6,7 +6,7 @@ namespace NotLimited.Framework.Common.Helpers
 {
 	public static class IPHelpers
 	{
-		private static readonly Regex _ipRegex = new Regex(@"<body>.*?\:\s+(.*?)</body>");
+		private static readonly Regex _ipRegex = new Regex(@"Your IP is\s+<b>(.*)</b>");
 
 		public static IPAddress GetExternalIp()
 		{
@@ -14,7 +14,7 @@ namespace NotLimited.Framework.Common.Helpers
 
 			try
 			{
-				string result = client.DownloadString("http://checkip.dyndns.org/");
+				string result = client.DownloadString("http://ping.eu/");
 				var match = _ipRegex.Match(result);
 
 				if (!match.Success || match.Groups.Count < 2)
