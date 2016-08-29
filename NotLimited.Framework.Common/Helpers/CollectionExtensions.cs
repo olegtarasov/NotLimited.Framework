@@ -414,5 +414,20 @@ namespace NotLimited.Framework.Common.Helpers
 
             return result;
         }
+
+	    public static ConcurrentDictionary<TKey, TValue> ToConcurrentDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keyFunc, Func<TSource, TValue> valueFunc)
+	    {
+		    if (source == null) throw new ArgumentNullException(nameof(source));
+		    if (keyFunc == null) throw new ArgumentNullException(nameof(keyFunc));
+		    if (valueFunc == null) throw new ArgumentNullException(nameof(valueFunc));
+		    
+			var result = new ConcurrentDictionary<TKey, TValue>();
+		    foreach (var item in source)
+		    {
+			    result.AddOrUpdate(keyFunc(item), valueFunc(item));
+		    }
+
+		    return result;
+	    }
 	}
 }
