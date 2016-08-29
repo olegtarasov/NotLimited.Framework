@@ -11,6 +11,16 @@ namespace NotLimited.Framework.Common.Helpers.NLog
 	{
 		public static void ConfigureConsoleAndFileLogger()
 		{
+			LogManager.Configuration = GetConsoleAndFileLoggingConfig();
+		}
+
+		public static LogFactory GetConsoleAndFileLoggingFactory()
+		{
+			return new LogFactory(GetConsoleAndFileLoggingConfig());
+		}
+
+		private static LoggingConfiguration GetConsoleAndFileLoggingConfig()
+		{
 			var config = new LoggingConfiguration();
 
 			config.AddTarget("console", new ColoredConsoleTarget { Layout = new SimpleLayout("${logger}: ${message} ${exception:format=tostring}") });
@@ -31,7 +41,7 @@ namespace NotLimited.Framework.Common.Helpers.NLog
 			config.AddRule(LogLevel.Debug, LogLevel.Fatal, "console");
 			config.AddRule(LogLevel.Debug, LogLevel.Fatal, "file");
 
-			LogManager.Configuration = config;
+			return config;
 		}
 	}
 }
