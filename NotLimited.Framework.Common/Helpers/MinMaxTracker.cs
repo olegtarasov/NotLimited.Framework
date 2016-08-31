@@ -2,8 +2,10 @@
 {
 	public class MinMaxTracker
 	{
-		public double Min = double.MaxValue;
-		public double Max = double.MinValue;
+		public double Min { get; private set; } = double.MaxValue;
+		public double Max { get; private set; } = double.MinValue;
+
+	    public double Range { get; private set; } = double.NaN;
 
 		public void Track(params double[] numbers)
 		{
@@ -18,13 +20,21 @@
 				{
 					Min = numbers[i];
 				}
+
+			    Range = Max - Min;
 			}
 		}
+
+	    public double Normalize(double value)
+	    {
+	        return (value - Min) / Range;
+	    }
 
 	    public void Reset()
 	    {
 	        Min = double.MaxValue;
 	        Max = double.MinValue;
+	        Range = double.NaN;
 	    }
 	}
 }
