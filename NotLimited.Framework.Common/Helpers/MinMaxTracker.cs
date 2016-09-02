@@ -2,8 +2,8 @@
 {
 	public class MinMaxTracker
 	{
-		public double Min { get; private set; } = double.MaxValue;
-		public double Max { get; private set; } = double.MinValue;
+		public double Min { get; private set; } = double.NaN;
+		public double Max { get; private set; } = double.NaN;
 
 	    public double Range { get; private set; } = double.NaN;
 
@@ -11,12 +11,17 @@
 		{
 			for (int i = 0; i < numbers.Length; i++)
 			{
-				if (numbers[i] > Max)
+			    if (double.IsNaN(numbers[i]))
+			    {
+			        continue;
+			    }
+
+				if (double.IsNaN(Max) || numbers[i] > Max)
 				{
 					Max = numbers[i];
 				}
 
-				if (numbers[i] < Min)
+				if (double.IsNaN(Min) || numbers[i] < Min)
 				{
 					Min = numbers[i];
 				}
