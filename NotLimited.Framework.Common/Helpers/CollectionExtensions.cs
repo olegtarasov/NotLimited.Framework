@@ -8,6 +8,26 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static bool HashsetEquals<T>(this HashSet<T> source, HashSet<T> compareTo)
+        {
+            if (source == null && compareTo == null)
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(source, compareTo))
+            {
+                return true;
+            }
+
+            if (source == null || compareTo == null)
+            {
+                return false;
+            }
+
+            return source.SetEquals(compareTo);
+        }
+
         public static SortedDictionary<TKey, TValue> Clone<TKey, TValue>(this SortedDictionary<TKey, TValue> source)
         {
             return new SortedDictionary<TKey, TValue>(source, source.Comparer);
