@@ -8,6 +8,7 @@ NuGet/Packages/*/*.nupkg
 *.suo
 *.user
 *.sln.docstates
+.vs/
 
 # Build results
 
