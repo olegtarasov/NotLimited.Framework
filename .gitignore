@@ -9,6 +9,9 @@ NuGet/Packages/*/*.nupkg
 *.user
 *.sln.docstates
 .vs/
+*.lock.json
+*.nuget.props
+*.nuget.targets
 
 # Build results
 
