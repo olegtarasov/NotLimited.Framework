@@ -10,7 +10,41 @@ namespace NotLimited.Framework.Common.Helpers
 
 	public static class MathHelpers
 	{
-		public static List<double> Normalize(this IReadOnlyList<double> source)
+        /// <summary>
+        /// Element-wize array subtraction.
+        /// </summary>
+        public static double[] Subtract(this double[] from, double[] subtractor)
+        {
+            if (from == null) throw new ArgumentNullException(nameof(from));
+            if (subtractor == null) throw new ArgumentNullException(nameof(subtractor));
+            if (from.Length != subtractor.Length) throw new InvalidOperationException("Arrays are of different sizes!");
+
+            var result = new double[from.Length];
+            for (int i = 0; i < from.Length; i++)
+            {
+                result[i] = from[i] - subtractor[i];
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Element-wize array multiplication with a constant
+        /// </summary>
+        public static double[] Multiply(this double[] array, double multiplier)
+        {
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            
+            var result = new double[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                result[i] = array[i] * multiplier;
+            }
+
+            return result;
+        }
+
+        public static List<double> Normalize(this IReadOnlyList<double> source)
 		{
 			var result = new List<double>(source.Count);
 			double total = 0.0d;
