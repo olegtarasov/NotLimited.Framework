@@ -8,6 +8,25 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static void CopyTo(this Array source, Array destination)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            if (destination.Length < source.Length) throw new InvalidOperationException("Target array size must be greater or equal to source array size!");
+
+            Array.Copy(source, 0, destination, 0, source.Length);
+        }
+
+        public static T[] CloneArray<T>(this T[] source) where T : struct
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
+            var result = new T[source.Length];
+            Array.Copy(source, 0, result, 0, source.Length);
+
+            return result;
+        }
+
         public static bool HashsetEquals<T>(this HashSet<T> source, HashSet<T> compareTo)
         {
             if (source == null && compareTo == null)
