@@ -24,7 +24,8 @@ namespace NotLimited.Framework.Common.PublishSubscribe
 
         public void Publish(string message, object arg)
         {
-            if (_subscribers.TryGetValue(message, out List<Action<object>> list))
+            List<Action<object>> list;
+            if (_subscribers.TryGetValue(message, out list))
             {
                 for (int i = 0; i < list.Count; i++)
                 {
