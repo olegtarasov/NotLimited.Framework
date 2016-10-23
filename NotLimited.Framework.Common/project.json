@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "NLog": "4.3.9"
+    "NLog": "4.3.10"
   },
   "frameworks": {
     "net451": {}
