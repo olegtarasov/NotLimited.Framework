@@ -50,30 +50,6 @@ namespace NotLimited.Framework.Common.Helpers
 			return result;
 		}
 
-		[Obsolete]
-		public static Dictionary<T, string> GetEnumDictionary<T>()
-		{
-			return GetEnumDictionary<T>(typeof(T));
-		}
-
-		[Obsolete]
-		public static Dictionary<T, string> GetEnumDictionary<T>(Type enumType)
-		{
-			var fields = enumType.GetFields(BindingFlags.Public | BindingFlags.Static);
-
-			return (from field in fields
-					let value = field.GetRawConstantValue()
-					let description = field.GetDisplayName()
-					orderby value
-					select new { Name = description, Value = value })
-				.ToDictionary(x => (T)x.Value, x => x.Name);
-		}
-
-		public static string GetEnumValueString<T>(this T en)
-		{
-			return GetEnumDictionary<T>()[en];
-		}
-
 		public static Dictionary<string, int> GetEnumDictionaryReflection<T>()
 		{
 			var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
