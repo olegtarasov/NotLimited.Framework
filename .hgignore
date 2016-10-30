@@ -6,6 +6,7 @@ syntax: glob
 project.lock.json
 *.VC.db
 *.VC.opendb
+.vs
 
 ## Mac ignores
 ._*
