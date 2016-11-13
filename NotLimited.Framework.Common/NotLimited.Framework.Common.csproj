@@ -91,7 +91,6 @@
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Misc\DynamicConfig.cs" />
-    <Compile Include="Misc\NamedPipeServer.cs" />
     <Compile Include="Misc\ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishSubscribe\Post.cs" />
