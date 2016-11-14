@@ -11,23 +11,23 @@ namespace NotLimited.Framework.Common.Helpers.NLog
 	{
 		public static void ConfigureConsoleAndFileLogger()
 		{
-			LogManager.Configuration = GetConsoleAndFileLoggingConfig();
+			LogManager.Configuration = GetConsoleAndFileLoggingConfig(Assembly.GetCallingAssembly().GetName().Name);
 		}
 
 		public static LogFactory GetConsoleAndFileLoggingFactory()
 		{
-			return new LogFactory(GetConsoleAndFileLoggingConfig());
+			return new LogFactory(GetConsoleAndFileLoggingConfig(Assembly.GetCallingAssembly().GetName().Name));
 		}
 
-		private static LoggingConfiguration GetConsoleAndFileLoggingConfig()
+		private static LoggingConfiguration GetConsoleAndFileLoggingConfig(string assemblyName)
 		{
 			var config = new LoggingConfiguration();
 
 			config.AddTarget("console", new ColoredConsoleTarget { Layout = new SimpleLayout("${logger}: ${message} ${exception:format=tostring}") });
 			config.AddTarget("file", new FileTarget
 			{
-				FileName = new SimpleLayout("${basedir}/logs/" + Assembly.GetCallingAssembly().GetName().Name + ".txt"),
-				Layout = new SimpleLayout("${longdate} ${logger}: ${message} ${exception:format=tostring}"),
+				FileName = new SimpleLayout("${basedir}/logs/" + assemblyName + ".txt"),
+				Layout = new SimpleLayout("${longdate} [${level}] ${logger}: ${message} ${exception:format=tostring}"),
 				ArchiveFileName = new SimpleLayout("${basedir}/archives/log.{#####}.txt"),
 				ArchiveAboveSize = 1024000,
 				ArchiveNumbering = ArchiveNumberingMode.Sequence,
