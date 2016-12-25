@@ -5,12 +5,13 @@ namespace NotLimited.Framework.Wpf
 {
 	public static class FileDialogHelpers
 	{
-		public static void LoadFiles(Action<string[]> action, string filter)
+		public static void LoadFiles(Action<string[]> action, string filter, string title = null)
 		{
 			var dlg = new OpenFileDialog
 			{
 				Filter = filter,
-				Multiselect = true
+				Multiselect = true,
+                Title = title
 			};
 			if (dlg.ShowDialog() == true && dlg.FileNames.Length > 0)
 			{
@@ -18,11 +19,12 @@ namespace NotLimited.Framework.Wpf
 			}
 		}
 
-		public static void LoadFile(Action<string> action, string filter)
+		public static void LoadFile(Action<string> action, string filter, string title = null)
 		{
 			var dlg = new OpenFileDialog
 			{
 				Filter = filter,
+                Title = title
 			};
 			if (dlg.ShowDialog() == true && !string.IsNullOrEmpty(dlg.FileName))
 			{
@@ -30,11 +32,12 @@ namespace NotLimited.Framework.Wpf
 			}
 		}
 
-		public static void SaveFile(Action<string> action, string filter)
+		public static void SaveFile(Action<string> action, string filter, string title = null)
 		{
 			var dlg = new SaveFileDialog
 			{
 				Filter = filter,
+                Title = title
 			};
 			if (dlg.ShowDialog() == true && !string.IsNullOrEmpty(dlg.FileName))
 			{
