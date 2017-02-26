@@ -204,7 +204,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NugetRelativeRefs.xslt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -226,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="NugetRelativeRefs.targets" />
     <None Include="Views\Shared\ConfirmDialog.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ConfirmDialog.generated.cs</LastGenOutput>
@@ -288,7 +286,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="NugetRelativeRefs.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
