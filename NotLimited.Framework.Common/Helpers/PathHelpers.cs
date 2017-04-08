@@ -28,7 +28,7 @@ namespace NotLimited.Framework.Common.Helpers
             return path.Trim(_separators).ToUpperInvariant().GetHashCode();
         }
 
-		public static IEnumerable<string> FindFiles(string path, string filter = "*.*")
+		public static IEnumerable<string> FindFilesRecursive(string path, string filter = "*.*")
 		{
 			var queue = new Queue<string>();
 			queue.Enqueue(path);

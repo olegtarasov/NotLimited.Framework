@@ -5,11 +5,12 @@
 Nuget/Packages/*/sources/
 Nuget/Packages/*/*.nupkg
 Hannibal.Distributed.Slave/Updater.exe
-out/
+[Oo]ut/
 .vs/
 *.VC.db
 *.lock.json
 *.nuget.props
+*.tss
 
 # User-specific files
 *.suo
