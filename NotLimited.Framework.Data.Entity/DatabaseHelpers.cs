@@ -45,12 +45,12 @@ execute (@SQL);";
 
         private static readonly Type _genericEnum = typeof(IEnumerable<>);
 
-        public static IQueryable<T> IncludeVirtualTree<T>(this IQueryable<T> source)
+        public static IQueryable<T> IncludeVirtualTree<T>(this IQueryable<T> source) where T : class
         {
             return source.IncludeVirtualTree(typeof(T), new HashSet<Type>(), "");
         }
 
-        private static IQueryable<T> IncludeVirtualTree<T>(this IQueryable<T> source, Type type, HashSet<Type> visited, string path)
+        private static IQueryable<T> IncludeVirtualTree<T>(this IQueryable<T> source, Type type, HashSet<Type> visited, string path) where T : class 
         {
             var result = source;
             var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x =>
