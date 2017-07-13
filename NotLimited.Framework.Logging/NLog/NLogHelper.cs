@@ -5,7 +5,7 @@ using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
 
-namespace NotLimited.Framework.Common.Helpers.NLog
+namespace NotLimited.Framework.Logging.NLog
 {
 	public static class NLogHelper
 	{
@@ -38,8 +38,8 @@ namespace NotLimited.Framework.Common.Helpers.NLog
 				EnableFileDelete = true
 			});
 
-			config.AddRule(LogLevel.Debug, LogLevel.Fatal, "console");
-			config.AddRule(LogLevel.Debug, LogLevel.Fatal, "file");
+			config.AddRule(global::NLog.LogLevel.Debug, global::NLog.LogLevel.Fatal, "console");
+			config.AddRule(global::NLog.LogLevel.Debug, global::NLog.LogLevel.Fatal, "file");
 
 			return config;
 		}

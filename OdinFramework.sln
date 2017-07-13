@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26621.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Server", "NotLimited.Framework.Server\NotLimited.Framework.Server.csproj", "{615003D2-ADFF-473C-BF06-6FB13AD84053}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Data.Entity", "NotLimited.Framework.Data.Entity\NotLimited.Framework.Data.Entity.csproj", "{778503EE-3BFB-4549-A427-94C88B99ADFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Tests", "NotLimited.Framework.Tests\NotLimited.Framework.Tests.csproj", "{DC05E617-DA9B-424B-81AD-A3ACC941837A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Logging", "NotLimited.Framework.Logging\NotLimited.Framework.Logging.csproj", "{246F2FF7-F68B-48D4-B997-B4569D5AA004}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,8 +59,15 @@ Global
 		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC05E617-DA9B-424B-81AD-A3ACC941837A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246F2FF7-F68B-48D4-B997-B4569D5AA004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246F2FF7-F68B-48D4-B997-B4569D5AA004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246F2FF7-F68B-48D4-B997-B4569D5AA004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246F2FF7-F68B-48D4-B997-B4569D5AA004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D60AD4AC-9697-4A81-BC50-5D0EDC917BD8}
 	EndGlobalSection
 EndGlobal

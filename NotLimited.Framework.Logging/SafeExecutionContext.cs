@@ -1,7 +1,6 @@
 ﻿using System;
-using NotLimited.Framework.Common.Logging;
 
-namespace NotLimited.Framework.Common.Helpers
+namespace NotLimited.Framework.Logging
 {
 	public class SafeExecutionExceptionArgs : EventArgs
 	{

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NotLimited.Framework.Logging</id>
+    <version>$version$</version>
+    <title>NotLimited.Framework logging helpers.</title>
+    <authors>Oleg Tarasov</authors>
+    <owners>Oleg Tarasov</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Logging helpers.</description>
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+</package>

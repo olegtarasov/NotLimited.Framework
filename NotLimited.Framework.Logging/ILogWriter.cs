@@ -1,4 +1,4 @@
-﻿namespace NotLimited.Framework.Common.Logging
+﻿namespace NotLimited.Framework.Logging
 {
 	/// <summary>
 	/// Generic log writer interface

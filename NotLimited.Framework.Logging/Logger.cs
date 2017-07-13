@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace NotLimited.Framework.Common.Logging
+namespace NotLimited.Framework.Logging
 {
 	public enum LogLevel { Debug, Info, Warn, Error, Catastrophe }
 

@@ -41,10 +41,6 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Common.Logging" Version="3.3.1" />
-    <PackageReference Include="NLog" Version="4.4.10" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -76,13 +72,11 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\MinMaxTracker.cs" />
     <Compile Include="Helpers\Native\MouseHook.cs" />
-    <Compile Include="Helpers\NLog\NLogHelper.cs" />
     <Compile Include="Helpers\PathEqualityComparer.cs" />
     <Compile Include="Helpers\PathHelpers.cs" />
     <Compile Include="Helpers\PerformanceTimer.cs" />
     <Compile Include="Helpers\RandomExtensions.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
-    <Compile Include="Helpers\SafeExecutionContext.cs" />
     <Compile Include="Helpers\SerializationHelpers.cs" />
     <Compile Include="Helpers\StreamExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
@@ -92,9 +86,6 @@
     <Compile Include="Helpers\TrueRandom.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Helpers\Xml\XDocumentExtensions.cs" />
-    <Compile Include="Logging\FileSystemLogWriter.cs" />
-    <Compile Include="Logging\ILogWriter.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Misc\DynamicConfig.cs" />
     <Compile Include="Misc\ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
