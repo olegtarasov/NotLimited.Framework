@@ -9,6 +9,11 @@ namespace NotLimited.Framework.Logging.NLog
 {
 	public static class NLogHelper
 	{
+	    public static void ConfigureCommonLoggingWithNLog(LogFactory factory)
+	    {
+	        Common.Logging.LogManager.Adapter = new NLogFactoryAdapter(factory);
+	    }
+
 		public static void ConfigureConsoleAndFileLogger()
 		{
 			LogManager.Configuration = GetConsoleAndFileLoggingConfig(Assembly.GetCallingAssembly().GetName().Name);
