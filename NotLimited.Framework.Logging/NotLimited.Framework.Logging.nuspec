@@ -9,5 +9,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Logging helpers.</description>
     <copyright>Copyright 2017</copyright>
+
+    <dependencies>
+        <dependency id="Common.Logging" version="3.3.1" />
+        <dependency id="NLog" version="4.4.11" />
+    </dependencies>
   </metadata>
 </package>
