@@ -8,6 +8,11 @@ namespace NotLimited.Framework.Common.Helpers
 {
     public static class CollectionExtensions
     {
+        public static IEnumerable<T> Concat<T>(this IEnumerable<IEnumerable<T>> source)
+        {
+            return source.SelectMany(x => x);
+        }
+
         public static void CopyTo(this Array source, Array destination)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));

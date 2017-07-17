@@ -27,5 +27,10 @@ namespace NotLimited.Framework.Common.Helpers
         {
             return new StreamWriter(path);
         }
+
+        public static BinaryWriter bwriter(Stream stream)
+        {
+            return new BinaryWriter(stream);
+        }
     }
 }
