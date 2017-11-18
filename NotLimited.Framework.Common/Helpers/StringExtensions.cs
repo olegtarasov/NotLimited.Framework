@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -197,6 +198,11 @@ namespace NotLimited.Framework.Common.Helpers
                 return input;
             int iNextSpace = input.LastIndexOf(" ", length, StringComparison.Ordinal);
             return string.Format("{0}...", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
+        }
+
+        public static string ToInvariantString(this double val)
+        {
+            return val.ToString(NumberFormatInfo.InvariantInfo);
         }
 	}
 }

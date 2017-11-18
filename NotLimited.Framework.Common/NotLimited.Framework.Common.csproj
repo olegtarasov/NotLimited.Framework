@@ -61,7 +61,6 @@
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
     <Compile Include="Helpers\FuncComparer.cs" />
-    <Compile Include="Helpers\Generators.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\IPHelpers.cs" />
     <Compile Include="Helpers\Lambda.cs" />
