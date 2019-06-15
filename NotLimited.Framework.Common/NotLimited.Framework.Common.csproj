@@ -6,6 +6,7 @@
     <Company />
     <Authors>Oleg Tarasov</Authors>
     <Product>NotLimited.Framework common helpers</Product>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
