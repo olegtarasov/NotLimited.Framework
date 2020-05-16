@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotLimited.Framework.Collections.Observable
+namespace NotLimited.Framework.Common.Collections.Observable
 {
 	[Serializable]
 	public sealed class SimpleMonitor : IDisposable

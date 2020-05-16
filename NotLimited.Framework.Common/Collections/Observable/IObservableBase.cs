@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace NotLimited.Framework.Collections.Observable
+namespace NotLimited.Framework.Common.Collections.Observable
 {
 	public interface IObservableBase<T> : ICollection<T>, INotifyPropertyChanged, INotifyCollectionChanged
 	{

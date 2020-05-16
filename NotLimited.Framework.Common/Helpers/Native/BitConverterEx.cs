@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotLimited.Framework.Native
+namespace NotLimited.Framework.Common.Helpers.Native
 {
 	public static class BitConverterEx
 	{

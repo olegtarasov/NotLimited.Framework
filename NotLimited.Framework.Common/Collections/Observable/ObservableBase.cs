@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace NotLimited.Framework.Collections.Observable
+namespace NotLimited.Framework.Common.Collections.Observable
 {
 	[DataContract]
 	public class ObservableBase<T> : IObservableBase<T>, IDisposable

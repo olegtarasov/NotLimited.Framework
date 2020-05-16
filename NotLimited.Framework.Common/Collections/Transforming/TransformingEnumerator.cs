@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NotLimited.Framework.Collections.Transforming
+namespace NotLimited.Framework.Common.Collections.Transforming
 {
 	public sealed class TransformingEnumerator<T, E> : IEnumerator<E>
 	{

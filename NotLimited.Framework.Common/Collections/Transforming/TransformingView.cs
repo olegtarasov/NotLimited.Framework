@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace NotLimited.Framework.Collections.Transforming
+namespace NotLimited.Framework.Common.Collections.Transforming
 {
 	public sealed class TransformingView<T, E> : INotifyCollectionChanged, IDisposable, IEnumerable<E>
 	{
