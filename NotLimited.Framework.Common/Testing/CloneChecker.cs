@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Reflection;
 
-namespace NotLimited.Framework.Common.Testing
+namespace NotLimited.Framework.Common.Testing;
+
+public static class CloneChecker
 {
-	public static class CloneChecker
+	public static void AssertMembersEqualTo<T>(this T a, T b)
 	{
-		public static void AssertMembersEqualTo<T>(this T a, T b)
+		var props = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+		foreach (var prop in props)
 		{
-			var props = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+			var valA = prop.GetValue(a);
+			var valB = prop.GetValue(b);
 
-			foreach (var prop in props)
+			if (!object.Equals(valA, valB))
 			{
-				var valA = prop.GetValue(a);
-				var valB = prop.GetValue(b);
-
-				if (!object.Equals(valA, valB))
-				{
-					throw new InvalidOperationException(string.Format("Property {0} is not equal between objects!", prop.Name));
-				}
+				throw new InvalidOperationException($"Property {prop.Name} is not equal between objects!");
 			}
 		}
 	}

@@ -5,219 +5,219 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using NotLimited.Framework.Common.Extensions;
 
-namespace NotLimited.Framework.Common.Helpers
+namespace NotLimited.Framework.Common.Helpers;
+
+public class TypeWithAttributes<T> where T : Attribute
 {
-    public class TypeWithAttributes<T> where T : Attribute
-    {
-        public TypeWithAttributes(Type type, List<T> attributes)
-        {
-            Type = type;
-            Attributes = attributes;
-        }
-
-        public Type Type { get; set; }
-        public List<T> Attributes { get; set; }
-    }
-
-    public static class TypeHelper
+	public TypeWithAttributes(Type type, List<T> attributes)
 	{
-        public static IEnumerable<TypeWithAttributes<TAttribute>> GetTypesWithAttribute<TType, TAttribute>(bool sameNamespace = false) where TAttribute : Attribute
-        {
-	        return GetTypesWithAttribute<TAttribute>(typeof(TType), sameNamespace);
-        }
+		Type = type;
+		Attributes = attributes;
+	}
 
-	    public static IEnumerable<TypeWithAttributes<TAttribute>> GetTypesWithAttribute<TAttribute>(Type srcType, bool sameNamespace = false) where TAttribute : Attribute
-	    {
-		    if (String.IsNullOrEmpty(srcType.Namespace))
-				throw new InvalidOperationException();
+	public Type Type { get; set; }
+	public List<T> Attributes { get; set; }
+}
 
-            var types = (IEnumerable<Type>)srcType.Assembly.GetTypes();
-            if (sameNamespace)
-                types = types.Where(x => x.Namespace != null && x.Namespace.StartsWith(srcType.Namespace));
+public static class TypeHelper
+{
+	public static IEnumerable<TypeWithAttributes<TAttribute>> GetTypesWithAttribute<TType, TAttribute>(bool sameNamespace = false) where TAttribute : Attribute
+	{
+		return GetTypesWithAttribute<TAttribute>(typeof(TType), sameNamespace);
+	}
 
-            return from type in types
-                   let attributes = type.GetCustomAttributes(typeof(TAttribute), false).Cast<TAttribute>().ToList()
-                   where attributes.Count > 0
-                   select new TypeWithAttributes<TAttribute>(type, attributes);
-	    }
+	public static IEnumerable<TypeWithAttributes<TAttribute>> GetTypesWithAttribute<TAttribute>(Type srcType, bool sameNamespace = false) where TAttribute : Attribute
+	{
+		if (String.IsNullOrEmpty(srcType.Namespace))
+			throw new InvalidOperationException();
 
-		public static string GetTypeName(this Type type)
+		var types = (IEnumerable<Type>)srcType.Assembly.GetTypes();
+		if (sameNamespace)
+			types = types.Where(x => x.Namespace != null && x.Namespace.StartsWith(srcType.Namespace));
+
+		return from type in types
+		       let attributes = type.GetCustomAttributes(typeof(TAttribute), false).Cast<TAttribute>().ToList()
+		       where attributes.Count > 0
+		       select new TypeWithAttributes<TAttribute>(type, attributes);
+	}
+
+	public static string GetTypeName(this Type type)
+	{
+		if (type.IsGenericType)
 		{
-			if (type.IsGenericType)
-			{
-				return type.GetGenericTypeDefinition().Name.Left('`') + "<" +
-				       type.GetGenericArguments().Select(x => x.GetTypeName()).Aggregate((a, b) => a + ", " + b) + ">";
-			}
+			return type.GetGenericTypeDefinition().Name.Left('`') + "<" +
+			       type.GetGenericArguments().Select(x => x.GetTypeName()).Aggregate((a, b) => a + ", " + b) + ">";
+		}
 			
-			return type.Name;
+		return type.Name;
+	}
+
+	public static string GetFullTypeName(this Type type)
+	{
+		if (type.IsGenericType)
+		{
+			return type.GetGenericTypeDefinition().FullName.Left('`') + "<" +
+			       type.GetGenericArguments().Select(x => x.GetFullTypeName()).Aggregate((a, b) => a + ", " + b) + ">";
 		}
 
-        public static string GetFullTypeName(this Type type)
-		{
-			if (type.IsGenericType)
-			{
-				return type.GetGenericTypeDefinition().FullName.Left('`') + "<" +
-				       type.GetGenericArguments().Select(x => x.GetFullTypeName()).Aggregate((a, b) => a + ", " + b) + ">";
-			}
+		return type.FullName;
+	}
 
-			return type.FullName;
+	public static List<Type> GetTypesByInterfacesBaseDir<T>()
+	{
+		return GetTypesByInterfacesDir<T>(AppDomain.CurrentDomain.BaseDirectory);
+	}
+
+	public static List<Type> GetTypesByInterfacesDir<T>(string dir)
+	{
+		var	result = new List<Type>();
+
+		if (!Directory.Exists(dir))
+			throw new DirectoryNotFoundException("Directory " + dir + " not found.");
+
+		foreach (var file in Directory.GetFiles(dir, "*.dll"))
+			result.AddRange(GetTypesByInterface<T>(file));
+
+		return result;
+	}
+
+	public static List<Type> GetTypesByInterface<T>(string path)
+	{
+		Assembly ass;
+
+		if (!File.Exists(path))
+			throw new FileNotFoundException("Assembly file " + path + " not found.");
+
+		try
+		{
+			ass = Assembly.LoadFrom(path);
+		}
+		catch (Exception)
+		{
+			return new List<Type>(0);
 		}
 
-		public static List<Type> GetTypesByInterfacesBaseDir<T>()
+		return GetTypesByInterface<T>(ass);
+	}
+
+	public static List<Type> GetTypesByAttribute<T>(this Assembly ass) where T : Attribute
+	{
+		var result = new List<Type>();
+		Type[] types = GetTypes(ass);
+
+		foreach (var type in types)
 		{
-			return GetTypesByInterfacesDir<T>(AppDomain.CurrentDomain.BaseDirectory);
+			if (type == null)
+				continue;
+			if (type.IsAbstract) // Skip abstract types
+				continue;
+
+			if (type.GetCustomAttribute<T>() != null)
+				result.Add(type);
 		}
 
-		public static List<Type> GetTypesByInterfacesDir<T>(string dir)
-		{
-			var	result = new List<Type>();
+		return result;
+	}
 
-			if (!Directory.Exists(dir))
-				throw new DirectoryNotFoundException("Directory " + dir + " not found.");
+	public static List<Type> GetTypesByInterface<T>(this Assembly ass)
+	{
+		var	result = new List<Type>();
+		string name = typeof(T).FullName;
 
-			foreach (var file in Directory.GetFiles(dir, "*.dll"))
-				result.AddRange(GetTypesByInterface<T>(file));
+		if (name == null)
+			throw new InvalidOperationException("Can't get type full name!");
 
-			return result;
-		}
-
-		public static List<Type> GetTypesByInterface<T>(string path)
-		{
-			Assembly ass;
-
-			if (!File.Exists(path))
-				throw new FileNotFoundException("Assembly file " + path + " not found.");
-
-			try
-			{
-				ass = Assembly.LoadFrom(path);
-			}
-			catch (Exception)
-			{
-				return new List<Type>(0);
-			}
-
-			return GetTypesByInterface<T>(ass);
-		}
-
-        public static List<Type> GetTypesByAttribute<T>(this Assembly ass) where T : Attribute
-        {
-            var result = new List<Type>();
-            Type[] types = GetTypes(ass);
-
-            foreach (var type in types)
-            {
-                if (type == null)
-                    continue;
-                if (type.IsAbstract) // Skip abstract types
-                    continue;
-
-                if (type.GetCustomAttribute<T>() != null)
-                    result.Add(type);
-            }
-
-            return result;
-        }
-
-		public static List<Type> GetTypesByInterface<T>(this Assembly ass)
-		{
-			var	result = new List<Type>();
-			string name = typeof(T).FullName;
-
-			if (name == null)
-				throw new InvalidOperationException("Can't get type full name!");
-
-			Type[] types = GetTypes(ass);
+		Type[] types = GetTypes(ass);
 			
 			
-			foreach (var type in types)
-			{
-				if (type == null)
-					continue;
-				if (type.IsAbstract) // Skip abstract types
-					continue;
+		foreach (var type in types)
+		{
+			if (type == null)
+				continue;
+			if (type.IsAbstract) // Skip abstract types
+				continue;
 
-				var iface = type.GetInterface(name, true);
-				if (iface != null)
-					result.Add(type);
-			}
-
-			return result;
+			var iface = type.GetInterface(name, true);
+			if (iface != null)
+				result.Add(type);
 		}
 
-		public static List<Type> GetTypesSubclassOf<T>(this Assembly ass)
+		return result;
+	}
+
+	public static List<Type> GetTypesSubclassOf<T>(this Assembly ass)
+	{
+		return GetTypesSubclassOf(ass, typeof(T));
+	}
+
+	public static List<Type> GetTypesSubclassOf(this Assembly ass, Type superclass)
+	{
+		var result = new List<Type>();
+		Type[] types = GetTypes(ass);
+
+
+		foreach (var type in types)
 		{
-			return GetTypesSubclassOf(ass, typeof(T));
+			if (type == null)
+				continue;
+			if (type.IsAbstract) // Skip abstract types
+				continue;
+
+			if (type.IsSubclassOf(superclass))
+				result.Add(type);
 		}
 
-        public static List<Type> GetTypesSubclassOf(this Assembly ass, Type superclass)
-        {
-            var result = new List<Type>();
-            Type[] types = GetTypes(ass);
+		return result;
+	}
 
+	private static Type[] GetTypes(Assembly ass)
+	{
+		Type[] types;
 
-            foreach (var type in types)
-            {
-                if (type == null)
-                    continue;
-                if (type.IsAbstract) // Skip abstract types
-                    continue;
-
-                if (type.IsSubclassOf(superclass))
-                    result.Add(type);
-            }
-
-            return result;
-        }
-
-		private static Type[] GetTypes(Assembly ass)
+		try
 		{
-			Type[] types;
-
-			try
-			{
-				types = ass.GetTypes();
-			}
-			catch (ReflectionTypeLoadException rtle)
-			{
-				types = rtle.Types;
-			}
-			return types;
+			types = ass.GetTypes();
 		}
-
-		public static List<T> CreateInstancesByInterfaceDir<T>(string dir)
+		catch (ReflectionTypeLoadException rtle)
 		{
-			return GetTypesByInterfacesDir<T>(dir).Select(type => (T)Activator.CreateInstance(type)).ToList();
+			types = rtle.Types;
 		}
+		return types;
+	}
 
-		public static List<T> CreateInstancesByInterface<T>(string path)
+	public static List<T> CreateInstancesByInterfaceDir<T>(string dir)
+	{
+		return GetTypesByInterfacesDir<T>(dir).Select(type => (T)Activator.CreateInstance(type)).ToList();
+	}
+
+	public static List<T> CreateInstancesByInterface<T>(string path)
+	{
+		return GetTypesByInterface<T>(path).Select(type => (T)Activator.CreateInstance(type)).ToList();
+	}
+
+	public static List<T> CreateInstancesByInterface<T>(this Assembly ass, bool skipNoParameterlessConstructor = false)
+	{
+		IEnumerable<Type> types = GetTypesByInterface<T>(ass);
+		if (skipNoParameterlessConstructor)
 		{
-			return GetTypesByInterface<T>(path).Select(type => (T)Activator.CreateInstance(type)).ToList();
+			types = types.Where(x => x.GetConstructors().Any(c => c.GetParameters().Length == 0));
 		}
-
-		public static List<T> CreateInstancesByInterface<T>(this Assembly ass, bool skipNoParameterlessConstructor = false)
-		{
-            IEnumerable<Type> types = GetTypesByInterface<T>(ass);
-		    if (skipNoParameterlessConstructor)
-		    {
-		        types = types.Where(x => x.GetConstructors().Any(c => c.GetParameters().Length == 0));
-		    }
             
-            return types.Select(type => (T)Activator.CreateInstance(type)).ToList();
-		}
+		return types.Select(type => (T)Activator.CreateInstance(type)).ToList();
+	}
 
-        public static string GetDisplayName(this MemberInfo member)
-        {
-            var displayAttr = member.GetCustomAttribute<DisplayAttribute>();
-            if (displayAttr != null && !String.IsNullOrEmpty(displayAttr.Name))
-                return displayAttr.Name;
+	public static string GetDisplayName(this MemberInfo member)
+	{
+		var displayAttr = member.GetCustomAttribute<DisplayAttribute>();
+		if (displayAttr != null && !String.IsNullOrEmpty(displayAttr.Name))
+			return displayAttr.Name;
 
-            var descAttr = member.GetCustomAttribute<DescriptionAttribute>();
-            if (descAttr != null && !String.IsNullOrEmpty(descAttr.Description))
-                return descAttr.Description;
+		var descAttr = member.GetCustomAttribute<DescriptionAttribute>();
+		if (descAttr != null && !String.IsNullOrEmpty(descAttr.Description))
+			return descAttr.Description;
 
-            return member.Name;
-        }
+		return member.Name;
 	}
 }

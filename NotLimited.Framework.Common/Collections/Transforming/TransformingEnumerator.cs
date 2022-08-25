@@ -3,58 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NotLimited.Framework.Common.Collections.Transforming
+namespace NotLimited.Framework.Common.Collections.Transforming;
+
+public sealed class TransformingEnumerator<T, E> : IEnumerator<E>
 {
-	public sealed class TransformingEnumerator<T, E> : IEnumerator<E>
+	private readonly IEnumerator<T> orig;
+	private readonly Func<T, IEnumerable<E>> transformer;
+
+	private IEnumerator<E> cur;
+
+	public TransformingEnumerator(IEnumerator<T> orig, Func<T, IEnumerable<E>> transformer)
 	{
-		private readonly IEnumerator<T> orig;
-		private readonly Func<T, IEnumerable<E>> transformer;
+		this.orig = orig;
+		this.transformer = transformer;
+	}
 
-		private IEnumerator<E> cur;
+	public void Dispose()
+	{
+	}
 
-		public TransformingEnumerator(IEnumerator<T> orig, Func<T, IEnumerable<E>> transformer)
+	public bool MoveNext()
+	{
+		while (cur == null || !cur.MoveNext())
 		{
-			this.orig = orig;
-			this.transformer = transformer;
-		}
+			IEnumerable<E> en = null;
 
-		public void Dispose()
-		{
-		}
-
-		public bool MoveNext()
-		{
-			while (cur == null || !cur.MoveNext())
+			while (en == null || en == Enumerable.Empty<E>())
 			{
-				IEnumerable<E> en = null;
-
-				while (en == null || en == Enumerable.Empty<E>())
-				{
-					if (!orig.MoveNext())
-						return false;
-					en = transformer(orig.Current);
-				}
-
-				cur = en.GetEnumerator();
+				if (!orig.MoveNext())
+					return false;
+				en = transformer(orig.Current);
 			}
 
-			return true;
+			cur = en.GetEnumerator();
 		}
 
-		public void Reset()
-		{
-			cur = null;
-			orig.Reset();
-		}
-
-		public E Current
-		{
-			get { return cur.Current; }
-		}
-
-		object IEnumerator.Current
-		{
-			get { return Current; }
-		}
+		return true;
 	}
+
+	public void Reset()
+	{
+		cur = null;
+		orig.Reset();
+	}
+
+	public E Current => cur.Current;
+
+	object IEnumerator.Current => Current;
 }

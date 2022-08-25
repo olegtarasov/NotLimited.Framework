@@ -4,75 +4,71 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace NotLimited.Framework.Common.Collections.Transforming
+namespace NotLimited.Framework.Common.Collections.Transforming;
+
+public sealed class TransformingView<TSource, TTarget> : INotifyCollectionChanged, IDisposable, IEnumerable<TTarget>
 {
-	public sealed class TransformingView<T, E> : INotifyCollectionChanged, IDisposable, IEnumerable<E>
+	private readonly IEnumerable<TSource> _collection;
+	private readonly Func<TSource, IEnumerable<TTarget>> _transformer;
+	private readonly INotifyCollectionChanged? _notify;
+
+	public TransformingView(IEnumerable<TSource> collection, Func<TSource, IEnumerable<TTarget>> transformer)
 	{
-		private readonly IEnumerable<T> collection;
-		private readonly Func<T, IEnumerable<E>> transformer;
-		private readonly INotifyCollectionChanged notify;
+		_collection = collection;
+		_transformer = transformer;
 
-		public TransformingView(IEnumerable<T> collection, Func<T, IEnumerable<E>> transformer)
-		{
-			this.collection = collection;
-			this.transformer = transformer;
+		_notify = collection as INotifyCollectionChanged;
 
-			notify = collection as INotifyCollectionChanged;
+		if (_notify != null)
+			_notify.CollectionChanged += OnCollectionChanged;
+	}
 
-			if (notify != null)
-				notify.CollectionChanged += notify_CollectionChanged;
-		}
+	private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		var args = e.Action switch
+		           {
+			           NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(
+				           e.Action, e.NewItems.Cast<TSource>().Select(_transformer).ToList(),
+				           RecalculateIndex(e.NewStartingIndex)),
+			           NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(
+				           e.Action, e.OldItems.Cast<TSource>().Select(_transformer).ToList(),
+				           RecalculateIndex(e.OldStartingIndex)),
+			           NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(
+				           e.Action, e.NewItems.Cast<TSource>().Select(_transformer).ToList(),
+				           e.OldItems.Cast<TSource>().Select(_transformer).ToList(),
+				           RecalculateIndex(e.OldStartingIndex)),
+			           NotifyCollectionChangedAction.Move => throw new InvalidOperationException(),
+			           NotifyCollectionChangedAction.Reset => e,
+			           _ => throw new ArgumentOutOfRangeException()
+		           };
 
-		private void notify_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			NotifyCollectionChangedEventArgs args = null;
+		OnCollectionChanged(args);
+	}
 
-			switch (e.Action)
-			{
-				case NotifyCollectionChangedAction.Add:
-					args = new NotifyCollectionChangedEventArgs(e.Action, e.NewItems.Cast<T>().Select(transformer).ToList(), RecalculateIndex(e.NewStartingIndex));
-					break;
-				case NotifyCollectionChangedAction.Remove:
-					args = new NotifyCollectionChangedEventArgs(e.Action, e.OldItems.Cast<T>().Select(transformer).ToList(), RecalculateIndex(e.OldStartingIndex));
-					break;
-				case NotifyCollectionChangedAction.Replace:
-					args = new NotifyCollectionChangedEventArgs(e.Action, e.NewItems.Cast<T>().Select(transformer).ToList(), e.OldItems.Cast<T>().Select(transformer).ToList(), RecalculateIndex(e.OldStartingIndex));
-					break;
-				case NotifyCollectionChangedAction.Move:
-					throw new InvalidOperationException();
-				case NotifyCollectionChangedAction.Reset:
-					args = e;
-					break;
-			}
+	private int RecalculateIndex(int idx)
+	{
+		return _collection.Take(idx).Sum(x => _transformer(x).Count());
+	}
 
-			OnCollectionChanged(args);
-		}
+	private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+	{
+		if (CollectionChanged != null)
+			CollectionChanged(this, e);
+	}
+	public event NotifyCollectionChangedEventHandler? CollectionChanged;
+	public void Dispose()
+	{
+		if (_notify != null)
+			_notify.CollectionChanged -= OnCollectionChanged;
+	}
 
-		private int RecalculateIndex(int idx)
-		{
-			return collection.Take(idx).Sum(x => transformer(x).Count());
-		}
+	public IEnumerator<TTarget> GetEnumerator()
+	{
+		return new TransformingEnumerator<TSource, TTarget>(_collection.GetEnumerator(), _transformer);
+	}
 
-		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-		{
-			if (CollectionChanged != null)
-				CollectionChanged(this, e);
-		}
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
-		public void Dispose()
-		{
-			if (notify != null)
-				notify.CollectionChanged -= notify_CollectionChanged;
-		}
-
-		public IEnumerator<E> GetEnumerator()
-		{
-			return new TransformingEnumerator<T, E>(collection.GetEnumerator(), transformer);
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return GetEnumerator();
 	}
 }

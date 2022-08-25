@@ -2,46 +2,45 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NotLimited.Framework.Common.Helpers
+namespace NotLimited.Framework.Common.Helpers;
+
+public static class TaskHelpers
 {
-	public static class TaskHelpers
+	public static void MuteExceptions(this Task task)
 	{
-		public static void MuteExceptions(this Task task)
+		if (task.Exception != null)
+			task.Exception.Handle(x => true);
+	}
+
+	public static void HandleExceptionLight(this Task task, Action<Exception> handler)
+	{
+		if (task.Exception != null)
 		{
-			if (task.Exception != null)
-				task.Exception.Handle(x => true);
+			task.Exception.Handle(exception =>
+			                      {
+				                      handler(exception);
+				                      return true;
+			                      });
+		}
+	}
+
+	public static void HandleException(this Task task, Action<Exception> handler)
+	{
+		if (SynchronizationContext.Current == null)
+		{
+			SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
 		}
 
-		public static void HandleExceptionLight(this Task task, Action<Exception> handler)
-		{
-			if (task.Exception != null)
-			{
-				task.Exception.Handle(exception =>
-				{
-					handler(exception);
-					return true;
-				});
-			}
-		}
-
-		public static void HandleException(this Task task, Action<Exception> handler)
-		{
-		    if (SynchronizationContext.Current == null)
-		    {
-		        SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-		    }
-
-			task.ContinueWith(result =>
-			{
-				if (result.Exception != null)
-				{
-					result.Exception.Handle(exception =>
-					{
-						handler(exception);
-						return true;
-					});
-				}
-			}, TaskScheduler.FromCurrentSynchronizationContext());
-		}
+		task.ContinueWith(result =>
+		                  {
+			                  if (result.Exception != null)
+			                  {
+				                  result.Exception.Handle(exception =>
+				                                          {
+					                                          handler(exception);
+					                                          return true;
+				                                          });
+			                  }
+		                  }, TaskScheduler.FromCurrentSynchronizationContext());
 	}
 }
