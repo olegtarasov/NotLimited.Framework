@@ -4,43 +4,32 @@ using System.Threading.Tasks;
 
 namespace NotLimited.Framework.Common.Helpers;
 
+/// <summary>
+/// Helpers to work with tasks.
+/// </summary>
 public static class TaskHelpers
 {
-	public static void MuteExceptions(this Task task)
-	{
-		if (task.Exception != null)
-			task.Exception.Handle(x => true);
-	}
+    /// <summary>
+    /// Attach a continuation to a task that will inspect task exceptions, flatten them and throw
+    /// using current SynchronizationContext if it's available.
+    /// </summary>
+    /// <param name="task">Task to attach to.</param>
+    public static void HandleExceptions(this Task task)
+    {
+        var action = new Action<Task>(t =>
+                                      {
+                                          if (t.Exception != null)
+                                              throw t.Exception.Flatten();
+                                      });
 
-	public static void HandleExceptionLight(this Task task, Action<Exception> handler)
-	{
-		if (task.Exception != null)
-		{
-			task.Exception.Handle(exception =>
-			                      {
-				                      handler(exception);
-				                      return true;
-			                      });
-		}
-	}
-
-	public static void HandleException(this Task task, Action<Exception> handler)
-	{
-		if (SynchronizationContext.Current == null)
-		{
-			SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-		}
-
-		task.ContinueWith(result =>
-		                  {
-			                  if (result.Exception != null)
-			                  {
-				                  result.Exception.Handle(exception =>
-				                                          {
-					                                          handler(exception);
-					                                          return true;
-				                                          });
-			                  }
-		                  }, TaskScheduler.FromCurrentSynchronizationContext());
-	}
+        if (SynchronizationContext.Current != null)
+        {
+            task.ContinueWith(action, default, TaskContinuationOptions.OnlyOnFaulted,
+                              TaskScheduler.FromCurrentSynchronizationContext());
+        }
+        else
+        {
+            task.ContinueWith(action, TaskContinuationOptions.OnlyOnFaulted);
+        }
+    }
 }

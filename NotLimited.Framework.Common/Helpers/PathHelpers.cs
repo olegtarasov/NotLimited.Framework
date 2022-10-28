@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace NotLimited.Framework.Common.Helpers;
@@ -50,9 +51,14 @@ public static class PathHelpers
         if (parts1.Length != parts2.Length)
             return false;
 
+        // Compare paths ignoring the case on Windows.
+        var comparison = (int)Environment.OSVersion.Platform <= 3
+                             ? StringComparison.OrdinalIgnoreCase
+                             : StringComparison.Ordinal;
+
         for (int i = 0; i < parts1.Length; i++)
         {
-            if (!string.Equals(parts1[i], parts2[i], StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(parts1[i], parts2[i], comparison))
                 return false;
         }
 
@@ -126,11 +132,8 @@ public static class PathHelpers
         if (string.IsNullOrEmpty(path))
             return path;
 
-        if (path[^1] == Path.DirectorySeparatorChar)
+        if (Path.EndsInDirectorySeparator(path))
             return path;
-
-        if (path[^1] == Path.AltDirectorySeparatorChar)
-            return path.Substring(0, path.Length - 1) + Path.DirectorySeparatorChar;
 
         return path + Path.DirectorySeparatorChar;
     }

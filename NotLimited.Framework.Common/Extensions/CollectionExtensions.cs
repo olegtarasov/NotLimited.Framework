@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using NotLimited.Framework.Common.Helpers;
 
 namespace NotLimited.Framework.Common.Extensions;
 
@@ -114,60 +112,6 @@ public static class CollectionExtensions
                 queue.Enqueue(child);
             }
         }
-    }
-
-    /// <summary>
-    /// Find minimum and maximum values that can be converted to <see cref="double"/>.
-    /// </summary>
-    public static MinMax<T> MinMax<T>(this IEnumerable<T> en, Func<T, double> selector)
-    {
-        var result = new MinMax<T>();
-        double curMin, curMax;
-
-        result.Max = result.Min = en.First();
-        curMax = curMin = selector(result.Min);
-
-        foreach (var item in en.Skip(1))
-        {
-            double curItem = selector(item);
-
-            if (curItem > curMax)
-            {
-                result.Max = item;
-                curMax = curItem;
-            }
-
-            if (curItem < curMin)
-            {
-                result.Min = item;
-                curMin = curItem;
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// Find minimum and maximum values.
-    /// </summary>
-    public static MinMax<double> MinMax(this IEnumerable<double> en)
-    {
-        var result = new MinMax<double> { Max = double.MinValue, Min = double.MaxValue };
-
-        foreach (var item in en)
-        {
-            if (item > result.Max)
-            {
-                result.Max = item;
-            }
-
-            if (item < result.Min)
-            {
-                result.Min = item;
-            }
-        }
-
-        return result;
     }
 
     /// <summary>

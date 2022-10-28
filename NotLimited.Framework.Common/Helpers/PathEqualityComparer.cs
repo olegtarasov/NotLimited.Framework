@@ -2,16 +2,29 @@ using System.Collections.Generic;
 
 namespace NotLimited.Framework.Common.Helpers;
 
+/// <summary>
+/// Equality comparer that compares paths.
+/// </summary>
 public class PathEqualityComparer : IEqualityComparer<string>
 {
-    private static readonly PathEqualityComparer _instanse = new PathEqualityComparer();
-    public static PathEqualityComparer Instance => _instanse;
+    /// <summary>
+    /// Comparer static instance.
+    /// </summary>
+    public static readonly PathEqualityComparer Instance = new();
 
-    public bool Equals(string x, string y)
+    /// <inheritdoc />
+    public bool Equals(string? x, string? y)
     {
+        if (x == null && y == null)
+            return true;
+
+        if (x == null || y == null)
+            return false;
+
         return PathHelpers.PathEquals(x, y);
     }
 
+    /// <inheritdoc />
     public int GetHashCode(string obj)
     {
         return PathHelpers.GetPathHashCode(obj);

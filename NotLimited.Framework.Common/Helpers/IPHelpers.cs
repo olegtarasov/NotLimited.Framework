@@ -1,32 +1,33 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 
 namespace NotLimited.Framework.Common.Helpers;
 
+/// <summary>
+/// Helpers for IP addresses
+/// </summary>
 public static class IPHelpers
 {
-	private static readonly Regex _ipRegex = new Regex(@"Your IP is\s+<b>(.*)</b>");
+    /// <summary>
+    /// Gets an external IP address using https://ipify.org.
+    /// </summary>
+    public static IPAddress? GetExternalIp()
+    {
+        var httpClient = new HttpClient();
 
-	public static IPAddress GetExternalIp()
-	{
-		var client = new WebClient();
+        try
+        {
+            string? ip = AsyncHelpers.RunSync(() => httpClient.GetStringAsync("https://api.ipify.org"));
+            if (string.IsNullOrEmpty(ip))
+                return null;
 
-		try
-		{
-			string result = client.DownloadString("http://ping.eu/");
-			var match = _ipRegex.Match(result);
-
-			if (!match.Success || match.Groups.Count < 2)
-			{
-				return null;
-			}
-
-			return IPAddress.Parse(match.Groups[1].Value);
-		}
-		catch (Exception)
-		{
-			return null;
-		}
-	}
+            return IPAddress.Parse(ip);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
 }

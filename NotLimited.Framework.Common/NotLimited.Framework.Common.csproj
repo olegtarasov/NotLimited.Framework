@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Description>Common helpers</Description>
-        <Company/>
+        <Company />
         <Authors>Oleg Tarasov</Authors>
         <Product>NotLimited.Framework common helpers</Product>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
