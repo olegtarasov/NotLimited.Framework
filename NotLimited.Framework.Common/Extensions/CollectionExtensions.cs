@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,93 +11,29 @@ namespace NotLimited.Framework.Common.Extensions;
 /// </summary>
 public static class CollectionExtensions
 {
+    /// <summary>
+    /// Adds a range of elements to a collection.
+    /// </summary>
     public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> source)
     {
         foreach (var item in source)
             collection.Add(item);
     }
 
-    public static List<T> CreateEmptyIfNull<T>(this List<T>? source)
-    {
-        return source ?? new List<T>();
-    }
-
-    public static TValue Max<TSource, TValue>(
-        this IEnumerable<TSource> source,
-        Func<TSource, double> keySelector,
-        Func<TSource, TValue> valueSelector)
-    {
-        double max = Double.MinValue;
-        TValue value = default(TValue);
-
-        foreach (var item in source)
-        {
-            var key = keySelector(item);
-            if (key > max)
-            {
-                max = key;
-                value = valueSelector(item);
-            }
-        }
-
-        return value;
-    }
-
-    public static TValue Max<TSource, TKey, TValue>(
-        this IEnumerable<TSource> source,
-        Func<TSource, TKey> keySelector,
-        Func<TSource, TValue> valueSelector) where TKey : IComparable<TKey>
-    {
-        return SelectByComparison(source, keySelector, valueSelector, 1);
-    }
-
-    public static TValue Min<TSource, TKey, TValue>(
-        this IEnumerable<TSource> source,
-        Func<TSource, TKey> keySelector,
-        Func<TSource, TValue> valueSelector) where TKey : IComparable<TKey>
-    {
-        return SelectByComparison(source, keySelector, valueSelector, -1);
-    }
-
-    private static TValue SelectByComparison<TSource, TKey, TValue>(
-        this IEnumerable<TSource> source,
-        Func<TSource, TKey> keySelector,
-        Func<TSource, TValue> valueSelector,
-        int comparisonResult) where TKey : IComparable<TKey>
-    {
-        if (!source.Any())
-        {
-            return default(TValue);
-        }
-
-        var first = source.First();
-        var curKey = keySelector(first);
-        var curValue = valueSelector(first);
-
-        foreach (var item in source.Skip(1))
-        {
-            var key = keySelector(item);
-            if (key.CompareTo(curKey) == comparisonResult)
-            {
-                curKey = key;
-                curValue = valueSelector(item);
-            }
-        }
-
-        return curValue;
-    }
-
-    public static IEnumerable<TElement> IterateQueueList<TElement, TContainer>(
+    /// <summary>
+    /// Iterates elements of a hierarchy depth-first. 
+    /// </summary>
+    public static IEnumerable<TElement> IterateHierarchy<TElement, TContainer>(
         this TContainer root,
         Func<TContainer, IEnumerable<TElement>> elementAccessor,
         Func<TContainer, IEnumerable<TContainer>> childrenAccessor)
     {
         if (root == null)
-            throw new ArgumentNullException("root");
+            throw new ArgumentNullException(nameof(root));
         if (elementAccessor == null)
-            throw new ArgumentNullException("elementAccessor");
+            throw new ArgumentNullException(nameof(elementAccessor));
         if (childrenAccessor == null)
-            throw new ArgumentNullException("childrenAccessor");
+            throw new ArgumentNullException(nameof(childrenAccessor));
 
         var queue = new Queue<TContainer>();
         queue.Enqueue(root);
@@ -118,17 +53,20 @@ public static class CollectionExtensions
         }
     }
 
-    public static IEnumerable<TElement> IterateQueue<TElement, TContainer>(
+    /// <summary>
+    /// Iterates elements of a hierarchy depth-first. 
+    /// </summary>
+    public static IEnumerable<TElement> IterateHierarchy<TElement, TContainer>(
         this TContainer root,
         Func<TContainer, TElement> elementAccessor,
         Func<TContainer, IEnumerable<TContainer>> childrenAccessor)
     {
         if (root == null)
-            throw new ArgumentNullException("root");
+            throw new ArgumentNullException(nameof(root));
         if (elementAccessor == null)
-            throw new ArgumentNullException("elementAccessor");
+            throw new ArgumentNullException(nameof(elementAccessor));
         if (childrenAccessor == null)
-            throw new ArgumentNullException("childrenAccessor");
+            throw new ArgumentNullException(nameof(childrenAccessor));
 
         var queue = new Queue<TContainer>();
         queue.Enqueue(root);
@@ -146,17 +84,20 @@ public static class CollectionExtensions
         }
     }
 
-    public static IEnumerable<TElement> IterateQueue<TElement, TContainer>(
+    /// <summary>
+    /// Iterates elements of a hierarchy depth-first. 
+    /// </summary>
+    public static IEnumerable<TElement> IterateHierarchy<TElement, TContainer>(
         this TContainer root,
         Func<TContainer, TElement> elementAccessor,
-        Func<TContainer, TContainer> childAccessor) where TContainer : class
+        Func<TContainer, TContainer?> childAccessor) where TContainer : class
     {
         if (root == null)
-            throw new ArgumentNullException("root");
+            throw new ArgumentNullException(nameof(root));
         if (elementAccessor == null)
-            throw new ArgumentNullException("elementAccessor");
+            throw new ArgumentNullException(nameof(elementAccessor));
         if (childAccessor == null)
-            throw new ArgumentNullException("childAccessor");
+            throw new ArgumentNullException(nameof(childAccessor));
 
         var queue = new Queue<TContainer>();
         queue.Enqueue(root);
@@ -175,17 +116,20 @@ public static class CollectionExtensions
         }
     }
 
+    /// <summary>
+    /// Find minimum and maximum values that can be converted to <see cref="double"/>.
+    /// </summary>
     public static MinMax<T> MinMax<T>(this IEnumerable<T> en, Func<T, double> selector)
     {
         var result = new MinMax<T>();
-        double curItem, curMin, curMax;
+        double curMin, curMax;
 
         result.Max = result.Min = en.First();
         curMax = curMin = selector(result.Min);
 
         foreach (var item in en.Skip(1))
         {
-            curItem = selector(item);
+            double curItem = selector(item);
 
             if (curItem > curMax)
             {
@@ -203,6 +147,9 @@ public static class CollectionExtensions
         return result;
     }
 
+    /// <summary>
+    /// Find minimum and maximum values.
+    /// </summary>
     public static MinMax<double> MinMax(this IEnumerable<double> en)
     {
         var result = new MinMax<double> { Max = double.MinValue, Min = double.MaxValue };
@@ -223,10 +170,14 @@ public static class CollectionExtensions
         return result;
     }
 
+    /// <summary>
+    /// Converts an enumerable to a concurrent dictionary.
+    /// </summary>
     public static ConcurrentDictionary<TKey, TValue> ToConcurrentDictionary<TSource, TKey, TValue>(
         this IEnumerable<TSource> source,
         Func<TSource, TKey> keyFunc,
         Func<TSource, TValue> valueFunc)
+        where TKey : notnull
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));

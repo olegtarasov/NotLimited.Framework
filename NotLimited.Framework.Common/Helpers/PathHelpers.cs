@@ -1,212 +1,223 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace NotLimited.Framework.Common.Helpers;
 
+/// <summary>
+/// Helpers to work with paths.
+/// </summary>
 public static class PathHelpers
 {
-	private static readonly char[] _separators = new[] {Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar};
-		
-	public static string AppPath => AppDomain.CurrentDomain.BaseDirectory;
+    private static readonly char[] Separators = { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar };
 
-	public static string CombineAppPath(string path)
-	{
-		return Path.Combine(AppPath, path);
-	}
+    /// <summary>
+    /// Gets a hash code of specified path ignoring trailing separators by default
+    /// </summary>
+    public static int GetPathHashCode(string path, bool ignoreTrailingSeparators = true)
+    {
+        return (ignoreTrailingSeparators ? path.TrimEnd(Separators) : path).ToUpperInvariant().GetHashCode();
+    }
 
-	public static string CombineAppPath(params string[] args)
-	{
-		return args.Aggregate(AppPath, Path.Combine);
-	}
+    /// <summary>
+    /// Performs a recursive file search based on the supplied pattern.
+    /// </summary>
+    public static IEnumerable<string> FindFilesRecursive(string path, string filter = "*")
+    {
+        var queue = new Queue<string>();
+        queue.Enqueue(path);
 
-	public static int GetPathHashCode(string path)
-	{
-		return path.Trim(_separators).ToUpperInvariant().GetHashCode();
-	}
+        while (queue.Count > 0)
+        {
+            string dir = queue.Dequeue();
+            foreach (var file in Directory.GetFiles(dir, filter))
+                yield return file;
 
-	public static IEnumerable<string> FindFilesRecursive(string path, string filter = "*.*")
-	{
-		var queue = new Queue<string>();
-		queue.Enqueue(path);
+            foreach (var child in Directory.GetDirectories(dir))
+                queue.Enqueue(child);
+        }
+    }
 
-		while (queue.Count > 0)
-		{
-			string dir = queue.Dequeue();
-			foreach (var file in Directory.GetFiles(dir, filter))
-				yield return file;
+    /// <summary>
+    /// Compares paths based on their elements.
+    /// </summary>
+    public static bool PathEquals(string path1, string path2)
+    {
+        var parts1 = ExplodePath(path1);
+        var parts2 = ExplodePath(path2);
 
-			foreach (var child in Directory.GetDirectories(dir))
-				queue.Enqueue(child);
-		}
-	}
+        if (parts1.Length != parts2.Length)
+            return false;
 
-	public static bool PathEquals(string path1, string path2)
-	{
-		var parts1 = ExplodePath(path1);
-		var parts2 = ExplodePath(path2);
+        for (int i = 0; i < parts1.Length; i++)
+        {
+            if (!string.Equals(parts1[i], parts2[i], StringComparison.OrdinalIgnoreCase))
+                return false;
+        }
 
-		if (parts1.Length != parts2.Length)
-			return false;
+        return true;
+    }
 
-		for (int i = 0; i < parts1.Length; i++)
-		{
-			if (!string.Equals(parts1[i], parts2[i], StringComparison.OrdinalIgnoreCase))
-				return false;
-		}
+    /// <summary>
+    /// Checks whether file path contains specified directory path.
+    /// </summary>
+    public static bool IsFileUnderPath(string filePath, string directory)
+    {
+        if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(directory))
+            return false;
 
-		return true;
-	}
+        var fileParts = ExplodePath(filePath);
+        var dirParts = ExplodePath(directory);
 
-	public static bool IsFileUnderPath(string filePath, string directory)
-	{
-		if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(directory))
-			return false;
+        if (dirParts.Length > fileParts.Length)
+            return false;
 
-		var fileParts = ExplodePath(filePath);
-		var dirParts = ExplodePath(directory);
+        for (int i = 0; i < dirParts.Length; i++)
+        {
+            if (!string.Equals(dirParts[i], fileParts[i], StringComparison.OrdinalIgnoreCase))
+                return false;
+        }
 
-		if (dirParts.Length > fileParts.Length)
-			return false;
+        return true;
+    }
 
-		for (int i = 0; i < dirParts.Length; i++)
-		{
-			if (!string.Equals(dirParts[i], fileParts[i], StringComparison.OrdinalIgnoreCase))
-				return false;
-		}
+    /// <summary>
+    /// Recursively deletes specified directory with all its files and subdirs, optionally performing an action
+    /// before deleting each file.
+    /// </summary>
+    public static void DeleteDirectory(string path, Action<string>? childPreAction = null)
+    {
+        if (path == null)
+            throw new ArgumentNullException(nameof(path));
+        if (!Directory.Exists(path))
+            throw new DirectoryNotFoundException("Directory doesn't exist!");
 
-		return true;
-	}
+        foreach (var file in Directory.GetFiles(path))
+        {
+            if (childPreAction != null)
+                childPreAction(file);
 
-	public static void DeleteDirectory(string path, Action<string> childPreAction = null)
-	{
-		if (path == null) throw new ArgumentNullException("path");
-		if (!Directory.Exists(path)) throw new DirectoryNotFoundException("Directory doesn't exist!");
+            File.SetAttributes(file, FileAttributes.Normal);
+            File.Delete(file);
+        }
 
-		foreach (var file in Directory.GetFiles(path))
-		{
-			if (childPreAction != null)
-				childPreAction(file);
+        foreach (var subDir in Directory.GetDirectories(path))
+            DeleteDirectory(subDir, childPreAction);
 
-			File.SetAttributes(file, FileAttributes.Normal);
-			File.Delete(file);
-		}
+        Directory.Delete(path);
+    }
 
-		foreach (var subDir in Directory.GetDirectories(path))
-			DeleteDirectory(subDir, childPreAction);
+    /// <summary>
+    /// Checks whether specified filename has a specified extension.
+    /// </summary>
+    public static bool HasExtension(string fileName, string extension)
+    {
+        return !string.IsNullOrEmpty(fileName)
+               && !string.IsNullOrEmpty(extension)
+               && fileName.EndsWith(extension, StringComparison.OrdinalIgnoreCase);
+    }
 
-		Directory.Delete(path);
-	}
+    /// <summary>
+    /// Ensures that specified path has a trailing <see cref="Path.DirectorySeparatorChar"/>.
+    /// </summary>
+    public static string EnsureTrailingSeparator(string path)
+    {
+        if (string.IsNullOrEmpty(path))
+            return path;
 
-	public static bool HasExtension(string fileName, string extension)
-	{
-		return !string.IsNullOrEmpty(fileName)
-		       && !string.IsNullOrEmpty(extension)
-		       && fileName.EndsWith(extension, StringComparison.OrdinalIgnoreCase);
-	}
+        if (path[^1] == Path.DirectorySeparatorChar)
+            return path;
 
-	public static string CombineWithAssemblyDirectory(string path)
-	{
-		var location = Assembly.GetExecutingAssembly().Location;
-		if (string.IsNullOrEmpty(location))
-			throw new InvalidOperationException("Can't get current assembly location");
+        if (path[^1] == Path.AltDirectorySeparatorChar)
+            return path.Substring(0, path.Length - 1) + Path.DirectorySeparatorChar;
 
-		return Path.Combine(Path.GetDirectoryName(location), path);
-	}
+        return path + Path.DirectorySeparatorChar;
+    }
 
-	public static string GetAssemblyDirectory()
-	{
-		return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-	}
+    /// <summary>
+    /// Rebases an absolute <paramref name="path"/> on top of <paramref name="target"/> relative to <paramref name="source"/> path.
+    /// </summary>
+    public static string RebasePath(string path, string source, string target)
+    {
+        return MakeAbsolute(MakeRelative(path, source), target);
+    }
 
-	public static string EnsureSlash(string path, char directorySeparator = '\\')
-	{
-		if (string.IsNullOrEmpty(path))
-			return path;
+    /// <summary>
+    /// Makes an absolute path relative to a specified path.
+    /// </summary>
+    public static string MakeRelative(string path, string relativeTo)
+    {
+        if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
+            return path;
 
-		if (path[path.Length - 1] == directorySeparator)
-			return path;
+        var pathParts = ExplodePath(path);
+        var relativeParts = ExplodePath(relativeTo);
+        int cnt;
 
-		if (path[path.Length - 1] == Path.DirectorySeparatorChar || path[path.Length - 1] == Path.AltDirectorySeparatorChar)
-			return path.Substring(0, path.Length - 1) + directorySeparator;
+        for (cnt = 0; cnt < Math.Min(pathParts.Length, relativeParts.Length); cnt++)
+            if (!string.Equals(pathParts[cnt], relativeParts[cnt], StringComparison.OrdinalIgnoreCase))
+                break;
 
-		return path + directorySeparator;
-	}
+        if (cnt == 0)
+            return path;
 
-	public static string RebasePath(string path, string source, string target, char directorySeparator = '\\')
-	{
-		return MakeAbsolute(MakeRelative(path, source, directorySeparator), target, directorySeparator);
-	}
+        var sb = new StringBuilder();
+        for (int i = 0; i < (relativeParts.Length - cnt); i++)
+            sb.Append(@"..").Append(Path.DirectorySeparatorChar);
 
-	public static string MakeRelative(string path, string relativeTo, char directorySeparator = '\\')
-	{
-		if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
-			return path;
+        for (int i = cnt; i < pathParts.Length; i++)
+        {
+            sb.Append(pathParts[i]);
+            if (i < pathParts.Length - 1)
+                sb.Append(Path.DirectorySeparatorChar);
+        }
 
-		var pathParts = ExplodePath(path);
-		var relativeParts = ExplodePath(relativeTo);
-		int cnt;
+        return sb.ToString();
+    }
 
-		for (cnt = 0; cnt < Math.Min(pathParts.Length, relativeParts.Length); cnt++)
-			if (!string.Equals(pathParts[cnt], relativeParts[cnt], StringComparison.OrdinalIgnoreCase))
-				break;
+    /// <summary>
+    /// Makes a specified path absolute relative to <paramref name="relativeTo"/>.
+    /// </summary>
+    public static string MakeAbsolute(string path, string relativeTo)
+    {
+        if (string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(relativeTo))
+            return relativeTo;
 
-		if (cnt == 0)
-			return path;
+        if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
+            return path;
 
-		var sb = new StringBuilder();
-		for (int i = 0; i < (relativeParts.Length - cnt); i++)
-			sb.Append(@"..").Append(directorySeparator);
+        if (Path.IsPathRooted(path))
+            return path;
 
-		for (int i = cnt; i < pathParts.Length; i++)
-		{
-			sb.Append(pathParts[i]);
-			if (i < pathParts.Length - 1)
-				sb.Append(directorySeparator);
-		}
+        var pathParts = ExplodePath(path);
+        var relativeParts = ExplodePath(relativeTo);
+        int cnt;
 
-		return sb.ToString();
-	}
+        for (cnt = 0; cnt < pathParts.Length; cnt++)
+            if (pathParts[cnt] != "..")
+                break;
 
-	public static string MakeAbsolute(string path, string relativeTo, char directorySeparator = '\\')
-	{
-		if (string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(relativeTo))
-			return relativeTo;
+        var sb = new StringBuilder();
 
-		if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(relativeTo))
-			return path;
+        for (int i = 0; i < relativeParts.Length - cnt; i++)
+            sb.Append(relativeParts[i]).Append(Path.DirectorySeparatorChar);
 
-		if (Path.IsPathRooted(path))
-			return path;
+        for (int i = cnt; i < pathParts.Length; i++)
+        {
+            sb.Append(pathParts[i]);
+            if (i < pathParts.Length - 1)
+                sb.Append(Path.DirectorySeparatorChar);
+        }
 
-		var pathParts = ExplodePath(path);
-		var relativeParts = ExplodePath(relativeTo);
-		int cnt;
+        return sb.ToString();
+    }
 
-		for (cnt = 0; cnt < pathParts.Length; cnt++)
-			if (pathParts[cnt] != "..")
-				break;
-
-		var sb = new StringBuilder();
-
-		for (int i = 0; i < relativeParts.Length - cnt; i++)
-			sb.Append(relativeParts[i]).Append(directorySeparator);
-
-		for (int i = cnt; i < pathParts.Length; i++)
-		{
-			sb.Append(pathParts[i]);
-			if (i < pathParts.Length - 1)
-				sb.Append(directorySeparator);
-		}
-
-		return sb.ToString();
-	}
-
-	public static string[] ExplodePath(string path)
-	{
-		return path.TrimEnd(_separators).Split(_separators, StringSplitOptions.RemoveEmptyEntries);
-	}
+    /// <summary>
+    /// Explodes a path into its components.
+    /// </summary>
+    public static string[] ExplodePath(string path)
+    {
+        return path.TrimEnd(Separators).Split(Separators, StringSplitOptions.RemoveEmptyEntries);
+    }
 }

@@ -6,201 +6,188 @@ using System.Text;
 
 namespace NotLimited.Framework.Common.Extensions;
 
+/// <summary>
+/// Extensions to work with strings.
+/// </summary>
 public static class StringExtensions
 {
-	public static string RemoveInvalidFileNameChars(this string input)
-	{
-		var chars = Path.GetInvalidFileNameChars();
-		var sb = new StringBuilder(input);
+    /// <summary>
+    /// Removes invalid path characters from a string.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static string RemoveInvalidFileNameChars(this string input)
+    {
+        var chars = Path.GetInvalidFileNameChars();
+        if (input.IndexOfAny(chars) == -1)
+            return input;
 
-		for (int i = 0; i < chars.Length; i++)
-		{
-			sb.Replace(chars[i].ToString(), "");
-		}
+        var sb = new StringBuilder(input);
 
-		return sb.ToString();
-	}
+        for (int i = 0; i < chars.Length; i++)
+        {
+            sb.Replace(chars[i].ToString(), "");
+        }
 
-	public static string ConcatNewLine(this IEnumerable<string> items)
-	{
-		var sb = new StringBuilder();
-		foreach (var item in items)
-		{
-			sb.AppendLine(item);
-		}
+        return sb.ToString();
+    }
 
-		return sb.ToString();
-	}
+    /// <summary>
+    /// Concatenates strings putting each one on a new line.
+    /// </summary>
+    public static string ConcatNewLine(this IEnumerable<string> items)
+    {
+        var sb = new StringBuilder();
+        foreach (var item in items)
+        {
+            sb.AppendLine(item);
+        }
 
-	public static bool ParseBool(this string input, bool def = false)
-	{
-		bool boolResult;
-		if (bool.TryParse(input, out boolResult))
-			return boolResult;
+        return sb.ToString();
+    }
 
-		int intResult;
-		if (int.TryParse(input, out intResult))
-			return intResult != 0;
+    /// <summary>
+    /// Tries to parse a string as a boolean or as an int, applying truthy logic to the result.
+    /// </summary>
+    public static bool ParseBoolish(this string input, bool def = false)
+    {
+        if (bool.TryParse(input, out bool boolResult))
+            return boolResult;
 
-		return def;
-	}
+        if (int.TryParse(input, out int intResult))
+            return intResult != 0;
 
-	public static string Left(this string input, int length)
-	{
-		return input.Substring(0, length);
-	}
+        return def;
+    }
 
-	public static string Left(this string input, char ch)
-	{
-		return input.Substring(0, input.IndexOf(ch));
-	}
+    /// <summary>
+    /// Returns at most <paramref name="length"/> items from the start of the string.
+    /// </summary>
+    public static string Left(this string input, int length)
+    {
+        return input.Substring(0, length);
+    }
 
-	public static string Right(this string input, int start)
-	{
-		return input.Substring(start);
-	}
+    /// <summary>
+    /// Returns a substring from start to the first occurence of <paramref name="ch"/>.
+    /// </summary>
+    public static string Left(this string input, char ch)
+    {
+        return input.Substring(0, input.IndexOf(ch));
+    }
 
-	public static int CountSubstrings(this string source, string substring)
-	{
-		int pos = -1;
-		int cnt = 0;
+    /// <summary>
+    /// Returns a substring starting from <paramref name="start"/> and to the end of the string.
+    /// </summary>
+    public static string Right(this string input, int start)
+    {
+        return input.Substring(start);
+    }
 
-		while ((pos = source.IndexOf(substring, pos + 1)) != -1)
-			cnt++;
+    /// <summary>
+    /// Counts the number of times <paramref name="substring"/> occurs in a string.
+    /// </summary>
+    public static int CountSubstrings(this string source, string substring)
+    {
+        int pos = -1;
+        int cnt = 0;
 
-		return cnt;
-	}
+        while ((pos = source.IndexOf(substring, pos + 1, StringComparison.Ordinal)) != -1)
+            cnt++;
 
-	public static string WithLowerFirstChar(this string source)
-	{
-		if (char.IsLower(source, 0))
-			return source;
+        return cnt;
+    }
 
-		return char.ToLowerInvariant(source[0]) + source.Substring(1);
-	}
+    /// <summary>
+    /// Returns a new string ensuring first charater is lowercase. 
+    /// </summary>
+    public static string WithLowerFirstChar(this string source)
+    {
+        if (char.IsLower(source, 0))
+            return source;
 
-	public static List<string> ReadLines(this string src)
-	{
-		var result = new List<string>();
-		string line;
+        return char.ToLowerInvariant(source[0]) + source.Substring(1);
+    }
 
-		using (var reader = new StringReader(src))
-		{
-			while ((line = reader.ReadLine()) != null)
-				result.Add(line);
-		}
+    /// <summary>
+    /// Reads a provided string as an array of lines.
+    /// </summary>
+    public static List<string> ReadLines(this string src)
+    {
+        var result = new List<string>();
 
-		return result;
-	}
+        using (var reader = new StringReader(src))
+        {
+            while (reader.ReadLine() is { } line)
+                result.Add(line);
+        }
 
-	public static string Reflow(this string src)
-	{
-		var sb = new StringBuilder();
-		int minWs = int.MaxValue, curWs;
-		var lines = src.ReadLines();
-		bool hasText = false;
+        return result;
+    }
 
-		for (int i = 0; i < lines.Count; i++)
-		{
-			string line = lines[i];
+    /// <summary>
+    /// Compares two strings ignoring their case with ordinal rules. 
+    /// </summary>
+    public static bool EqualsIgnoreCase(this string? a, string? b)
+    {
+        return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+    }
 
-			if (string.IsNullOrWhiteSpace(line) || line.Length == 0)
-			{
-				if (!hasText)
-				{
-					lines.RemoveAt(i);
-					i--;
-				}
-					
-				continue;
-			}
-			for (curWs = 0; curWs < line.Length; curWs++)
-			{
-				if (!char.IsWhiteSpace(line[curWs]))
-				{
-					hasText = true;
-					if (char.IsLower(line[curWs]) && i > 0)
-					{
-						lines[i - 1] = lines[i - 1].TrimEnd() + " " + line.Substring(curWs);
-						lines.RemoveAt(i);
-						i--;
-					}
-					else
-					{
-						if (curWs < minWs)
-							minWs = curWs;
-					}
+    /// <summary>
+    /// Checks whether a string ends with another string ignoring their case with ordinal rules.
+    /// </summary>
+    public static bool EndsWithIgnoreCase(this string? a, string? b)
+    {
+        if (a == null || b == null)
+            return false;
+        return a.EndsWith(b, StringComparison.OrdinalIgnoreCase);
+    }
 
-					break;
-				}
-			}
-		}
+    /// <summary>
+    /// Compares two strings optionally ignoring their case with ordinal rules. 
+    /// </summary>
+    public static bool EqualsOrdinal(this string? a, string? b, bool ignoreCase = false)
+    {
+        return string.Equals(a, b, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+    }
 
-		for (int i = 0, cnt = 0; i < lines.Count; i++)
-		{
-			string line = lines[i];
+    /// <summary>
+    /// Checks whether a string starts with another string optionally ignoring their case with ordinal rules.
+    /// </summary>
+    public static bool StartsWithOrdinal(this string? input, string? value, bool ignoreCase = false)
+    {
+        if (input == null || value == null)
+            return false;
+        return input.StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+    }
 
-			if (string.IsNullOrWhiteSpace(line) || line.Length == 0)
-				continue;
+    /// <summary>
+    /// Finds a first whitespace character after <paramref name="length"/> and truncates <paramref name="input"/>
+    /// at that point. If no whitespace is found, truncates exactly at <paramref name="length"/>.
+    /// </summary>
+    public static string? TruncateAtWord(this string? input, int length)
+    {
+        if (input == null || input.Length < length)
+            return input;
 
-			if (cnt > 0)
-				sb.AppendLine();
-			sb.Append(line.Substring(minWs));
-			cnt++;
-		}
+        int iNextSpace;
+        for (iNextSpace = length; iNextSpace < input.Length; iNextSpace++)
+        {
+            if (char.IsWhiteSpace(input, iNextSpace))
+                break;
+        }
 
-		return sb.ToString();
-	}
+        if (iNextSpace == input.Length || iNextSpace == 0)
+            return $"{input.Substring(0, length).Trim()}";
 
-	public static string AddSlashes(this string input)
-	{
-		var sb = new StringBuilder();
-		var lines = input.ReadLines();
+        return $"{input.Substring(0, iNextSpace).Trim()}";
+    }
 
-		for (int i = 0; i < lines.Count; i++)
-		{
-			if (i > 0)
-				sb.AppendLine();
-			sb.Append("// ").Append(lines[i]);
-		}
-
-		return sb.ToString();
-	}
-
-	public static bool EqualsIgnoreCase(this string a, string b)
-	{
-		return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
-	}
-
-	public static bool EndsWithIgnoreCase(this string a, string b)
-	{
-		if (a == null || string.IsNullOrEmpty(b))
-			return false;
-		return a.EndsWith(b, StringComparison.OrdinalIgnoreCase);
-	}
-
-	public static bool EqualsOrdinal(this string a, string b, bool ignoreCase = false)
-	{
-		return string.Equals(a, b, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-	}
-
-	public static bool StartsWithOrdinal(this string input, string value, bool ignoreCase = false)
-	{
-		if (string.IsNullOrEmpty(input))
-			return false;
-		return input.StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-	}
-
-	public static string TruncateAtWord(this string input, int length)
-	{
-		if (input == null || input.Length < length)
-			return input;
-		int iNextSpace = input.LastIndexOf(" ", length, StringComparison.Ordinal);
-		return string.Format("{0}...", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
-	}
-
-	public static string ToInvariantString(this double val)
-	{
-		return val.ToString(NumberFormatInfo.InvariantInfo);
-	}
+    /// <summary>
+    /// Converts double value to string using <see cref="NumberFormatInfo.InvariantInfo"/>.
+    /// </summary>
+    public static string ToInvariantString(this double val)
+    {
+        return val.ToString(NumberFormatInfo.InvariantInfo);
+    }
 }

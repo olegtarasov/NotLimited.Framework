@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using NotLimited.Framework.Common.Helpers;
+using System.Collections.Generic;
 
-namespace NotLimited.Framework.Common.Extensions;
+namespace NotLimited.Framework.Common.Helpers;
 
 public class PathEqualityComparer : IEqualityComparer<string>
 {
