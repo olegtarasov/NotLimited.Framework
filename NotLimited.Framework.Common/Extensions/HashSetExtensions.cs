@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace NotLimited.Framework.Common.Extensions;
 
 /// <summary>

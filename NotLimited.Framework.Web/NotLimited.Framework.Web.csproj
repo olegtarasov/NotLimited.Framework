@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Description>Web helpers</Description>
+        <Company />
+        <Authors>Oleg Tarasov</Authors>
+        <Product>NotLimited.Framework Web helpers</Product>
+        <ImplicitUsings>true</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Serilog" Version="2.12.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\NotLimited.Framework.Common\NotLimited.Framework.Common.csproj" />
+    </ItemGroup>
+</Project>

@@ -1,5 +1,3 @@
-using System;
-
 namespace NotLimited.Framework.Common.Extensions;
 
 /// <summary>

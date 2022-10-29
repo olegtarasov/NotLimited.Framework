@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NotLimited.Framework.Common.Extensions;
+﻿namespace NotLimited.Framework.Common.Extensions;
 
 /// <summary>
 /// Extensions to work with <see cref="Random"/>.

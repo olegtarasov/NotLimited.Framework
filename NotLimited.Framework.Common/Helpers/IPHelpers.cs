@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Text.RegularExpressions;
+﻿using System.Net;
 
 namespace NotLimited.Framework.Common.Helpers;
 
