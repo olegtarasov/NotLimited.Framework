@@ -10,6 +10,12 @@ public static class PathHelpers
     private static readonly char[] Separators = { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar };
 
     /// <summary>
+    /// Indicates whether paths are case sensitive on current platform.
+    /// </summary>
+    public static bool PathsCaseSensitive => (int)Environment.OSVersion.Platform > 3 
+                                            && Environment.OSVersion.Platform != PlatformID.Xbox;
+
+    /// <summary>
     /// Gets a hash code of specified path ignoring trailing separators by default
     /// </summary>
     public static int GetPathHashCode(string path, bool ignoreTrailingSeparators = true)
@@ -48,9 +54,7 @@ public static class PathHelpers
             return false;
 
         // Compare paths ignoring the case on Windows.
-        var comparison = (int)Environment.OSVersion.Platform <= 3
-                             ? StringComparison.OrdinalIgnoreCase
-                             : StringComparison.Ordinal;
+        var comparison = PathsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
 
         for (int i = 0; i < parts1.Length; i++)
         {
