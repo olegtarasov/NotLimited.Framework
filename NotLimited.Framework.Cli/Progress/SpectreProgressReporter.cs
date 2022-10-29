@@ -21,7 +21,7 @@ public class SpectreProgressReporter : IProgressReporter
     /// <inheritdoc />
     public void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action)
     {
-        AnsiConsole.Progress().HideCompleted(true).AutoRefresh(!_externalRefresh).Start(
+        AnsiConsole.Progress().HideCompleted(true).AutoClear(true).AutoRefresh(!_externalRefresh).Start(
             context =>
             {
                 var scope = new SpectreProgressScope(context, maxTicks, message, externalRefresh: _externalRefresh);
@@ -36,7 +36,7 @@ public class SpectreProgressReporter : IProgressReporter
         int reportAtPercent,
         Action<IProgressScope> action)
     {
-        AnsiConsole.Progress().HideCompleted(true).AutoRefresh(!_externalRefresh).Start(
+        AnsiConsole.Progress().HideCompleted(true).AutoClear(true).AutoRefresh(!_externalRefresh).Start(
             context =>
             {
                 var scope = new SpectreProgressScope(context, maxTicks, message, reportAtPercent, _externalRefresh);
@@ -47,7 +47,7 @@ public class SpectreProgressReporter : IProgressReporter
     /// <inheritdoc />
     public async Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action)
     {
-        await AnsiConsole.Progress().HideCompleted(true).AutoRefresh(!_externalRefresh).StartAsync(
+        await AnsiConsole.Progress().HideCompleted(true).AutoClear(true).AutoRefresh(!_externalRefresh).StartAsync(
             async context =>
             {
                 var scope = new SpectreProgressScope(context, maxTicks, message, externalRefresh: _externalRefresh);
@@ -62,7 +62,7 @@ public class SpectreProgressReporter : IProgressReporter
         int reportAtPercent,
         Func<IProgressScope, Task> action)
     {
-        await AnsiConsole.Progress().HideCompleted(true).AutoRefresh(!_externalRefresh).StartAsync(
+        await AnsiConsole.Progress().HideCompleted(true).AutoClear(true).AutoRefresh(!_externalRefresh).StartAsync(
             async context =>
             {
                 var scope = new SpectreProgressScope(context, maxTicks, message, reportAtPercent, _externalRefresh);

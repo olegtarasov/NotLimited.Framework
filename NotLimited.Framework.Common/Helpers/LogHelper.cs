@@ -18,7 +18,7 @@ public static class LogHelper
     /// <summary>
     /// Console logging template.
     /// </summary>
-    public const string ConsoleTemplate = "{Message:lj}";
+    public const string ConsoleTemplate = "{Message:lj}{NewLine}{Exception}";
 
     // /// <summary>
     // /// Logs an exception. When there is a <see cref="StructuredException"/> in exception hierarchy, logs it
@@ -36,7 +36,7 @@ public static class LogHelper
     //         logger.Error(exception, exception.Message);
     //     }
     // }
-    
+
     /// <summary>
     /// Adds console logging sink.
     /// </summary>
