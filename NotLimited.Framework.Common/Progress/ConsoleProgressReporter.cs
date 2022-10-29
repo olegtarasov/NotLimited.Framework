@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace NotLimited.Framework.Common.Progress;
 
 /// <summary>
@@ -7,92 +5,39 @@ namespace NotLimited.Framework.Common.Progress;
 /// </summary>
 public class ConsoleProgressReporter : IProgressReporter
 {
-    private readonly int? _reportAtPercent;
-
-    /// <summary>
-    /// Ctor.
-    /// </summary>
-    /// <param name="reportAtPercent">
-    /// If specified, always overrides <code>reportAtPercent</code> value in <see cref="IProgressReporter.CreateScope(int,string?,int)"/>
-    /// </param>
-    public ConsoleProgressReporter(int? reportAtPercent = null)
+    /// <inheritdoc />
+    public void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action)
     {
-        _reportAtPercent = reportAtPercent;
+        var scope = new ConsoleProgressScope(maxTicks, message);
+        action(scope);
     }
 
     /// <inheritdoc />
-    public IProgressScope CreateScope(int maxTicks, string? message) => new ConsoleProgressScope(maxTicks, message);
-
-    /// <inheritdoc />
-    public IProgressScope CreateScope(int maxTicks, string? message, int reportAtPercent) => new ConsoleProgressScope(maxTicks, message, _reportAtPercent ?? reportAtPercent);
-}
-    
-/// <summary>
-/// Creates a progress reporting scope and uses System.Console as output.
-/// </summary>
-public class ConsoleProgressScope : IProgressScope
-{
-    private readonly PercentProgressTracker? _tracker = null;
-
-    private int _curTicks = 0;
-
-    /// <summary>
-    /// Ctor.
-    /// </summary>
-    /// <param name="maxTicks">Maximum number of ticks in a process</param>
-    /// <param name="message">Optional message to be reported with progress</param>
-    /// <param name="reportAtPercent">If specified, reports only at discrete percent intervals, not every tracked event.</param>
-    public ConsoleProgressScope(int maxTicks, string? message, int? reportAtPercent = null)
+    public void CreateProgressScope(
+        int maxTicks,
+        string? message,
+        int reportAtPercent,
+        Action<IProgressScope> action)
     {
-        MaxTicks = maxTicks;
-        Message = message;
-        if (reportAtPercent != null)
-        {
-            _tracker = new(maxTicks, reportAtPercent.Value);
-        }
+        var scope = new ConsoleProgressScope(maxTicks, message, reportAtPercent);
+        action(scope);
     }
 
     /// <inheritdoc />
-    public void Report(string? message = null)
+    public async Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action)
     {
-        Report(_curTicks + 1, message);
+        var scope = new ConsoleProgressScope(maxTicks, message);
+        await action(scope);
     }
 
     /// <inheritdoc />
-    public void Report(int ticks, string? message = null)
+    public async Task CreateProgressScopeAsync(
+        int maxTicks,
+        string? message,
+        int reportAtPercent,
+        Func<IProgressScope, Task> action)
     {
-        _curTicks = ticks;
-        if (_tracker != null)
-        {
-            if (_tracker.ShouldReport(_curTicks))
-                ReportInternal(_curTicks, message);
-        }
-        else
-        {
-            ReportInternal(_curTicks, message);
-        }
+        var scope = new ConsoleProgressScope(maxTicks, message, reportAtPercent);
+        await action(scope);
     }
-
-    /// <inheritdoc />
-    public int MaxTicks { get; set; }
-
-    /// <inheritdoc />
-    public string? Message { get; set; }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void ReportInternal(int ticks, string? message = null)
-    {
-        Console.WriteLine($"[ {ticks} / {MaxTicks} ] {message ?? Message ?? string.Empty}");
-    }
-
-    /// <inheritdoc />
-    public void Dispose()
-    {
-    }
-
-    /// <inheritdoc />
-    public IProgressScope CreateScope(int maxTicks, string? message) => this;
-
-    /// <inheritdoc />
-    public IProgressScope CreateScope(int maxTicks, string? message, int reportAtPercent) => this;
 }

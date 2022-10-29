@@ -11,7 +11,7 @@ public static class ProcessHelper
     /// <summary>
     /// Runs a process synchronously and captures its output and optionally error stream.
     /// </summary>
-    public static string RunAndGetOutput(string fileName, string arguments = "", string workDir = "", bool includeError = false)
+    public static async Task<string> RunAndGetOutput(string fileName, string arguments = "", string workDir = "", bool includeError = false)
     {
         var info = new ProcessStartInfo(fileName, arguments)
                    {
@@ -31,7 +31,7 @@ public static class ProcessHelper
             process.BeginErrorReadLine();
         }
 
-        process.WaitForExit();
+        await process.WaitForExitAsync();
 
         return builder.ToString();
     }

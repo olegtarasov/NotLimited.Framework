@@ -18,8 +18,7 @@ public static class LogHelper
     /// <summary>
     /// Console logging template.
     /// </summary>
-    public const string ConsoleTemplate =
-        "{Timestamp:HH:mm:ss} [{Level:u4}] {Message:lj}{NewLine}{Exception}";
+    public const string ConsoleTemplate = "{Message:lj}";
 
     // /// <summary>
     // /// Logs an exception. When there is a <see cref="StructuredException"/> in exception hierarchy, logs it

@@ -10,7 +10,8 @@ public interface IProgressReporter
     /// </summary>
     /// <param name="maxTicks">Maximum number of ticks in a process</param>
     /// <param name="message">Optional message to be reported with progress</param>
-    IProgressScope CreateScope(int maxTicks, string? message);
+    /// <param name="action">An action to perform on <see cref="IProgressScope"/>.</param>
+    void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action);
 
     /// <summary>
     /// Create a progress reporting scope. 
@@ -18,34 +19,23 @@ public interface IProgressReporter
     /// <param name="maxTicks">Maximum number of ticks in a process</param>
     /// <param name="message">Optional message to be reported with progress</param>
     /// <param name="reportAtPercent">Report only at discrete percent intervals, not every tracked event.</param>
-    IProgressScope CreateScope(int maxTicks, string? message, int reportAtPercent);
-}
-
-/// <summary>
-/// Progress reporting scope that can track a number of ticks elapsed.
-/// </summary>
-public interface IProgressScope : IProgressReporter, IDisposable
-{
-    /// <summary>
-    /// Increase the number of elapsed ticks by 1 and report progress.
-    /// </summary>
-    /// <param name="message">An optional message. Doesn't override previous message if null.</param>
-    void Report(string? message = null);
+    /// <param name="action">An action to perform on <see cref="IProgressScope"/>.</param>
+    void CreateProgressScope(int maxTicks, string? message, int reportAtPercent, Action<IProgressScope> action);
 
     /// <summary>
-    /// Set the number of elapsed ticks to <paramref name="ticks"/> and report progress.
+    /// Create a progress reporting scope. 
     /// </summary>
-    /// <param name="ticks">An absolute number of elapsed ticks.</param>
-    /// <param name="message">An optional message. Doesn't override previous message if null.</param>
-    void Report(int ticks, string? message = null);
-    
+    /// <param name="maxTicks">Maximum number of ticks in a process</param>
+    /// <param name="message">Optional message to be reported with progress</param>
+    /// <param name="action">An action to perform on <see cref="IProgressScope"/>.</param>
+    Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action);
+
     /// <summary>
-    /// Gets of sets the maximum number of ticks in a process.
+    /// Create a progress reporting scope. 
     /// </summary>
-    int MaxTicks { get; set; }
-    
-    /// <summary>
-    /// Gets of sets an optional message to be reported with progress.
-    /// </summary>
-    string? Message { get; set; }
+    /// <param name="maxTicks">Maximum number of ticks in a process</param>
+    /// <param name="message">Optional message to be reported with progress</param>
+    /// <param name="reportAtPercent">Report only at discrete percent intervals, not every tracked event.</param>
+    /// <param name="action">An action to perform on <see cref="IProgressScope"/>.</param>
+    Task CreateProgressScopeAsync(int maxTicks, string? message, int reportAtPercent, Func<IProgressScope, Task> action);
 }
