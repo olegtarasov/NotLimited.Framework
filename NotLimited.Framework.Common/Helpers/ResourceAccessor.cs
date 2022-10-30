@@ -17,7 +17,13 @@ public class ResourceAccessor
     public ResourceAccessor(Assembly assembly)
     {
         _assembly = assembly;
-        _assemblyName = _assembly.GetName().Name ?? throw new InvalidOperationException("Failed to get assembly name!");
+        string? resourceName = assembly.GetManifestResourceNames().FirstOrDefault();
+        if (resourceName == null)
+            throw new InvalidOperationException("Failed to get assembly name!");
+
+        int pos = resourceName.IndexOf('.');
+
+        _assemblyName = pos > -1 ? resourceName.Substring(0, pos) : resourceName;
     }
 
     /// <summary>
