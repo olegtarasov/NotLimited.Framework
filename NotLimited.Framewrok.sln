@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Cli", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Web", "NotLimited.Framework.Web\NotLimited.Framework.Web.csproj", "{DF914383-76CD-4294-B858-CE293CF7B29D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotLimited.Framework.Tests", "NotLimited.Framework.Tests\NotLimited.Framework.Tests.csproj", "{DEF2AB10-F534-434C-A061-288272319BC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DF914383-76CD-4294-B858-CE293CF7B29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF914383-76CD-4294-B858-CE293CF7B29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF914383-76CD-4294-B858-CE293CF7B29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF2AB10-F534-434C-A061-288272319BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF2AB10-F534-434C-A061-288272319BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF2AB10-F534-434C-A061-288272319BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF2AB10-F534-434C-A061-288272319BC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

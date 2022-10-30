@@ -7,13 +7,12 @@ namespace NotLimited.Framework.Common.Helpers;
 /// </summary>
 public static class PathHelpers
 {
-    private static readonly char[] Separators = { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar };
+    private static readonly char[] Separators = { '\\', '/' };
 
     /// <summary>
     /// Indicates whether paths are case sensitive on current platform.
     /// </summary>
-    public static bool PathsCaseSensitive => (int)Environment.OSVersion.Platform > 3 
-                                            && Environment.OSVersion.Platform != PlatformID.Xbox;
+    public static bool PathsCaseSensitive => OperatingSystem.IsWindows();
 
     /// <summary>
     /// Gets a hash code of specified path ignoring trailing separators by default
@@ -147,6 +146,31 @@ public static class PathHelpers
     }
 
     /// <summary>
+    /// Ensures a path has Unix-style slashes.
+    /// </summary>
+    public static string EnsureUnixSlashes(string path)
+    {
+        if (path.IndexOf('\\') == -1)
+            return path;
+
+        return path.Replace('\\', '/');
+    }
+
+    /// <summary>
+    /// Ensures a path has correct platform-specific slashes.
+    /// </summary>
+    public static string EnsurePlatformSlashes(string path)
+    {
+        char correctSlash = OperatingSystem.IsWindows() ? '\\' : '/';
+        char incorrectSlash = OperatingSystem.IsWindows() ? '/' : '\\';
+
+        if (path.IndexOf(incorrectSlash) == -1)
+            return path;
+
+        return path.Replace(incorrectSlash, correctSlash);
+    }
+
+    /// <summary>
     /// Makes an absolute path relative to a specified path.
     /// </summary>
     public static string MakeRelative(string path, string relativeTo)
@@ -221,6 +245,6 @@ public static class PathHelpers
     /// </summary>
     public static string[] ExplodePath(string path)
     {
-        return path.TrimEnd(Separators).Split(Separators, StringSplitOptions.RemoveEmptyEntries);
+        return path.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
     }
 }
