@@ -6,6 +6,20 @@ namespace NotLimited.Framework.Common.Helpers;
 public static class TextHelpers
 {
     /// <summary>
+    /// Tries to guess if specified buffer contains text data by checking for \0 bytes.
+    /// </summary>
+    public static bool IsTextData(byte[] buff)
+    {
+        for (int i = 0; i < buff.Length; i++)
+        {
+            if (buff[i] == 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// Ensures a string has correct platform-specific line endings.
     /// </summary>
     public static string EnsurePlatformLineEndings(string input)

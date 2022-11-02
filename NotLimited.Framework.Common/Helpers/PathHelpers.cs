@@ -88,6 +88,19 @@ public static class PathHelpers
     }
 
     /// <summary>
+    /// Checks whether provided directory exists and creates if it doesn't. If <paramref name="directory"/> is
+    /// null, just ignores it.
+    /// </summary>
+    public static void EnsureDirectoryExists(string? directory)
+    {
+        if (directory == null)
+            return;
+
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+    }
+
+    /// <summary>
     /// Recursively deletes specified directory with all its files and subdirs, optionally performing an action
     /// before deleting each file.
     /// </summary>
