@@ -19,4 +19,13 @@ public static class FileHelpers
 
         return buff;
     }
+
+    /// <summary>
+    /// Reads first 8000 bytes from file and tries to guess whether it's text by checking for \0 bytes.
+    /// </summary>
+    public static bool IsTextFile(string fileName)
+    {
+        var head = ReadFileBytes(fileName, 8000);
+        return TextHelpers.IsTextData(head);
+    }
 }

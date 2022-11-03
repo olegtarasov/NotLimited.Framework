@@ -23,7 +23,12 @@ public class SpectreProgressScope : IProgressScope
     /// <param name="message">Optional message to be reported with progress</param>
     /// <param name="reportAtPercent">If specified, reports only at discrete percent intervals, not every tracked event.</param>
     /// <param name="externalRefresh">Specifies whether progress bar should only be updated externally.</param>
-    public SpectreProgressScope(ProgressContext context, int maxTicks, string? message, int? reportAtPercent = null, bool externalRefresh = false)
+    public SpectreProgressScope(
+        ProgressContext context,
+        int maxTicks,
+        string? message,
+        int? reportAtPercent = null,
+        bool externalRefresh = false)
     {
         _context = context;
         _externalRefresh = externalRefresh;
@@ -32,42 +37,6 @@ public class SpectreProgressScope : IProgressScope
 
         MaxTicks = maxTicks;
         Message = message;
-    }
-
-    /// <inheritdoc />
-    public void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action)
-    {
-        var scope = new SpectreProgressScope(_context, maxTicks, message, externalRefresh: _externalRefresh);
-        action(scope);
-    }
-
-    /// <inheritdoc />
-    public void CreateProgressScope(
-        int maxTicks,
-        string? message,
-        int reportAtPercent,
-        Action<IProgressScope> action)
-    {
-        var scope = new SpectreProgressScope(_context, maxTicks, message, reportAtPercent, _externalRefresh);
-        action(scope);
-    }
-
-    /// <inheritdoc />
-    public async Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action)
-    {
-        var scope = new SpectreProgressScope(_context, maxTicks, message, externalRefresh: _externalRefresh);
-        await action(scope);
-    }
-
-    /// <inheritdoc />
-    public async Task CreateProgressScopeAsync(
-        int maxTicks,
-        string? message,
-        int reportAtPercent,
-        Func<IProgressScope, Task> action)
-    {
-        var scope = new SpectreProgressScope(_context, maxTicks, message, reportAtPercent, _externalRefresh);
-        await action(scope);
     }
 
     /// <inheritdoc />
@@ -129,5 +98,88 @@ public class SpectreProgressScope : IProgressScope
     {
         get => _task.Description;
         set => _task.Description = value ?? string.Empty;
+    }
+
+    /// <inheritdoc />
+    public void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action)
+    {
+        CreateProgressScope(maxTicks, message, progress =>
+                                               {
+                                                   action(progress);
+                                                   return 0;
+                                               });
+    }
+
+    /// <inheritdoc />
+    public void CreateProgressScope(
+        int maxTicks,
+        string? message,
+        int reportAtPercent,
+        Action<IProgressScope> action)
+    {
+        CreateProgressScope(maxTicks, message, reportAtPercent, progress =>
+                                                                {
+                                                                    action(progress);
+                                                                    return 0;
+                                                                });
+    }
+
+    /// <inheritdoc />
+    public T CreateProgressScope<T>(int maxTicks, string? message, Func<IProgressScope, T> action)
+    {
+        var scope = new SpectreProgressScope(_context, maxTicks, message, externalRefresh: _externalRefresh);
+        return action(scope);
+    }
+
+    /// <inheritdoc />
+    public T CreateProgressScope<T>(int maxTicks, string? message, int reportAtPercent, Func<IProgressScope, T> action)
+    {
+        var scope = new SpectreProgressScope(_context, maxTicks, message, reportAtPercent, _externalRefresh);
+        return action(scope);
+    }
+
+    /// <inheritdoc />
+    public async Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action)
+    {
+        await CreateProgressScopeAsync(maxTicks, message, async progress =>
+                                                          {
+                                                              await action(progress);
+                                                              return 0;
+                                                          });
+    }
+
+    /// <inheritdoc />
+    public async Task CreateProgressScopeAsync(
+        int maxTicks,
+        string? message,
+        int reportAtPercent,
+        Func<IProgressScope, Task> action)
+    {
+        await CreateProgressScopeAsync(maxTicks, message, reportAtPercent, async progress =>
+                                                                           {
+                                                                               await action(progress);
+                                                                               return 0;
+                                                                           });
+    }
+
+    /// <inheritdoc />
+    public async Task<T> CreateProgressScopeAsync<T>(
+        int maxTicks,
+        string? message,
+        Func<IProgressScope, Task<T>> action)
+    {
+        var scope = new SpectreProgressScope(_context, maxTicks, message, externalRefresh: _externalRefresh);
+        return await action(scope);
+    }
+
+    /// <inheritdoc />
+    public async Task<T> CreateProgressScopeAsync<T>(
+        int maxTicks,
+        string? message,
+        int reportAtPercent,
+        Func<IProgressScope, Task<T>> action)
+    {
+        var scope = new SpectreProgressScope(_context, maxTicks, message, reportAtPercent, _externalRefresh);
+        return await action(scope);
     }
 }

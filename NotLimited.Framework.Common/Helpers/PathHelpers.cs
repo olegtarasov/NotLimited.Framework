@@ -15,7 +15,7 @@ public static class PathHelpers
     public static bool PathsCaseSensitive => OperatingSystem.IsWindows();
 
     /// <summary>
-    /// Gets a hash code of specified path ignoring trailing separators by default
+    /// Gets a hash code of specified directory ignoring trailing separators by default
     /// </summary>
     public static int GetPathHashCode(string path, bool ignoreTrailingSeparators = true)
     {
@@ -25,16 +25,19 @@ public static class PathHelpers
     /// <summary>
     /// Performs a recursive file search based on the supplied pattern.
     /// </summary>
-    public static IEnumerable<string> FindFilesRecursive(string path, string filter = "*")
+    public static IEnumerable<string> FindFilesRecursive(
+        string directory,
+        string filter = "*",
+        bool makeRelative = false)
     {
         var queue = new Queue<string>();
-        queue.Enqueue(path);
+        queue.Enqueue(directory);
 
         while (queue.Count > 0)
         {
             string dir = queue.Dequeue();
             foreach (var file in Directory.GetFiles(dir, filter))
-                yield return file;
+                yield return makeRelative ? MakeRelative(file, directory) : file;
 
             foreach (var child in Directory.GetDirectories(dir))
                 queue.Enqueue(child);
@@ -65,7 +68,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Checks whether file path contains specified directory path.
+    /// Checks whether file directory contains specified directory directory.
     /// </summary>
     public static bool IsFileUnderPath(string filePath, string directory)
     {
@@ -137,7 +140,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Ensures that specified path has a trailing <see cref="Path.DirectorySeparatorChar"/>.
+    /// Ensures that specified directory has a trailing <see cref="Path.DirectorySeparatorChar"/>.
     /// </summary>
     public static string EnsureTrailingSeparator(string path)
     {
@@ -151,7 +154,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Rebases an absolute <paramref name="path"/> on top of <paramref name="target"/> relative to <paramref name="source"/> path.
+    /// Rebases an absolute <paramref name="path"/> on top of <paramref name="target"/> relative to <paramref name="source"/> directory.
     /// </summary>
     public static string RebasePath(string path, string source, string target)
     {
@@ -159,7 +162,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Ensures a path has Unix-style slashes.
+    /// Ensures a directory has Unix-style slashes.
     /// </summary>
     public static string EnsureUnixSlashes(string path)
     {
@@ -170,7 +173,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Ensures a path has correct platform-specific slashes.
+    /// Ensures a directory has correct platform-specific slashes.
     /// </summary>
     public static string EnsurePlatformSlashes(string path)
     {
@@ -184,7 +187,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Makes an absolute path relative to a specified path.
+    /// Makes an absolute directory relative to a specified directory.
     /// </summary>
     public static string MakeRelative(string path, string relativeTo)
     {
@@ -217,7 +220,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Makes a specified path absolute relative to <paramref name="relativeTo"/>.
+    /// Makes a specified directory absolute relative to <paramref name="relativeTo"/>.
     /// </summary>
     public static string MakeAbsolute(string path, string relativeTo)
     {
@@ -254,7 +257,7 @@ public static class PathHelpers
     }
 
     /// <summary>
-    /// Explodes a path into its components.
+    /// Explodes a directory into its components.
     /// </summary>
     public static string[] ExplodePath(string path)
     {

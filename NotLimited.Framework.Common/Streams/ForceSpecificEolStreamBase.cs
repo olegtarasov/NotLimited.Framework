@@ -17,9 +17,9 @@ public abstract class ForceSpecificEolStreamBase : Stream
     /// </summary>
     public ForceSpecificEolStreamBase(Stream innerStream)
     {
-        if (!innerStream.CanSeek)
-            throw new NotSupportedException("Underlying stream doesn't support seeking, and this is required");
-        
+        if (!innerStream.CanSeek || !innerStream.CanRead)
+            throw new NotSupportedException("Underlying stream should support at least reading and seeking");
+
         InnerStream = innerStream;
     }
 
@@ -30,7 +30,7 @@ public abstract class ForceSpecificEolStreamBase : Stream
     public override bool CanSeek => false;
 
     /// <inheritdoc />
-    public override bool CanWrite => true;
+    public override bool CanWrite => InnerStream.CanWrite;
 
     /// <inheritdoc />
     public override long Length => throw new NotSupportedException();
@@ -48,7 +48,7 @@ public abstract class ForceSpecificEolStreamBase : Stream
         var buff = ArrayPool<byte>.Shared.Rent(1);
         int read = Read(buff, 0, 1);
         int result = buff[0];
-        
+
         ArrayPool<byte>.Shared.Return(buff);
 
         return read == 0 ? -1 : result;
@@ -60,7 +60,7 @@ public abstract class ForceSpecificEolStreamBase : Stream
         int read = InnerStream.Read(buffer, offset, count);
         if (read <= 0)
             return read;
-        
+
         return ProcessSpan(new Span<byte>(buffer, offset, read));
     }
 
@@ -115,7 +115,7 @@ public abstract class ForceSpecificEolStreamBase : Stream
     public override void Write(ReadOnlySpan<byte> buffer)
     {
         var copy = buffer.ToArray();
-        
+
         int actualCount = ProcessSpan(new Span<byte>(copy));
         InnerStream.Write(copy, 0, actualCount);
     }
@@ -131,7 +131,9 @@ public abstract class ForceSpecificEolStreamBase : Stream
     }
 
     /// <inheritdoc />
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken = default)
     {
         var copy = buffer.ToArray();
 

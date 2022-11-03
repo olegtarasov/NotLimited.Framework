@@ -5,7 +5,7 @@ namespace NotLimited.Framework.Common.Progress;
 /// <summary>
 /// Creates a progress reporting scope and uses System.Console as output.
 /// </summary>
-public class ConsoleProgressScope : IProgressScope
+public class ConsoleProgressScope : ConsoleProgressReporter, IProgressScope
 {
     private readonly PercentProgressTracker? _tracker = null;
 
@@ -63,41 +63,5 @@ public class ConsoleProgressScope : IProgressScope
     /// <inheritdoc />
     public void Dispose()
     {
-    }
-
-    /// <inheritdoc />
-    public void CreateProgressScope(int maxTicks, string? message, Action<IProgressScope> action)
-    {
-        var scope = new ConsoleProgressScope(maxTicks, message);
-        action(scope);
-    }
-
-    /// <inheritdoc />
-    public void CreateProgressScope(
-        int maxTicks,
-        string? message,
-        int reportAtPercent,
-        Action<IProgressScope> action)
-    {
-        var scope = new ConsoleProgressScope(maxTicks, message, reportAtPercent);
-        action(scope);
-    }
-
-    /// <inheritdoc />
-    public async Task CreateProgressScopeAsync(int maxTicks, string? message, Func<IProgressScope, Task> action)
-    {
-        var scope = new ConsoleProgressScope(maxTicks, message);
-        await action(scope);
-    }
-
-    /// <inheritdoc />
-    public async Task CreateProgressScopeAsync(
-        int maxTicks,
-        string? message,
-        int reportAtPercent,
-        Func<IProgressScope, Task> action)
-    {
-        var scope = new ConsoleProgressScope(maxTicks, message, reportAtPercent);
-        await action(scope);
     }
 }
