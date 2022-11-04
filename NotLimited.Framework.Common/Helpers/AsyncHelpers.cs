@@ -44,7 +44,7 @@ public static class AsyncHelpers
     /// <typeparam name="T">Return Type</typeparam>
     /// <param name="task">Task method to execute</param>
     /// <returns></returns>
-    public static T RunSync<T>(Func<Task<T>> task)
+    public static T? RunSync<T>(Func<Task<T>> task)
     {
         var oldContext = SynchronizationContext.Current;
         var synch = new ExclusiveSynchronizationContext();

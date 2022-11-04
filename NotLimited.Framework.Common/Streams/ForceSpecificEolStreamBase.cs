@@ -57,41 +57,65 @@ public abstract class ForceSpecificEolStreamBase : Stream
     /// <inheritdoc />
     public override int Read(byte[] buffer, int offset, int count)
     {
-        int read = InnerStream.Read(buffer, offset, count);
-        if (read <= 0)
-            return read;
+        int actualRead;
+        do
+        {
+            int read = InnerStream.Read(buffer, offset, count);
+            if (read <= 0)
+                return read;
 
-        return ProcessSpan(new Span<byte>(buffer, offset, read));
+            actualRead = ProcessSpan(new Span<byte>(buffer, offset, read));
+        } while (actualRead <= 0);
+
+        return actualRead;
     }
 
     /// <inheritdoc />
     public override int Read(Span<byte> buffer)
     {
-        int read = InnerStream.Read(buffer);
-        if (read <= 0)
-            return read;
+        int actualRead;
+        do
+        {
+            int read = InnerStream.Read(buffer);
+            if (read <= 0)
+                return read;
 
-        return ProcessSpan(read != buffer.Length ? buffer.Slice(0, read) : buffer);
+            actualRead = ProcessSpan(read != buffer.Length ? buffer[..read] : buffer);
+        } while (actualRead <= 0);
+
+        return actualRead;
     }
 
     /// <inheritdoc />
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
-        int read = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
-        if (read <= 0)
-            return read;
+        int actualRead;
+        do
+        {
+            int read = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
+            if (read <= 0)
+                return read;
 
-        return ProcessSpan(new Memory<byte>(buffer, offset, read).Span);
+            actualRead = ProcessSpan(new Memory<byte>(buffer, offset, read).Span);
+        } while (actualRead <= 0);
+
+        return actualRead;
     }
 
     /// <inheritdoc />
     public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
     {
-        int read = await InnerStream.ReadAsync(buffer, cancellationToken);
-        if (read <= 0)
-            return read;
+        int actualRead;
+        do
+        {
+            int read = await InnerStream.ReadAsync(buffer, cancellationToken);
+            if (read <= 0)
+                return read;
 
-        return ProcessSpan(read != buffer.Length ? buffer.Span.Slice(0, read) : buffer.Span);
+            actualRead = ProcessSpan(read != buffer.Length ? buffer.Span.Slice(0, read) : buffer.Span);
+        } while (actualRead <= 0);
+
+        return actualRead;
     }
 
     /// <inheritdoc />
